@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flagged World Map</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">International Conferences</p>
+          <div class="hero-title-row">
+            <img src="./images/logo-1.png" alt="" class="hero-logo" />
+            <h1>国際風工学会 IAWE 関連会議の記録</h1>
+            <img src="./images/logo-1.png" alt="" class="hero-logo" />
+          </div>
+          <p class="lead">
+            国際風工学会IAWEに関連する国際会議の開催都市と開催年一覧
+          </p>
+	  <p>
+	  <!--
+          ICWE: International Conference on Wind Engineering, BBAA: Bluff Body and Aerodynamics, CWE: Computational Wind Engineering
+          APCWE:Asia-Pacific Conference on Wind Engineering
+	  -->
+          </p> 
+        </div>
+      </header>
+
+      <main class="layout">
+        <section class="map-panel">
+          <div class="map-panel-header">
+            <div>
+              <p class="eyebrow">World map</p>
+            </div>
+            <div class="map-controls" aria-label="地図の拡大縮小">
+              <button type="button" id="zoom-in-button" class="map-control-button">+</button>
+              <button type="button" id="zoom-out-button" class="map-control-button">-</button>
+              <button type="button" id="zoom-reset-button" class="map-control-button">100%</button>
+            </div>
+          </div>
+          <div id="map" aria-label="世界地図"></div>
+        </section>
+
+        <section class="photo-panel">
+          <div class="photo-panel-header">
+            <div>
+              <p class="eyebrow">Conference Photo</p>
+            </div>
+            <div class="photo-view-actions" aria-label="写真表示切替">
+              <button type="button" id="photo-view-carousel" class="sort-button">スライド</button>
+              <button type="button" id="photo-view-grid" class="sort-button is-active">一覧</button>
+            </div>
+          </div>
+          <figure class="photo-figure">
+            <div id="photo-carousel" class="photo-carousel">
+              <button type="button" id="conference-photo-prev" class="photo-nav-button" aria-label="前の写真">&#8249;</button>
+              <div id="conference-photo-track" class="photo-track"></div>
+              <button type="button" id="conference-photo-next" class="photo-nav-button" aria-label="次の写真">&#8250;</button>
+            </div>
+            <div id="photo-grid" class="photo-grid is-hidden"></div>
+            <figcaption id="conference-photo-caption" class="photo-caption"></figcaption>
+          </figure>
+        </section>
+
+        <aside class="sidebar">
+          <div class="sidebar-header">
+            <button type="button" id="hosting-cities-chart-button" class="sidebar-title-button">
+              <span class="sidebar-title">
+              <p class="eyebrow">HOSTING CITIES</p>
+              </span>
+            </button>
+            <div class="sidebar-tools">
+              <button type="button" id="city-autoplay-toggle" class="sort-button" aria-pressed="false">
+                Auto-scroll
+              </button>
+              <div class="sort-block">
+                <div class="sort-actions">
+                  <button type="button" class="sort-button" data-sort-key="eventDate">開催年順</button>
+                  <button type="button" class="sort-button" data-sort-key="country">国別表示</button>
+                </div>
+              </div>
+              <div class="filter-actions" id="conference-type-filter" aria-label="会議種類フィルタ">
+                <button type="button" class="sort-button is-active" data-conference-filter="all">ALL</button>
+                <button type="button" class="sort-button" data-conference-filter="ICWE">ICWE</button>
+                <button type="button" class="sort-button" data-conference-filter="APCWE">APCWE</button>
+                <button type="button" class="sort-button" data-conference-filter="BBAA">BBAA</button>
+                <button type="button" class="sort-button" data-conference-filter="CWE">CWE</button>
+              </div>
+            </div>
+          </div>
+          <div id="city-list" class="city-list"></div>
+        </aside>
+      </main>
+
+    </div>
+
+    <section class="editor-panel editor-panel-external">
+      <div class="editor-panel-header">
+        <button type="button" id="toggle-city-editor" class="sidebar-button">編集ウィンドウを隠す</button>
+      </div>
+      <form id="city-editor" class="city-editor"></form>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+    <script src="./cities.initial-data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
