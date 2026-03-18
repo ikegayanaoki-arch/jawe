@@ -586,13 +586,13 @@ h1 {
 }
 
 .cities-chart-page-shell {
-  width: min(1320px, calc(100% - 40px));
+  width: 100%;
   height: 100vh;
   margin: 0 auto;
-  padding: 24px 0 20px;
+  padding: 10px;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
-  gap: 14px;
+  gap: 8px;
 }
 
 .cities-chart-page-header {
@@ -607,27 +607,73 @@ h1 {
 }
 
 .cities-chart-page-header h1 {
-  margin: 4px 0 0;
-  font-size: 1.9rem;
+  margin: 2px 0 0;
+  font-size: 1.6rem;
   white-space: normal;
 }
 
 .cities-modal-chart {
   min-height: 0;
-  overflow: auto;
-  border-radius: 22px;
-  background: rgba(248, 252, 252, 0.8);
-  padding: 18px;
+  overflow: hidden;
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+
+.cities-chart-panels {
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.cities-chart-panel {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 8px;
+  padding: 10px;
   border: 1px solid rgba(24, 84, 94, 0.1);
-  box-shadow: var(--shadow);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.62);
+  container-type: inline-size;
+}
+
+.cities-chart-panel-header .eyebrow {
+  margin: 0;
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+.cities-chart-panel-header h2 {
+  margin: 3px 0 0;
+  font-size: 1rem;
+  line-height: 1.1;
+}
+
+.cities-chart-panel-body {
+  min-height: 0;
+  overflow: hidden;
+  display: grid;
+  place-items: start center;
+}
+
+.cities-chart-scale-frame {
+  --timeline-scale: 1;
+  transform: scale(var(--timeline-scale));
+  transform-origin: top center;
 }
 
 .cities-chart-grid {
   display: grid;
-  grid-template-columns: 92px repeat(4, minmax(180px, 1fr));
-  gap: 4px 8px;
+  grid-template-columns: 58px repeat(4, minmax(clamp(88px, 17cqi, 132px), 1fr));
+  gap: 2px 4px;
   align-items: stretch;
-  min-width: 920px;
+  min-width: 0;
 }
 
 .cities-chart-corner,
@@ -637,11 +683,11 @@ h1 {
   align-items: center;
   justify-content: center;
   align-self: stretch;
-  min-height: 48px;
-  border-radius: 14px;
+  min-height: 34px;
+  border-radius: 10px;
   background: rgba(255, 255, 255, 0.78);
   color: var(--muted);
-  font-size: 0.84rem;
+  font-size: 0.8rem;
   border: 1px solid rgba(24, 84, 94, 0.08);
 }
 
@@ -662,7 +708,7 @@ h1 {
   border: 0;
   border-radius: 0;
   background: transparent;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   line-height: 1;
 }
 
@@ -681,38 +727,42 @@ h1 {
   align-self: stretch;
   padding: 0;
   display: grid;
-  gap: 5px;
+  gap: 3px;
   align-content: start;
-  justify-items: center;
+  justify-items: stretch;
 }
 
-.cities-chart-card {
-  width: min(100%, 180px);
+.city-card.cities-chart-card {
+  width: 100%;
   min-width: 0;
   max-width: none;
-  padding: 5px 7px;
-  border-radius: 12px;
+  padding: 3px 5px;
+  border-radius: 9px;
   scroll-snap-align: unset;
-  --card-comment-size: 0.78rem;
-  --card-title-size: 0.68rem;
+  --card-comment-size: 0.64rem;
+  --card-title-size: 0.56rem;
+  --card-country-size: 0.64rem;
 }
 
 .cities-chart-card .city-card-header {
   align-items: start;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 0;
 }
 
 .cities-chart-card .city-card-title {
   min-width: 0;
-  gap: 5px;
+  gap: 3px;
   line-height: 1.02;
+  justify-content: center;
+  text-align: center;
 }
 
 .cities-chart-card .comment,
 .cities-chart-card .city-card-title {
   white-space: normal;
   overflow-wrap: anywhere;
+  text-align: center;
 }
 
 .cities-chart-card .comment {
@@ -721,8 +771,18 @@ h1 {
 }
 
 .cities-chart-card .flag {
-  font-size: 0.95rem;
+  font-size: 0.72rem;
   line-height: 1;
+}
+
+@media (max-width: 980px) {
+  .cities-chart-panels {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cities-chart-panel {
+    min-height: 320px;
+  }
 }
 
 .editor-panel-header {
@@ -910,8 +970,8 @@ h1 {
 
 .city-card {
   display: grid;
-  width: min(210px, 56vw);
-  min-width: 210px;
+  width: min(110px, 56vw);
+  min-width: 110px;
   padding: 8px 11px;
   border-radius: 18px;
   background: var(--card-tint, rgba(248, 252, 252, 0.72));
