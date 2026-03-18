@@ -57,6 +57,7 @@ let currentPhotoViewMode = "grid";
 let cityAutoPlayTimerId = null;
 let cityAutoPlayResumeTimerId = null;
 let isCityAutoPlayEnabled = false;
+let cityListResizeObserver;
 
 bootstrapApp();
 
@@ -94,7 +95,11 @@ photoViewGridButton?.addEventListener("click", () => {
 });
 
 hostingCitiesChartButton?.addEventListener("click", () => {
-  window.open("./cities-chart.html", "_blank", "noopener");
+  window.open(
+    "./cities-chart.html",
+    "hosting-cities-timeline",
+    "popup=yes,width=1400,height=900,resizable=yes,scrollbars=yes",
+  );
 });
 
 cityAutoPlayToggleButton?.addEventListener("click", () => {
@@ -115,6 +120,14 @@ window.addEventListener(
     });
   }, 120),
 );
+
+window.addEventListener("message", (event) => {
+  if (event.data?.type !== "select-city-from-timeline") {
+    return;
+  }
+
+  window.selectCityFromTimelinePopup?.(Number(event.data.index));
+});
 
 function renderCityList(items, selectedIndex) {
   cityListElement.innerHTML = getSortedEntries(getVisibleCityEntries(items))
@@ -152,33 +165,47 @@ function renderCityList(items, selectedIndex) {
 
 function fitCityCardsText(root = cityListElement) {
   root.querySelectorAll(".city-card").forEach((card) => {
-    card.style.removeProperty("--card-comment-size");
-    card.style.removeProperty("--card-title-size");
-    card.style.removeProperty("--card-country-size");
-
     const title = card.querySelector(".city-card-title");
     const country = card.querySelector(".country");
     if (!title || !country) {
       return;
     }
 
-    const sizeSteps = [
-      { title: "0.78rem", comment: "0.92rem", country: "0.78rem" },
-      { title: "0.74rem", comment: "0.86rem", country: "0.74rem" },
-      { title: "0.7rem", comment: "0.8rem", country: "0.7rem" },
-      { title: "0.68rem", comment: "0.76rem", country: "0.68rem" },
-    ];
+    const cardWidth = card.clientWidth || 210;
+    const titleSize = clamp(cardWidth * 0.0042, 0.74, 0.94);
+    const commentSize = clamp(cardWidth * 0.0045, 0.82, 1.04);
+    const countrySize = titleSize;
+    const flagSize = clamp(cardWidth * 0.0072, 1.14, 1.56);
 
-    for (const step of sizeSteps) {
-      card.style.setProperty("--card-title-size", step.title);
-      card.style.setProperty("--card-comment-size", step.comment);
-      card.style.setProperty("--card-country-size", step.country);
+    card.style.setProperty("--card-title-size", `${titleSize}rem`);
+    card.style.setProperty("--card-comment-size", `${commentSize}rem`);
+    card.style.setProperty("--card-country-size", `${countrySize}rem`);
+    card.style.setProperty("--card-flag-size", `${flagSize}rem`);
 
-      if (title.scrollWidth <= title.clientWidth && country.scrollWidth <= country.clientWidth) {
-        break;
+    if (title.scrollWidth > title.clientWidth || country.scrollWidth > country.clientWidth) {
+      const shrinkRatio = Math.min(title.clientWidth / title.scrollWidth || 1, country.clientWidth / country.scrollWidth || 1);
+      if (shrinkRatio < 1) {
+        card.style.setProperty("--card-title-size", `${Math.max(titleSize * shrinkRatio * 0.96, 0.62)}rem`);
+        card.style.setProperty("--card-comment-size", `${Math.max(commentSize * shrinkRatio * 0.98, 0.72)}rem`);
+        card.style.setProperty("--card-country-size", `${Math.max(countrySize * shrinkRatio * 0.96, 0.6)}rem`);
+        card.style.setProperty("--card-flag-size", `${Math.max(flagSize * shrinkRatio, 0.96)}rem`);
       }
     }
   });
+}
+
+function observeCityCardSizing() {
+  cityListResizeObserver?.disconnect();
+  if (!cityListElement || typeof ResizeObserver === "undefined") {
+    return;
+  }
+
+  cityListResizeObserver = new ResizeObserver(() => {
+    requestAnimationFrame(() => {
+      fitCityCardsText(cityListElement);
+    });
+  });
+  cityListResizeObserver.observe(cityListElement);
 }
 
 function renderCityEditor(city) {
@@ -449,6 +476,7 @@ async function bootstrapApp() {
   syncInitialActiveCity();
   setCityEditorVisibility(isCityEditorVisible);
   renderCityList(cities, activeCityIndex);
+  observeCityCardSizing();
   renderCityEditor(cities[activeCityIndex]);
   renderConferencePhoto(cities[activeCityIndex]);
   syncCityActions();
@@ -612,7 +640,7 @@ function updateZoom(multiplier) {
     return;
   }
 
-  currentZoomFactor = clamp(currentZoomFactor * multiplier, 0.8, 4);
+  currentZoomFactor = clamp(currentZoomFactor * multiplier, 0.8, 20);
   redrawMap();
 }
 
@@ -669,6 +697,24 @@ function selectCity(index, options = {}) {
     pauseCityAutoPlay();
   }
 }
+
+window.selectCityFromTimelinePopup = (index) => {
+  if (!Number.isInteger(index) || index < 0 || index >= cities.length) {
+    return;
+  }
+
+  if (document.visibilityState === "hidden") {
+    window.focus();
+  }
+
+  const cityButton = cityListElement?.querySelector(`[data-city-index="${index}"]`);
+  if (cityButton instanceof HTMLButtonElement) {
+    cityButton.click();
+    return;
+  }
+
+  selectCity(index, { pauseAutoPlay: true, forceScroll: true });
+};
 
 function renderConferencePhoto(city) {
   if (!conferencePhotoTrack || !conferencePhotoCaption || !photoGridElement || !city) {

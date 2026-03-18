@@ -79,7 +79,7 @@ function createTimelinePanel(eyebrow, axisEntries, cities) {
           );
 
       for (const city of items) {
-        cell.append(createCityCard(city));
+        cell.append(createCityCard(city, cities.indexOf(city)));
       }
 
       grid.append(cell);
@@ -99,13 +99,15 @@ function createTextCell(text, className) {
   return element;
 }
 
-function createCityCard(city) {
-  const article = document.createElement("article");
-  article.className =
+function createCityCard(city, cityIndex) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className =
     `city-card cities-chart-card type-${conferenceTypeToToken(normalizeConferenceType(city.conferenceType))}` +
     (city.isUpcoming ? " is-upcoming" : "");
+  button.dataset.cityIndex = String(cityIndex);
 
-  article.innerHTML = `
+  button.innerHTML = `
     <span class="comment">${escapeHtml(city.comment || "")}</span>
     <span class="city-card-header">
       <span class="city-card-title">
@@ -114,8 +116,20 @@ function createCityCard(city) {
       </span>
     </span>
   `;
+  button.addEventListener("click", () => {
+    if (window.opener && !window.opener.closed) {
+      window.opener.postMessage(
+        {
+          type: "select-city-from-timeline",
+          index: cityIndex,
+        },
+        "*",
+      );
+      window.opener.focus?.();
+    }
+  });
 
-  return article;
+  return button;
 }
 
 function fitCityCardsText(root) {
