@@ -1,0 +1,120 @@
+{
+  "cities": {
+    "31": [
+      {
+        "src": "./images/uploaded/icwe-the-united-kingdom-1975/16icwe-2023.jpg",
+        "title": "16ICWE-2023.jpg",
+        "credit": "",
+        "deletePassword": "test"
+      }
+    ],
+    "32": [
+      {
+        "src": "./images/uploaded/icwe-japan-1971/16icwe-2023.jpg",
+        "title": "16ICWE-2023.jpg",
+        "credit": "",
+        "deletePassword": "test"
+      },
+      {
+        "src": "./images/uploaded/icwe-japan-1971/closing.heic",
+        "title": "closing.HEIC",
+        "credit": "",
+        "deletePassword": "test"
+      }
+    ],
+    "33": [
+      {
+        "src": "./images/uploaded/icwe-canada-1967/16icwe-2023.jpg",
+        "title": "16ICWE-2023.jpg",
+        "credit": "",
+        "deletePassword": "test"
+      },
+      {
+        "src": "./images/uploaded/icwe-canada-1967/opening.heic",
+        "title": "opening.HEIC",
+        "credit": "",
+        "deletePassword": "test"
+      },
+      {
+        "src": "./images/uploaded/icwe-canada-1967/venue.heic",
+        "title": "venue.HEIC",
+        "credit": "",
+        "deletePassword": "test"
+      }
+    ],
+    "34": [
+      {
+        "src": "./images/uploaded/icwe-the-united-kingdom-1963/16icwe-2023.jpg",
+        "title": "か",
+        "credit": "t",
+        "deletePassword": "test"
+      },
+      {
+        "src": "./images/uploaded/icwe-the-united-kingdom-1963/16icwe-2023-2.jpg",
+        "title": "test",
+        "credit": "test",
+        "deletePassword": "test"
+      },
+      {
+        "src": "./images/uploaded/35-teddington-symposium-on-wind-effect/16icwe-2023.jpg",
+        "title": "test1",
+        "credit": "test1",
+        "deletePassword": "test"
+      },
+      {
+        "src": "./images/uploaded/35-teddington-symposium-on-wind-effect/closing.heic",
+        "title": "test2",
+        "credit": "test2",
+        "deletePassword": "test"
+      },
+      {
+        "src": "./images/uploaded/35-teddington-symposium-on-wind-effect/opening.heic",
+        "title": "test3",
+        "credit": "test3",
+        "deletePassword": "test"
+      },
+      {
+        "src": "./images/uploaded/35-teddington-symposium-on-wind-effect/16icwe-2023-2.jpg",
+        "title": "16ICWE-2023.jpg",
+        "credit": "",
+        "deletePassword": "test"
+      },
+      {
+        "src": "./images/uploaded/35-teddington-symposium-on-wind-effect/closing-2.heic",
+        "title": "closing.HEIC",
+        "credit": "",
+        "deletePassword": "test"
+      },
+      {
+        "src": "./images/uploaded/35-teddington-symposium-on-wind-effect/opening-2.heic",
+        "title": "opening.HEIC",
+        "credit": "",
+        "deletePassword": "test"
+      },
+      {
+        "src": "./images/uploaded/35-teddington-symposium-on-wind-effect/venue.heic",
+        "title": "venue.HEIC",
+        "credit": "",
+        "deletePassword": "test"
+      },
+      {
+        "src": "./images/uploaded/icwe-the-united-kingdom-1963/16icwe-2023-3.jpg",
+        "title": "16ICWE-2023.jpg",
+        "credit": "",
+        "deletePassword": "test"
+      },
+      {
+        "src": "./images/uploaded/icwe-the-united-kingdom-1963/opening.heic",
+        "title": "opening.HEIC",
+        "credit": "",
+        "deletePassword": "test"
+      },
+      {
+        "src": "./images/uploaded/icwe-the-united-kingdom-1963/venue.heic",
+        "title": "venue.HEIC",
+        "credit": "",
+        "deletePassword": "test"
+      }
+    ]
+  }
+}

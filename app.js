@@ -9,6 +9,7 @@ const DEFAULT_COORDINATES = [0, 0];
 const DEFAULT_ZOOM_FACTOR = 1.728;
 const AUTO_CITY_ADVANCE_MS = 6000;
 const AUTO_CITY_RESUME_DELAY_MS = 7000;
+const PHOTO_UPLOAD_POPUP_NAME = "photo-upload-popup";
 
 const cities = [
   {
@@ -35,6 +36,7 @@ const conferencePhotoPrevButton = document.getElementById("conference-photo-prev
 const conferencePhotoNextButton = document.getElementById("conference-photo-next");
 const photoViewCarouselButton = document.getElementById("photo-view-carousel");
 const photoViewGridButton = document.getElementById("photo-view-grid");
+const photoUploadCountElement = document.getElementById("photo-upload-count");
 const hostingCitiesChartButton = document.getElementById("hosting-cities-chart-button");
 const toggleCityEditorButton = document.getElementById("toggle-city-editor");
 const zoomInButton = document.getElementById("zoom-in-button");
@@ -58,6 +60,7 @@ let cityAutoPlayTimerId = null;
 let cityAutoPlayResumeTimerId = null;
 let isCityAutoPlayEnabled = false;
 let cityListResizeObserver;
+let photoGridResizeObserver;
 
 bootstrapApp();
 
@@ -129,10 +132,69 @@ window.addEventListener("message", (event) => {
   window.selectCityFromTimelinePopup?.(Number(event.data.index));
 });
 
+window.addEventListener("message", (event) => {
+  if (event.data?.type !== "upload-photos-to-city") {
+    return;
+  }
+
+  handleUploadedPhotosMessage(event.data)
+    .then((result) => {
+      event.source?.postMessage(
+        {
+          type: "upload-photos-result",
+          ok: true,
+          count: result.count,
+          message: result.message,
+        },
+        "*",
+      );
+    })
+    .catch((error) => {
+      event.source?.postMessage(
+        {
+          type: "upload-photos-result",
+          ok: false,
+          message: error?.message || "画像の保存に失敗しました",
+        },
+        "*",
+      );
+      console.error("Failed to import uploaded photos.", error);
+      setSaveStatus("画像の保存に失敗しました");
+    });
+});
+
+window.addEventListener("message", (event) => {
+  if (event.data?.type !== "server-uploaded-photos") {
+    return;
+  }
+
+  const cityIndex = Number(event.data.cityIndex);
+  const uploadedPhotos = Array.isArray(event.data.photos)
+    ? event.data.photos.map((entry) => normalizePhotoEntry(entry)).filter(Boolean)
+    : [];
+
+  if (!Number.isInteger(cityIndex) || cityIndex < 0 || cityIndex >= cities.length || uploadedPhotos.length === 0) {
+    return;
+  }
+
+  cities[cityIndex].photos = mergeUniquePhotoEntries(cities[cityIndex].photos, uploadedPhotos);
+
+  if (cityIndex === activeCityIndex) {
+    renderCityEditor(cities[activeCityIndex]);
+    renderConferencePhoto(cities[activeCityIndex]);
+  }
+
+  renderCityList(cities, activeCityIndex);
+  redrawMap();
+  setSaveStatus(`${uploadedPhotos.length}件の画像を追加しました`);
+});
+
 function renderCityList(items, selectedIndex) {
   cityListElement.innerHTML = getSortedEntries(getVisibleCityEntries(items))
     .map(
-      ({ city, index }) => `
+      ({ city, index }) => {
+        const hasPhotos = getCityPhotos(city).length > 0;
+        return `
         <button
           type="button"
           class="city-card type-${conferenceTypeToToken(normalizeConferenceType(city.conferenceType))}${city.isUpcoming ? " is-upcoming" : ""}${index === selectedIndex ? " is-active" : ""}"
@@ -140,6 +202,7 @@ function renderCityList(items, selectedIndex) {
           data-conference-type="${escapeHtml(normalizeConferenceType(city.conferenceType))}"
           aria-pressed="${index === selectedIndex}"
         >
+          ${hasPhotos ? '<img src="./images/logo/logo-photo.svg" alt="写真あり" class="city-card-photo-badge" />' : ""}
           <span class="comment">${city.comment}</span>
           <span class="city-card-header">
             <span class="city-card-title">
@@ -149,7 +212,8 @@ function renderCityList(items, selectedIndex) {
             <span class="country">${city.country}</span>
           </span>
 	      </button>
-	    `,
+	    `;
+      },
     )
     .join("");
 
@@ -207,6 +271,21 @@ function observeCityCardSizing() {
   });
   cityListResizeObserver.observe(cityListElement);
 }
+
+function observePhotoGridSizing() {
+  photoGridResizeObserver?.disconnect();
+  if (!photoGridElement || typeof ResizeObserver === "undefined") {
+    return;
+  }
+
+  photoGridResizeObserver = new ResizeObserver(() => {
+    requestAnimationFrame(() => {
+      syncPhotoGridLayout();
+    });
+  });
+  photoGridResizeObserver.observe(photoGridElement);
+}
+
 
 function renderCityEditor(city) {
   cityEditorElement.innerHTML = `
@@ -473,10 +552,12 @@ async function geocodeActiveCity(options = {}) {
 
 async function bootstrapApp() {
   await hydrateCities();
+  await hydrateServerUploads();
   syncInitialActiveCity();
   setCityEditorVisibility(isCityEditorVisible);
   renderCityList(cities, activeCityIndex);
   observeCityCardSizing();
+  observePhotoGridSizing();
   renderCityEditor(cities[activeCityIndex]);
   renderConferencePhoto(cities[activeCityIndex]);
   syncCityActions();
@@ -485,6 +566,31 @@ async function bootstrapApp() {
     console.error("Failed to initialize map.", error);
   });
   syncCityAutoPlay();
+}
+
+async function hydrateServerUploads() {
+  try {
+    const response = await fetch("./api/uploads", { headers: { Accept: "application/json" } });
+    if (!response.ok) {
+      return;
+    }
+
+    const payload = await response.json();
+    if (!payload || typeof payload !== "object" || !payload.cities) {
+      return;
+    }
+
+    Object.entries(payload.cities).forEach(([indexKey, entries]) => {
+      const cityIndex = Number(indexKey);
+      if (!Number.isInteger(cityIndex) || cityIndex < 0 || cityIndex >= cities.length || !Array.isArray(entries)) {
+        return;
+      }
+
+      cities[cityIndex].photos = mergeUniquePhotoEntries(cities[cityIndex].photos, entries);
+    });
+  } catch (error) {
+    console.error("Failed to load shared uploaded photos.", error);
+  }
 }
 
 async function initializeMap() {
@@ -724,6 +830,7 @@ function renderConferencePhoto(city) {
   const missingPhotoMessage =
     "この会議での日本風工学会員に関わる集合写真やグループ写真をお持ちの方はご提供ください。";
   const photos = getCityPhotos(city);
+  syncPhotoUploadCount(photos.length);
   const slides = [
     ...photos,
     {
@@ -736,12 +843,14 @@ function renderConferencePhoto(city) {
   currentPhotoIndex = 0;
 
   if (photos.length === 0) {
-    conferencePhotoTrack.innerHTML = `<div class="photo-empty">${missingPhotoMessage}</div>`;
-    photoGridElement.innerHTML = `<div class="photo-empty">${missingPhotoMessage}</div>`;
+    conferencePhotoTrack.innerHTML = renderPhotoUploadNotice(city, missingPhotoMessage);
+    photoGridElement.innerHTML = renderPhotoUploadNotice(city, missingPhotoMessage);
     conferencePhotoCaption.textContent = "";
     updatePhotoControls(photos.length);
     stopPhotoCarousel();
     syncPhotoView();
+    bindPhotoUploadTriggers(city);
+    syncPhotoGridLayout();
     return;
   }
 
@@ -751,7 +860,7 @@ function renderConferencePhoto(city) {
         <div class="photo-slide">
           ${
             photo.isNotice
-              ? `<div class="photo-empty">${escapeHtml(missingPhotoMessage)}</div>`
+              ? renderPhotoUploadNotice(city, missingPhotoMessage)
               : `<img class="photo-image" src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.title || `${city.comment} の関連写真 ${index + 1}`)}" />`
           }
         </div>
@@ -762,21 +871,26 @@ function renderConferencePhoto(city) {
   photoGridElement.innerHTML = photos
     .map(
       (photo, index) => `
-        <button
-          type="button"
-          class="photo-grid-button"
-          data-photo-index="${index}"
-          data-photo-title="${escapeHtml(photo.title || "写真タイトル未設定")}"
-        >
-          <img class="photo-thumb" src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.title || `写真 ${index + 1}`)}" />
-        </button>
+        <div class="photo-grid-item">
+          <button
+            type="button"
+            class="photo-grid-button"
+            data-photo-index="${index}"
+            data-photo-title="${escapeHtml(photo.title || "写真タイトル未設定")}"
+          >
+            <img class="photo-thumb" src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.title || `写真 ${index + 1}`)}" />
+          </button>
+          ${
+            isUploadedPhoto(photo)
+              ? `<button type="button" class="photo-delete-button" data-photo-delete-index="${index}" aria-label="画像を削除">×</button>`
+              : ""
+          }
+        </div>
       `,
     )
     .join("");
   photoGridElement.innerHTML += `
-    <div class="photo-empty">
-      ${escapeHtml(missingPhotoMessage)}
-    </div>
+    ${renderPhotoUploadNotice(city, missingPhotoMessage)}
   `;
   photoGridElement.querySelectorAll("[data-photo-index]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -786,9 +900,282 @@ function renderConferencePhoto(city) {
       startPhotoCarousel();
     });
   });
+  photoGridElement.querySelectorAll("[data-photo-delete-index]").forEach((button) => {
+    button.addEventListener("click", async (event) => {
+      event.stopPropagation();
+      const photoIndex = Number(button.dataset.photoDeleteIndex);
+      await deleteUploadedPhoto(activeCityIndex, photos[photoIndex]);
+    });
+  });
+  bindPhotoUploadTriggers(city);
+  syncPhotoGridLayout();
 
   updateVisiblePhoto();
   syncPhotoView();
+}
+
+function isUploadedPhoto(photo) {
+  return String(photo?.src || "").startsWith("./images/uploaded/");
+}
+
+async function deleteUploadedPhoto(cityIndex, photo) {
+  if (!photo || !isUploadedPhoto(photo)) {
+    return;
+  }
+
+  const password = window.prompt("この画像を削除しようとしています．本当に削除する場合は，削除用パスワードを入力してください．");
+  if (password === null) {
+    return;
+  }
+
+  try {
+    const response = await fetch("./api/delete-upload", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        cityIndex,
+        src: photo.src,
+        password,
+      }),
+    });
+
+    const result = await response.json().catch(() => null);
+    if (!response.ok || !result?.ok) {
+      throw new Error(result?.message || "画像を削除できませんでした");
+    }
+
+    cities[cityIndex].photos = getCityPhotos(cities[cityIndex]).filter((entry) => entry.src !== photo.src);
+    if (cityIndex === activeCityIndex) {
+      renderCityEditor(cities[activeCityIndex]);
+      renderConferencePhoto(cities[activeCityIndex]);
+    }
+    renderCityList(cities, activeCityIndex);
+    redrawMap();
+    setSaveStatus("画像を削除しました");
+  } catch (error) {
+    console.error("Failed to delete uploaded photo.", error);
+    setSaveStatus(error?.message || "画像を削除できませんでした");
+  }
+}
+
+function syncPhotoGridLayout() {
+  if (!photoGridElement) {
+    return;
+  }
+
+  const photoItems = photoGridElement.querySelectorAll(".photo-grid-button");
+  const noticeItems = photoGridElement.querySelectorAll(".photo-empty");
+  const itemCount = photoItems.length + noticeItems.length;
+  if (itemCount === 0) {
+    return;
+  }
+
+  const availableWidth = photoGridElement.clientWidth;
+  const availableHeight = photoGridElement.clientHeight;
+  if (!availableWidth || !availableHeight) {
+    return;
+  }
+
+  const photoCount = photoItems.length;
+  let preferredColumns = 2;
+  if (photoCount >= 13) {
+    preferredColumns = 5;
+  } else if (photoCount >= 10) {
+    preferredColumns = 4;
+  } else if (photoCount >= 5) {
+    preferredColumns = 3;
+  }
+  const gap = 1;
+  const bestColumns = preferredColumns;
+  const tileSize = Math.max(Math.floor((availableWidth - gap * (bestColumns - 1)) / bestColumns), 48);
+  const noticePadding = Math.max(4, Math.min(10, Math.floor(tileSize * 0.08)));
+
+  photoGridElement.style.setProperty("--photo-grid-columns", String(bestColumns));
+  photoGridElement.style.setProperty("--photo-grid-tile-size", `${tileSize}px`);
+  photoGridElement.style.setProperty("--photo-grid-gap", `${gap}px`);
+  photoGridElement.style.setProperty("--photo-empty-padding", `${noticePadding}px`);
+  fitPhotoNoticeTiles(tileSize);
+}
+
+function fitPhotoNoticeTiles(tileSize) {
+  if (!photoGridElement) {
+    return;
+  }
+
+  photoGridElement.querySelectorAll(".photo-empty").forEach((noticeElement) => {
+    if (!(noticeElement instanceof HTMLElement)) {
+      return;
+    }
+
+    const maxFontSize = Math.max(12, Math.min(18, tileSize * 0.12));
+    const minFontSize = Math.max(8, Math.min(11, tileSize * 0.07));
+    const lineHeight = 1.28;
+
+    noticeElement.style.fontSize = `${maxFontSize}px`;
+    noticeElement.style.lineHeight = String(lineHeight);
+
+    let currentFontSize = maxFontSize;
+    while (
+      currentFontSize > minFontSize &&
+      (noticeElement.scrollHeight > noticeElement.clientHeight ||
+        noticeElement.scrollWidth > noticeElement.clientWidth)
+    ) {
+      currentFontSize -= 0.5;
+      noticeElement.style.fontSize = `${currentFontSize}px`;
+    }
+  });
+}
+
+function renderPhotoUploadNotice(city, message) {
+  return `
+    <button
+      type="button"
+      class="photo-empty photo-upload-trigger"
+      data-photo-upload-city-index="${activeCityIndex}"
+      aria-label="${escapeHtml(city.comment || city.name || "写真アップロード")}"
+    >
+      ${escapeHtml(message)}
+    </button>
+  `;
+}
+
+function bindPhotoUploadTriggers(city) {
+  document.querySelectorAll("[data-photo-upload-city-index]").forEach((button) => {
+    button.addEventListener("click", () => {
+      openPhotoUploadPopup(activeCityIndex, city);
+    });
+  });
+}
+
+function openPhotoUploadPopup(cityIndex, city) {
+  if (!Number.isInteger(cityIndex) || cityIndex < 0 || cityIndex >= cities.length) {
+    return;
+  }
+
+  const url = new URL("./photo-upload.html", window.location.href);
+  url.searchParams.set("cityIndex", String(cityIndex));
+  url.searchParams.set("cityName", city.name || "");
+  url.searchParams.set("comment", city.comment || "");
+  url.searchParams.set("conferenceType", city.conferenceType || "");
+  url.searchParams.set("country", city.country || "");
+  url.searchParams.set("eventDate", city.eventDate || "");
+
+  window.open(
+    url.toString(),
+    PHOTO_UPLOAD_POPUP_NAME,
+    "popup=yes,width=560,height=720,resizable=yes,scrollbars=yes",
+  );
+}
+
+async function handleUploadedPhotosMessage(data) {
+  const cityIndex = Number(data.cityIndex);
+  const uploadedFiles = Array.isArray(data.files) ? data.files : [];
+
+  if (!Number.isInteger(cityIndex) || cityIndex < 0 || cityIndex >= cities.length || uploadedFiles.length === 0) {
+    throw new Error("保存対象の都市または画像データが不正です");
+  }
+
+  const savedPhotos = await saveUploadedPhotosToProjectDirectory(cities[cityIndex], uploadedFiles);
+  if (savedPhotos.length === 0) {
+    throw new Error("保存できる画像がありませんでした");
+  }
+
+  const existingPhotos = getCityPhotos(cities[cityIndex]);
+  cities[cityIndex].photos = [...existingPhotos, ...savedPhotos];
+
+  if (cityIndex === activeCityIndex) {
+    renderCityEditor(cities[activeCityIndex]);
+    renderConferencePhoto(cities[activeCityIndex]);
+  }
+
+  renderCityList(cities, activeCityIndex);
+  redrawMap();
+  setSaveStatus(`${savedPhotos.length}件の画像を保存しました`);
+  return {
+    count: savedPhotos.length,
+    message: `${savedPhotos.length}件の画像を保存しました`,
+  };
+}
+
+async function saveUploadedPhotosToProjectDirectory(city, uploadedFiles) {
+  if (!("showDirectoryPicker" in window)) {
+    throw new Error("このブラウザはディレクトリ保存に対応していません。localhost 上の Chrome 系ブラウザで開いてください。");
+  }
+
+  const projectDirectoryHandle = await getProjectDirectoryHandle();
+  const imagesDirectoryHandle = await projectDirectoryHandle.getDirectoryHandle("images", { create: true });
+  const uploadsDirectoryHandle = await imagesDirectoryHandle.getDirectoryHandle("uploaded", { create: true });
+  const cityDirectoryHandle = await uploadsDirectoryHandle.getDirectoryHandle(buildPhotoDirectoryName(city), { create: true });
+
+  const savedPhotos = [];
+
+  for (let index = 0; index < uploadedFiles.length; index += 1) {
+    const uploadedFile = uploadedFiles[index];
+    if (!uploadedFile || !(uploadedFile.buffer instanceof ArrayBuffer)) {
+      continue;
+    }
+
+    const fileName = await createUniquePhotoFileName(cityDirectoryHandle, uploadedFile.name, index);
+    const fileHandle = await cityDirectoryHandle.getFileHandle(fileName, { create: true });
+    const writable = await fileHandle.createWritable();
+    await writable.write(new Blob([uploadedFile.buffer], { type: uploadedFile.type || "application/octet-stream" }));
+    await writable.close();
+
+    savedPhotos.push({
+      src: `./images/uploaded/${buildPhotoDirectoryName(city)}/${fileName}`,
+      title: String(uploadedFile.title || "").trim(),
+      credit: String(uploadedFile.credit || "").trim(),
+    });
+  }
+
+  return savedPhotos;
+}
+
+function buildPhotoDirectoryName(city) {
+  const year = String(city.eventDate || "unknown").trim() || "unknown";
+  const name = slugifyFileName(city.name || "city");
+  return `${year}-${name}`.slice(0, 80);
+}
+
+async function createUniquePhotoFileName(directoryHandle, originalName, index) {
+  const parsedName = String(originalName || `photo-${index + 1}`).trim();
+  const extensionMatch = parsedName.match(/(\.[a-z0-9]+)$/i);
+  const extension = extensionMatch ? extensionMatch[1].toLowerCase() : ".png";
+  const baseName = slugifyFileName(parsedName.replace(/(\.[a-z0-9]+)$/i, "")) || `photo-${index + 1}`;
+
+  let candidate = `${baseName}${extension}`;
+  let suffix = 1;
+
+  while (await fileExistsInDirectory(directoryHandle, candidate)) {
+    suffix += 1;
+    candidate = `${baseName}-${suffix}${extension}`;
+  }
+
+  return candidate;
+}
+
+async function fileExistsInDirectory(directoryHandle, fileName) {
+  try {
+    await directoryHandle.getFileHandle(fileName);
+    return true;
+  } catch (error) {
+    if (error?.name === "NotFoundError") {
+      return false;
+    }
+    throw error;
+  }
+}
+
+function slugifyFileName(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase()
+    .replaceAll(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 48);
 }
 
 function getCityPhotos(city) {
@@ -871,6 +1258,22 @@ function mergePhotoEntries(pathsValue, titlesValue, creditsValue) {
     .filter(Boolean);
 }
 
+function mergeUniquePhotoEntries(existingEntries, nextEntries) {
+  const mergedEntries = [...(Array.isArray(existingEntries) ? existingEntries : []), ...(Array.isArray(nextEntries) ? nextEntries : [])]
+    .map((entry) => normalizePhotoEntry(entry))
+    .filter(Boolean);
+
+  const seen = new Set();
+  return mergedEntries.filter((entry) => {
+    if (seen.has(entry.src)) {
+      return false;
+    }
+
+    seen.add(entry.src);
+    return true;
+  });
+}
+
 function moveConferencePhoto(step, options = {}) {
   const { restartTimer = false } = options;
   const slides = conferencePhotoTrack?.querySelectorAll(".photo-slide");
@@ -924,6 +1327,7 @@ function syncPhotoView() {
   photoViewGridButton?.classList.toggle("is-active", !isCarousel);
   if (!isCarousel && conferencePhotoCaption) {
     conferencePhotoCaption.textContent = "";
+    syncPhotoGridLayout();
   } else if (isCarousel) {
     updateVisiblePhoto();
   }
@@ -943,6 +1347,14 @@ function updatePhotoControls(count) {
   if (conferencePhotoNextButton) {
     conferencePhotoNextButton.disabled = disabled;
   }
+}
+
+function syncPhotoUploadCount(count) {
+  if (!photoUploadCountElement) {
+    return;
+  }
+
+  photoUploadCountElement.textContent = `${count}枚`;
 }
 
 function startPhotoCarousel() {
@@ -1097,6 +1509,7 @@ function drawMarkers(activeIndex) {
 
     const [x, y] = projected;
     const isActive = index === activeIndex;
+    const hasPhotos = getCityPhotos(city).length > 0;
 
     const group = markersGroup
       .append("g")
@@ -1129,7 +1542,7 @@ function drawMarkers(activeIndex) {
       return;
     }
 
-    const metrics = measureLabelMetrics(markersGroup, city);
+    const metrics = measureLabelMetrics(markersGroup, city, hasPhotos);
     const preferredOffset = city.manualLabelOffset ?? city.labelOffset ?? [24, -62];
     const placement = city.manualLabelOffset
       ? getPlacementFromOffset(x, y, preferredOffset, metrics)
@@ -1167,6 +1580,18 @@ function drawMarkers(activeIndex) {
       .append("tspan")
       .attr("class", "label-title-country")
       .text(` ${city.country}`);
+
+    if (hasPhotos) {
+      labelLayer
+        .append("image")
+        .attr("class", "label-photo-badge")
+        .attr("href", "./images/logo/logo-photo.svg")
+        .attr("x", placement.rect.x + placement.rect.width - 20)
+        .attr("y", placement.rect.y + 8)
+        .attr("width", 12)
+        .attr("height", 12)
+        .attr("preserveAspectRatio", "xMidYMid meet");
+    }
 
     const labelBox = labelLayer
       .insert("rect", ":first-child")
@@ -1556,10 +1981,11 @@ function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
 
-function measureLabelMetrics(parentGroup, city) {
+function measureLabelMetrics(parentGroup, city, hasPhotos = false) {
   const paddingX = 12;
   const paddingTop = 10;
   const paddingBottom = 10;
+  const photoBadgeSpace = hasPhotos ? 18 : 0;
   const probe = parentGroup.append("g").attr("visibility", "hidden").attr("pointer-events", "none");
   const commentX = paddingX;
   const commentY = paddingTop + 18;
@@ -1590,7 +2016,7 @@ function measureLabelMetrics(parentGroup, city) {
   const contentBottom = Math.max(commentBox.y + commentBox.height, titleBox.y + titleBox.height);
   const rectLeft = contentLeft - paddingX;
   const rectTop = contentTop - paddingTop;
-  const rectRight = contentRight + paddingX;
+  const rectRight = contentRight + paddingX + photoBadgeSpace;
   const rectBottom = contentBottom + paddingBottom;
 
   probe.remove();

@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photo Upload</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      body {
+        min-height: 100vh;
+      }
+
+      .photo-upload-shell {
+        width: 100%;
+        min-height: 100vh;
+        margin: 0 auto;
+        padding: 18px;
+        display: grid;
+        align-content: start;
+        gap: 14px;
+      }
+
+      .photo-upload-panel {
+        display: grid;
+        gap: 12px;
+        min-height: calc(100vh - 36px);
+        padding: 16px;
+        border: 1px solid rgba(24, 84, 94, 0.1);
+        border-radius: 22px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .photo-upload-panel h1 {
+        font-size: 1.5rem;
+        white-space: normal;
+      }
+
+      .photo-upload-meta {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .photo-upload-field {
+        display: grid;
+        gap: 6px;
+      }
+
+      .photo-upload-field input,
+      .photo-upload-field textarea {
+        width: 100%;
+        min-width: 0;
+        padding: 10px 12px;
+        border: 1px solid rgba(24, 84, 94, 0.14);
+        border-radius: 12px;
+        background: var(--surface);
+        color: var(--ink);
+        font: inherit;
+      }
+
+      .photo-upload-field textarea {
+        resize: vertical;
+      }
+
+      .photo-upload-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .photo-upload-status {
+        color: var(--muted);
+        font-size: 0.86rem;
+        min-height: 1.4em;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="photo-upload-shell">
+      <section class="photo-upload-panel">
+        <div>
+          <p class="eyebrow">PHOTO UPLOAD</p>
+          <h1>写真追加</h1>
+          <p id="photo-upload-meta" class="photo-upload-meta"></p>
+        </div>
+
+        <label class="photo-upload-field">
+          <span>画像ファイル（複数まとめて選択できます）</span>
+          <input id="photo-upload-input" type="file" accept="image/*" multiple />
+        </label>
+
+        <label class="photo-upload-field">
+          <span>写真のタイトルを入れてください（特に，写真に写っている方のお名前を記載ください）</span>
+          <textarea id="photo-upload-titles" rows="5" placeholder="1行目が1枚目，2行目が2枚目に対応します"></textarea>
+        </label>
+
+        <label class="photo-upload-field">
+          <span>写真提供者（所属）</span>
+          <textarea
+            id="photo-upload-credits"
+            rows="5"
+            placeholder="1行だけ入力すると全画像に適用されます&#10;複数行入力すると1行目が1枚目，2行目が2枚目に対応します"
+          ></textarea>
+        </label>
+
+        <label class="photo-upload-field">
+          <span>削除用パスワード（画像を削除する際に必要になります．）</span>
+          <input id="photo-upload-password" type="text" value="jawe-50-aniv" placeholder="削除時に必要になります" />
+        </label>
+
+        <div class="photo-upload-actions">
+          <button id="photo-upload-submit" type="button" class="save-button">アップロード</button>
+          <button id="photo-upload-close" type="button" class="secondary-button">閉じる</button>
+        </div>
+
+        <p id="photo-upload-status" class="photo-upload-status"></p>
+      </section>
+    </main>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const cityIndex = Number(params.get("cityIndex"));
+      const cityName = params.get("cityName") || "";
+      const comment = params.get("comment") || "";
+      const conferenceType = params.get("conferenceType") || "";
+      const country = params.get("country") || "";
+      const eventDate = params.get("eventDate") || "";
+
+      const metaElement = document.getElementById("photo-upload-meta");
+      const inputElement = document.getElementById("photo-upload-input");
+      const titlesElement = document.getElementById("photo-upload-titles");
+      const creditsElement = document.getElementById("photo-upload-credits");
+      const submitButton = document.getElementById("photo-upload-submit");
+      const closeButton = document.getElementById("photo-upload-close");
+      const statusElement = document.getElementById("photo-upload-status");
+      const passwordElement = document.getElementById("photo-upload-password");
+      let pendingUpload = false;
+
+      metaElement.textContent = [comment, cityName, country, eventDate].filter(Boolean).join(" | ");
+
+      closeButton.addEventListener("click", () => {
+        window.close();
+      });
+
+      submitButton.addEventListener("click", async () => {
+        const files = Array.from(inputElement.files || []);
+        if (files.length === 0 || !Number.isInteger(cityIndex)) {
+          statusElement.textContent = "画像ファイルを選択してください。";
+          return;
+        }
+
+        pendingUpload = true;
+        submitButton.disabled = true;
+        statusElement.textContent = "画像を読み込み中...";
+
+        const titles = String(titlesElement.value || "")
+          .split("\n")
+          .map((value) => value.trim());
+        const credits = String(creditsElement.value || "")
+          .split("\n")
+          .map((value) => value.trim());
+        const sharedCredit = credits.length === 1 ? credits[0] : "";
+        const deletePassword = String(passwordElement.value || "").trim() || "test";
+
+        try {
+          const filesPayload = await Promise.all(
+            files.map((file, index) => {
+              return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                  resolve({
+                    name: file.name,
+                    type: file.type,
+                    dataUrl: String(reader.result || ""),
+                    title: titles[index] || file.name,
+                    credit: sharedCredit || credits[index] || "",
+                  });
+                };
+                reader.onerror = () => reject(reader.error || new Error("Failed to read file"));
+                reader.readAsDataURL(file);
+              });
+            }),
+          );
+
+          statusElement.textContent = `${filesPayload.length}件の画像をアップロードしています...`;
+
+          const response = await fetch("./api/upload", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              cityIndex,
+              cityName,
+              comment,
+              conferenceType,
+              country,
+              eventDate,
+              deletePassword,
+              files: filesPayload,
+            }),
+          });
+
+          const responseText = await response.text();
+          let result = null;
+          try {
+            result = responseText ? JSON.parse(responseText) : null;
+          } catch (error) {
+            result = null;
+          }
+
+          if (!response.ok || !result?.ok) {
+            const fallbackMessage =
+              response.status === 404
+                ? "アップロード API が見つかりません。`node server.js` で起動したサーバーを使ってください。"
+                : response.status === 0
+                  ? "サーバーに接続できません。`node server.js` を起動して `http://localhost:8000` で開いてください。"
+                  : `画像のアップロードに失敗しました。(${response.status})`;
+            throw new Error(result?.message || fallbackMessage);
+          }
+
+          if (window.opener && !window.opener.closed) {
+            window.opener.postMessage(
+              {
+                type: "server-uploaded-photos",
+                cityIndex,
+                photos: Array.isArray(result.photos) ? result.photos : [],
+              },
+              "*",
+            );
+          }
+
+          pendingUpload = false;
+          statusElement.textContent = result.message || `${filesPayload.length}件の画像をアップロードしました。`;
+          window.setTimeout(() => {
+            window.close();
+          }, 500);
+        } catch (error) {
+          pendingUpload = false;
+          statusElement.textContent = error?.message || "画像のアップロードに失敗しました。";
+        } finally {
+          if (!pendingUpload) {
+            submitButton.disabled = false;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <g fill="none" stroke="black" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <!-- frame -->
+    <rect x="10" y="10" width="80" height="80" rx="8" ry="8"/>
+    <!-- mountains -->
+    <path d="M15 65 L40 40 L55 55 L70 45 L85 65"/>
+    <!-- sun -->
+    <circle cx="70" cy="30" r="8"/>
+  </g>
+</svg>

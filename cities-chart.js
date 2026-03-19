@@ -5,14 +5,16 @@ const panelScaleObservers = [];
 
 const chartRoot = document.getElementById("cities-chart-page-content");
 
-renderChartPage();
+renderChartPage().catch((error) => {
+  console.error("Failed to render chart page.", error);
+});
 
-function renderChartPage() {
+async function renderChartPage() {
   if (!chartRoot) {
     return;
   }
 
-  const cities = loadCities();
+  const cities = await loadCities();
   const yearAxis = buildYearAxis(cities);
   const panelWrapper = document.createElement("div");
   panelWrapper.className = "cities-chart-panels";
@@ -100,6 +102,7 @@ function createTextCell(text, className) {
 }
 
 function createCityCard(city, cityIndex) {
+  const hasPhotos = hasCityPhotos(city);
   const button = document.createElement("button");
   button.type = "button";
   button.className =
@@ -108,6 +111,7 @@ function createCityCard(city, cityIndex) {
   button.dataset.cityIndex = String(cityIndex);
 
   button.innerHTML = `
+    ${hasPhotos ? '<img src="./images/logo/logo-photo.svg" alt="写真あり" class="city-card-photo-badge" />' : ""}
     <span class="comment">${escapeHtml(city.comment || "")}</span>
     <span class="city-card-header">
       <span class="city-card-title">
@@ -130,6 +134,20 @@ function createCityCard(city, cityIndex) {
   });
 
   return button;
+}
+
+function hasCityPhotos(city) {
+  if (Array.isArray(city?.photos)) {
+    return city.photos.some((entry) => {
+      if (typeof entry === "string") {
+        return Boolean(String(entry.split("|")[0] || "").trim());
+      }
+
+      return Boolean(String(entry?.src || "").trim());
+    });
+  }
+
+  return Boolean(String(city?.photo || "").trim());
 }
 
 function fitCityCardsText(root) {
@@ -227,20 +245,55 @@ function fitTimelinePanels(root) {
   });
 }
 
-function loadCities() {
+async function loadCities() {
+  let cities = [];
+
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored) {
       const parsed = JSON.parse(stored);
       if (Array.isArray(parsed) && parsed.length > 0) {
-        return parsed;
+        cities = parsed;
       }
     }
   } catch (error) {
     console.error("Failed to load saved city data.", error);
   }
 
-  return Array.isArray(window.__INITIAL_CITIES__) ? window.__INITIAL_CITIES__ : [];
+  if (cities.length === 0) {
+    cities = Array.isArray(window.__INITIAL_CITIES__) ? window.__INITIAL_CITIES__ : [];
+  }
+
+  try {
+    const response = await fetch("./api/uploads", { headers: { Accept: "application/json" } });
+    if (response.ok) {
+      const payload = await response.json();
+      if (payload && typeof payload === "object" && payload.cities) {
+        Object.entries(payload.cities).forEach(([indexKey, entries]) => {
+          const cityIndex = Number(indexKey);
+          if (!Number.isInteger(cityIndex) || cityIndex < 0 || cityIndex >= cities.length || !Array.isArray(entries)) {
+            return;
+          }
+
+          const existing = Array.isArray(cities[cityIndex].photos) ? cities[cityIndex].photos : [];
+          const merged = [...existing, ...entries].filter(Boolean);
+          const seen = new Set();
+          cities[cityIndex].photos = merged.filter((entry) => {
+            const src = typeof entry === "string" ? String(entry.split("|")[0] || "").trim() : String(entry?.src || "").trim();
+            if (!src || seen.has(src)) {
+              return false;
+            }
+            seen.add(src);
+            return true;
+          });
+        });
+      }
+    }
+  } catch (error) {
+    console.error("Failed to load shared uploaded photos for timeline.", error);
+  }
+
+  return cities;
 }
 
 function normalizeConferenceType(conferenceType) {

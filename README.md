@@ -8,7 +8,7 @@
 2. ブラウザで `http://localhost:8000` を開きます。
 
 ```bash
-python3 -m http.server 8000
+node server.js
 ```
 
 ## 都市データの編集
@@ -38,5 +38,6 @@ python3 -m http.server 8000
 
 ## 補足
 
+- 画像アップロード共有機能は `server.js` の API を使います。`python3 -m http.server` ではアップロードできません。
 - 地図の国境データは `world-atlas` を CDN から取得しています。
 - オフラインで使う場合は、`app.js` の `d3.json(...)` の参照先をローカルファイルへ変更してください。
