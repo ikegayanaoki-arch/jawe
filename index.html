@@ -110,6 +110,13 @@
       <form id="city-editor" class="city-editor"></form>
     </section>
 
+    <div id="photo-lightbox" class="photo-lightbox is-hidden" aria-hidden="true">
+      <button type="button" id="photo-lightbox-close" class="photo-lightbox-close" aria-label="拡大画像を閉じる">
+        ×
+      </button>
+      <img id="photo-lightbox-image" class="photo-lightbox-image" alt="" />
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
     <script src="./cities.initial-data.js"></script>

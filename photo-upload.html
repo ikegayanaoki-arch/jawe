@@ -42,6 +42,21 @@
         line-height: 1.5;
       }
 
+      .photo-upload-note {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 0.84rem;
+        line-height: 1.55;
+      }
+
+      .photo-upload-note-list {
+        margin: 8px 0 0;
+        padding-left: 1.2em;
+        color: var(--muted);
+        font-size: 0.84rem;
+        line-height: 1.6;
+      }
+
       .photo-upload-field {
         display: grid;
         gap: 6px;
@@ -75,6 +90,10 @@
         font-size: 0.86rem;
         min-height: 1.4em;
       }
+
+      .photo-upload-status.is-error {
+        color: #b42318;
+      }
     </style>
   </head>
   <body>
@@ -84,6 +103,17 @@
           <p class="eyebrow">PHOTO UPLOAD</p>
           <h1>写真追加</h1>
           <p id="photo-upload-meta" class="photo-upload-meta"></p>
+          <p class="photo-upload-note">
+            アップロードした画像は，風工学会会員全員が閲覧できる状態になります．以下の点に注意してください．
+          </p>
+          <ul class="photo-upload-note-list">
+            <li>肖像権やプライバシーに問題がないこと</li>
+            <li>個人情報に関わる画像が含まれていないこと</li>
+            <li>投稿する画像は，投稿者が権利を有するもの，または適切な使用許諾を得たものに限ること</li>
+            <li>公序良俗に反する内容や不適切な表現を含まないこと</li>
+            <li>アップロードされた画像は学会の活動において利用される場合があることに同意すること</li>
+            <li>投稿内容に関する責任は投稿者に帰属すること</li>
+          </ul>
         </div>
 
         <label class="photo-upload-field">
@@ -138,6 +168,11 @@
       const passwordElement = document.getElementById("photo-upload-password");
       let pendingUpload = false;
 
+      function setStatus(message, options = {}) {
+        statusElement.textContent = message;
+        statusElement.classList.toggle("is-error", Boolean(options.isError));
+      }
+
       metaElement.textContent = [comment, cityName, country, eventDate].filter(Boolean).join(" | ");
 
       closeButton.addEventListener("click", () => {
@@ -147,13 +182,19 @@
       submitButton.addEventListener("click", async () => {
         const files = Array.from(inputElement.files || []);
         if (files.length === 0 || !Number.isInteger(cityIndex)) {
-          statusElement.textContent = "画像ファイルを選択してください。";
+          setStatus("画像ファイルを選択してください。", { isError: true });
+          return;
+        }
+
+        const creditsText = String(creditsElement.value || "").trim();
+        if (!creditsText) {
+          setStatus("写真提供者（所属）は必須です。", { isError: true });
           return;
         }
 
         pendingUpload = true;
         submitButton.disabled = true;
-        statusElement.textContent = "画像を読み込み中...";
+        setStatus("画像を読み込み中...");
 
         const titles = String(titlesElement.value || "")
           .split("\n")
@@ -184,7 +225,7 @@
             }),
           );
 
-          statusElement.textContent = `${filesPayload.length}件の画像をアップロードしています...`;
+          setStatus(`${filesPayload.length}件の画像をアップロードしています...`);
 
           const response = await fetch("./api/upload", {
             method: "POST",
@@ -234,13 +275,13 @@
           }
 
           pendingUpload = false;
-          statusElement.textContent = result.message || `${filesPayload.length}件の画像をアップロードしました。`;
+          setStatus(result.message || `${filesPayload.length}件の画像をアップロードしました。`);
           window.setTimeout(() => {
             window.close();
           }, 500);
         } catch (error) {
           pendingUpload = false;
-          statusElement.textContent = error?.message || "画像のアップロードに失敗しました。";
+          setStatus(error?.message || "画像のアップロードに失敗しました。", { isError: true });
         } finally {
           if (!pendingUpload) {
             submitButton.disabled = false;

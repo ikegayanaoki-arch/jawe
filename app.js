@@ -37,6 +37,9 @@ const conferencePhotoNextButton = document.getElementById("conference-photo-next
 const photoViewCarouselButton = document.getElementById("photo-view-carousel");
 const photoViewGridButton = document.getElementById("photo-view-grid");
 const photoUploadCountElement = document.getElementById("photo-upload-count");
+const photoLightboxElement = document.getElementById("photo-lightbox");
+const photoLightboxImageElement = document.getElementById("photo-lightbox-image");
+const photoLightboxCloseButton = document.getElementById("photo-lightbox-close");
 const hostingCitiesChartButton = document.getElementById("hosting-cities-chart-button");
 const toggleCityEditorButton = document.getElementById("toggle-city-editor");
 const zoomInButton = document.getElementById("zoom-in-button");
@@ -861,13 +864,19 @@ function renderConferencePhoto(city) {
           ${
             photo.isNotice
               ? renderPhotoUploadNotice(city, missingPhotoMessage)
-              : `<img class="photo-image" src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.title || `${city.comment} の関連写真 ${index + 1}`)}" />`
+              : `<img class="photo-image" data-carousel-photo-index="${index}" src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.title || `${city.comment} の関連写真 ${index + 1}`)}" />`
           }
         </div>
       `,
     )
     .join("");
   conferencePhotoTrack.innerHTML = `<div class="photo-strip">${conferencePhotoTrack.innerHTML}</div>`;
+  conferencePhotoTrack.querySelectorAll("[data-carousel-photo-index]").forEach((image) => {
+    image.addEventListener("dblclick", () => {
+      const photoIndex = Number(image.dataset.carouselPhotoIndex);
+      openPhotoLightbox(photos[photoIndex]);
+    });
+  });
   photoGridElement.innerHTML = photos
     .map(
       (photo, index) => `
@@ -916,6 +925,32 @@ function renderConferencePhoto(city) {
 
 function isUploadedPhoto(photo) {
   return String(photo?.src || "").startsWith("./images/uploaded/");
+}
+
+function openPhotoLightbox(photo) {
+  if (!photoLightboxElement || !photoLightboxImageElement || !photo?.src) {
+    return;
+  }
+
+  stopPhotoCarousel();
+  photoLightboxImageElement.src = photo.src;
+  photoLightboxImageElement.alt = photo.title || "拡大写真";
+  photoLightboxElement.classList.remove("is-hidden");
+  photoLightboxElement.setAttribute("aria-hidden", "false");
+}
+
+function closePhotoLightbox() {
+  if (!photoLightboxElement || !photoLightboxImageElement) {
+    return;
+  }
+
+  photoLightboxElement.classList.add("is-hidden");
+  photoLightboxElement.setAttribute("aria-hidden", "true");
+  photoLightboxImageElement.removeAttribute("src");
+  photoLightboxImageElement.alt = "";
+  if (currentPhotoViewMode === "carousel") {
+    startPhotoCarousel();
+  }
 }
 
 async function deleteUploadedPhoto(cityIndex, photo) {
@@ -1374,6 +1409,19 @@ function stopPhotoCarousel() {
   window.clearInterval(photoCarouselTimerId);
   photoCarouselTimerId = null;
 }
+
+photoLightboxCloseButton?.addEventListener("click", closePhotoLightbox);
+photoLightboxElement?.addEventListener("click", (event) => {
+  if (event.target === photoLightboxElement) {
+    closePhotoLightbox();
+  }
+});
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !photoLightboxElement?.classList.contains("is-hidden")) {
+    closePhotoLightbox();
+  }
+});
 
 function scrollActiveCityCardIntoView() {
   const activeButton = cityListElement.querySelector(`[data-city-index="${activeCityIndex}"]`);
