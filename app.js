@@ -846,7 +846,10 @@ async function hydrateServerUploads() {
 
 async function initializeMap() {
   const width = mapElement.clientWidth;
-  const height = Math.max(420, Math.min(760, width * 0.62));
+  const isCompactViewport = window.innerWidth <= 720;
+  const minHeight = isCompactViewport ? 240 : 420;
+  const maxHeight = isCompactViewport ? 420 : 760;
+  const height = Math.max(minHeight, Math.min(maxHeight, width * 0.62));
 
   mapElement.innerHTML = "";
 
