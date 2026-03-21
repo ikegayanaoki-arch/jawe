@@ -4,7 +4,7 @@ const path = require("path");
 const { URL } = require("url");
 
 const ROOT_DIR = __dirname;
-const HOST = "127.0.0.1";
+const HOST = "0.0.0.0";
 const PORT = Number(process.env.PORT || 8000);
 const UPLOADS_MANIFEST_PATH = path.join(ROOT_DIR, "uploads.json");
 const STATIC_TYPES = {
@@ -49,7 +49,7 @@ const server = http.createServer(async (request, response) => {
 });
 
 server.listen(PORT, HOST, () => {
-  console.log(`Server running at http://${HOST}:${PORT}/index.html`);
+  console.log(`Server running on ${HOST}:${PORT}`);
 });
 
 async function handleGetUploads(response) {
