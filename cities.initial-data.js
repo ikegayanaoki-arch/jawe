@@ -844,6 +844,16 @@ window.__INITIAL_CITIES__ = [
         "src": "./images/uploaded/apcwe-china-2025/10apcwe-2025.png",
         "title": "Group photo",
         "credit": "池谷直樹（池谷直樹）"
+      },
+      {
+        "src": "./images/uploaded/apcwe-china-2025/img-7032.heic",
+        "title": "Coffee Break",
+        "credit": "池谷直樹（九州大学）"
+      },
+      {
+        "src": "./images/uploaded/apcwe-china-2025/97ae62eb-0473-4f98-8f7e-d8c13c54542a.jpg",
+        "title": "Ikegaya Lab. (Kyushu Uni.: Tong, Yin , Azeri, Ikegaya, Wang)",
+        "credit": "池谷直樹（九州大学）"
       }
     ],
     "isUpcoming": false,
