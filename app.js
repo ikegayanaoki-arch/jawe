@@ -28,6 +28,7 @@ const cities = [
 ];
 
 const mapElement = document.getElementById("map");
+const heroLeadElement = document.querySelector(".hero .lead");
 const cityListElement = document.getElementById("city-list");
 const cityEditorElement = document.getElementById("city-editor");
 const photoCarouselElement = document.getElementById("photo-carousel");
@@ -192,6 +193,7 @@ window.addEventListener(
     initializeMap().catch((error) => {
       console.error("Failed to reinitialize map.", error);
     });
+    fitHeroLeadText();
     if (!quickGuideElement?.classList.contains("is-hidden")) {
       renderQuickGuideStep();
     }
@@ -660,8 +662,34 @@ async function bootstrapApp() {
   initializeMap().catch((error) => {
     console.error("Failed to initialize map.", error);
   });
+  fitHeroLeadText();
   syncCityAutoPlay();
   showQuickGuideIfNeeded();
+}
+
+function fitHeroLeadText() {
+  if (!heroLeadElement) {
+    return;
+  }
+
+  heroLeadElement.style.removeProperty("font-size");
+
+  if (window.innerWidth > 720) {
+    heroLeadElement.style.removeProperty("white-space");
+    return;
+  }
+
+  heroLeadElement.style.whiteSpace = "nowrap";
+
+  const baseSize = window.innerWidth <= 520 ? 0.72 : 0.8;
+  const minSize = window.innerWidth <= 520 ? 0.5 : 0.58;
+  let currentSize = baseSize;
+  heroLeadElement.style.fontSize = `${currentSize}rem`;
+
+  while (currentSize > minSize && heroLeadElement.scrollWidth > heroLeadElement.clientWidth) {
+    currentSize -= 0.02;
+    heroLeadElement.style.fontSize = `${currentSize}rem`;
+  }
 }
 
 function showQuickGuideIfNeeded() {

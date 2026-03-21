@@ -1595,6 +1595,7 @@ svg {
   .lead {
     font-size: 0.8rem;
     line-height: 1.45;
+    white-space: nowrap;
   }
 
   .hero-logo {
@@ -1689,6 +1690,7 @@ svg {
   .lead {
     font-size: 0.72rem;
     line-height: 1.35;
+    white-space: nowrap;
   }
 
   .guide-toggle-row {
