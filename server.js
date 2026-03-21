@@ -4,7 +4,6 @@ const path = require("path");
 const { URL } = require("url");
 
 const ROOT_DIR = __dirname;
-const HOST = "0.0.0.0";
 const PORT = Number(process.env.PORT || 8000);
 const UPLOADS_MANIFEST_PATH = path.join(ROOT_DIR, "uploads.json");
 const STATIC_TYPES = {
@@ -23,7 +22,7 @@ const STATIC_TYPES = {
 
 const server = http.createServer(async (request, response) => {
   try {
-    const requestUrl = new URL(request.url, `http://${request.headers.host || `${HOST}:${PORT}`}`);
+    const requestUrl = new URL(request.url, `http://${request.headers.host || `localhost:${PORT}`}`);
 
     if (request.method === "GET" && requestUrl.pathname === "/api/uploads") {
       return handleGetUploads(response);
@@ -48,8 +47,8 @@ const server = http.createServer(async (request, response) => {
   }
 });
 
-server.listen(PORT, HOST, () => {
-  console.log(`Server running on ${HOST}:${PORT}`);
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
 
 async function handleGetUploads(response) {
