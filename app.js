@@ -10,6 +10,8 @@ const DEFAULT_ZOOM_FACTOR = 1.728;
 const AUTO_CITY_ADVANCE_MS = 6000;
 const AUTO_CITY_RESUME_DELAY_MS = 7000;
 const PHOTO_UPLOAD_POPUP_NAME = "photo-upload-popup";
+const QUICK_GUIDE_DISMISSED_KEY = "flagged-world-map-quick-guide-dismissed";
+const CITY_EDITOR_PASSWORD = "ikegaya.naoki";
 
 const cities = [
   {
@@ -40,12 +42,22 @@ const photoUploadCountElement = document.getElementById("photo-upload-count");
 const photoLightboxElement = document.getElementById("photo-lightbox");
 const photoLightboxImageElement = document.getElementById("photo-lightbox-image");
 const photoLightboxCloseButton = document.getElementById("photo-lightbox-close");
+const quickGuideElement = document.getElementById("quick-guide");
+const quickGuideTitleElement = document.getElementById("quick-guide-title");
+const quickGuideTextElement = document.getElementById("quick-guide-text");
+const quickGuideStepElement = document.getElementById("quick-guide-step");
+const quickGuidePrevButton = document.getElementById("quick-guide-prev");
+const quickGuideNextButton = document.getElementById("quick-guide-next");
+const quickGuideCloseButton = document.getElementById("quick-guide-close");
+const quickGuideToggleButton = document.getElementById("quick-guide-toggle");
 const hostingCitiesChartButton = document.getElementById("hosting-cities-chart-button");
 const toggleCityEditorButton = document.getElementById("toggle-city-editor");
 const zoomInButton = document.getElementById("zoom-in-button");
 const zoomOutButton = document.getElementById("zoom-out-button");
 const zoomResetButton = document.getElementById("zoom-reset-button");
 const cityAutoPlayToggleButton = document.getElementById("city-autoplay-toggle");
+const cityAutoPlayStatusElement = document.getElementById("city-autoplay-status");
+const upcomingVisibilityToggleButton = document.getElementById("upcoming-visibility-toggle");
 const sortButtons = document.querySelectorAll("[data-sort-key]");
 const conferenceFilterButtons = document.querySelectorAll("[data-conference-filter]");
 
@@ -62,8 +74,28 @@ let currentPhotoViewMode = "grid";
 let cityAutoPlayTimerId = null;
 let cityAutoPlayResumeTimerId = null;
 let isCityAutoPlayEnabled = false;
+let isUpcomingVisible = false;
 let cityListResizeObserver;
 let photoGridResizeObserver;
+let quickGuideStepIndex = 0;
+
+const QUICK_GUIDE_STEPS = [
+  {
+    selector: ".map-panel",
+    title: "World map",
+    text: "選択中の開催都市に合わせて地図が回転します．右上のボタンで拡大・縮小できます．開催都市をクリックすると，会議名と都市名が表示されます．",
+  },
+  {
+    selector: ".photo-panel",
+    title: "Conference Photo",
+    text: "会議写真をスライド表示または一覧表示で確認できます．画像を追加するとここに共有表示されます．アップロードアイコンから追加できます．",
+  },
+  {
+    selector: ".sidebar",
+    title: "Hosting Cities",
+    text: "開催都市カードの一覧です．カードをクリックすると地図と写真がその都市に切り替わります．HOSTING CITIESをクリックすると開催都市の一覧表が表示されます．",
+  },
+];
 
 bootstrapApp();
 
@@ -81,6 +113,17 @@ zoomResetButton.addEventListener("click", () => {
 });
 
 toggleCityEditorButton.addEventListener("click", () => {
+  if (!isCityEditorVisible) {
+    const password = window.prompt("編集ウィンドウを表示するにはパスワードを入力してください。");
+    if (password === null) {
+      return;
+    }
+    if (password !== CITY_EDITOR_PASSWORD) {
+      setSaveStatus("パスワードが違います");
+      return;
+    }
+  }
+
   setCityEditorVisibility(!isCityEditorVisible);
 });
 
@@ -98,6 +141,31 @@ photoViewCarouselButton?.addEventListener("click", () => {
 
 photoViewGridButton?.addEventListener("click", () => {
   setPhotoViewMode("grid");
+});
+
+quickGuidePrevButton?.addEventListener("click", () => {
+  quickGuideStepIndex = Math.max(0, quickGuideStepIndex - 1);
+  renderQuickGuideStep();
+});
+
+quickGuideNextButton?.addEventListener("click", () => {
+  if (quickGuideStepIndex >= QUICK_GUIDE_STEPS.length - 1) {
+    dismissQuickGuide();
+    return;
+  }
+
+  quickGuideStepIndex += 1;
+  renderQuickGuideStep();
+});
+
+quickGuideCloseButton?.addEventListener("click", dismissQuickGuide);
+quickGuideToggleButton?.addEventListener("click", () => {
+  if (quickGuideElement?.classList.contains("is-hidden")) {
+    openQuickGuide();
+    return;
+  }
+
+  hideQuickGuide();
 });
 
 hostingCitiesChartButton?.addEventListener("click", () => {
@@ -124,6 +192,9 @@ window.addEventListener(
     initializeMap().catch((error) => {
       console.error("Failed to reinitialize map.", error);
     });
+    if (!quickGuideElement?.classList.contains("is-hidden")) {
+      renderQuickGuideStep();
+    }
   }, 120),
 );
 
@@ -485,12 +556,33 @@ conferenceFilterButtons.forEach((button) => {
   });
 });
 
+upcomingVisibilityToggleButton?.addEventListener("click", () => {
+  isUpcomingVisible = !isUpcomingVisible;
+  syncUpcomingVisibilityButton();
+  syncActiveCityWithFilter();
+  renderCityList(cities, activeCityIndex);
+  renderCityEditor(cities[activeCityIndex]);
+  renderConferencePhoto(cities[activeCityIndex]);
+  redrawMap();
+  focusCity(cities[activeCityIndex], true);
+  syncCityAutoPlay();
+});
+
 function syncConferenceFilterActions() {
   conferenceFilterButtons.forEach((button) => {
     const isActive = button.dataset.conferenceFilter === currentConferenceFilter;
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-pressed", String(isActive));
   });
+}
+
+function syncUpcomingVisibilityButton() {
+  if (!upcomingVisibilityToggleButton) {
+    return;
+  }
+
+  upcomingVisibilityToggleButton.classList.toggle("is-active", isUpcomingVisible);
+  upcomingVisibilityToggleButton.setAttribute("aria-pressed", String(isUpcomingVisible));
 }
 
 async function geocodeActiveCity(options = {}) {
@@ -569,6 +661,162 @@ async function bootstrapApp() {
     console.error("Failed to initialize map.", error);
   });
   syncCityAutoPlay();
+  showQuickGuideIfNeeded();
+}
+
+function showQuickGuideIfNeeded() {
+  if (!quickGuideElement || isQuickGuideDismissed()) {
+    return;
+  }
+
+  openQuickGuide();
+}
+
+function openQuickGuide() {
+  if (!quickGuideElement) {
+    return;
+  }
+
+  quickGuideStepIndex = 0;
+  quickGuideElement.classList.remove("is-hidden");
+  quickGuideElement.setAttribute("aria-hidden", "false");
+  renderQuickGuideStep();
+}
+
+function isQuickGuideDismissed() {
+  try {
+    return window.localStorage.getItem(QUICK_GUIDE_DISMISSED_KEY) === "1";
+  } catch (error) {
+    return false;
+  }
+}
+
+function dismissQuickGuide() {
+  hideQuickGuide();
+  try {
+    window.localStorage.setItem(QUICK_GUIDE_DISMISSED_KEY, "1");
+  } catch (error) {
+    console.error("Failed to persist quick guide dismissal.", error);
+  }
+}
+
+function hideQuickGuide() {
+  if (!quickGuideElement) {
+    return;
+  }
+
+  clearQuickGuideHighlights();
+  quickGuideElement.classList.add("is-hidden");
+  quickGuideElement.setAttribute("aria-hidden", "true");
+}
+
+function renderQuickGuideStep() {
+  if (!quickGuideElement || !quickGuideTitleElement || !quickGuideTextElement || !quickGuideStepElement) {
+    return;
+  }
+
+  const step = QUICK_GUIDE_STEPS[quickGuideStepIndex];
+  if (!step) {
+    dismissQuickGuide();
+    return;
+  }
+
+  quickGuideTitleElement.textContent = step.title;
+  quickGuideTextElement.textContent = step.text;
+  quickGuideStepElement.textContent = `${quickGuideStepIndex + 1} / ${QUICK_GUIDE_STEPS.length}`;
+  quickGuidePrevButton.disabled = quickGuideStepIndex === 0;
+  quickGuideNextButton.textContent = quickGuideStepIndex === QUICK_GUIDE_STEPS.length - 1 ? "完了" : "次へ";
+  const target = highlightQuickGuideTarget(step.selector);
+  ensureQuickGuideTargetVisible(target);
+  positionQuickGuideDialog(target);
+  window.setTimeout(() => positionQuickGuideDialog(target), 260);
+}
+
+function highlightQuickGuideTarget(selector) {
+  clearQuickGuideHighlights();
+  const target = document.querySelector(selector);
+  if (!target) {
+    return null;
+  }
+
+  target.classList.add("is-guide-highlight");
+  return target;
+}
+
+function clearQuickGuideHighlights() {
+  document.querySelectorAll(".is-guide-highlight").forEach((element) => {
+    element.classList.remove("is-guide-highlight");
+  });
+}
+
+function ensureQuickGuideTargetVisible(target) {
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+
+  target.scrollIntoView({
+    behavior: "smooth",
+    block: "center",
+    inline: "nearest",
+  });
+}
+
+function positionQuickGuideDialog(target) {
+  const dialog = quickGuideElement?.querySelector(".quick-guide-dialog");
+  if (!dialog) {
+    return;
+  }
+
+  dialog.style.top = "20px";
+  dialog.style.right = "20px";
+  dialog.style.left = "auto";
+  dialog.style.bottom = "auto";
+
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+
+  const gap = 18;
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+  const targetRect = target.getBoundingClientRect();
+  const dialogRect = dialog.getBoundingClientRect();
+
+  let left = targetRect.right + gap;
+  if (left + dialogRect.width > viewportWidth - 20) {
+    left = targetRect.left - dialogRect.width - gap;
+  }
+  if (left < 20) {
+    left = Math.max(20, viewportWidth - dialogRect.width - 20);
+  }
+
+  let top = targetRect.top;
+  if (top + dialogRect.height > viewportHeight - 20) {
+    top = viewportHeight - dialogRect.height - 20;
+  }
+  if (top < 20) {
+    top = 20;
+  }
+
+  const overlapsHorizontally =
+    left < targetRect.right + gap && left + dialogRect.width > targetRect.left - gap;
+  const overlapsVertically =
+    top < targetRect.bottom + gap && top + dialogRect.height > targetRect.top - gap;
+
+  if (overlapsHorizontally && overlapsVertically) {
+    const belowTop = targetRect.bottom + gap;
+    const aboveTop = targetRect.top - dialogRect.height - gap;
+    if (belowTop + dialogRect.height <= viewportHeight - 20) {
+      top = belowTop;
+    } else if (aboveTop >= 20) {
+      top = aboveTop;
+    }
+  }
+
+  dialog.style.left = `${Math.round(left)}px`;
+  dialog.style.top = `${Math.round(top)}px`;
+  dialog.style.right = "auto";
+  dialog.style.bottom = "auto";
 }
 
 async function hydrateServerUploads() {
@@ -891,7 +1139,7 @@ function renderConferencePhoto(city) {
           </button>
           ${
             isUploadedPhoto(photo)
-              ? `<button type="button" class="photo-delete-button" data-photo-delete-index="${index}" aria-label="画像を削除">×</button>`
+              ? `<button type="button" class="photo-delete-button" data-photo-delete-index="${index}" aria-label="画像を削除"><img src="./images/logo/logo-trash.svg.svg" alt="" class="photo-delete-icon" /></button>`
               : ""
           }
         </div>
@@ -1421,6 +1669,9 @@ window.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && !photoLightboxElement?.classList.contains("is-hidden")) {
     closePhotoLightbox();
   }
+  if (event.key === "Escape" && !quickGuideElement?.classList.contains("is-hidden")) {
+    dismissQuickGuide();
+  }
 });
 
 function scrollActiveCityCardIntoView() {
@@ -1512,6 +1763,7 @@ function syncCityAutoPlay() {
   }
 
   syncCityAutoPlayButton();
+  syncUpcomingVisibilityButton();
 }
 
 function syncCityAutoPlayButton() {
@@ -1522,6 +1774,9 @@ function syncCityAutoPlayButton() {
   cityAutoPlayToggleButton.classList.toggle("is-active", isCityAutoPlayEnabled);
   cityAutoPlayToggleButton.setAttribute("aria-pressed", String(isCityAutoPlayEnabled));
   cityAutoPlayToggleButton.textContent = "Auto-scroll";
+  if (cityAutoPlayStatusElement) {
+    cityAutoPlayStatusElement.textContent = isCityAutoPlayEnabled ? "Auco-scrolling..." : "";
+  }
 }
 
 function syncInitialActiveCity() {
@@ -1947,16 +2202,17 @@ function getSortedEntries(items) {
     .sort((left, right) => {
       const leftValue = normalizeSortValue(left.city[currentSortKey]);
       const rightValue = normalizeSortValue(right.city[currentSortKey]);
+      const sortDirection = currentSortKey === "eventDate" ? -1 : 1;
 
       if (leftValue < rightValue) {
-        return -1;
+        return -1 * sortDirection;
       }
 
       if (leftValue > rightValue) {
-        return 1;
+        return 1 * sortDirection;
       }
 
-      return left.index - right.index;
+      return (left.index - right.index) * sortDirection;
     });
 }
 
@@ -1968,6 +2224,10 @@ function getVisibleCityEntries(items) {
   return items
     .map((city, index) => ({ city, index }))
     .filter(({ city }) => {
+      if (city.isUpcoming && !isUpcomingVisible) {
+        return false;
+      }
+
       if (currentConferenceFilter === "all") {
         return true;
       }

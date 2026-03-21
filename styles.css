@@ -78,6 +78,13 @@ body::before {
   text-align: center;
 }
 
+.guide-toggle-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0 2px 6px;
+}
+
 .hero-copy {
   min-width: 0;
   overflow-x: visible;
@@ -110,6 +117,25 @@ body::before {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  color: var(--accent);
+}
+
+.guide-toggle-link {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(24, 84, 94, 0.68);
+  font: inherit;
+  font-size: 0.76rem;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.guide-toggle-link:hover,
+.guide-toggle-link:focus-visible {
   color: var(--accent);
 }
 
@@ -330,20 +356,24 @@ h1 {
   top: 6px;
   right: 6px;
   z-index: 3;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   padding: 0;
   border: 0;
   border-radius: 999px;
-  background: rgba(15, 47, 54, 0.82);
-  color: #fff;
-  font: inherit;
-  font-size: 0.85rem;
-  line-height: 1;
+  background: rgba(255, 255, 255, 0.84);
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
   transition: opacity 140ms ease;
+  display: grid;
+  place-items: center;
+}
+
+.photo-delete-icon {
+  width: 14px;
+  height: 14px;
+  display: block;
 }
 
 .photo-grid-item:hover .photo-delete-button,
@@ -456,6 +486,8 @@ button.photo-empty:focus-visible {
 }
 
 .photo-grid .photo-empty {
+  position: relative;
+  isolation: isolate;
   width: 100%;
   height: 100%;
   min-height: 0;
@@ -467,6 +499,33 @@ button.photo-empty:focus-visible {
   font-size: var(--photo-empty-font-size, 0.8rem);
   line-height: 1.25;
   overflow-wrap: anywhere;
+  overflow: hidden;
+}
+
+.photo-grid .photo-empty::before {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  z-index: -1;
+  background: center / contain no-repeat url("./images/logo/logo-upload.svg");
+  opacity: 0.13;
+  transform: scale(0.92);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    filter 180ms ease;
+}
+
+.photo-grid .photo-empty:hover::before,
+.photo-grid .photo-empty:focus-visible::before {
+  opacity: 0.42;
+  transform: scale(1);
+  filter: saturate(1.08);
+}
+
+.photo-grid .photo-empty:hover,
+.photo-grid .photo-empty:focus-visible {
+  background: rgba(228, 239, 236, 0.98);
 }
 
 .photo-lightbox {
@@ -508,6 +567,72 @@ button.photo-empty:focus-visible {
   font-size: 1.6rem;
   line-height: 1;
   cursor: pointer;
+}
+
+.quick-guide {
+  position: fixed;
+  inset: 0;
+  z-index: 44;
+}
+
+.quick-guide.is-hidden {
+  display: none;
+}
+
+.quick-guide-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 26, 30, 0.48);
+}
+
+.quick-guide-dialog {
+  position: absolute;
+  z-index: 45;
+  top: 20px;
+  right: 20px;
+  width: min(380px, calc(100vw - 40px));
+  padding: 18px 18px 16px;
+  border: 1px solid rgba(24, 84, 94, 0.14);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 24px 60px rgba(15, 47, 54, 0.18);
+}
+
+.quick-guide-title {
+  margin: 4px 0 8px;
+  font-size: 1.4rem;
+  line-height: 1.1;
+}
+
+.quick-guide-text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.quick-guide-step {
+  margin: 10px 0 0;
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.quick-guide-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.is-guide-highlight {
+  position: relative;
+  z-index: 35;
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.98),
+    0 0 0 8px rgba(24, 84, 94, 0.46),
+    0 24px 60px rgba(15, 47, 54, 0.24);
 }
 
 .photo-nav-button {
@@ -627,6 +752,14 @@ button.photo-empty:focus-visible {
   align-items: center;
   margin-top: 0;
   justify-content: flex-end;
+}
+
+.city-autoplay-status {
+  min-height: 1em;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .sort-block {
@@ -1448,6 +1581,11 @@ svg {
     gap: 10px;
   }
 
+  h1 {
+    white-space: normal;
+    line-height: 1.02;
+  }
+
   .hero-logo {
     width: clamp(68px, 18vw, 96px);
   }
@@ -1475,8 +1613,90 @@ svg {
     align-items: start;
   }
 
+  .map-panel-header,
+  .photo-panel-header {
+    display: grid;
+    gap: 10px;
+    align-items: start;
+  }
+
+  .map-controls,
+  .photo-view-actions,
+  .filter-actions,
+  .sort-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .photo-figure {
+    min-height: 420px;
+  }
+
   .city-card {
-    width: min(260px, 84vw);
-    min-width: 260px;
+    width: min(220px, 72vw);
+    min-width: 220px;
+  }
+
+  .quick-guide-dialog {
+    width: min(340px, calc(100vw - 28px));
+  }
+}
+
+@media (max-width: 520px) {
+  .app-shell {
+    padding-inline: 10px;
+  }
+
+  .hero-copy,
+  .map-panel,
+  .photo-panel,
+  .sidebar {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .hero-title-row {
+    gap: 8px;
+  }
+
+  .hero-logo {
+    width: 56px;
+  }
+
+  h1 {
+    font-size: clamp(1.6rem, 9vw, 2.5rem);
+  }
+
+  .guide-toggle-row {
+    margin-bottom: 4px;
+  }
+
+  .photo-figure {
+    min-height: 360px;
+  }
+
+  .photo-upload-count,
+  .city-autoplay-status,
+  .guide-toggle-link {
+    font-size: 0.74rem;
+  }
+
+  .sort-button,
+  .map-control-button,
+  .sidebar-button,
+  .secondary-button,
+  .save-button {
+    min-height: 38px;
+  }
+
+  .city-card {
+    width: min(200px, 76vw);
+    min-width: 200px;
+  }
+
+  .quick-guide-dialog {
+    top: 12px;
+    right: 12px;
+    width: calc(100vw - 24px);
   }
 }

@@ -15,6 +15,9 @@
   <body>
     <div class="app-shell">
       <header class="hero">
+        <div class="guide-toggle-row">
+          <button type="button" id="quick-guide-toggle" class="guide-toggle-link">Quick guide</button>
+        </div>
         <div class="hero-copy">
           <p class="eyebrow">List of IAWE-Related International Conferences</p>
           <div class="hero-title-row">
@@ -79,6 +82,7 @@
               </span>
             </button>
             <div class="sidebar-tools">
+              <span id="city-autoplay-status" class="city-autoplay-status" aria-live="polite"></span>
               <button type="button" id="city-autoplay-toggle" class="sort-button" aria-pressed="false">
                 Auto-scroll
               </button>
@@ -94,6 +98,7 @@
                 <button type="button" class="sort-button" data-conference-filter="APCWE">APCWE</button>
                 <button type="button" class="sort-button" data-conference-filter="BBAA">BBAA</button>
                 <button type="button" class="sort-button" data-conference-filter="CWE">CWE</button>
+                <button type="button" id="upcoming-visibility-toggle" class="sort-button" aria-pressed="false">開催前表示</button>
               </div>
             </div>
           </div>
@@ -115,6 +120,21 @@
         ×
       </button>
       <img id="photo-lightbox-image" class="photo-lightbox-image" alt="" />
+    </div>
+
+    <div id="quick-guide" class="quick-guide is-hidden" aria-hidden="true">
+      <div class="quick-guide-backdrop"></div>
+      <section class="quick-guide-dialog" aria-labelledby="quick-guide-title">
+        <p class="eyebrow">Quick guide</p>
+        <h2 id="quick-guide-title" class="quick-guide-title"></h2>
+        <p id="quick-guide-text" class="quick-guide-text"></p>
+        <p id="quick-guide-step" class="quick-guide-step"></p>
+        <div class="quick-guide-actions">
+          <button type="button" id="quick-guide-prev" class="secondary-button">戻る</button>
+          <button type="button" id="quick-guide-next" class="save-button">次へ</button>
+          <button type="button" id="quick-guide-close" class="secondary-button">閉じる</button>
+        </div>
+      </section>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>

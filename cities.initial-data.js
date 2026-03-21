@@ -629,23 +629,18 @@ window.__INITIAL_CITIES__ = [
     "photo": "./images/16ICWE-2023.jpg",
     "photos": [
       {
-        "src": "./images/icwe-italy-2023/16ICWE-2023.jpg",
-        "title": "全体集合写真",
+        "src": "./images/uploaded/icwe-italy-2023/16icwe-2023.jpg",
+        "title": "Group Photo",
         "credit": "池谷直樹（九州大学）"
       },
       {
-        "src": "./images/icwe-italy-2023/opening.HEIC",
+        "src": "./images/uploaded/icwe-italy-2023/closing.heic",
         "title": "Opening Ceremony",
         "credit": "池谷直樹（九州大学）"
       },
       {
-        "src": "./images/icwe-italy-2023/closing.HEIC",
+        "src": "./images/uploaded/icwe-italy-2023/opening.heic",
         "title": "Closing Ceremony",
-        "credit": "池谷直樹（九州大学）"
-      },
-      {
-        "src": "./images/icwe-italy-2023/venue.HEIC",
-        "title": "Welcome Message",
         "credit": "池谷直樹（九州大学）"
       }
     ],
@@ -692,13 +687,7 @@ window.__INITIAL_CITIES__ = [
     "eventDate": "1975",
     "organizer": "",
     "photo": "",
-    "photos": [
-      {
-        "src": "./images/uploaded/icwe-the-united-kingdom-1975/16icwe-2023.jpg",
-        "title": "16ICWE-2023.jpg",
-        "credit": ""
-      }
-    ],
+    "photos": [],
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -722,18 +711,7 @@ window.__INITIAL_CITIES__ = [
     "eventDate": "1971",
     "organizer": "",
     "photo": "",
-    "photos": [
-      {
-        "src": "./images/uploaded/icwe-japan-1971/16icwe-2023.jpg",
-        "title": "16ICWE-2023.jpg",
-        "credit": ""
-      },
-      {
-        "src": "./images/uploaded/icwe-japan-1971/closing.heic",
-        "title": "closing.HEIC",
-        "credit": ""
-      }
-    ],
+    "photos": [],
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -757,23 +735,7 @@ window.__INITIAL_CITIES__ = [
     "eventDate": "1967",
     "organizer": "",
     "photo": "",
-    "photos": [
-      {
-        "src": "./images/uploaded/icwe-canada-1967/16icwe-2023.jpg",
-        "title": "16ICWE-2023.jpg",
-        "credit": ""
-      },
-      {
-        "src": "./images/uploaded/icwe-canada-1967/opening.heic",
-        "title": "opening.HEIC",
-        "credit": ""
-      },
-      {
-        "src": "./images/uploaded/icwe-canada-1967/venue.heic",
-        "title": "venue.HEIC",
-        "credit": ""
-      }
-    ],
+    "photos": [],
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -793,68 +755,7 @@ window.__INITIAL_CITIES__ = [
     "eventDate": "1963",
     "organizer": "",
     "photo": "",
-    "photos": [
-      {
-        "src": "./images/uploaded/icwe-the-united-kingdom-1963/16icwe-2023.jpg",
-        "title": "か",
-        "credit": "t"
-      },
-      {
-        "src": "./images/uploaded/icwe-the-united-kingdom-1963/16icwe-2023-2.jpg",
-        "title": "test",
-        "credit": "test"
-      },
-      {
-        "src": "./images/uploaded/35-teddington-symposium-on-wind-effect/16icwe-2023.jpg",
-        "title": "test1",
-        "credit": "test1"
-      },
-      {
-        "src": "./images/uploaded/35-teddington-symposium-on-wind-effect/closing.heic",
-        "title": "test2",
-        "credit": "test2"
-      },
-      {
-        "src": "./images/uploaded/35-teddington-symposium-on-wind-effect/opening.heic",
-        "title": "test3",
-        "credit": "test3"
-      },
-      {
-        "src": "./images/uploaded/35-teddington-symposium-on-wind-effect/16icwe-2023-2.jpg",
-        "title": "16ICWE-2023.jpg",
-        "credit": ""
-      },
-      {
-        "src": "./images/uploaded/35-teddington-symposium-on-wind-effect/closing-2.heic",
-        "title": "closing.HEIC",
-        "credit": ""
-      },
-      {
-        "src": "./images/uploaded/35-teddington-symposium-on-wind-effect/opening-2.heic",
-        "title": "opening.HEIC",
-        "credit": ""
-      },
-      {
-        "src": "./images/uploaded/35-teddington-symposium-on-wind-effect/venue.heic",
-        "title": "venue.HEIC",
-        "credit": ""
-      },
-      {
-        "src": "./images/uploaded/icwe-the-united-kingdom-1963/16icwe-2023-3.jpg",
-        "title": "16ICWE-2023.jpg",
-        "credit": ""
-      },
-      {
-        "src": "./images/uploaded/icwe-the-united-kingdom-1963/opening.heic",
-        "title": "opening.HEIC",
-        "credit": ""
-      },
-      {
-        "src": "./images/uploaded/icwe-the-united-kingdom-1963/venue.heic",
-        "title": "venue.HEIC",
-        "credit": ""
-      }
-    ],
+    "photos": [],
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -938,7 +839,13 @@ window.__INITIAL_CITIES__ = [
     "eventDate": "2025",
     "organizer": "",
     "photo": "",
-    "photos": [],
+    "photos": [
+      {
+        "src": "./images/uploaded/apcwe-china-2025/10apcwe-2025.png",
+        "title": "Group photo",
+        "credit": "池谷直樹（池谷直樹）"
+      }
+    ],
     "isUpcoming": false,
     "conferenceType": "APCWE",
     "coordinates": [
