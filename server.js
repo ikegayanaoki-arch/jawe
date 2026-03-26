@@ -1,11 +1,33 @@
 const http = require("http");
+const crypto = require("crypto");
+const { spawn } = require("child_process");
+const fsNative = require("fs");
 const fs = require("fs/promises");
 const path = require("path");
+const heicConvert = require("heic-convert");
+const sharp = require("sharp");
 const { URL } = require("url");
 
 const ROOT_DIR = __dirname;
 const PORT = Number(process.env.PORT || 8000);
-const UPLOADS_MANIFEST_PATH = path.join(ROOT_DIR, "uploads.json");
+const DATA_DIR = path.resolve(process.env.DATA_DIR || path.join(ROOT_DIR, "data"));
+const UPLOADS_DIR = path.join(DATA_DIR, "uploaded");
+const ORIGINAL_UPLOADS_DIR = path.join(UPLOADS_DIR, "original");
+const PUBLIC_UPLOADS_DIR = path.join(UPLOADS_DIR, "public");
+const EXPORTS_DIR = path.join(DATA_DIR, "exports");
+const UPLOADS_MANIFEST_PATH = path.join(DATA_DIR, "uploads.json");
+const LEGACY_UPLOADS_MANIFEST_PATH = path.join(ROOT_DIR, "uploads.json");
+const LEGACY_ROOT_UPLOADS_DIR = path.join(ROOT_DIR, "images", "uploaded");
+const LEGACY_DATA_UPLOADS_DIR = path.join(DATA_DIR, "images", "uploaded");
+const VIEWER_PASSWORD = String(process.env.VIEWER_PASSWORD || "").trim();
+const ADMIN_DOWNLOAD_PASSWORD = String(process.env.ADMIN_DOWNLOAD_PASSWORD || "").trim();
+const AUTH_COOKIE_NAME = "iawe_viewer_session";
+const AUTH_DURATION_MS = 1000 * 60 * 60 * 12;
+const PUBLIC_IMAGE_MAX_DIMENSION = Number(process.env.PUBLIC_IMAGE_MAX_DIMENSION || 1600);
+const PUBLIC_IMAGE_QUALITY = Number(process.env.PUBLIC_IMAGE_QUALITY || 82);
+const AUTH_SECRET = String(
+  process.env.AUTH_SECRET || `${ROOT_DIR}:${VIEWER_PASSWORD || "viewer"}:${ADMIN_DOWNLOAD_PASSWORD || "admin"}`,
+);
 const STATIC_TYPES = {
   ".css": "text/css; charset=utf-8",
   ".gif": "image/gif",
@@ -17,39 +39,82 @@ const STATIC_TYPES = {
   ".json": "application/json; charset=utf-8",
   ".png": "image/png",
   ".svg": "image/svg+xml",
+  ".tar": "application/x-tar",
+  ".gz": "application/gzip",
   ".webp": "image/webp",
 };
 
 const server = http.createServer(async (request, response) => {
   try {
     const requestUrl = new URL(request.url, `http://${request.headers.host || `localhost:${PORT}`}`);
+    const cookies = parseCookies(request.headers.cookie || "");
 
     if (request.method === "GET" && requestUrl.pathname === "/api/uploads") {
+      if (!requireViewerAuthentication(request, response, cookies)) {
+        return;
+      }
       return handleGetUploads(response);
     }
 
+    if (request.method === "GET" && requestUrl.pathname === "/api/auth/session") {
+      return handleGetAuthSession(response, cookies);
+    }
+
+    if (request.method === "POST" && requestUrl.pathname === "/api/auth/login") {
+      return handleLogin(request, response);
+    }
+
+    if (request.method === "POST" && requestUrl.pathname === "/api/auth/logout") {
+      return handleLogout(response);
+    }
+
     if (request.method === "POST" && requestUrl.pathname === "/api/upload") {
+      if (!requireViewerAuthentication(request, response, cookies)) {
+        return;
+      }
       return handleUpload(request, response);
     }
 
     if (request.method === "POST" && requestUrl.pathname === "/api/delete-upload") {
+      if (!requireViewerAuthentication(request, response, cookies)) {
+        return;
+      }
       return handleDeleteUpload(request, response);
+    }
+
+    if (request.method === "GET" && requestUrl.pathname === "/api/storage-info") {
+      return handleGetStorageInfo(response);
+    }
+
+    if (request.method === "GET" && requestUrl.pathname === "/api/export/uploads-archive") {
+      return handleCreateUploadsArchive(request, response);
     }
 
     if (request.method !== "GET" && request.method !== "HEAD") {
       return writeJson(response, 405, { ok: false, message: "Method not allowed" });
     }
 
-    return serveStaticFile(requestUrl.pathname, response, request.method === "HEAD");
+    return serveStaticFile(requestUrl.pathname, response, request.method === "HEAD", cookies, request);
   } catch (error) {
     console.error(error);
     return writeJson(response, 500, { ok: false, message: "Internal server error" });
   }
 });
 
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+bootstrapStorage()
+  .then(() => {
+    server.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+      console.log(`Uploads data directory: ${DATA_DIR}`);
+      console.log(`Uploads original directory: ${ORIGINAL_UPLOADS_DIR}`);
+      console.log(`Uploads public directory: ${PUBLIC_UPLOADS_DIR}`);
+      console.log(`Uploads archive endpoint: http://localhost:${PORT}/api/export/uploads-archive`);
+    });
+  })
+  .catch((error) => {
+    console.error("Failed to initialize storage.", error);
+    process.exitCode = 1;
+  });
 
 async function handleGetUploads(response) {
   const manifest = await readUploadsManifest();
@@ -62,10 +127,63 @@ async function handleGetUploads(response) {
   return writeJson(response, 200, { ok: true, cities: publicCities });
 }
 
+function handleGetAuthSession(response, cookies) {
+  return writeJson(response, 200, {
+    ok: true,
+    auth: {
+      viewerPasswordConfigured: Boolean(VIEWER_PASSWORD),
+      authenticated: isViewerAuthenticated(cookies),
+    },
+  });
+}
+
+async function handleLogin(request, response) {
+  if (!VIEWER_PASSWORD) {
+    return writeJson(response, 200, {
+      ok: true,
+      message: "閲覧用パスワードは設定されていません",
+      auth: { viewerPasswordConfigured: false, authenticated: true },
+    });
+  }
+
+  const payload = await readJsonBody(request);
+  const password = String(payload.password || "").trim();
+  if (password !== VIEWER_PASSWORD) {
+    return writeJson(response, 401, { ok: false, message: "パスワードが違います" });
+  }
+
+  const expiresAt = Date.now() + AUTH_DURATION_MS;
+  const token = signViewerSessionToken(expiresAt);
+  return writeJson(
+    response,
+    200,
+    {
+      ok: true,
+      message: "ログインしました",
+      auth: { viewerPasswordConfigured: true, authenticated: true, expiresAt: new Date(expiresAt).toISOString() },
+    },
+    {
+      "Set-Cookie": buildSessionCookie(token, expiresAt),
+    },
+  );
+}
+
+function handleLogout(response) {
+  return writeJson(
+    response,
+    200,
+    { ok: true, message: "ログアウトしました" },
+    {
+      "Set-Cookie": buildExpiredSessionCookie(),
+    },
+  );
+}
+
 async function handleUpload(request, response) {
   const payload = await readJsonBody(request);
   const cityIndex = Number(payload.cityIndex);
   const files = Array.isArray(payload.files) ? payload.files : [];
+  const cityName = String(payload.cityName || "").trim() || `city-${cityIndex}`;
   const conferenceType = String(payload.conferenceType || "").trim() || "other";
   const country = String(payload.country || "").trim() || "country";
   const eventDate = String(payload.eventDate || "").trim() || "unknown";
@@ -75,14 +193,35 @@ async function handleUpload(request, response) {
     return writeJson(response, 400, { ok: false, message: "cityIndex または files が不正です" });
   }
 
-  const uploadDirectoryName = buildUploadDirectoryName(conferenceType, country, eventDate);
-  const uploadDirectoryPath = path.join(ROOT_DIR, "images", "uploaded", uploadDirectoryName);
-  await fs.mkdir(uploadDirectoryPath, { recursive: true });
+  const uploadDirectoryRelativePath = buildUploadDirectoryRelativePath({
+    conferenceType,
+    eventDate,
+    country,
+    cityName,
+  });
+  const originalUploadDirectoryPath = path.join(ORIGINAL_UPLOADS_DIR, uploadDirectoryRelativePath);
+  const publicUploadDirectoryPath = path.join(PUBLIC_UPLOADS_DIR, uploadDirectoryRelativePath);
+  await fs.mkdir(originalUploadDirectoryPath, { recursive: true });
+  await fs.mkdir(publicUploadDirectoryPath, { recursive: true });
 
   const savedPhotos = [];
   for (let index = 0; index < files.length; index += 1) {
     const file = files[index];
-    const savedPhoto = await saveUploadedFile(uploadDirectoryPath, uploadDirectoryName, file, index, deletePassword);
+    const savedPhoto = await saveUploadedFile(
+      uploadDirectoryRelativePath,
+      originalUploadDirectoryPath,
+      publicUploadDirectoryPath,
+      file,
+      index,
+      deletePassword,
+      {
+        cityIndex,
+        cityName,
+        conferenceType,
+        country,
+        eventDate,
+      },
+    );
     if (savedPhoto) {
       savedPhotos.push(savedPhoto);
     }
@@ -136,23 +275,90 @@ async function handleDeleteUpload(request, response) {
   }
   await fs.writeFile(UPLOADS_MANIFEST_PATH, JSON.stringify(manifest, null, 2));
 
-  const filePath = path.resolve(ROOT_DIR, src.replace(/^\.\//, ""));
-  if (filePath.startsWith(ROOT_DIR)) {
+  const publicFilePath = resolvePublicAssetPath(src);
+  if (publicFilePath && publicFilePath.startsWith(PUBLIC_UPLOADS_DIR)) {
     try {
-      await fs.unlink(filePath);
+      await fs.unlink(publicFilePath);
     } catch (error) {
       if (error.code !== "ENOENT") {
         throw error;
       }
     }
 
-    await removeEmptyParentDirectories(path.dirname(filePath), path.join(ROOT_DIR, "images", "uploaded"));
+    await removeEmptyParentDirectories(path.dirname(publicFilePath), PUBLIC_UPLOADS_DIR);
+  }
+
+  const originalFilePath = matchedEntry.originalPath ? resolveOriginalArchivePath(matchedEntry.originalPath) : null;
+  if (originalFilePath && originalFilePath.startsWith(ORIGINAL_UPLOADS_DIR)) {
+    try {
+      await fs.unlink(originalFilePath);
+    } catch (error) {
+      if (error.code !== "ENOENT") {
+        throw error;
+      }
+    }
+
+    await removeEmptyParentDirectories(path.dirname(originalFilePath), ORIGINAL_UPLOADS_DIR);
   }
 
   return writeJson(response, 200, { ok: true, message: "画像を削除しました", src });
 }
 
-async function saveUploadedFile(uploadDirectoryPath, uploadDirectoryName, file, index, deletePassword) {
+async function handleGetStorageInfo(response) {
+  const manifest = await readUploadsManifest();
+  const photoCount = Object.values(manifest.cities || {}).reduce(
+    (count, entries) => count + (Array.isArray(entries) ? entries.length : 0),
+    0,
+  );
+
+  return writeJson(response, 200, {
+    ok: true,
+    storage: {
+      dataDir: DATA_DIR,
+      uploadsDir: UPLOADS_DIR,
+      originalUploadsDir: ORIGINAL_UPLOADS_DIR,
+      publicUploadsDir: PUBLIC_UPLOADS_DIR,
+      manifestPath: UPLOADS_MANIFEST_PATH,
+      exportsDir: EXPORTS_DIR,
+    },
+    photoCount,
+    archiveDownloadPath: "/api/export/uploads-archive",
+  });
+}
+
+async function handleCreateUploadsArchive(request, response) {
+  if (!isAdminDownloadAuthorized(request)) {
+    return writeJson(response, 403, {
+      ok: false,
+      message: "管理者パスワードが必要です。`X-Admin-Password` ヘッダーを付けてください。",
+    });
+  }
+
+  await ensureDirectory(EXPORTS_DIR);
+  const archiveFileName = `uploads-export-${formatTimestampForFileName(new Date())}.tar.gz`;
+  const archivePath = path.join(EXPORTS_DIR, archiveFileName);
+
+  await createUploadsArchive(archivePath);
+
+  const stat = await fs.stat(archivePath);
+  response.writeHead(200, {
+    "Content-Type": "application/gzip",
+    "Content-Disposition": `attachment; filename="${archiveFileName}"`,
+    "Content-Length": stat.size,
+    "Cache-Control": "no-cache",
+  });
+  fsNative.createReadStream(archivePath).pipe(response);
+}
+
+async function saveUploadedFile(
+  uploadDirectoryRelativePath,
+  originalUploadDirectoryPath,
+  publicUploadDirectoryPath,
+  file,
+  index,
+  deletePassword,
+  context,
+) {
   const dataUrl = String(file?.dataUrl || "");
   const match = dataUrl.match(/^data:(.+?);base64,(.+)$/);
   if (!match) {
@@ -161,15 +367,54 @@ async function saveUploadedFile(uploadDirectoryPath, uploadDirectoryName, file, 
 
   const mimeType = match[1];
   const buffer = Buffer.from(match[2], "base64");
-  const fileName = await createUniqueFileName(uploadDirectoryPath, String(file?.name || `photo-${index + 1}`), mimeType, index);
-  const filePath = path.join(uploadDirectoryPath, fileName);
-  await fs.writeFile(filePath, buffer);
+  const originalFileName = await createUniqueFileName(
+    originalUploadDirectoryPath,
+    String(file?.name || `photo-${index + 1}`),
+    mimeType,
+    index,
+  );
+  const originalFilePath = path.join(originalUploadDirectoryPath, originalFileName);
+  await fs.writeFile(originalFilePath, buffer);
+
+  const publicFileName = await createVariantFileName(
+    publicUploadDirectoryPath,
+    path.basename(originalFileName, path.extname(originalFileName)),
+    ".jpg",
+  );
+  const publicFilePath = path.join(publicUploadDirectoryPath, publicFileName);
+  const publicImage = await buildPublicImageVariant(buffer, context);
+  await fs.writeFile(publicFilePath, publicImage.buffer);
+
+  const storedAt = new Date().toISOString();
+  const publicPath = `./images/uploaded/${toPosixPath(path.join(uploadDirectoryRelativePath, publicFileName))}`;
+  const originalPath = toPosixPath(path.join("uploaded", "original", uploadDirectoryRelativePath, originalFileName));
+  const publicArchivePath = toPosixPath(path.join("uploaded", "public", uploadDirectoryRelativePath, publicFileName));
 
   return {
-    src: `./images/uploaded/${uploadDirectoryName}/${fileName}`,
+    id: `${storedAt}-${originalFileName}`.replace(/[^a-z0-9._-]+/gi, "-"),
+    src: publicPath,
     title: String(file?.title || "").trim(),
     credit: String(file?.credit || "").trim(),
     deletePassword,
+    originalName: String(file?.name || "").trim() || originalFileName,
+    mimeType,
+    bytes: publicImage.buffer.length,
+    originalBytes: buffer.length,
+    publicBytes: publicImage.buffer.length,
+    storedAt,
+    archivePath: originalPath,
+    originalPath,
+    publicPath: publicArchivePath,
+    width: publicImage.width,
+    height: publicImage.height,
+    originalWidth: publicImage.originalWidth,
+    originalHeight: publicImage.originalHeight,
+    watermarkText: publicImage.watermarkText,
+    cityIndex: context.cityIndex,
+    cityName: context.cityName,
+    conferenceType: context.conferenceType,
+    country: context.country,
+    eventDate: context.eventDate,
   };
 }
 
@@ -182,6 +427,19 @@ async function createUniqueFileName(directoryPath, originalName, mimeType, index
   while (await fileExists(path.join(directoryPath, candidate))) {
     suffix += 1;
     candidate = `${baseName}-${suffix}${extension}`;
+  }
+
+  return candidate;
+}
+
+async function createVariantFileName(directoryPath, baseName, extension) {
+  const normalizedBaseName = slugify(baseName) || "photo";
+  let candidate = `${normalizedBaseName}${extension}`;
+  let suffix = 1;
+
+  while (await fileExists(path.join(directoryPath, candidate))) {
+    suffix += 1;
+    candidate = `${normalizedBaseName}-${suffix}${extension}`;
   }
 
   return candidate;
@@ -204,11 +462,113 @@ function getFileExtension(originalName, mimeType) {
   return byMime[mimeType] || ".png";
 }
 
-function buildUploadDirectoryName(conferenceType, country, eventDate) {
+function buildUploadDirectoryRelativePath({ conferenceType, eventDate, country, cityName }) {
   const conferencePart = slugify(conferenceType) || "other";
+  const eventPart = slugify(eventDate) || "unknown";
   const countryPart = slugify(country) || "country";
-  const yearPart = slugify(eventDate) || "unknown";
-  return `${conferencePart}-${countryPart}-${yearPart}`;
+  const cityPart = slugify(cityName) || "city";
+  return path.join(conferencePart, eventPart, countryPart, cityPart);
+}
+
+async function buildPublicImageVariant(buffer, context) {
+  const normalizedSourceBuffer = await normalizeSourceImageBuffer(buffer);
+  const pipeline = sharp(normalizedSourceBuffer, { failOn: "none" }).rotate();
+  const metadata = await pipeline.metadata();
+  const originalWidth = Number(metadata.width) || 0;
+  const originalHeight = Number(metadata.height) || 0;
+
+  const resizedBuffer = await pipeline
+    .resize({
+      width: PUBLIC_IMAGE_MAX_DIMENSION,
+      height: PUBLIC_IMAGE_MAX_DIMENSION,
+      fit: "inside",
+      withoutEnlargement: true,
+    })
+    .jpeg({
+      quality: PUBLIC_IMAGE_QUALITY,
+      mozjpeg: true,
+      chromaSubsampling: "4:4:4",
+    })
+    .toBuffer();
+
+  const resizedMetadata = await sharp(resizedBuffer).metadata();
+  const width = Number(resizedMetadata.width) || originalWidth;
+  const height = Number(resizedMetadata.height) || originalHeight;
+  const watermarkText = buildWatermarkText(context);
+  const watermarkSvg = createWatermarkSvg(width, height, watermarkText);
+  const compositedBuffer = await sharp(resizedBuffer)
+    .composite([{ input: Buffer.from(watermarkSvg), gravity: "southeast" }])
+    .jpeg({
+      quality: PUBLIC_IMAGE_QUALITY,
+      mozjpeg: true,
+      chromaSubsampling: "4:4:4",
+    })
+    .toBuffer();
+
+  return {
+    buffer: compositedBuffer,
+    width,
+    height,
+    originalWidth,
+    originalHeight,
+    watermarkText,
+  };
+}
+
+async function normalizeSourceImageBuffer(buffer) {
+  if (looksLikeHeic(buffer)) {
+    const converted = await heicConvert({
+      buffer,
+      format: "JPEG",
+      quality: 0.92,
+    });
+    return Buffer.from(converted);
+  }
+
+  return buffer;
+}
+
+function looksLikeHeic(buffer) {
+  const signature = buffer.subarray(0, 64).toString("latin1");
+  return signature.includes("ftypheic") || signature.includes("ftypheix") || signature.includes("ftypmif1");
+}
+
+function buildWatermarkText(context) {
+  return [
+    "JAWE Members Only",
+    [context.conferenceType, context.eventDate].filter(Boolean).join(" "),
+    [context.cityName, context.country].filter(Boolean).join(" / "),
+  ]
+    .map((line) => String(line || "").trim())
+    .filter(Boolean);
+}
+
+function createWatermarkSvg(width, height, lines) {
+  const safeWidth = Math.max(320, width);
+  const safeHeight = Math.max(240, height);
+  const padding = Math.round(Math.min(safeWidth, safeHeight) * 0.03);
+  const lineHeight = Math.max(18, Math.round(safeHeight * 0.035));
+  const fontSize = Math.max(15, Math.round(safeHeight * 0.03));
+  const watermarkWidth = Math.min(Math.round(safeWidth * 0.62), 720);
+  const watermarkHeight = padding * 2 + lineHeight * lines.length;
+  const x = safeWidth - watermarkWidth - padding;
+  const y = safeHeight - watermarkHeight - padding;
+
+  const textElements = lines
+    .map((line, index) => {
+      const dy = padding + fontSize + index * lineHeight;
+      return `<text x="${watermarkWidth - padding}" y="${dy}" text-anchor="end">${escapeXml(line)}</text>`;
+    })
+    .join("");
+
+  return `
+    <svg xmlns="http://www.w3.org/2000/svg" width="${safeWidth}" height="${safeHeight}">
+      <rect x="${x}" y="${y}" width="${watermarkWidth}" height="${watermarkHeight}" rx="18" ry="18" fill="#0a1b1f" fill-opacity="0.42" />
+      <g font-family="Arial, sans-serif" font-size="${fontSize}" font-weight="700" fill="#ffffff" fill-opacity="0.88">
+        ${textElements}
+      </g>
+    </svg>
+  `;
 }
 
 function mergeUniquePhotos(existingEntries, nextEntries) {
@@ -229,29 +589,75 @@ async function readUploadsManifest() {
   try {
     const content = await fs.readFile(UPLOADS_MANIFEST_PATH, "utf8");
     const parsed = JSON.parse(content);
-    return normalizeUploadsManifest(parsed && typeof parsed === "object" ? parsed : { cities: {} });
+    return normalizeUploadsManifest(parsed && typeof parsed === "object" ? parsed : createEmptyManifest());
   } catch (error) {
     if (error.code === "ENOENT") {
-      return { cities: {} };
+      return createEmptyManifest();
     }
     throw error;
   }
 }
 
+function createEmptyManifest() {
+  return {
+    version: 2,
+    generatedAt: new Date().toISOString(),
+    storage: {
+      dataDir: DATA_DIR,
+      uploadsDir: UPLOADS_DIR,
+      originalUploadsDir: ORIGINAL_UPLOADS_DIR,
+      publicUploadsDir: PUBLIC_UPLOADS_DIR,
+      exportsDir: EXPORTS_DIR,
+    },
+    cities: {},
+  };
+}
+
 function normalizeUploadsManifest(manifest) {
-  const normalized = { cities: {} };
+  const normalized = createEmptyManifest();
+  normalized.version = Number(manifest.version) || 2;
+  normalized.generatedAt = String(manifest.generatedAt || new Date().toISOString());
   Object.entries(manifest.cities || {}).forEach(([cityIndex, entries]) => {
     normalized.cities[cityIndex] = Array.isArray(entries)
       ? entries
           .filter((entry) => entry && typeof entry === "object" && entry.src)
           .map((entry) => ({
+            id: String(entry.id || entry.src).trim(),
             src: String(entry.src || "").trim(),
             title: String(entry.title || "").trim(),
             credit: String(entry.credit || "").trim(),
             deletePassword: String(entry.deletePassword || "test"),
+            originalName: String(entry.originalName || path.basename(String(entry.src || ""))).trim(),
+            mimeType: String(entry.mimeType || "").trim(),
+            bytes: Number(entry.bytes) || 0,
+            originalBytes: Number(entry.originalBytes) || Number(entry.bytes) || 0,
+            publicBytes: Number(entry.publicBytes) || Number(entry.bytes) || 0,
+            storedAt: String(entry.storedAt || "").trim(),
+            archivePath:
+              String(entry.archivePath || "").trim() ||
+              toPosixPath(path.join("uploaded", "original", String(entry.src || "").replace(/^\.\/images\/uploaded\//, ""))),
+            originalPath:
+              String(entry.originalPath || "").trim() ||
+              toPosixPath(path.join("uploaded", "original", String(entry.src || "").replace(/^\.\/images\/uploaded\//, ""))),
+            publicPath:
+              String(entry.publicPath || "").trim() ||
+              toPosixPath(path.join("uploaded", "public", String(entry.src || "").replace(/^\.\/images\/uploaded\//, ""))),
+            width: Number(entry.width) || 0,
+            height: Number(entry.height) || 0,
+            originalWidth: Number(entry.originalWidth) || 0,
+            originalHeight: Number(entry.originalHeight) || 0,
+            watermarkText: Array.isArray(entry.watermarkText)
+              ? entry.watermarkText.map((line) => String(line || "").trim()).filter(Boolean)
+              : [],
+            cityIndex: Number(entry.cityIndex),
+            cityName: String(entry.cityName || "").trim(),
+            conferenceType: String(entry.conferenceType || "").trim(),
+            country: String(entry.country || "").trim(),
+            eventDate: String(entry.eventDate || "").trim(),
           }))
       : [];
   });
+  normalized.generatedAt = new Date().toISOString();
   return normalized;
 }
 
@@ -276,23 +682,29 @@ function readJsonBody(request) {
   });
 }
 
-async function serveStaticFile(urlPathname, response, headOnly) {
+async function serveStaticFile(urlPathname, response, headOnly, cookies, request) {
   const normalizedPath = decodeURIComponent(urlPathname === "/" ? "/index.html" : urlPathname);
-  const filePath = path.join(ROOT_DIR, normalizedPath);
-  const resolvedPath = path.resolve(filePath);
-  if (!resolvedPath.startsWith(ROOT_DIR)) {
+  if (normalizedPath.startsWith("/images/uploaded/") && !requireViewerAuthentication(request, response, cookies)) {
+    return;
+  }
+
+  const resolvedPath = resolvePublicFilePath(normalizedPath);
+  if (!resolvedPath) {
     return writeText(response, 403, "Forbidden");
   }
 
   try {
     const stat = await fs.stat(resolvedPath);
     if (stat.isDirectory()) {
-      return serveStaticFile(path.join(normalizedPath, "index.html"), response, headOnly);
+      return serveStaticFile(path.join(normalizedPath, "index.html"), response, headOnly, cookies, request);
     }
 
     const extension = path.extname(resolvedPath).toLowerCase();
     const contentType = STATIC_TYPES[extension] || "application/octet-stream";
-    response.writeHead(200, { "Content-Type": contentType, "Cache-Control": "no-cache" });
+    response.writeHead(200, {
+      "Content-Type": contentType,
+      "Cache-Control": normalizedPath.startsWith("/images/uploaded/") ? "private, no-store" : "no-cache",
+    });
     if (headOnly) {
       response.end();
       return;
@@ -315,6 +727,177 @@ function slugify(value) {
     .replaceAll(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 48);
+}
+
+function toPosixPath(value) {
+  return String(value || "").split(path.sep).join("/");
+}
+
+function escapeXml(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&apos;");
+}
+
+function parseCookies(cookieHeader) {
+  return String(cookieHeader || "")
+    .split(";")
+    .map((chunk) => chunk.trim())
+    .filter(Boolean)
+    .reduce((cookies, pair) => {
+      const separatorIndex = pair.indexOf("=");
+      if (separatorIndex <= 0) {
+        return cookies;
+      }
+
+      const name = pair.slice(0, separatorIndex).trim();
+      const value = pair.slice(separatorIndex + 1).trim();
+      cookies[name] = decodeURIComponent(value);
+      return cookies;
+    }, {});
+}
+
+function isViewerAuthenticated(cookies) {
+  if (!VIEWER_PASSWORD) {
+    return true;
+  }
+
+  const token = String(cookies?.[AUTH_COOKIE_NAME] || "").trim();
+  return verifyViewerSessionToken(token);
+}
+
+function requireViewerAuthentication(request, response, cookies) {
+  if (isViewerAuthenticated(cookies)) {
+    return true;
+  }
+
+  if (String(request?.url || "").startsWith("/images/uploaded/")) {
+    writeText(response, 401, "Authentication required");
+    return false;
+  }
+
+  writeJson(response, 401, {
+    ok: false,
+    message: "閲覧用パスワードでログインしてください",
+    authRequired: true,
+  });
+  return false;
+}
+
+function signViewerSessionToken(expiresAt) {
+  const payload = JSON.stringify({ role: "viewer", expiresAt });
+  const encodedPayload = Buffer.from(payload, "utf8").toString("base64url");
+  const signature = crypto.createHmac("sha256", AUTH_SECRET).update(encodedPayload).digest("base64url");
+  return `${encodedPayload}.${signature}`;
+}
+
+function verifyViewerSessionToken(token) {
+  const [encodedPayload, signature] = String(token || "").split(".");
+  if (!encodedPayload || !signature) {
+    return false;
+  }
+
+  const expectedSignature = crypto.createHmac("sha256", AUTH_SECRET).update(encodedPayload).digest("base64url");
+  if (!timingSafeEqual(signature, expectedSignature)) {
+    return false;
+  }
+
+  try {
+    const payload = JSON.parse(Buffer.from(encodedPayload, "base64url").toString("utf8"));
+    return payload.role === "viewer" && Number(payload.expiresAt) > Date.now();
+  } catch (error) {
+    return false;
+  }
+}
+
+function timingSafeEqual(left, right) {
+  const leftBuffer = Buffer.from(String(left || ""));
+  const rightBuffer = Buffer.from(String(right || ""));
+  if (leftBuffer.length !== rightBuffer.length) {
+    return false;
+  }
+
+  return crypto.timingSafeEqual(leftBuffer, rightBuffer);
+}
+
+function buildSessionCookie(token, expiresAt) {
+  const attributes = [
+    `${AUTH_COOKIE_NAME}=${encodeURIComponent(token)}`,
+    "Path=/",
+    "HttpOnly",
+    "SameSite=Lax",
+    `Max-Age=${Math.max(0, Math.floor((expiresAt - Date.now()) / 1000))}`,
+  ];
+
+  if (process.env.NODE_ENV === "production") {
+    attributes.push("Secure");
+  }
+
+  return attributes.join("; ");
+}
+
+function buildExpiredSessionCookie() {
+  const attributes = [`${AUTH_COOKIE_NAME}=`, "Path=/", "HttpOnly", "SameSite=Lax", "Max-Age=0"];
+  if (process.env.NODE_ENV === "production") {
+    attributes.push("Secure");
+  }
+  return attributes.join("; ");
+}
+
+function isAdminDownloadAuthorized(request) {
+  if (!ADMIN_DOWNLOAD_PASSWORD) {
+    return false;
+  }
+
+  const headerPassword = String(request.headers["x-admin-password"] || "").trim();
+  return headerPassword === ADMIN_DOWNLOAD_PASSWORD;
+}
+
+function resolvePublicFilePath(normalizedPath) {
+  const relativePath = normalizedPath.replace(/^\/+/, "");
+  const rootPath = path.resolve(path.join(ROOT_DIR, relativePath));
+  if (rootPath.startsWith(ROOT_DIR) && !relativePath.startsWith("images/uploaded/")) {
+    return rootPath;
+  }
+
+  if (relativePath.startsWith("images/uploaded/")) {
+    const uploadsPath = path.resolve(path.join(PUBLIC_UPLOADS_DIR, relativePath.replace(/^images\/uploaded\/?/, "")));
+    if (uploadsPath.startsWith(PUBLIC_UPLOADS_DIR)) {
+      return uploadsPath;
+    }
+  }
+
+  if (relativePath.startsWith("exports/")) {
+    const exportPath = path.resolve(path.join(DATA_DIR, relativePath));
+    if (exportPath.startsWith(DATA_DIR)) {
+      return exportPath;
+    }
+  }
+
+  return null;
+}
+
+function resolvePublicAssetPath(src) {
+  const relativeAssetPath = String(src || "").replace(/^\.\//, "");
+  if (!relativeAssetPath.startsWith("images/uploaded/")) {
+    return null;
+  }
+
+  const filePath = path.resolve(path.join(PUBLIC_UPLOADS_DIR, relativeAssetPath.replace(/^images\/uploaded\/?/, "")));
+  return filePath.startsWith(PUBLIC_UPLOADS_DIR) ? filePath : null;
+}
+
+function resolveOriginalArchivePath(archivePath) {
+  const relativeAssetPath = String(archivePath || "").trim().replace(/^\/+/, "");
+  if (!relativeAssetPath.startsWith("uploaded/original/")) {
+    return null;
+  }
+
+  const filePath = path.resolve(path.join(DATA_DIR, relativeAssetPath));
+  return filePath.startsWith(ORIGINAL_UPLOADS_DIR) ? filePath : null;
 }
 
 async function fileExists(filePath) {
@@ -350,8 +933,88 @@ async function removeEmptyParentDirectories(startPath, stopPath) {
   }
 }
 
-function writeJson(response, statusCode, payload) {
-  response.writeHead(statusCode, { "Content-Type": "application/json; charset=utf-8" });
+async function bootstrapStorage() {
+  await ensureDirectory(ORIGINAL_UPLOADS_DIR);
+  await ensureDirectory(PUBLIC_UPLOADS_DIR);
+  await ensureDirectory(EXPORTS_DIR);
+
+  if (await fileExists(LEGACY_ROOT_UPLOADS_DIR)) {
+    await fs.cp(LEGACY_ROOT_UPLOADS_DIR, ORIGINAL_UPLOADS_DIR, { recursive: true, force: false, errorOnExist: false });
+    await fs.cp(LEGACY_ROOT_UPLOADS_DIR, PUBLIC_UPLOADS_DIR, { recursive: true, force: false, errorOnExist: false });
+  }
+
+  if (await fileExists(LEGACY_DATA_UPLOADS_DIR)) {
+    await fs.cp(LEGACY_DATA_UPLOADS_DIR, ORIGINAL_UPLOADS_DIR, { recursive: true, force: false, errorOnExist: false });
+    await fs.cp(LEGACY_DATA_UPLOADS_DIR, PUBLIC_UPLOADS_DIR, { recursive: true, force: false, errorOnExist: false });
+  }
+
+  const entries = await fs.readdir(UPLOADS_DIR, { withFileTypes: true }).catch(() => []);
+  for (const entry of entries) {
+    if (!entry.isDirectory() || entry.name === "original" || entry.name === "public") {
+      continue;
+    }
+
+    const legacyFlatPath = path.join(UPLOADS_DIR, entry.name);
+    await fs.cp(legacyFlatPath, path.join(ORIGINAL_UPLOADS_DIR, entry.name), {
+      recursive: true,
+      force: false,
+      errorOnExist: false,
+    });
+    await fs.cp(legacyFlatPath, path.join(PUBLIC_UPLOADS_DIR, entry.name), {
+      recursive: true,
+      force: false,
+      errorOnExist: false,
+    });
+  }
+
+  if (!(await fileExists(UPLOADS_MANIFEST_PATH)) && (await fileExists(LEGACY_UPLOADS_MANIFEST_PATH))) {
+    const legacyContent = await fs.readFile(LEGACY_UPLOADS_MANIFEST_PATH, "utf8");
+    const legacyManifest = normalizeUploadsManifest(JSON.parse(legacyContent));
+    await fs.writeFile(UPLOADS_MANIFEST_PATH, JSON.stringify(legacyManifest, null, 2));
+  } else if (!(await fileExists(UPLOADS_MANIFEST_PATH))) {
+    await fs.writeFile(UPLOADS_MANIFEST_PATH, JSON.stringify(createEmptyManifest(), null, 2));
+  }
+}
+
+async function ensureDirectory(directoryPath) {
+  await fs.mkdir(directoryPath, { recursive: true });
+}
+
+function formatTimestampForFileName(date) {
+  return [
+    date.getUTCFullYear(),
+    String(date.getUTCMonth() + 1).padStart(2, "0"),
+    String(date.getUTCDate()).padStart(2, "0"),
+    "-",
+    String(date.getUTCHours()).padStart(2, "0"),
+    String(date.getUTCMinutes()).padStart(2, "0"),
+    String(date.getUTCSeconds()).padStart(2, "0"),
+  ].join("");
+}
+
+async function createUploadsArchive(outputPath) {
+  await new Promise((resolve, reject) => {
+    const child = spawn("tar", ["-czf", outputPath, "-C", DATA_DIR, "uploads.json", "uploaded/original"], { cwd: ROOT_DIR });
+    let stderr = "";
+
+    child.stderr.on("data", (chunk) => {
+      stderr += chunk.toString("utf8");
+    });
+
+    child.on("error", reject);
+    child.on("close", (code) => {
+      if (code === 0) {
+        resolve();
+        return;
+      }
+
+      reject(new Error(stderr.trim() || `tar exited with code ${code}`));
+    });
+  });
+}
+
+function writeJson(response, statusCode, payload, headers = {}) {
+  response.writeHead(statusCode, { "Content-Type": "application/json; charset=utf-8", ...headers });
   response.end(JSON.stringify(payload));
 }
 

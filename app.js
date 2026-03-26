@@ -53,6 +53,11 @@ const quickGuideCloseButton = document.getElementById("quick-guide-close");
 const quickGuideToggleButton = document.getElementById("quick-guide-toggle");
 const hostingCitiesChartButton = document.getElementById("hosting-cities-chart-button");
 const toggleCityEditorButton = document.getElementById("toggle-city-editor");
+const authGateElement = document.getElementById("auth-gate");
+const authFormElement = document.getElementById("auth-form");
+const authPasswordElement = document.getElementById("auth-password");
+const authStatusElement = document.getElementById("auth-status");
+const authLogoutButton = document.getElementById("auth-logout-button");
 const zoomInButton = document.getElementById("zoom-in-button");
 const zoomOutButton = document.getElementById("zoom-out-button");
 const zoomResetButton = document.getElementById("zoom-reset-button");
@@ -79,6 +84,9 @@ let isUpcomingVisible = false;
 let cityListResizeObserver;
 let photoGridResizeObserver;
 let quickGuideStepIndex = 0;
+let appBootstrapped = false;
+let isViewerAuthenticated = false;
+let isViewerPasswordConfigured = false;
 
 const QUICK_GUIDE_STEPS = [
   {
@@ -98,7 +106,7 @@ const QUICK_GUIDE_STEPS = [
   },
 ];
 
-bootstrapApp();
+initializeViewerAuth();
 
 zoomInButton.addEventListener("click", () => {
   updateZoom(1.2);
@@ -111,6 +119,50 @@ zoomOutButton.addEventListener("click", () => {
 zoomResetButton.addEventListener("click", () => {
   currentZoomFactor = DEFAULT_ZOOM_FACTOR;
   redrawMap();
+});
+
+authFormElement?.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const password = String(authPasswordElement?.value || "").trim();
+  if (!password) {
+    setAuthStatus("パスワードを入力してください", { isError: true });
+    return;
+  }
+
+  setAuthStatus("ログイン中...");
+  try {
+    const response = await fetch("./api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ password }),
+    });
+    const result = await response.json().catch(() => null);
+    if (!response.ok || !result?.ok) {
+      throw new Error(result?.message || "ログインできませんでした");
+    }
+
+    isViewerPasswordConfigured = true;
+    if (authPasswordElement) {
+      authPasswordElement.value = "";
+    }
+    setAuthStatus("");
+    setViewerAuthenticated(true);
+    startApp();
+  } catch (error) {
+    setAuthStatus(error?.message || "ログインできませんでした", { isError: true });
+  }
+});
+
+authLogoutButton?.addEventListener("click", async () => {
+  try {
+    await fetch("./api/auth/logout", { method: "POST", headers: { Accept: "application/json" } });
+  } catch (error) {
+    console.error("Failed to logout.", error);
+  }
+  window.location.reload();
 });
 
 toggleCityEditorButton.addEventListener("click", () => {
@@ -667,6 +719,67 @@ async function bootstrapApp() {
   showQuickGuideIfNeeded();
 }
 
+async function initializeViewerAuth() {
+  setViewerAuthenticated(false);
+
+  try {
+    const response = await fetch("./api/auth/session", { headers: { Accept: "application/json" } });
+    const payload = await response.json().catch(() => null);
+    const authenticated = Boolean(payload?.auth?.authenticated);
+    const viewerPasswordConfigured = Boolean(payload?.auth?.viewerPasswordConfigured);
+    isViewerPasswordConfigured = viewerPasswordConfigured;
+
+    if (!viewerPasswordConfigured || authenticated) {
+      setViewerAuthenticated(true);
+      startApp();
+      return;
+    }
+
+    setAuthStatus("会議写真を表示するには共通パスワードが必要です。");
+  } catch (error) {
+    console.error("Failed to check viewer auth session.", error);
+    setAuthStatus("認証状態を確認できませんでした。再読み込みしてください。", { isError: true });
+  }
+}
+
+function startApp() {
+  if (appBootstrapped) {
+    return;
+  }
+
+  appBootstrapped = true;
+  bootstrapApp().catch((error) => {
+    console.error("Failed to bootstrap app.", error);
+    setSaveStatus("画面の初期化に失敗しました");
+  });
+}
+
+function setViewerAuthenticated(authenticated) {
+  isViewerAuthenticated = Boolean(authenticated);
+  document.body.classList.toggle("auth-locked", !isViewerAuthenticated);
+  authGateElement?.classList.toggle("is-hidden", isViewerAuthenticated);
+  authGateElement?.setAttribute("aria-hidden", String(isViewerAuthenticated));
+  authLogoutButton?.classList.toggle("is-hidden", !isViewerAuthenticated || !isViewerPasswordConfigured);
+}
+
+function setAuthStatus(message, options = {}) {
+  if (!authStatusElement) {
+    return;
+  }
+
+  authStatusElement.textContent = message;
+  authStatusElement.classList.toggle("is-error", Boolean(options.isError));
+}
+
+function handleViewerAuthRequired(message) {
+  if (!isViewerAuthenticated) {
+    return;
+  }
+
+  setViewerAuthenticated(false);
+  setAuthStatus(message || "認証の有効期限が切れました。もう一度パスワードを入力してください。", { isError: true });
+}
+
 function fitHeroLeadText() {
   if (!heroLeadElement) {
     return;
@@ -850,6 +963,10 @@ function positionQuickGuideDialog(target) {
 async function hydrateServerUploads() {
   try {
     const response = await fetch("./api/uploads", { headers: { Accept: "application/json" } });
+    if (response.status === 401) {
+      handleViewerAuthRequired("ログイン後に写真を読み込みます。");
+      return;
+    }
     if (!response.ok) {
       return;
     }
@@ -865,7 +982,7 @@ async function hydrateServerUploads() {
         return;
       }
 
-      cities[cityIndex].photos = mergeUniquePhotoEntries(cities[cityIndex].photos, entries);
+      cities[cityIndex].photos = mergeServerUploadedPhotoEntries(cities[cityIndex].photos, entries);
     });
   } catch (error) {
     console.error("Failed to load shared uploaded photos.", error);
@@ -1256,6 +1373,11 @@ async function deleteUploadedPhoto(cityIndex, photo) {
       }),
     });
 
+    if (response.status === 401) {
+      handleViewerAuthRequired();
+      throw new Error("再ログイン後に削除してください");
+    }
+
     const result = await response.json().catch(() => null);
     if (!response.ok || !result?.ok) {
       throw new Error(result?.message || "画像を削除できませんでした");
@@ -1586,6 +1708,14 @@ function mergeUniquePhotoEntries(existingEntries, nextEntries) {
     seen.add(entry.src);
     return true;
   });
+}
+
+function mergeServerUploadedPhotoEntries(existingEntries, nextEntries) {
+  const preservedExistingEntries = (Array.isArray(existingEntries) ? existingEntries : [])
+    .map((entry) => normalizePhotoEntry(entry))
+    .filter((entry) => entry && !isUploadedPhoto(entry));
+
+  return mergeUniquePhotoEntries(preservedExistingEntries, nextEntries);
 }
 
 function moveConferencePhoto(step, options = {}) {

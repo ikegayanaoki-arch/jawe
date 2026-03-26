@@ -94,11 +94,38 @@
       .photo-upload-status.is-error {
         color: #b42318;
       }
+
+      .photo-upload-auth {
+        display: grid;
+        gap: 10px;
+        padding: 14px;
+        border: 1px solid rgba(24, 84, 94, 0.1);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.54);
+      }
+
+      .photo-upload-auth.is-hidden {
+        display: none;
+      }
     </style>
   </head>
   <body>
     <main class="photo-upload-shell">
       <section class="photo-upload-panel">
+        <section id="photo-upload-auth" class="photo-upload-auth is-hidden">
+          <div>
+            <p class="eyebrow">Members Only</p>
+            <p class="photo-upload-note">アップロードするには閲覧用の共通パスワードでログインしてください。</p>
+          </div>
+          <label class="photo-upload-field">
+            <span>共通パスワード</span>
+            <input id="photo-upload-auth-password" type="password" autocomplete="current-password" />
+          </label>
+          <div class="photo-upload-actions">
+            <button id="photo-upload-auth-submit" type="button" class="save-button">ログイン</button>
+          </div>
+        </section>
+
         <div>
           <p class="eyebrow">PHOTO UPLOAD</p>
           <h1>写真追加</h1>
@@ -141,7 +168,7 @@
         </label>
 
         <div class="photo-upload-actions">
-          <button id="photo-upload-submit" type="button" class="save-button">アップロード</button>
+          <button id="photo-upload-submit" type="button" class="save-button" disabled>アップロード</button>
           <button id="photo-upload-close" type="button" class="secondary-button">閉じる</button>
         </div>
 
@@ -166,11 +193,21 @@
       const closeButton = document.getElementById("photo-upload-close");
       const statusElement = document.getElementById("photo-upload-status");
       const passwordElement = document.getElementById("photo-upload-password");
+      const authPanelElement = document.getElementById("photo-upload-auth");
+      const authPasswordElement = document.getElementById("photo-upload-auth-password");
+      const authSubmitElement = document.getElementById("photo-upload-auth-submit");
       let pendingUpload = false;
+      let isViewerAuthenticated = false;
 
       function setStatus(message, options = {}) {
         statusElement.textContent = message;
         statusElement.classList.toggle("is-error", Boolean(options.isError));
+      }
+
+      function setViewerAuthenticated(authenticated) {
+        isViewerAuthenticated = Boolean(authenticated);
+        authPanelElement.classList.toggle("is-hidden", isViewerAuthenticated);
+        submitButton.disabled = !isViewerAuthenticated || pendingUpload;
       }
 
       metaElement.textContent = [comment, cityName, country, eventDate].filter(Boolean).join(" | ");
@@ -179,7 +216,47 @@
         window.close();
       });
 
+      authSubmitElement.addEventListener("click", async () => {
+        const password = String(authPasswordElement.value || "").trim();
+        if (!password) {
+          setStatus("共通パスワードを入力してください。", { isError: true });
+          return;
+        }
+
+        authSubmitElement.disabled = true;
+        setStatus("ログイン中...");
+        try {
+          const response = await fetch("./api/auth/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({ password }),
+          });
+
+          const result = await response.json().catch(() => null);
+          if (!response.ok || !result?.ok) {
+            throw new Error(result?.message || "ログインできませんでした。");
+          }
+
+          authPasswordElement.value = "";
+          setViewerAuthenticated(true);
+          setStatus("ログインしました。");
+        } catch (error) {
+          setViewerAuthenticated(false);
+          setStatus(error?.message || "ログインできませんでした。", { isError: true });
+        } finally {
+          authSubmitElement.disabled = false;
+        }
+      });
+
       submitButton.addEventListener("click", async () => {
+        if (!isViewerAuthenticated) {
+          setStatus("共通パスワードでログインしてください。", { isError: true });
+          return;
+        }
+
         const files = Array.from(inputElement.files || []);
         if (files.length === 0 || !Number.isInteger(cityIndex)) {
           setStatus("画像ファイルを選択してください。", { isError: true });
@@ -254,6 +331,11 @@
           }
 
           if (!response.ok || !result?.ok) {
+            if (response.status === 401) {
+              setViewerAuthenticated(false);
+              setStatus("再ログインしてください。", { isError: true });
+              return;
+            }
             const fallbackMessage =
               response.status === 404
                 ? "アップロード API が見つかりません。`node server.js` で起動したサーバーを使ってください。"
@@ -288,6 +370,21 @@
           }
         }
       });
+
+      fetch("./api/auth/session", { headers: { Accept: "application/json" } })
+        .then((response) => response.json())
+        .then((payload) => {
+          const viewerPasswordConfigured = Boolean(payload?.auth?.viewerPasswordConfigured);
+          const authenticated = Boolean(payload?.auth?.authenticated);
+          setViewerAuthenticated(!viewerPasswordConfigured || authenticated);
+          if (viewerPasswordConfigured && !authenticated) {
+            setStatus("アップロード前にログインしてください。");
+          }
+        })
+        .catch(() => {
+          setViewerAuthenticated(false);
+          setStatus("認証状態を確認できませんでした。", { isError: true });
+        });
     </script>
   </body>
 </html>
