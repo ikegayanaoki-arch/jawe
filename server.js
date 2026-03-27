@@ -23,7 +23,7 @@ const VIEWER_PASSWORD = String(process.env.VIEWER_PASSWORD || "").trim();
 const ADMIN_DOWNLOAD_PASSWORD = String(process.env.ADMIN_DOWNLOAD_PASSWORD || "").trim();
 const AUTH_COOKIE_NAME = "iawe_viewer_session";
 const AUTH_DURATION_MS = 1000 * 60 * 60 * 12;
-const PUBLIC_IMAGE_MAX_DIMENSION = Number(process.env.PUBLIC_IMAGE_MAX_DIMENSION || 1600);
+const PUBLIC_IMAGE_MAX_DIMENSION = Number(process.env.PUBLIC_IMAGE_MAX_DIMENSION || 1200);
 const PUBLIC_IMAGE_QUALITY = Number(process.env.PUBLIC_IMAGE_QUALITY || 82);
 const AUTH_SECRET = String(
   process.env.AUTH_SECRET || `${ROOT_DIR}:${VIEWER_PASSWORD || "viewer"}:${ADMIN_DOWNLOAD_PASSWORD || "admin"}`,
@@ -121,7 +121,7 @@ async function handleGetUploads(response) {
   const publicCities = {};
   Object.entries(manifest.cities || {}).forEach(([cityIndex, entries]) => {
     publicCities[cityIndex] = Array.isArray(entries)
-      ? entries.map(({ src, title, credit }) => ({ src, title, credit }))
+      ? entries.map((entry) => buildClientPhotoEntry(entry))
       : [];
   });
   return writeJson(response, 200, { ok: true, cities: publicCities });
@@ -250,13 +250,13 @@ async function handleDeleteUpload(request, response) {
   const src = String(payload.src || "").trim();
   const password = String(payload.password || "").trim();
 
-  if (!Number.isInteger(cityIndex) || cityIndex < 0 || !src.startsWith("./images/uploaded/")) {
+  if (!Number.isInteger(cityIndex) || cityIndex < 0 || !isServedUploadedSrc(src)) {
     return writeJson(response, 400, { ok: false, message: "cityIndex または src が不正です" });
   }
 
   const manifest = await readUploadsManifest();
   const existingEntries = Array.isArray(manifest.cities?.[cityIndex]) ? manifest.cities[cityIndex] : [];
-  const matchedEntry = existingEntries.find((entry) => String(entry?.src || "").trim() === src);
+  const matchedEntry = existingEntries.find((entry) => photoEntryMatchesSrc(entry, src));
   if (!matchedEntry) {
     return writeJson(response, 404, { ok: false, message: "削除対象の画像が見つかりませんでした" });
   }
@@ -386,7 +386,7 @@ async function saveUploadedFile(
   await fs.writeFile(publicFilePath, publicImage.buffer);
 
   const storedAt = new Date().toISOString();
-  const publicPath = `./images/uploaded/${toPosixPath(path.join(uploadDirectoryRelativePath, publicFileName))}`;
+  const publicPath = `./data/uploaded/public/${toPosixPath(path.join(uploadDirectoryRelativePath, publicFileName))}`;
   const originalPath = toPosixPath(path.join("uploaded", "original", uploadDirectoryRelativePath, originalFileName));
   const publicArchivePath = toPosixPath(path.join("uploaded", "public", uploadDirectoryRelativePath, publicFileName));
 
@@ -557,14 +557,14 @@ function createWatermarkSvg(width, height, lines) {
   const textElements = lines
     .map((line, index) => {
       const dy = padding + fontSize + index * lineHeight;
-      return `<text x="${watermarkWidth - padding}" y="${dy}" text-anchor="end">${escapeXml(line)}</text>`;
+      return `<text x="${x + watermarkWidth / 2}" y="${y + dy}" text-anchor="middle">${escapeXml(line)}</text>`;
     })
     .join("");
 
   return `
     <svg xmlns="http://www.w3.org/2000/svg" width="${safeWidth}" height="${safeHeight}">
-      <rect x="${x}" y="${y}" width="${watermarkWidth}" height="${watermarkHeight}" rx="18" ry="18" fill="#0a1b1f" fill-opacity="0.42" />
-      <g font-family="Arial, sans-serif" font-size="${fontSize}" font-weight="700" fill="#ffffff" fill-opacity="0.88">
+      <rect x="${x}" y="${y}" width="${watermarkWidth}" height="${watermarkHeight}" rx="18" ry="18" fill="#0a1b1f" fill-opacity="0.62" />
+      <g font-family="Arial, sans-serif" font-size="${fontSize}" font-weight="700" fill="#ffffff" fill-opacity="0.94">
         ${textElements}
       </g>
     </svg>
@@ -684,7 +684,7 @@ function readJsonBody(request) {
 
 async function serveStaticFile(urlPathname, response, headOnly, cookies, request) {
   const normalizedPath = decodeURIComponent(urlPathname === "/" ? "/index.html" : urlPathname);
-  if (normalizedPath.startsWith("/images/uploaded/") && !requireViewerAuthentication(request, response, cookies)) {
+  if (isProtectedImagePath(normalizedPath) && !requireViewerAuthentication(request, response, cookies)) {
     return;
   }
 
@@ -700,10 +700,14 @@ async function serveStaticFile(urlPathname, response, headOnly, cookies, request
     }
 
     const extension = path.extname(resolvedPath).toLowerCase();
+    if (normalizedPath.startsWith("/data/uploaded/original/") && (extension === ".heic" || extension === ".heif")) {
+      return serveOriginalHeicFile(resolvedPath, response, headOnly);
+    }
+
     const contentType = STATIC_TYPES[extension] || "application/octet-stream";
     response.writeHead(200, {
       "Content-Type": contentType,
-      "Cache-Control": normalizedPath.startsWith("/images/uploaded/") ? "private, no-store" : "no-cache",
+      "Cache-Control": isProtectedImagePath(normalizedPath) ? "private, no-store" : "no-cache",
     });
     if (headOnly) {
       response.end();
@@ -718,6 +722,20 @@ async function serveStaticFile(urlPathname, response, headOnly, cookies, request
     }
     throw error;
   }
+}
+
+async function serveOriginalHeicFile(filePath, response, headOnly) {
+  const sourceBuffer = await fs.readFile(filePath);
+  const jpegBuffer = await normalizeSourceImageBuffer(sourceBuffer);
+  response.writeHead(200, {
+    "Content-Type": "image/jpeg",
+    "Cache-Control": "private, no-store",
+  });
+  if (headOnly) {
+    response.end();
+    return;
+  }
+  response.end(jpegBuffer);
 }
 
 function slugify(value) {
@@ -760,6 +778,13 @@ function parseCookies(cookieHeader) {
     }, {});
 }
 
+function isProtectedImagePath(pathname) {
+  return (
+    String(pathname || "").startsWith("/data/uploaded/public/") ||
+    String(pathname || "").startsWith("/data/uploaded/original/")
+  );
+}
+
 function isViewerAuthenticated(cookies) {
   if (!VIEWER_PASSWORD) {
     return true;
@@ -774,7 +799,7 @@ function requireViewerAuthentication(request, response, cookies) {
     return true;
   }
 
-  if (String(request?.url || "").startsWith("/images/uploaded/")) {
+  if (isProtectedImagePath(String(request?.url || ""))) {
     writeText(response, 401, "Authentication required");
     return false;
   }
@@ -859,13 +884,26 @@ function isAdminDownloadAuthorized(request) {
 function resolvePublicFilePath(normalizedPath) {
   const relativePath = normalizedPath.replace(/^\/+/, "");
   const rootPath = path.resolve(path.join(ROOT_DIR, relativePath));
-  if (rootPath.startsWith(ROOT_DIR) && !relativePath.startsWith("images/uploaded/")) {
+  if (
+    rootPath.startsWith(ROOT_DIR) &&
+    !relativePath.startsWith("data/uploaded/public/") &&
+    !relativePath.startsWith("data/uploaded/original/")
+  ) {
     return rootPath;
   }
 
-  if (relativePath.startsWith("images/uploaded/")) {
-    const uploadsPath = path.resolve(path.join(PUBLIC_UPLOADS_DIR, relativePath.replace(/^images\/uploaded\/?/, "")));
+  if (relativePath.startsWith("data/uploaded/public/")) {
+    const uploadsPath = path.resolve(path.join(PUBLIC_UPLOADS_DIR, relativePath.replace(/^data\/uploaded\/public\/?/, "")));
     if (uploadsPath.startsWith(PUBLIC_UPLOADS_DIR)) {
+      return uploadsPath;
+    }
+  }
+
+  if (relativePath.startsWith("data/uploaded/original/")) {
+    const uploadsPath = path.resolve(
+      path.join(ORIGINAL_UPLOADS_DIR, relativePath.replace(/^data\/uploaded\/original\/?/, "")),
+    );
+    if (uploadsPath.startsWith(ORIGINAL_UPLOADS_DIR)) {
       return uploadsPath;
     }
   }
@@ -882,11 +920,11 @@ function resolvePublicFilePath(normalizedPath) {
 
 function resolvePublicAssetPath(src) {
   const relativeAssetPath = String(src || "").replace(/^\.\//, "");
-  if (!relativeAssetPath.startsWith("images/uploaded/")) {
+  if (!relativeAssetPath.startsWith("data/uploaded/public/")) {
     return null;
   }
 
-  const filePath = path.resolve(path.join(PUBLIC_UPLOADS_DIR, relativeAssetPath.replace(/^images\/uploaded\/?/, "")));
+  const filePath = path.resolve(path.join(PUBLIC_UPLOADS_DIR, relativeAssetPath.replace(/^data\/uploaded\/public\/?/, "")));
   return filePath.startsWith(PUBLIC_UPLOADS_DIR) ? filePath : null;
 }
 
@@ -898,6 +936,32 @@ function resolveOriginalArchivePath(archivePath) {
 
   const filePath = path.resolve(path.join(DATA_DIR, relativeAssetPath));
   return filePath.startsWith(ORIGINAL_UPLOADS_DIR) ? filePath : null;
+}
+
+function buildPublicSrcFromArchivePath(archivePath) {
+  const relativePath = String(archivePath || "").trim().replace(/^uploaded\/public\//, "");
+  return relativePath && relativePath !== archivePath ? `./data/uploaded/public/${relativePath}` : "";
+}
+
+function buildOriginalSrcFromArchivePath(archivePath) {
+  const relativePath = String(archivePath || "").trim().replace(/^uploaded\/original\//, "");
+  return relativePath && relativePath !== archivePath ? `./data/uploaded/original/${relativePath}` : "";
+}
+
+function isServedUploadedSrc(src) {
+  return (
+    String(src || "").startsWith("./data/uploaded/public/") ||
+    String(src || "").startsWith("./data/uploaded/original/")
+  );
+}
+
+function photoEntryMatchesSrc(entry, src) {
+  const normalizedSrc = String(src || "").trim();
+  return (
+    String(entry?.src || "").trim() === normalizedSrc ||
+    buildPublicSrcFromArchivePath(String(entry?.publicPath || "").trim()) === normalizedSrc ||
+    buildOriginalSrcFromArchivePath(String(entry?.originalPath || "").trim()) === normalizedSrc
+  );
 }
 
 async function fileExists(filePath) {
@@ -1021,4 +1085,16 @@ function writeJson(response, statusCode, payload, headers = {}) {
 function writeText(response, statusCode, message) {
   response.writeHead(statusCode, { "Content-Type": "text/plain; charset=utf-8" });
   response.end(message);
+}
+function buildClientPhotoEntry(entry) {
+  return {
+    src: String(entry.src || "").trim(),
+    title: String(entry.title || "").trim(),
+    credit: String(entry.credit || "").trim(),
+    originalName: String(entry.originalName || "").trim(),
+    publicPath: String(entry.publicPath || "").trim(),
+    originalPath: String(entry.originalPath || "").trim(),
+    publicSrc: buildPublicSrcFromArchivePath(String(entry.publicPath || "").trim()),
+    originalSrc: buildOriginalSrcFromArchivePath(String(entry.originalPath || "").trim()),
+  };
 }

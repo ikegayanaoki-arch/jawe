@@ -11,7 +11,7 @@ const ORIGINAL_UPLOADS_DIR = path.join(UPLOADS_DIR, "original");
 const PUBLIC_UPLOADS_DIR = path.join(UPLOADS_DIR, "public");
 const MANIFEST_PATH = path.join(DATA_DIR, "uploads.json");
 const CITIES_PATH = path.join(ROOT_DIR, "cities.initial-data.js");
-const PUBLIC_IMAGE_MAX_DIMENSION = Number(process.env.PUBLIC_IMAGE_MAX_DIMENSION || 1600);
+const PUBLIC_IMAGE_MAX_DIMENSION = Number(process.env.PUBLIC_IMAGE_MAX_DIMENSION || 1200);
 const PUBLIC_IMAGE_QUALITY = Number(process.env.PUBLIC_IMAGE_QUALITY || 82);
 
 async function main() {
@@ -52,11 +52,11 @@ async function main() {
 
 async function migrateEntry(entry, cityIndex, city) {
   const src = String(entry?.src || "").trim();
-  if (!src.startsWith("./images/uploaded/")) {
+  if (!src.startsWith("./data/uploaded/public/")) {
     return null;
   }
 
-  const relativeLegacyPath = src.replace(/^\.\/images\/uploaded\//, "");
+  const relativeLegacyPath = src.replace(/^\.\/data\/uploaded\/public\//, "");
   const relativeDirectory = path.dirname(relativeLegacyPath);
   const sourceFilePath = await resolveSourceFile(entry, relativeLegacyPath);
   if (!sourceFilePath) {
@@ -95,7 +95,7 @@ async function migrateEntry(entry, cityIndex, city) {
 
   return {
     id: String(entry?.id || `${storedAt}-${originalName}`).replace(/[^a-z0-9._-]+/gi, "-"),
-    src: `./images/uploaded/${toPosixPath(path.join(relativeDirectory, publicFileName))}`,
+    src: `./data/uploaded/public/${toPosixPath(path.join(relativeDirectory, publicFileName))}`,
     title: String(entry?.title || "").trim(),
     credit: String(entry?.credit || "").trim(),
     deletePassword: String(entry?.deletePassword || "test"),
@@ -254,14 +254,14 @@ function createWatermarkSvg(width, height, lines) {
   const textElements = lines
     .map((line, index) => {
       const dy = padding + fontSize + index * lineHeight;
-      return `<text x="${watermarkWidth - padding}" y="${dy}" text-anchor="end">${escapeXml(line)}</text>`;
+      return `<text x="${x + watermarkWidth / 2}" y="${y + dy}" text-anchor="middle">${escapeXml(line)}</text>`;
     })
     .join("");
 
   return `
     <svg xmlns="http://www.w3.org/2000/svg" width="${safeWidth}" height="${safeHeight}">
-      <rect x="${x}" y="${y}" width="${watermarkWidth}" height="${watermarkHeight}" rx="18" ry="18" fill="#0a1b1f" fill-opacity="0.42" />
-      <g font-family="Arial, sans-serif" font-size="${fontSize}" font-weight="700" fill="#ffffff" fill-opacity="0.88">
+      <rect x="${x}" y="${y}" width="${watermarkWidth}" height="${watermarkHeight}" rx="18" ry="18" fill="#0a1b1f" fill-opacity="0.62" />
+      <g font-family="Arial, sans-serif" font-size="${fontSize}" font-weight="700" fill="#ffffff" fill-opacity="0.94">
         ${textElements}
       </g>
     </svg>

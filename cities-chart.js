@@ -278,7 +278,7 @@ async function loadCities() {
           const existing = Array.isArray(cities[cityIndex].photos) ? cities[cityIndex].photos : [];
           const preservedExisting = existing.filter((entry) => {
             const src = typeof entry === "string" ? String(entry.split("|")[0] || "").trim() : String(entry?.src || "").trim();
-            return src && !src.startsWith("./images/uploaded/");
+            return src && !src.startsWith("./data/uploaded/public/") && !src.startsWith("./data/uploaded/original/");
           });
           const merged = [...preservedExisting, ...entries].filter(Boolean);
           const seen = new Set();

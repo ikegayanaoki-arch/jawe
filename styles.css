@@ -349,6 +349,21 @@ h1 {
   letter-spacing: 0.12em;
 }
 
+.photo-panel-title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.photo-source-badge {
+  color: #c1121f;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
 .photo-panel-header {
   display: flex;
   align-items: center;
@@ -1180,28 +1195,55 @@ button.photo-empty:focus-visible {
   gap: 6px;
 }
 
+.editor-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  flex-wrap: nowrap;
+  min-height: 20px;
+}
+
 .editor-check {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   width: fit-content;
+}
+
+.editor-check-inline {
+  margin-left: 12px;
+  flex: 0 0 auto;
 }
 
 .editor-check input {
   width: 16px;
   height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: 16px;
+  max-height: 16px;
+  flex: 0 0 16px;
   margin: 0;
   accent-color: var(--accent);
+  appearance: auto;
 }
 
 .editor-check-label {
-  color: var(--ink);
-  font-size: 0.9rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  white-space: nowrap;
 }
 
 .editor-label {
   color: var(--muted);
   font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.editor-label-spacer {
+  width: 188px;
+  flex: 0 0 188px;
 }
 
 .editor-field input,

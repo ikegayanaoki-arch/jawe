@@ -8,6 +8,7 @@
     <style>
       body {
         min-height: 100vh;
+        font-size: 1.08rem;
       }
 
       .photo-upload-shell {
@@ -32,20 +33,20 @@
       }
 
       .photo-upload-panel h1 {
-        font-size: 1.5rem;
+        font-size: 1.72rem;
         white-space: normal;
       }
 
       .photo-upload-meta {
         color: var(--muted);
-        font-size: 0.9rem;
+        font-size: 1rem;
         line-height: 1.5;
       }
 
       .photo-upload-note {
         margin: 6px 0 0;
         color: var(--muted);
-        font-size: 0.84rem;
+        font-size: 0.95rem;
         line-height: 1.55;
       }
 
@@ -53,7 +54,7 @@
         margin: 8px 0 0;
         padding-left: 1.2em;
         color: var(--muted);
-        font-size: 0.84rem;
+        font-size: 0.94rem;
         line-height: 1.6;
       }
 
@@ -66,7 +67,7 @@
       .photo-upload-field textarea {
         width: 100%;
         min-width: 0;
-        padding: 10px 12px;
+        padding: 11px 13px;
         border: 1px solid rgba(24, 84, 94, 0.14);
         border-radius: 12px;
         background: var(--surface);
@@ -85,9 +86,22 @@
         justify-content: center;
       }
 
+      .photo-upload-consent {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.98rem;
+        line-height: 1.6;
+      }
+
+      .photo-upload-consent input {
+        margin-top: 0.25em;
+        transform: scale(1.15);
+      }
+
       .photo-upload-status {
         color: var(--muted);
-        font-size: 0.86rem;
+        font-size: 0.98rem;
         min-height: 1.4em;
       }
 
@@ -106,6 +120,11 @@
 
       .photo-upload-auth.is-hidden {
         display: none;
+      }
+
+      .photo-upload-field span {
+        font-size: 1rem;
+        line-height: 1.5;
       }
     </style>
   </head>
@@ -131,7 +150,8 @@
           <h1>写真追加</h1>
           <p id="photo-upload-meta" class="photo-upload-meta"></p>
           <p class="photo-upload-note">
-            アップロードした画像は，風工学会会員全員が閲覧できる状態になります．以下の点に注意してください．
+            画像をアップロード頂く場合には，以下の点にご同意下さるようお願いいたします．
+            また，アップロードした画像は，風工学会会員全員が閲覧できる状態になりますのでご注意ください．
           </p>
           <ul class="photo-upload-note-list">
             <li>肖像権やプライバシーに問題がないこと</li>
@@ -145,7 +165,7 @@
 
         <label class="photo-upload-field">
           <span>画像ファイル（複数まとめて選択できます）</span>
-          <input id="photo-upload-input" type="file" accept="image/*" multiple />
+          <input id="photo-upload-input" type="file" accept=".jpg,.jpeg,.png,.gif,.webp,.svg,.heic,image/jpeg,image/png,image/gif,image/webp,image/svg+xml,image/heic" multiple />
         </label>
 
         <label class="photo-upload-field">
@@ -165,6 +185,11 @@
         <label class="photo-upload-field">
           <span>削除用パスワード（画像を削除する際に必要になります．）</span>
           <input id="photo-upload-password" type="text" value="jawe-50-aniv" placeholder="削除時に必要になります" />
+        </label>
+
+        <label class="photo-upload-consent">
+          <input id="photo-upload-consent" type="checkbox" />
+          <span>上記の注意事項を確認し，承諾しました．</span>
         </label>
 
         <div class="photo-upload-actions">
@@ -193,9 +218,11 @@
       const closeButton = document.getElementById("photo-upload-close");
       const statusElement = document.getElementById("photo-upload-status");
       const passwordElement = document.getElementById("photo-upload-password");
+      const consentElement = document.getElementById("photo-upload-consent");
       const authPanelElement = document.getElementById("photo-upload-auth");
       const authPasswordElement = document.getElementById("photo-upload-auth-password");
       const authSubmitElement = document.getElementById("photo-upload-auth-submit");
+      const allowedExtensions = new Set(["jpg", "jpeg", "png", "gif", "webp", "svg", "heic"]);
       let pendingUpload = false;
       let isViewerAuthenticated = false;
 
@@ -260,6 +287,23 @@
         const files = Array.from(inputElement.files || []);
         if (files.length === 0 || !Number.isInteger(cityIndex)) {
           setStatus("画像ファイルを選択してください。", { isError: true });
+          return;
+        }
+
+        if (!consentElement.checked) {
+          setStatus("注意事項を確認した上で，チェックボックスにチェックをしてください。", { isError: true });
+          return;
+        }
+
+        const invalidFile = files.find((file) => {
+          const extension = String(file.name || "")
+            .split(".")
+            .pop()
+            .toLowerCase();
+          return !allowedExtensions.has(extension);
+        });
+        if (invalidFile) {
+          setStatus(`対応していない形式です: ${invalidFile.name}`, { isError: true });
           return;
         }
 

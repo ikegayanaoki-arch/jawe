@@ -35,6 +35,7 @@ const photoCarouselElement = document.getElementById("photo-carousel");
 const photoGridElement = document.getElementById("photo-grid");
 const conferencePhotoTrack = document.getElementById("conference-photo-track");
 const conferencePhotoCaption = document.getElementById("conference-photo-caption");
+const photoSourceBadgeElement = document.getElementById("photo-source-badge");
 const conferencePhotoPrevButton = document.getElementById("conference-photo-prev");
 const conferencePhotoNextButton = document.getElementById("conference-photo-next");
 const photoViewCarouselButton = document.getElementById("photo-view-carousel");
@@ -87,6 +88,7 @@ let quickGuideStepIndex = 0;
 let appBootstrapped = false;
 let isViewerAuthenticated = false;
 let isViewerPasswordConfigured = false;
+let currentEditorPhotoSourceMode = "public";
 
 const QUICK_GUIDE_STEPS = [
   {
@@ -416,6 +418,7 @@ function observePhotoGridSizing() {
 
 
 function renderCityEditor(city) {
+  currentEditorPhotoSourceMode = getCityPhotoSourceMode(city);
   cityEditorElement.innerHTML = `
     <div class="editor-header">
       <div>
@@ -457,19 +460,31 @@ function renderCityEditor(city) {
     </label>
     <div class="editor-photo-grid">
       <label class="editor-field">
-        <span class="editor-label">写真パス</span>
+        <span class="editor-label-row">
+          <span class="editor-label">写真ファイル名</span>
+          <label class="editor-check editor-check-inline">
+            <input name="photoSourceMode" type="checkbox"${currentEditorPhotoSourceMode === "original" ? " checked" : ""} />
+            <span class="editor-check-label">originalで表示する</span>
+          </label>
+        </span>
         <textarea name="photos" rows="4" placeholder="./images/example-1.jpg&#10;./images/example-2.jpg">${escapeHtml(
           serializeCityPhotoPaths(city),
         )}</textarea>
       </label>
       <label class="editor-field">
-        <span class="editor-label">写真タイトル</span>
+        <span class="editor-label-row">
+          <span class="editor-label">写真タイトル</span>
+          <span class="editor-label-spacer" aria-hidden="true"></span>
+        </span>
         <textarea name="photoTitles" rows="4" placeholder="会場外観&#10;会場内">${escapeHtml(
           serializeCityPhotoTitles(city),
         )}</textarea>
       </label>
       <label class="editor-field">
-        <span class="editor-label">写真提供者</span>
+        <span class="editor-label-row">
+          <span class="editor-label">写真提供者</span>
+          <span class="editor-label-spacer" aria-hidden="true"></span>
+        </span>
         <textarea name="photoCredits" rows="4" placeholder="山田太郎&#10;佐藤花子">${escapeHtml(
           serializeCityPhotoCredits(city),
         )}</textarea>
@@ -507,9 +522,21 @@ function renderCityEditor(city) {
   `;
 
   cityEditorElement.querySelectorAll("input, select, textarea").forEach((field) => {
-    field.addEventListener("input", (event) => {
+    const handleFieldEdit = (event) => {
       const fieldName = event.target.name;
       if (fieldName === "latitude" || fieldName === "longitude") {
+        return;
+      }
+      if (fieldName === "photoSourceMode") {
+        currentEditorPhotoSourceMode = event.target.checked ? "original" : "public";
+        cities.forEach((entry) => {
+          entry.photoSourceMode = currentEditorPhotoSourceMode;
+        });
+        applyPhotoSourceModeToAllCities(currentEditorPhotoSourceMode);
+        renderCityEditor(cities[activeCityIndex]);
+        renderCityList(cities, activeCityIndex);
+        renderConferencePhoto(cities[activeCityIndex]);
+        redrawMap();
         return;
       }
       if (fieldName === "photos") {
@@ -517,18 +544,21 @@ function renderCityEditor(city) {
           event.target.value,
           cityEditorElement.querySelector('[name="photoTitles"]')?.value || "",
           cityEditorElement.querySelector('[name="photoCredits"]')?.value || "",
+          getCityPhotos(cities[activeCityIndex]),
         );
       } else if (fieldName === "photoTitles") {
         cities[activeCityIndex].photos = mergePhotoEntries(
           cityEditorElement.querySelector('[name="photos"]')?.value || "",
           event.target.value,
           cityEditorElement.querySelector('[name="photoCredits"]')?.value || "",
+          getCityPhotos(cities[activeCityIndex]),
         );
       } else if (fieldName === "photoCredits") {
         cities[activeCityIndex].photos = mergePhotoEntries(
           cityEditorElement.querySelector('[name="photos"]')?.value || "",
           cityEditorElement.querySelector('[name="photoTitles"]')?.value || "",
           event.target.value,
+          getCityPhotos(cities[activeCityIndex]),
         );
       } else {
         cities[activeCityIndex][fieldName] =
@@ -538,7 +568,10 @@ function renderCityEditor(city) {
       renderConferencePhoto(cities[activeCityIndex]);
       syncCityActions();
       redrawMap();
-    });
+    };
+
+    field.addEventListener("input", handleFieldEdit);
+    field.addEventListener("change", handleFieldEdit);
   });
 
   cityEditorElement.querySelector("#geocode-city-data").addEventListener("click", () => {
@@ -702,6 +735,7 @@ async function geocodeActiveCity(options = {}) {
 async function bootstrapApp() {
   await hydrateCities();
   await hydrateServerUploads();
+  applyPhotoSourceModeToAllCities(getGlobalPhotoSourceMode());
   syncInitialActiveCity();
   setCityEditorVisibility(isCityEditorVisible);
   renderCityList(cities, activeCityIndex);
@@ -1226,6 +1260,7 @@ function renderConferencePhoto(city) {
     return;
   }
 
+  syncPhotoSourceBadge();
   const missingPhotoMessage =
     "この会議での日本風工学会員に関わる集合写真やグループ写真をお持ちの方はご提供ください。";
   const photos = getCityPhotos(city);
@@ -1260,7 +1295,7 @@ function renderConferencePhoto(city) {
           ${
             photo.isNotice
               ? renderPhotoUploadNotice(city, missingPhotoMessage)
-              : `<img class="photo-image" data-carousel-photo-index="${index}" src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.title || `${city.comment} の関連写真 ${index + 1}`)}" />`
+              : `<img class="photo-image" data-carousel-photo-index="${index}" src="${escapeHtml(getRenderablePhotoSrc(photo))}" alt="${escapeHtml(photo.title || `${city.comment} の関連写真 ${index + 1}`)}" />`
           }
         </div>
       `,
@@ -1283,7 +1318,7 @@ function renderConferencePhoto(city) {
             data-photo-index="${index}"
             data-photo-title="${escapeHtml(photo.title || "写真タイトル未設定")}"
           >
-            <img class="photo-thumb" src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.title || `写真 ${index + 1}`)}" />
+            <img class="photo-thumb" src="${escapeHtml(getRenderablePhotoSrc(photo))}" alt="${escapeHtml(photo.title || `写真 ${index + 1}`)}" />
           </button>
           ${
             isUploadedPhoto(photo)
@@ -1320,7 +1355,8 @@ function renderConferencePhoto(city) {
 }
 
 function isUploadedPhoto(photo) {
-  return String(photo?.src || "").startsWith("./images/uploaded/");
+  const src = String(photo?.src || "").trim();
+  return src.startsWith("./data/uploaded/public/") || src.startsWith("./data/uploaded/original/");
 }
 
 function openPhotoLightbox(photo) {
@@ -1329,7 +1365,7 @@ function openPhotoLightbox(photo) {
   }
 
   stopPhotoCarousel();
-  photoLightboxImageElement.src = photo.src;
+  photoLightboxImageElement.src = getRenderablePhotoSrc(photo);
   photoLightboxImageElement.alt = photo.title || "拡大写真";
   photoLightboxElement.classList.remove("is-hidden");
   photoLightboxElement.setAttribute("aria-hidden", "false");
@@ -1502,7 +1538,7 @@ function openPhotoUploadPopup(cityIndex, city) {
   window.open(
     url.toString(),
     PHOTO_UPLOAD_POPUP_NAME,
-    "popup=yes,width=560,height=720,resizable=yes,scrollbars=yes",
+    "popup=yes,width=460,height=620,resizable=yes,scrollbars=yes",
   );
 }
 
@@ -1542,9 +1578,10 @@ async function saveUploadedPhotosToProjectDirectory(city, uploadedFiles) {
   }
 
   const projectDirectoryHandle = await getProjectDirectoryHandle();
-  const imagesDirectoryHandle = await projectDirectoryHandle.getDirectoryHandle("images", { create: true });
-  const uploadsDirectoryHandle = await imagesDirectoryHandle.getDirectoryHandle("uploaded", { create: true });
-  const cityDirectoryHandle = await uploadsDirectoryHandle.getDirectoryHandle(buildPhotoDirectoryName(city), { create: true });
+  const dataDirectoryHandle = await projectDirectoryHandle.getDirectoryHandle("data", { create: true });
+  const uploadsDirectoryHandle = await dataDirectoryHandle.getDirectoryHandle("uploaded", { create: true });
+  const publicDirectoryHandle = await uploadsDirectoryHandle.getDirectoryHandle("public", { create: true });
+  const cityDirectoryHandle = await publicDirectoryHandle.getDirectoryHandle(buildPhotoDirectoryName(city), { create: true });
 
   const savedPhotos = [];
 
@@ -1561,7 +1598,7 @@ async function saveUploadedPhotosToProjectDirectory(city, uploadedFiles) {
     await writable.close();
 
     savedPhotos.push({
-      src: `./images/uploaded/${buildPhotoDirectoryName(city)}/${fileName}`,
+      src: `./data/uploaded/public/${buildPhotoDirectoryName(city)}/${fileName}`,
       title: String(uploadedFile.title || "").trim(),
       credit: String(uploadedFile.credit || "").trim(),
     });
@@ -1616,8 +1653,20 @@ function slugifyFileName(value) {
 
 function getCityPhotos(city) {
   if (Array.isArray(city.photos)) {
+    const sourceMode = getCityPhotoSourceMode(city);
     return city.photos
       .map((entry) => normalizePhotoEntry(entry))
+      .map((entry) => {
+        if (!entry) {
+          return null;
+        }
+
+        const selectedSrc = getPhotoSourceForMode(entry, sourceMode) || entry.src;
+        return {
+          ...entry,
+          src: selectedSrc,
+        };
+      })
       .filter((entry) => entry && entry.src);
   }
 
@@ -1625,12 +1674,73 @@ function getCityPhotos(city) {
   return singlePhoto ? [{ src: singlePhoto, title: "" }] : [];
 }
 
+function getCityPhotoSourceMode(city) {
+  const globalMode = readConfiguredPhotoSourceMode();
+  if (globalMode) {
+    return globalMode;
+  }
+
+  return String(city?.photoSourceMode || "").trim() === "original" ? "original" : "public";
+}
+
+function getGlobalPhotoSourceMode() {
+  const configuredMode = readConfiguredPhotoSourceMode();
+  if (configuredMode) {
+    return configuredMode;
+  }
+
+  return cities.some((city) => getCityPhotoSourceMode(city) === "original") ? "original" : "public";
+}
+
+function readConfiguredPhotoSourceMode() {
+  const configuredMode = String(window.__PHOTO_SOURCE_MODE__ || "").trim();
+  if (configuredMode === "original" || configuredMode === "public") {
+    return configuredMode;
+  }
+
+  return "";
+}
+
+function syncPhotoSourceBadge() {
+  if (!photoSourceBadgeElement) {
+    return;
+  }
+
+  const isOriginalMode = getGlobalPhotoSourceMode() === "original";
+  photoSourceBadgeElement.classList.toggle("is-hidden", !isOriginalMode);
+}
+
+function applyPhotoSourceModeToAllCities(sourceMode) {
+  const normalizedMode = sourceMode === "original" ? "original" : "public";
+  window.__PHOTO_SOURCE_MODE__ = normalizedMode;
+  cities.forEach((city) => {
+    city.photoSourceMode = normalizedMode;
+    if (!Array.isArray(city.photos)) {
+      return;
+    }
+
+    city.photos = city.photos
+      .map((entry) => normalizePhotoEntry(entry))
+      .map((entry) => {
+        if (!entry || !isUploadedPhoto(entry)) {
+          return entry;
+        }
+
+        return {
+          ...entry,
+          src: getPhotoSourceForMode(entry, normalizedMode) || entry.src,
+        };
+      })
+      .filter(Boolean);
+  });
+}
+
 function normalizePhotoEntry(entry) {
   if (typeof entry === "string") {
     const [srcPart, ...titleParts] = entry.split("|");
     const src = String(srcPart || "").trim();
     const title = titleParts.join("|").trim();
-    return src ? { src, title, credit: "" } : null;
+    return src ? { src, title, credit: "", publicSrc: "", originalSrc: "", publicPath: "", originalPath: "" } : null;
   }
 
   if (!entry || typeof entry !== "object") {
@@ -1640,7 +1750,83 @@ function normalizePhotoEntry(entry) {
   const src = String(entry.src || "").trim();
   const title = String(entry.title || "").trim();
   const credit = String(entry.credit || "").trim();
-  return src ? { src, title, credit } : null;
+  const explicitPublicSrc = String(entry.publicSrc || "").trim();
+  const explicitOriginalSrc = String(entry.originalSrc || "").trim();
+  const publicSrc =
+    explicitPublicSrc ||
+    (src.startsWith("./data/uploaded/public/") ? src : "") ||
+    derivePublicUploadedSrc(explicitOriginalSrc || src);
+  const originalSrc = explicitOriginalSrc || deriveOriginalUploadedSrc(explicitPublicSrc || src);
+  const publicPath = String(entry.publicPath || "").trim() || derivePublicArchivePath(publicSrc || src);
+  const originalPath = String(entry.originalPath || "").trim() || deriveOriginalArchivePath(originalSrc || src);
+  return src
+    ? {
+        src,
+        title,
+        credit,
+        publicSrc,
+        originalSrc,
+        publicPath,
+        originalPath,
+        originalName: String(entry.originalName || "").trim(),
+      }
+    : null;
+}
+
+function deriveOriginalUploadedSrc(value) {
+  const normalizedValue = String(value || "").trim();
+  if (normalizedValue.startsWith("./data/uploaded/original/")) {
+    return normalizedValue;
+  }
+  if (normalizedValue.startsWith("./data/uploaded/public/")) {
+    return normalizedValue.replace("./data/uploaded/public/", "./data/uploaded/original/");
+  }
+  return "";
+}
+
+function derivePublicUploadedSrc(value) {
+  const normalizedValue = String(value || "").trim();
+  if (normalizedValue.startsWith("./data/uploaded/public/")) {
+    return normalizedValue;
+  }
+  if (normalizedValue.startsWith("./data/uploaded/original/")) {
+    return normalizedValue.replace("./data/uploaded/original/", "./data/uploaded/public/");
+  }
+  return "";
+}
+
+function deriveOriginalArchivePath(value) {
+  const normalizedValue = String(value || "").trim();
+  if (normalizedValue.startsWith("uploaded/original/")) {
+    return normalizedValue;
+  }
+  if (normalizedValue.startsWith("uploaded/public/")) {
+    return normalizedValue.replace("uploaded/public/", "uploaded/original/");
+  }
+  if (normalizedValue.startsWith("./data/uploaded/original/")) {
+    return normalizedValue.replace("./data/uploaded/original/", "uploaded/original/");
+  }
+  if (normalizedValue.startsWith("./data/uploaded/public/")) {
+    return normalizedValue.replace("./data/uploaded/public/", "uploaded/original/");
+  }
+  return "";
+}
+
+function derivePublicArchivePath(value) {
+  const normalizedValue = String(value || "").trim();
+  if (normalizedValue.startsWith("uploaded/public/")) {
+    return normalizedValue;
+  }
+  if (normalizedValue.startsWith("uploaded/original/")) {
+    return normalizedValue.replace("uploaded/original/", "uploaded/public/");
+  }
+  if (normalizedValue.startsWith("./data/uploaded/public/")) {
+    return normalizedValue.replace("./data/uploaded/public/", "uploaded/public/");
+  }
+  if (normalizedValue.startsWith("./data/uploaded/original/")) {
+    return normalizedValue.replace("./data/uploaded/original/", "uploaded/public/");
+  }
+  return "";
 }
 
 function parsePhotoEntries(value) {
@@ -1652,7 +1838,7 @@ function parsePhotoEntries(value) {
 
 function serializeCityPhotoPaths(city) {
   return getCityPhotos(city)
-    .map((photo) => photo.src)
+    .map((photo) => getDisplayedPhotoFileName(photo))
     .join("\n");
 }
 
@@ -1668,7 +1854,7 @@ function serializeCityPhotoCredits(city) {
     .join("\n");
 }
 
-function mergePhotoEntries(pathsValue, titlesValue, creditsValue) {
+function mergePhotoEntries(pathsValue, titlesValue, creditsValue, existingPhotos = []) {
   const paths = String(pathsValue)
     .split("\n")
     .map((value) => String(value).trim());
@@ -1680,18 +1866,97 @@ function mergePhotoEntries(pathsValue, titlesValue, creditsValue) {
     .map((value) => String(value).trim());
 
   return paths
-    .map((src, index) => {
-      if (!src) {
+    .map((fileName, index) => {
+      if (!fileName) {
         return null;
       }
 
+      const existingEntry = findPhotoEntryByDisplayedFileName(existingPhotos, fileName) || existingPhotos[index] || null;
+      if (existingEntry) {
+        return updatePhotoEntryFromDisplayedFileName(existingEntry, fileName, titles[index] || "", credits[index] || "");
+      }
+
       return {
-        src,
+        src: fileName,
         title: titles[index] || "",
         credit: credits[index] || "",
+        publicSrc: "",
+        originalSrc: "",
+        publicPath: "",
+        originalPath: "",
       };
     })
     .filter(Boolean);
+}
+
+function getDisplayedPhotoFileName(photo) {
+  const sourcePath = getPhotoSourceForMode(photo, currentEditorPhotoSourceMode) || photo.src || "";
+  return getFileNameFromPath(sourcePath);
+}
+
+function getRenderablePhotoSrc(photo) {
+  const sourceMode = getGlobalPhotoSourceMode();
+  return getPhotoSourceForMode(photo, sourceMode) || String(photo?.src || "").trim();
+}
+
+function getPhotoSourceForMode(photo, sourceMode) {
+  if (sourceMode === "original") {
+    return String(photo?.originalSrc || "").trim() || String(photo?.src || "").trim();
+  }
+
+  return String(photo?.publicSrc || "").trim() || String(photo?.src || "").trim();
+}
+
+function getFileNameFromPath(value) {
+  return String(value || "")
+    .split("/")
+    .pop()
+    .trim();
+}
+
+function findPhotoEntryByDisplayedFileName(existingPhotos, fileName) {
+  const normalizedFileName = String(fileName || "").trim();
+  return (Array.isArray(existingPhotos) ? existingPhotos : []).find((entry) => {
+    return getDisplayedPhotoFileName(entry) === normalizedFileName;
+  });
+}
+
+function updatePhotoEntryFromDisplayedFileName(photo, fileName, title, credit) {
+  const normalized = normalizePhotoEntry(photo);
+  if (!normalized) {
+    return null;
+  }
+
+  const nextEntry = {
+    ...normalized,
+    title,
+    credit,
+  };
+
+  if (isUploadedPhoto(normalized)) {
+    if (currentEditorPhotoSourceMode === "original") {
+      nextEntry.originalSrc = replaceFileNameInPath(normalized.originalSrc || normalized.src, fileName);
+      nextEntry.originalPath = replaceFileNameInPath(normalized.originalPath, fileName);
+      nextEntry.src = nextEntry.originalSrc || nextEntry.src;
+    } else {
+      nextEntry.publicSrc = replaceFileNameInPath(normalized.publicSrc || normalized.src, fileName);
+      nextEntry.publicPath = replaceFileNameInPath(normalized.publicPath, fileName);
+      nextEntry.src = nextEntry.publicSrc || nextEntry.src;
+    }
+    return nextEntry;
+  }
+
+  nextEntry.src = replaceFileNameInPath(normalized.src, fileName);
+  return nextEntry;
+}
+
+function replaceFileNameInPath(value, fileName) {
+  const source = String(value || "").trim();
+  if (!source) {
+    return fileName;
+  }
+
+  return source.replace(/[^/]+$/, fileName);
 }
 
 function mergeUniquePhotoEntries(existingEntries, nextEntries) {
@@ -1711,11 +1976,62 @@ function mergeUniquePhotoEntries(existingEntries, nextEntries) {
 }
 
 function mergeServerUploadedPhotoEntries(existingEntries, nextEntries) {
-  const preservedExistingEntries = (Array.isArray(existingEntries) ? existingEntries : [])
+  const normalizedExistingEntries = (Array.isArray(existingEntries) ? existingEntries : [])
     .map((entry) => normalizePhotoEntry(entry))
-    .filter((entry) => entry && !isUploadedPhoto(entry));
+    .filter(Boolean);
 
-  return mergeUniquePhotoEntries(preservedExistingEntries, nextEntries);
+  const preservedExistingEntries = normalizedExistingEntries.filter((entry) => !isUploadedPhoto(entry));
+  const existingUploadedEntries = normalizedExistingEntries.filter((entry) => isUploadedPhoto(entry));
+
+  const mergedUploadedEntries = (Array.isArray(nextEntries) ? nextEntries : [])
+    .map((entry) => normalizePhotoEntry(entry))
+    .filter(Boolean)
+    .map((entry) => {
+      const existingEntry = existingUploadedEntries.find((candidate) => isSameUploadedPhoto(candidate, entry));
+      if (!existingEntry) {
+        return entry;
+      }
+
+      return {
+        ...entry,
+        title: String(existingEntry.title || "").trim() || String(entry.title || "").trim(),
+        credit: String(existingEntry.credit || "").trim() || String(entry.credit || "").trim(),
+      };
+    });
+
+  return mergeUniquePhotoEntries(preservedExistingEntries, mergedUploadedEntries);
+}
+
+function isSameUploadedPhoto(left, right) {
+  const leftEntry = normalizePhotoEntry(left);
+  const rightEntry = normalizePhotoEntry(right);
+  if (!leftEntry || !rightEntry) {
+    return false;
+  }
+
+  const leftKeys = [
+    String(leftEntry.publicPath || "").trim(),
+    String(leftEntry.originalPath || "").trim(),
+    String(leftEntry.publicSrc || "").trim(),
+    String(leftEntry.originalSrc || "").trim(),
+    String(leftEntry.src || "").trim(),
+  ].filter(Boolean);
+  const rightKeys = [
+    String(rightEntry.publicPath || "").trim(),
+    String(rightEntry.originalPath || "").trim(),
+    String(rightEntry.publicSrc || "").trim(),
+    String(rightEntry.originalSrc || "").trim(),
+    String(rightEntry.src || "").trim(),
+  ].filter(Boolean);
+
+  if (leftKeys.some((key) => rightKeys.includes(key))) {
+    return true;
+  }
+
+  return (
+    getFileNameFromPath(leftEntry.publicSrc || leftEntry.originalSrc || leftEntry.src) ===
+    getFileNameFromPath(rightEntry.publicSrc || rightEntry.originalSrc || rightEntry.src)
+  );
 }
 
 function moveConferencePhoto(step, options = {}) {
@@ -2197,6 +2513,7 @@ function createEmptyCity(sequence) {
     organizer: "",
     photo: "",
     photos: [],
+    photoSourceMode: "public",
     isUpcoming: false,
     conferenceType: "その他",
     coordinates: [...DEFAULT_COORDINATES],
@@ -2205,7 +2522,55 @@ function createEmptyCity(sequence) {
 }
 
 function buildInitialCitiesSource() {
-  return `window.__INITIAL_CITIES__ = ${JSON.stringify(cities, null, 2)};\n`;
+  const photoSourceMode = getGlobalPhotoSourceMode();
+  return `window.__PHOTO_SOURCE_MODE__ = ${JSON.stringify(photoSourceMode)};\nwindow.__INITIAL_CITIES__ = ${JSON.stringify(buildSerializableCities(), null, 2)};\n`;
+}
+
+function buildSerializableCities() {
+  return cities.map((city) => {
+    const normalizedPhotos = (Array.isArray(city.photos) ? city.photos : [])
+      .map((entry) => normalizePhotoEntry(entry))
+      .filter(Boolean)
+      .map((entry) => ({
+        src: String(getPhotoSourceForMode(entry, getCityPhotoSourceMode(city)) || entry.src || "").trim(),
+        title: String(entry.title || "").trim(),
+        credit: String(entry.credit || "").trim(),
+        publicSrc: String(entry.publicSrc || "").trim(),
+        originalSrc: String(entry.originalSrc || "").trim(),
+        publicPath: String(entry.publicPath || "").trim(),
+        originalPath: String(entry.originalPath || "").trim(),
+        originalName: String(entry.originalName || "").trim(),
+      }));
+
+    return {
+      name: String(city.name || "").trim(),
+      country: String(city.country || "").trim(),
+      flag: String(city.flag || "").trim(),
+      comment: String(city.comment || "").trim(),
+      eventDate: String(city.eventDate || "").trim(),
+      organizer: String(city.organizer || "").trim(),
+      photo: normalizedPhotos[0]?.src || "",
+      photos: normalizedPhotos,
+      photoSourceMode: getCityPhotoSourceMode(city),
+      isUpcoming: Boolean(city.isUpcoming),
+      conferenceType: normalizeConferenceType(city.conferenceType),
+      coordinates: normalizeCoordinatePair(city.coordinates, DEFAULT_COORDINATES),
+      labelOffset: normalizeCoordinatePair(city.labelOffset, [24, -62]),
+      ...(Array.isArray(city.manualLabelOffset)
+        ? { manualLabelOffset: normalizeCoordinatePair(city.manualLabelOffset, [24, -62]) }
+        : {}),
+    };
+  });
+}
+
+function normalizeCoordinatePair(value, fallback) {
+  const source = Array.isArray(value) ? value : fallback;
+  const first = Number(source[0]);
+  const second = Number(source[1]);
+  return [
+    Number.isFinite(first) ? first : Number(fallback[0]),
+    Number.isFinite(second) ? second : Number(fallback[1]),
+  ];
 }
 
 async function saveInitialDataToProjectDirectory(source) {
@@ -2327,6 +2692,11 @@ async function loadStoredDirectoryHandle() {
 
 async function loadInitialCities() {
   try {
+    if (String(window.__PHOTO_SOURCE_MODE__ || "").trim() === "original") {
+      currentEditorPhotoSourceMode = "original";
+    } else {
+      currentEditorPhotoSourceMode = "public";
+    }
     const parsed = window.__INITIAL_CITIES__;
     if (!Array.isArray(parsed) || parsed.length === 0) {
       return null;

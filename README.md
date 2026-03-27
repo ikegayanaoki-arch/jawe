@@ -11,7 +11,7 @@
 node server.js
 ```
 
-`server.js` は静的画像を `./images`、アップロード画像と manifest と export を `./data` に保存します。Render の Persistent Disk を使う場合は mount path を `/opt/render/project/src/data` にすると、アップロード画像・`uploads.json`・アーカイブをまとめて永続化できます。
+`server.js` はロゴなどの静的アセットを `./images` から配信し、アップロード画像と manifest と export は `./data` に保存します。Render の Persistent Disk を使う場合は mount path を `/opt/render/project/src/data` にすると、アップロード画像・`uploads.json`・アーカイブをまとめて永続化できます。
 
 閲覧制限を使う場合は、環境変数に次を設定してください。
 
@@ -56,7 +56,9 @@ curl -L \
 - `cities.initial-data.js` があれば、それを読み込んで表示します
 - ファイルがなければ `app.js` の `cities` 配列を使います
 
-`cities.initial-data.js` は、画面右側の「選択中の都市を編集」にある `更新内容を保存` ボタンを押すと書き出されます。対応ブラウザでは初回保存時に `index.html` があるディレクトリを選ぶと、その後は同じディレクトリへ `cities.initial-data.js` を上書き保存します。未対応ブラウザではダウンロードにフォールバックします。
+`cities.initial-data.js` は、画面右側の「選択中の都市を編集」にある `ファイル保存` ボタンを押すと書き出されます。対応ブラウザでは初回保存時に `index.html` があるディレクトリを選ぶと、その後は同じディレクトリへ `cities.initial-data.js` を上書き保存します。未対応ブラウザではダウンロードにフォールバックします。
+
+先頭の `window.__PHOTO_SOURCE_MODE__ = "public";` または `"original";` を変更すると、読み込み時に配信用画像と元画像のどちらを表示するかを切り替えられます。編集画面の `originalで表示する` チェックボックスでも同じ設定を変更できます。
 
 手動で初期データを管理したい場合は、`app.js` の `cities` 配列を編集してください。右側の都市リストをクリックすると、その都市が地図の中心付近に来るようにアニメーションします。
 
@@ -71,6 +73,7 @@ curl -L \
   conferenceType: "ICWE",
   coordinates: [103.8198, 1.3521],
   labelOffset: [24, 36],
+  photoSourceMode: "public",
 }
 ```
 
@@ -79,7 +82,7 @@ curl -L \
 - 画像アップロード共有機能は `server.js` の API を使います。`python3 -m http.server` ではアップロードできません。
 - `VIEWER_PASSWORD` を設定すると、未ログインではアップロード画像と共有アップロード API を利用できません。
 - 一括ダウンロード API は `X-Admin-Password` ヘッダーで `ADMIN_DOWNLOAD_PASSWORD` を送ったときだけ使えます。
-- 閲覧者に配信されるのは縮小版かつ透かし入りの JPEG です。元画像は `data/uploaded/original` に保持されます。
+- 閲覧者に配信されるのは縮小版かつ透かし入りの JPEG です。元画像は `data/uploaded/original` に保持され、参照パスも `./data/uploaded/public/...` と `./data/uploaded/original/...` に統一しています。
 - 地図の国境データは `world-atlas` を CDN から取得しています。
 - オフラインで使う場合は、`app.js` の `d3.json(...)` の参照先をローカルファイルへ変更してください。
 - 以前の構成で `images/uploaded` または `data/images/uploaded` を使っていた場合は、起動時に `data/uploaded` へマージされます。
