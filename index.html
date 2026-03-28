@@ -63,6 +63,11 @@
               <p class="eyebrow">World map</p>
             </div>
             <div class="map-controls" aria-label="地図の拡大縮小">
+              <div class="map-projection-controls" aria-label="地図投影法">
+                <button type="button" id="projection-globe-toggle" class="map-control-button">Globe</button>
+                <button type="button" id="projection-natural-earth" class="map-control-button is-active">Natural</button>
+                <button type="button" id="projection-mercator" class="map-control-button">Mercator</button>
+              </div>
               <button type="button" id="zoom-in-button" class="map-control-button">+</button>
               <button type="button" id="zoom-out-button" class="map-control-button">-</button>
               <button type="button" id="zoom-reset-button" class="map-control-button">100%</button>

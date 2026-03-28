@@ -6,12 +6,25 @@ const DIRECTORY_HANDLE_KEY = "project-directory";
 const CONFERENCE_TYPES = ["ICWE", "CWE", "APCWE", "BBAA", "その他"];
 const DEFAULT_FLAG = "🏳️";
 const DEFAULT_COORDINATES = [0, 0];
-const DEFAULT_ZOOM_FACTOR = 1.728;
+const DEFAULT_FLAT_ZOOM_FACTOR = 1.728;
+const DEFAULT_GLOBE_ZOOM_FACTOR = 1;
 const AUTO_CITY_ADVANCE_MS = 6000;
 const AUTO_CITY_RESUME_DELAY_MS = 7000;
 const PHOTO_UPLOAD_POPUP_NAME = "photo-upload-popup";
 const QUICK_GUIDE_DISMISSED_KEY = "flagged-world-map-quick-guide-dismissed";
+const MAP_PROJECTION_STORAGE_KEY = "flagged-world-map-projection";
+const MAP_VIEW_MODE_STORAGE_KEY = "flagged-world-map-view-mode";
 const CITY_EDITOR_PASSWORD = "ikegaya.naoki";
+const MAP_PROJECTION_TYPES = {
+  natural: {
+    create: () => d3.geoNaturalEarth1(),
+    label: "Natural",
+  },
+  mercator: {
+    create: () => d3.geoMercator(),
+    label: "Mercator",
+  },
+};
 
 const cities = [
   {
@@ -62,6 +75,9 @@ const authLogoutButton = document.getElementById("auth-logout-button");
 const zoomInButton = document.getElementById("zoom-in-button");
 const zoomOutButton = document.getElementById("zoom-out-button");
 const zoomResetButton = document.getElementById("zoom-reset-button");
+const projectionNaturalButton = document.getElementById("projection-natural-earth");
+const projectionMercatorButton = document.getElementById("projection-mercator");
+const projectionGlobeToggleButton = document.getElementById("projection-globe-toggle");
 const cityAutoPlayToggleButton = document.getElementById("city-autoplay-toggle");
 const cityAutoPlayStatusElement = document.getElementById("city-autoplay-status");
 const upcomingVisibilityToggleButton = document.getElementById("upcoming-visibility-toggle");
@@ -73,7 +89,6 @@ let worldDataPromise;
 let mapState;
 let currentSortKey = "eventDate";
 let currentConferenceFilter = "all";
-let currentZoomFactor = DEFAULT_ZOOM_FACTOR;
 let isCityEditorVisible = false;
 let currentPhotoIndex = 0;
 let photoCarouselTimerId = null;
@@ -89,6 +104,9 @@ let appBootstrapped = false;
 let isViewerAuthenticated = false;
 let isViewerPasswordConfigured = false;
 let currentEditorPhotoSourceMode = "public";
+let currentMapViewMode = loadStoredMapViewMode();
+let currentMapProjectionType = loadStoredMapProjectionType();
+let currentZoomFactor = getDefaultZoomFactor();
 
 const QUICK_GUIDE_STEPS = [
   {
@@ -119,8 +137,20 @@ zoomOutButton.addEventListener("click", () => {
 });
 
 zoomResetButton.addEventListener("click", () => {
-  currentZoomFactor = DEFAULT_ZOOM_FACTOR;
+  currentZoomFactor = getDefaultZoomFactor();
   redrawMap();
+});
+
+projectionNaturalButton?.addEventListener("click", () => {
+  setMapProjectionType("natural");
+});
+
+projectionMercatorButton?.addEventListener("click", () => {
+  setMapProjectionType("mercator");
+});
+
+projectionGlobeToggleButton?.addEventListener("click", () => {
+  setMapViewMode(currentMapViewMode === "globe" ? "flat" : "globe");
 });
 
 authFormElement?.addEventListener("submit", async (event) => {
@@ -1051,7 +1081,19 @@ async function initializeMap() {
   gradient.append("stop").attr("offset", "0%").attr("stop-color", "var(--ocean-top)");
   gradient.append("stop").attr("offset", "100%").attr("stop-color", "var(--ocean-bottom)");
 
-  const projection = d3.geoNaturalEarth1().fitExtent(
+  const globeGradient = defs
+    .append("radialGradient")
+    .attr("id", "globe-ocean-gradient")
+    .attr("cx", "34%")
+    .attr("cy", "28%")
+    .attr("r", "72%");
+
+  globeGradient.append("stop").attr("offset", "0%").attr("stop-color", "#edf8fc");
+  globeGradient.append("stop").attr("offset", "34%").attr("stop-color", "#c2d9e6");
+  globeGradient.append("stop").attr("offset", "68%").attr("stop-color", "#6d93ab");
+  globeGradient.append("stop").attr("offset", "100%").attr("stop-color", "#35596c");
+
+  const projection = createMapProjection(currentMapProjectionType).fitExtent(
     [
       [2, 2],
       [width - 2, height - 2],
@@ -1073,6 +1115,7 @@ async function initializeMap() {
     height,
     svg,
     projection,
+    projectionType: currentMapProjectionType,
     baseScale: projection.scale(),
     path,
     sphere,
@@ -1083,6 +1126,7 @@ async function initializeMap() {
   };
 
   attachMapInteraction();
+  syncMapProjectionButtons();
 
   redrawMap();
 
@@ -1183,6 +1227,100 @@ function updateZoom(multiplier) {
   redrawMap();
 }
 
+function createMapProjection(projectionType) {
+  if (currentMapViewMode === "globe") {
+    return d3.geoOrthographic().clipAngle(90);
+  }
+
+  const projectionConfig = MAP_PROJECTION_TYPES[projectionType] || MAP_PROJECTION_TYPES.natural;
+  return projectionConfig.create();
+}
+
+function setMapProjectionType(projectionType) {
+  const normalizedType = MAP_PROJECTION_TYPES[projectionType] ? projectionType : "natural";
+  if (currentMapProjectionType === normalizedType) {
+    return;
+  }
+
+  currentMapProjectionType = normalizedType;
+  persistMapProjectionType(normalizedType);
+  syncMapProjectionButtons();
+  initializeMap().catch((error) => {
+    console.error("Failed to reinitialize map.", error);
+  });
+}
+
+function syncMapProjectionButtons() {
+  const isGlobeMode = currentMapViewMode === "globe";
+  if (projectionGlobeToggleButton) {
+    projectionGlobeToggleButton.classList.toggle("is-active", isGlobeMode);
+    projectionGlobeToggleButton.setAttribute("aria-pressed", String(isGlobeMode));
+  }
+
+  const projectionButtons = [
+    ["natural", projectionNaturalButton],
+    ["mercator", projectionMercatorButton],
+  ];
+
+  projectionButtons.forEach(([projectionType, button]) => {
+    if (!button) {
+      return;
+    }
+
+    const isActive = currentMapProjectionType === projectionType;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+    button.disabled = isGlobeMode;
+  });
+}
+
+function loadStoredMapProjectionType() {
+  try {
+    const stored = String(window.localStorage.getItem(MAP_PROJECTION_STORAGE_KEY) || "").trim();
+    return MAP_PROJECTION_TYPES[stored] ? stored : "natural";
+  } catch (error) {
+    return "natural";
+  }
+}
+
+function persistMapProjectionType(projectionType) {
+  try {
+    window.localStorage.setItem(MAP_PROJECTION_STORAGE_KEY, projectionType);
+  } catch (error) {
+    console.error("Failed to persist map projection.", error);
+  }
+}
+
+function loadStoredMapViewMode() {
+  try {
+    return window.localStorage.getItem(MAP_VIEW_MODE_STORAGE_KEY) === "globe" ? "globe" : "flat";
+  } catch (error) {
+    return "flat";
+  }
+}
+
+function persistMapViewMode(viewMode) {
+  try {
+    window.localStorage.setItem(MAP_VIEW_MODE_STORAGE_KEY, viewMode);
+  } catch (error) {
+    console.error("Failed to persist map view mode.", error);
+  }
+}
+
+function setMapViewMode(viewMode) {
+  const normalizedMode = viewMode === "globe" ? "globe" : "flat";
+  if (currentMapViewMode === normalizedMode) {
+    return;
+  }
+
+  currentMapViewMode = normalizedMode;
+  persistMapViewMode(normalizedMode);
+  syncMapProjectionButtons();
+  initializeMap().catch((error) => {
+    console.error("Failed to reinitialize map.", error);
+  });
+}
+
 function applyZoom() {
   if (!mapState) {
     return;
@@ -1192,12 +1330,17 @@ function applyZoom() {
   syncZoomControls();
 }
 
+function getDefaultZoomFactor() {
+  return currentMapViewMode === "globe" ? DEFAULT_GLOBE_ZOOM_FACTOR : DEFAULT_FLAT_ZOOM_FACTOR;
+}
+
 function syncZoomControls() {
   if (!zoomResetButton) {
     return;
   }
 
-  const isDefaultZoom = Math.abs(currentZoomFactor - DEFAULT_ZOOM_FACTOR) < 0.0001;
+  const defaultZoomFactor = getDefaultZoomFactor();
+  const isDefaultZoom = Math.abs(currentZoomFactor - defaultZoomFactor) < 0.0001;
   zoomResetButton.classList.toggle("is-active", isDefaultZoom);
   zoomResetButton.setAttribute("aria-pressed", String(isDefaultZoom));
 }
@@ -1209,11 +1352,45 @@ function redrawMap() {
 
   const { path, sphere, graticule, countriesGroup } = mapState;
   applyZoom();
+  const isGlobeMode = currentMapViewMode === "globe";
+
+  sphere.classed("is-globe-mode", isGlobeMode);
+  sphere.attr("fill", isGlobeMode ? "url(#globe-ocean-gradient)" : "url(#ocean-gradient)");
+  graticule.classed("is-globe-mode", isGlobeMode);
+  countriesGroup.classed("is-globe-mode", isGlobeMode);
 
   sphere.attr("d", path);
   graticule.attr("d", path);
   countriesGroup.selectAll("path").attr("d", path);
+  syncActiveCountryHighlight();
   drawMarkers(activeCityIndex);
+}
+
+function syncActiveCountryHighlight() {
+  if (!mapState || !Array.isArray(mapState.countries) || mapState.countries.length === 0) {
+    return;
+  }
+
+  const activeCity = cities[activeCityIndex];
+  const coordinates = Array.isArray(activeCity?.coordinates) ? activeCity.coordinates : null;
+  if (!coordinates || coordinates.length < 2) {
+    mapState.countriesGroup.selectAll("path").classed("is-active-country", false);
+    return;
+  }
+
+  const [longitude, latitude] = coordinates;
+  const activeCountry = mapState.countries.find((feature) => d3.geoContains(feature, [longitude, latitude])) || null;
+  const activeTypeClass = `type-${conferenceTypeToToken(normalizeConferenceType(activeCity?.conferenceType))}`;
+  const highlightTypeClasses = ["type-icwe", "type-cwe", "type-apcwe", "type-bbaa", "type-other"];
+
+  mapState.countriesGroup.selectAll("path").each(function applyCountryHighlightClass(feature) {
+    const isActiveCountry = feature === activeCountry;
+    const selection = d3.select(this);
+    selection.classed("is-active-country", isActiveCountry);
+    highlightTypeClasses.forEach((className) => {
+      selection.classed(className, isActiveCountry && className === activeTypeClass);
+    });
+  });
 }
 
 function selectCity(index, options = {}) {
@@ -2282,6 +2459,10 @@ function drawMarkers(activeIndex) {
     .sort((left, right) => Number(left.index === activeIndex) - Number(right.index === activeIndex));
 
   orderedCities.forEach(({ city, index }) => {
+    if (!isCityVisibleOnCurrentMap(city, projection)) {
+      return;
+    }
+
     const projected = projection(city.coordinates);
     if (!projected) {
       return;
@@ -2386,6 +2567,21 @@ function drawMarkers(activeIndex) {
     enableLabelDrag(labelLayer, labelBox, line, commentText, title, city, x, y, metrics);
     occupiedRects.push(placement.rect);
   });
+}
+
+function isCityVisibleOnCurrentMap(city, projection) {
+  if (currentMapViewMode !== "globe") {
+    return true;
+  }
+
+  const coordinates = Array.isArray(city?.coordinates) ? city.coordinates : null;
+  if (!coordinates || coordinates.length < 2) {
+    return false;
+  }
+
+  const rotate = projection.rotate();
+  const center = [-Number(rotate?.[0] || 0), -Number(rotate?.[1] || 0)];
+  return d3.geoDistance(coordinates, center) <= Math.PI / 2;
 }
 
 function drawFallbackMessage(svg, width, height) {
