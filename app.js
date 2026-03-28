@@ -14,6 +14,7 @@ const PHOTO_UPLOAD_POPUP_NAME = "photo-upload-popup";
 const QUICK_GUIDE_DISMISSED_KEY = "flagged-world-map-quick-guide-dismissed";
 const MAP_PROJECTION_STORAGE_KEY = "flagged-world-map-projection";
 const MAP_VIEW_MODE_STORAGE_KEY = "flagged-world-map-view-mode";
+const PANEL_SPLIT_STORAGE_KEY = "flagged-world-map-panel-split";
 const CITY_EDITOR_PASSWORD = "ikegaya.naoki";
 const MAP_PROJECTION_TYPES = {
   natural: {
@@ -41,6 +42,8 @@ const cities = [
 ];
 
 const mapElement = document.getElementById("map");
+const layoutElement = document.querySelector(".layout");
+const panelResizerElement = document.getElementById("panel-resizer");
 const heroLeadElement = document.querySelector(".hero .lead");
 const cityListElement = document.getElementById("city-list");
 const cityEditorElement = document.getElementById("city-editor");
@@ -107,6 +110,8 @@ let currentEditorPhotoSourceMode = "public";
 let currentMapViewMode = loadStoredMapViewMode();
 let currentMapProjectionType = loadStoredMapProjectionType();
 let currentZoomFactor = getDefaultZoomFactor();
+let currentPanelSplit = loadStoredPanelSplit();
+let panelResizeFrameId = null;
 
 const QUICK_GUIDE_STEPS = [
   {
@@ -152,6 +157,8 @@ projectionMercatorButton?.addEventListener("click", () => {
 projectionGlobeToggleButton?.addEventListener("click", () => {
   setMapViewMode(currentMapViewMode === "globe" ? "flat" : "globe");
 });
+
+attachPanelResize();
 
 authFormElement?.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -763,6 +770,7 @@ async function geocodeActiveCity(options = {}) {
 }
 
 async function bootstrapApp() {
+  applyStoredPanelSplit();
   await hydrateCities();
   await hydrateServerUploads();
   applyPhotoSourceModeToAllCities(getGlobalPhotoSourceMode());
@@ -781,6 +789,107 @@ async function bootstrapApp() {
   fitHeroLeadText();
   syncCityAutoPlay();
   showQuickGuideIfNeeded();
+}
+
+function attachPanelResize() {
+  if (!panelResizerElement || !layoutElement) {
+    return;
+  }
+
+  let dragState = null;
+
+  panelResizerElement.addEventListener("pointerdown", (event) => {
+    if (window.innerWidth <= 1100) {
+      return;
+    }
+
+    const rect = layoutElement.getBoundingClientRect();
+    dragState = {
+      layoutLeft: rect.left,
+      layoutWidth: rect.width,
+    };
+
+    panelResizerElement.classList.add("is-dragging");
+    panelResizerElement.setPointerCapture(event.pointerId);
+    event.preventDefault();
+  });
+
+  panelResizerElement.addEventListener("pointermove", (event) => {
+    if (!dragState) {
+      return;
+    }
+
+    const resizerSize = panelResizerElement.getBoundingClientRect().width || 10;
+    const nextSplit = clamp(((event.clientX - dragState.layoutLeft - resizerSize / 2) / dragState.layoutWidth) * 100, 32, 68);
+    currentPanelSplit = nextSplit;
+    applyStoredPanelSplit();
+    scheduleMapResizeRefresh();
+  });
+
+  const finishDrag = (event) => {
+    if (!dragState) {
+      return;
+    }
+
+    persistPanelSplit(currentPanelSplit);
+    panelResizerElement.classList.remove("is-dragging");
+    if (event && panelResizerElement.hasPointerCapture?.(event.pointerId)) {
+      panelResizerElement.releasePointerCapture(event.pointerId);
+    }
+    dragState = null;
+    initializeMap().catch((error) => {
+      console.error("Failed to reinitialize map.", error);
+    });
+  };
+
+  panelResizerElement.addEventListener("pointerup", finishDrag);
+  panelResizerElement.addEventListener("pointercancel", finishDrag);
+
+  window.addEventListener("resize", () => {
+    applyStoredPanelSplit();
+  });
+}
+
+function applyStoredPanelSplit() {
+  if (!layoutElement) {
+    return;
+  }
+
+  if (window.innerWidth <= 1100) {
+    layoutElement.style.removeProperty("grid-template-columns");
+    return;
+  }
+
+  const leftPercent = clamp(currentPanelSplit, 32, 68);
+  const rightPercent = 100 - leftPercent;
+  layoutElement.style.gridTemplateColumns = `minmax(0, ${leftPercent}%) var(--panel-resizer-size) minmax(320px, ${rightPercent}%)`;
+}
+
+function scheduleMapResizeRefresh() {
+  window.cancelAnimationFrame(panelResizeFrameId);
+  panelResizeFrameId = window.requestAnimationFrame(() => {
+    panelResizeFrameId = null;
+    initializeMap().catch((error) => {
+      console.error("Failed to reinitialize map.", error);
+    });
+  });
+}
+
+function loadStoredPanelSplit() {
+  try {
+    const stored = Number(window.localStorage.getItem(PANEL_SPLIT_STORAGE_KEY));
+    return Number.isFinite(stored) ? clamp(stored, 32, 68) : 58;
+  } catch (error) {
+    return 58;
+  }
+}
+
+function persistPanelSplit(split) {
+  try {
+    window.localStorage.setItem(PANEL_SPLIT_STORAGE_KEY, String(clamp(split, 32, 68)));
+  } catch (error) {
+    console.error("Failed to persist panel split.", error);
+  }
 }
 
 async function initializeViewerAuth() {
