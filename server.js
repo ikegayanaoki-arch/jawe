@@ -13,6 +13,7 @@ const PORT = Number(process.env.PORT || 8000);
 const DATA_DIR = path.resolve(process.env.DATA_DIR || path.join(ROOT_DIR, "data"));
 const WATERMARK_FONT_CANDIDATE_PATHS = [
   process.env.WATERMARK_FONT_PATH ? path.resolve(process.env.WATERMARK_FONT_PATH) : "",
+  path.join(ROOT_DIR, "fonts", "NotoSansJP-Bold.otf"),
   path.join(ROOT_DIR, "fonts", "NotoSansJP-Bold.ttf"),
   path.join(ROOT_DIR, "fonts", "NotoSansJP-Regular.ttf"),
   path.join(ROOT_DIR, "fonts", "NotoSansJP-VariableFont_wght.ttf"),
