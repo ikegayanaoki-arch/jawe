@@ -27,8 +27,8 @@ npm install
 
 ## 画像保存先とエクスポート
 
-- 元画像保存先: `data/uploaded/original/<conferenceType>/<eventDate>/<country>/<cityName>/...`
-- 配信用画像保存先: `data/uploaded/public/<conferenceType>/<eventDate>/<country>/<cityName>/...`
+- 元画像保存先: `data/uploaded/original/<conferenceType>-<eventDate>-<country>-<cityName>/...`
+- 配信用画像保存先: `data/uploaded/public/<conferenceType>-<eventDate>-<country>-<cityName>/...`
 - manifest: `data/uploads.json`
 - アーカイブ出力先: `data/exports`
 

@@ -258,6 +258,7 @@ async function handleDeleteUpload(request, response) {
   const cityIndex = Number(payload.cityIndex);
   const src = String(payload.src || "").trim();
   const password = String(payload.password || "").trim();
+  const useAdminPassword = Boolean(payload.useAdminPassword);
 
   if (!Number.isInteger(cityIndex) || cityIndex < 0 || !isServedUploadedSrc(src)) {
     return writeJson(response, 400, { ok: false, message: "cityIndex または src が不正です" });
@@ -270,7 +271,9 @@ async function handleDeleteUpload(request, response) {
     return writeJson(response, 404, { ok: false, message: "削除対象の画像が見つかりませんでした" });
   }
 
-  if ((matchedEntry.deletePassword || "test") !== password) {
+  const deletePassword = String(matchedEntry.deletePassword || "test");
+  const passwordMatched = useAdminPassword ? isAdminPassword(password) : deletePassword === password;
+  if (!passwordMatched) {
     return writeJson(response, 403, { ok: false, message: "パスワードが違います" });
   }
 
@@ -476,7 +479,7 @@ function buildUploadDirectoryRelativePath({ conferenceType, eventDate, country, 
   const eventPart = slugify(eventDate) || "unknown";
   const countryPart = slugify(country) || "country";
   const cityPart = slugify(cityName) || "city";
-  return path.join(conferencePart, eventPart, countryPart, cityPart);
+  return [conferencePart, eventPart, countryPart, cityPart].join("-").slice(0, 160);
 }
 
 async function buildPublicImageVariant(buffer, context) {
@@ -981,7 +984,15 @@ function isAdminDownloadAuthorized(request) {
   }
 
   const headerPassword = String(request.headers["x-admin-password"] || "").trim();
-  return headerPassword === ADMIN_DOWNLOAD_PASSWORD;
+  return isAdminPassword(headerPassword);
+}
+
+function isAdminPassword(password) {
+  if (!ADMIN_DOWNLOAD_PASSWORD) {
+    return false;
+  }
+
+  return String(password || "").trim() === ADMIN_DOWNLOAD_PASSWORD;
 }
 
 function resolvePublicFilePath(normalizedPath) {

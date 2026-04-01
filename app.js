@@ -60,6 +60,12 @@ const photoUploadCountElement = document.getElementById("photo-upload-count");
 const photoLightboxElement = document.getElementById("photo-lightbox");
 const photoLightboxImageElement = document.getElementById("photo-lightbox-image");
 const photoLightboxCloseButton = document.getElementById("photo-lightbox-close");
+const photoDeleteDialogElement = document.getElementById("photo-delete-dialog");
+const photoDeletePasswordElement = document.getElementById("photo-delete-password");
+const photoDeleteAdminElement = document.getElementById("photo-delete-admin");
+const photoDeleteStatusElement = document.getElementById("photo-delete-status");
+const photoDeleteCancelButton = document.getElementById("photo-delete-cancel");
+const photoDeleteConfirmButton = document.getElementById("photo-delete-confirm");
 const quickGuideElement = document.getElementById("quick-guide");
 const quickGuideTitleElement = document.getElementById("quick-guide-title");
 const quickGuideTextElement = document.getElementById("quick-guide-text");
@@ -106,6 +112,7 @@ let quickGuideStepIndex = 0;
 let appBootstrapped = false;
 let isViewerAuthenticated = false;
 let isViewerPasswordConfigured = false;
+let pendingPhotoDeleteResolver = null;
 let currentEditorPhotoSourceMode = "public";
 let currentMapViewMode = loadStoredMapViewMode();
 let currentMapProjectionType = loadStoredMapProjectionType();
@@ -278,6 +285,34 @@ cityAutoPlayToggleButton?.addEventListener("click", () => {
   startCityAutoPlay();
 });
 
+photoDeleteCancelButton?.addEventListener("click", () => {
+  resolvePhotoDeleteDialog(null);
+});
+
+photoDeleteConfirmButton?.addEventListener("click", () => {
+  const password = String(photoDeletePasswordElement?.value || "").trim();
+  if (!password) {
+    setPhotoDeleteStatus("パスワードを入力してください");
+    photoDeletePasswordElement?.focus();
+    return;
+  }
+
+  resolvePhotoDeleteDialog({
+    password,
+    useAdminPassword: Boolean(photoDeleteAdminElement?.checked),
+  });
+});
+
+photoDeleteDialogElement?.addEventListener("click", (event) => {
+  const target = event.target;
+  if (
+    target === photoDeleteDialogElement ||
+    (target instanceof HTMLElement && target.classList.contains("photo-delete-dialog-backdrop"))
+  ) {
+    resolvePhotoDeleteDialog(null);
+  }
+});
+
 window.addEventListener(
   "resize",
   debounce(() => {
@@ -297,6 +332,12 @@ window.addEventListener("message", (event) => {
   }
 
   window.selectCityFromTimelinePopup?.(Number(event.data.index));
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && pendingPhotoDeleteResolver) {
+    resolvePhotoDeleteDialog(null);
+  }
 });
 
 window.addEventListener("message", (event) => {
@@ -1680,58 +1721,116 @@ async function deleteUploadedPhoto(cityIndex, photo) {
     return;
   }
 
-  const confirmed = window.confirm("この画像を削除しますか？");
-  if (!confirmed) {
-    return;
-  }
-
-  const password = window.prompt("この画像を削除しようとしています．本当に削除する場合は，削除用パスワードを入力してください．");
-  if (password === null) {
-    return;
-  }
-
-  try {
-    const response = await fetch("./api/delete-upload", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        cityIndex,
-        src: photo.src,
-        password,
-      }),
-    });
-
-    if (response.status === 401) {
-      handleViewerAuthRequired();
-      throw new Error("再ログイン後に削除してください");
+  let dialogOptions = {};
+  while (true) {
+    const deleteOptions = await openPhotoDeleteDialog(dialogOptions);
+    if (!deleteOptions) {
+      return;
     }
 
-    const result = await response.json().catch(() => null);
-    if (!response.ok || !result?.ok) {
-      if (response.status === 403) {
-        const message = result?.message || "パスワードが違います";
-        setSaveStatus(message);
-        window.alert(message);
-        return;
+    try {
+      const response = await fetch("./api/delete-upload", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          cityIndex,
+          src: photo.src,
+          password: deleteOptions.password,
+          useAdminPassword: deleteOptions.useAdminPassword,
+        }),
+      });
+
+      if (response.status === 401) {
+        handleViewerAuthRequired();
+        throw new Error("再ログイン後に削除してください");
       }
-      throw new Error(result?.message || "画像を削除できませんでした");
-    }
 
-    cities[cityIndex].photos = getCityPhotos(cities[cityIndex]).filter((entry) => entry.src !== photo.src);
-    if (cityIndex === activeCityIndex) {
-      renderCityEditor(cities[activeCityIndex]);
-      renderConferencePhoto(cities[activeCityIndex]);
+      const result = await response.json().catch(() => null);
+      if (!response.ok || !result?.ok) {
+        if (response.status === 403) {
+          const message = result?.message || "パスワードが違います";
+          setSaveStatus(message);
+          dialogOptions = {
+            preserveAdminMode: deleteOptions.useAdminPassword,
+            initialMessage: message,
+          };
+          continue;
+        }
+        throw new Error(result?.message || "画像を削除できませんでした");
+      }
+
+      cities[cityIndex].photos = getCityPhotos(cities[cityIndex]).filter((entry) => entry.src !== photo.src);
+      if (cityIndex === activeCityIndex) {
+        renderCityEditor(cities[activeCityIndex]);
+        renderConferencePhoto(cities[activeCityIndex]);
+      }
+      renderCityList(cities, activeCityIndex);
+      redrawMap();
+      setSaveStatus("画像を削除しました");
+      return;
+    } catch (error) {
+      console.error("Failed to delete uploaded photo.", error);
+      setSaveStatus(error?.message || "画像を削除できませんでした");
+      return;
     }
-    renderCityList(cities, activeCityIndex);
-    redrawMap();
-    setSaveStatus("画像を削除しました");
-  } catch (error) {
-    console.error("Failed to delete uploaded photo.", error);
-    setSaveStatus(error?.message || "画像を削除できませんでした");
   }
+}
+
+function openPhotoDeleteDialog(options = {}) {
+  if (!photoDeleteDialogElement || !photoDeletePasswordElement || !photoDeleteAdminElement) {
+    const fallbackPassword = window.prompt("削除用パスワードを入力してください");
+    return Promise.resolve(
+      fallbackPassword
+        ? {
+            password: fallbackPassword,
+            useAdminPassword: false,
+          }
+        : null,
+    );
+  }
+
+  if (pendingPhotoDeleteResolver) {
+    resolvePhotoDeleteDialog(null);
+  }
+
+  photoDeleteDialogElement.classList.remove("is-hidden");
+  photoDeleteDialogElement.setAttribute("aria-hidden", "false");
+  photoDeletePasswordElement.value = "";
+  photoDeleteAdminElement.checked = Boolean(options.preserveAdminMode);
+  setPhotoDeleteStatus(String(options.initialMessage || "").trim());
+  window.setTimeout(() => {
+    photoDeletePasswordElement.focus();
+  }, 0);
+
+  return new Promise((resolve) => {
+    pendingPhotoDeleteResolver = resolve;
+  });
+}
+
+function resolvePhotoDeleteDialog(result) {
+  if (!pendingPhotoDeleteResolver || !photoDeleteDialogElement || !photoDeletePasswordElement || !photoDeleteAdminElement) {
+    return;
+  }
+
+  const resolver = pendingPhotoDeleteResolver;
+  pendingPhotoDeleteResolver = null;
+  photoDeleteDialogElement.classList.add("is-hidden");
+  photoDeleteDialogElement.setAttribute("aria-hidden", "true");
+  photoDeletePasswordElement.value = "";
+  photoDeleteAdminElement.checked = false;
+  setPhotoDeleteStatus("");
+  resolver(result);
+}
+
+function setPhotoDeleteStatus(message) {
+  if (!photoDeleteStatusElement) {
+    return;
+  }
+
+  photoDeleteStatusElement.textContent = String(message || "").trim();
 }
 
 function syncPhotoGridLayout() {
@@ -1909,9 +2008,11 @@ async function saveUploadedPhotosToProjectDirectory(city, uploadedFiles) {
 }
 
 function buildPhotoDirectoryName(city) {
+  const conferenceType = slugifyFileName(city.conferenceType || "other");
   const year = String(city.eventDate || "unknown").trim() || "unknown";
+  const country = slugifyFileName(city.country || "country");
   const name = slugifyFileName(city.name || "city");
-  return `${year}-${name}`.slice(0, 80);
+  return [conferenceType || "other", year, country || "country", name || "city"].join("-").slice(0, 160);
 }
 
 async function createUniquePhotoFileName(directoryHandle, originalName, index) {
