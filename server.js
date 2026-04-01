@@ -5,6 +5,7 @@ const fsNative = require("fs");
 const fs = require("fs/promises");
 const path = require("path");
 const heicConvert = require("heic-convert");
+const opentype = require("opentype.js");
 const sharp = require("sharp");
 const { URL } = require("url");
 
@@ -50,7 +51,7 @@ const STATIC_TYPES = {
   ".gz": "application/gzip",
   ".webp": "image/webp",
 };
-const WATERMARK_FONT_EMBED = loadWatermarkFontEmbed();
+const WATERMARK_FONT = loadWatermarkFont();
 
 const server = http.createServer(async (request, response) => {
   try {
@@ -557,66 +558,106 @@ function createWatermarkSvg(width, height, lines) {
   const padding = Math.round(Math.min(safeWidth, safeHeight) * 0.03);
   const lineHeight = Math.max(18, Math.round(safeHeight * 0.035));
   const fontSize = Math.max(15, Math.round(safeHeight * 0.03));
-  const watermarkWidth = Math.min(Math.round(safeWidth * 0.62), 720);
+  const measuredTextWidth = WATERMARK_FONT ? measureWatermarkTextWidth(lines, fontSize) : 0;
+  const watermarkWidth = Math.min(
+    Math.max(Math.round(safeWidth * 0.38), Math.ceil(measuredTextWidth + padding * 2.8)),
+    Math.round(safeWidth * 0.78),
+    720,
+  );
   const watermarkHeight = padding * 2 + lineHeight * lines.length;
   const x = safeWidth - watermarkWidth - padding;
   const y = safeHeight - watermarkHeight - padding;
-
-  const textElements = lines
-    .map((line, index) => {
-      const dy = padding + fontSize + index * lineHeight;
-      return `<text x="${x + watermarkWidth / 2}" y="${y + dy}" text-anchor="middle">${escapeXml(line)}</text>`;
-    })
-    .join("");
-  const fontFaceStyle = WATERMARK_FONT_EMBED
-    ? `<style>
-        @font-face {
-          font-family: "WatermarkJP";
-          src: url("${WATERMARK_FONT_EMBED.dataUrl}") format("${WATERMARK_FONT_EMBED.format}");
-          font-weight: 400 900;
-          font-style: normal;
-        }
-      </style>`
-    : "";
-  const fontFamily = WATERMARK_FONT_EMBED
-    ? 'WatermarkJP, "Noto Sans JP", "Noto Sans CJK JP", sans-serif'
-    : '"Noto Sans JP", "Noto Sans CJK JP", Arial, sans-serif';
+  const textElements = WATERMARK_FONT
+    ? createWatermarkPathElements(lines, {
+        x,
+        y,
+        width: watermarkWidth,
+        padding,
+        lineHeight,
+        fontSize,
+      })
+    : createWatermarkTextElements(lines, {
+        x,
+        y,
+        width: watermarkWidth,
+        padding,
+        lineHeight,
+        fontSize,
+      });
 
   return `
     <svg xmlns="http://www.w3.org/2000/svg" width="${safeWidth}" height="${safeHeight}">
-      <defs>${fontFaceStyle}</defs>
       <rect x="${x}" y="${y}" width="${watermarkWidth}" height="${watermarkHeight}" rx="18" ry="18" fill="#0a1b1f" fill-opacity="0.62" />
-      <g font-family="${escapeXml(fontFamily)}" font-size="${fontSize}" font-weight="700" fill="#ffffff" fill-opacity="0.94">
+      <g fill="#ffffff" fill-opacity="0.94">
         ${textElements}
       </g>
     </svg>
   `;
 }
 
-function loadWatermarkFontEmbed() {
+function createWatermarkTextElements(lines, layout) {
+  return lines
+    .map((line, index) => {
+      const baselineY = layout.y + layout.padding + layout.fontSize + index * layout.lineHeight;
+      return `<text x="${layout.x + layout.width / 2}" y="${baselineY}" text-anchor="middle" font-family='"Noto Sans JP", "Noto Sans CJK JP", Arial, sans-serif' font-size="${layout.fontSize}" font-weight="700">${escapeXml(line)}</text>`;
+    })
+    .join("");
+}
+
+function createWatermarkPathElements(lines, layout) {
+  return lines
+    .map((line, index) => {
+      const pathMarkup = buildWatermarkLinePath(line, layout, index);
+      return pathMarkup || "";
+    })
+    .join("");
+}
+
+function buildWatermarkLinePath(line, layout, index) {
+  const trimmedLine = String(line || "").trim();
+  if (!trimmedLine || !WATERMARK_FONT) {
+    return "";
+  }
+
+  const baselineY = layout.y + layout.padding + layout.fontSize + index * layout.lineHeight;
+  const pathObject = WATERMARK_FONT.getPath(trimmedLine, 0, baselineY, layout.fontSize, {
+    kerning: true,
+    features: { liga: true },
+  });
+  const bounds = pathObject.getBoundingBox();
+  const textWidth = Math.max(0, bounds.x2 - bounds.x1);
+  const centeredX = layout.x + (layout.width - textWidth) / 2 - bounds.x1;
+  const centeredPath = WATERMARK_FONT.getPath(trimmedLine, centeredX, baselineY, layout.fontSize, {
+    kerning: true,
+    features: { liga: true },
+  });
+  return `<path d="${centeredPath.toPathData(2)}" />`;
+}
+
+function measureWatermarkTextWidth(lines, fontSize) {
+  return lines.reduce((maxWidth, line) => {
+    const trimmedLine = String(line || "").trim();
+    if (!trimmedLine || !WATERMARK_FONT) {
+      return maxWidth;
+    }
+
+    const pathObject = WATERMARK_FONT.getPath(trimmedLine, 0, 0, fontSize, {
+      kerning: true,
+      features: { liga: true },
+    });
+    const bounds = pathObject.getBoundingBox();
+    return Math.max(maxWidth, Math.max(0, bounds.x2 - bounds.x1));
+  }, 0);
+}
+
+function loadWatermarkFont() {
   for (const candidatePath of WATERMARK_FONT_CANDIDATE_PATHS) {
     try {
       if (!candidatePath || !fsNative.existsSync(candidatePath)) {
         continue;
       }
 
-      const buffer = fsNative.readFileSync(candidatePath);
-      const extension = path.extname(candidatePath).toLowerCase();
-      const mimeType =
-        extension === ".woff2"
-          ? "font/woff2"
-          : extension === ".woff"
-            ? "font/woff"
-            : extension === ".otf"
-              ? "font/otf"
-              : "font/ttf";
-      const format =
-        extension === ".woff2" ? "woff2" : extension === ".woff" ? "woff" : extension === ".otf" ? "opentype" : "truetype";
-
-      return {
-        dataUrl: `data:${mimeType};base64,${buffer.toString("base64")}`,
-        format,
-      };
+      return opentype.loadSync(candidatePath);
     } catch (error) {
       console.warn(`Failed to load watermark font from ${candidatePath}:`, error);
     }
