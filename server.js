@@ -11,6 +11,12 @@ const { URL } = require("url");
 const ROOT_DIR = __dirname;
 const PORT = Number(process.env.PORT || 8000);
 const DATA_DIR = path.resolve(process.env.DATA_DIR || path.join(ROOT_DIR, "data"));
+const WATERMARK_FONT_CANDIDATE_PATHS = [
+  process.env.WATERMARK_FONT_PATH ? path.resolve(process.env.WATERMARK_FONT_PATH) : "",
+  path.join(ROOT_DIR, "fonts", "NotoSansJP-Bold.ttf"),
+  path.join(ROOT_DIR, "fonts", "NotoSansJP-Regular.ttf"),
+  path.join(ROOT_DIR, "fonts", "NotoSansJP-VariableFont_wght.ttf"),
+].filter(Boolean);
 const UPLOADS_DIR = path.join(DATA_DIR, "uploaded");
 const ORIGINAL_UPLOADS_DIR = path.join(UPLOADS_DIR, "original");
 const PUBLIC_UPLOADS_DIR = path.join(UPLOADS_DIR, "public");
@@ -43,6 +49,7 @@ const STATIC_TYPES = {
   ".gz": "application/gzip",
   ".webp": "image/webp",
 };
+const WATERMARK_FONT_EMBED = loadWatermarkFontEmbed();
 
 const server = http.createServer(async (request, response) => {
   try {
@@ -560,15 +567,61 @@ function createWatermarkSvg(width, height, lines) {
       return `<text x="${x + watermarkWidth / 2}" y="${y + dy}" text-anchor="middle">${escapeXml(line)}</text>`;
     })
     .join("");
+  const fontFaceStyle = WATERMARK_FONT_EMBED
+    ? `<style>
+        @font-face {
+          font-family: "WatermarkJP";
+          src: url("${WATERMARK_FONT_EMBED.dataUrl}") format("${WATERMARK_FONT_EMBED.format}");
+          font-weight: 400 900;
+          font-style: normal;
+        }
+      </style>`
+    : "";
+  const fontFamily = WATERMARK_FONT_EMBED
+    ? `"WatermarkJP", "Noto Sans JP", "Noto Sans CJK JP", sans-serif`
+    : `"Noto Sans JP", "Noto Sans CJK JP", Arial, sans-serif`;
 
   return `
     <svg xmlns="http://www.w3.org/2000/svg" width="${safeWidth}" height="${safeHeight}">
+      <defs>${fontFaceStyle}</defs>
       <rect x="${x}" y="${y}" width="${watermarkWidth}" height="${watermarkHeight}" rx="18" ry="18" fill="#0a1b1f" fill-opacity="0.62" />
-      <g font-family="Arial, sans-serif" font-size="${fontSize}" font-weight="700" fill="#ffffff" fill-opacity="0.94">
+      <g font-family=${JSON.stringify(fontFamily)} font-size="${fontSize}" font-weight="700" fill="#ffffff" fill-opacity="0.94">
         ${textElements}
       </g>
     </svg>
   `;
+}
+
+function loadWatermarkFontEmbed() {
+  for (const candidatePath of WATERMARK_FONT_CANDIDATE_PATHS) {
+    try {
+      if (!candidatePath || !fsNative.existsSync(candidatePath)) {
+        continue;
+      }
+
+      const buffer = fsNative.readFileSync(candidatePath);
+      const extension = path.extname(candidatePath).toLowerCase();
+      const mimeType =
+        extension === ".woff2"
+          ? "font/woff2"
+          : extension === ".woff"
+            ? "font/woff"
+            : extension === ".otf"
+              ? "font/otf"
+              : "font/ttf";
+      const format =
+        extension === ".woff2" ? "woff2" : extension === ".woff" ? "woff" : extension === ".otf" ? "opentype" : "truetype";
+
+      return {
+        dataUrl: `data:${mimeType};base64,${buffer.toString("base64")}`,
+        format,
+      };
+    } catch (error) {
+      console.warn(`Failed to load watermark font from ${candidatePath}:`, error);
+    }
+  }
+
+  return null;
 }
 
 function mergeUniquePhotos(existingEntries, nextEntries) {
