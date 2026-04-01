@@ -579,14 +579,14 @@ function createWatermarkSvg(width, height, lines) {
       </style>`
     : "";
   const fontFamily = WATERMARK_FONT_EMBED
-    ? `"WatermarkJP", "Noto Sans JP", "Noto Sans CJK JP", sans-serif`
-    : `"Noto Sans JP", "Noto Sans CJK JP", Arial, sans-serif`;
+    ? 'WatermarkJP, "Noto Sans JP", "Noto Sans CJK JP", sans-serif'
+    : '"Noto Sans JP", "Noto Sans CJK JP", Arial, sans-serif';
 
   return `
     <svg xmlns="http://www.w3.org/2000/svg" width="${safeWidth}" height="${safeHeight}">
       <defs>${fontFaceStyle}</defs>
       <rect x="${x}" y="${y}" width="${watermarkWidth}" height="${watermarkHeight}" rx="18" ry="18" fill="#0a1b1f" fill-opacity="0.62" />
-      <g font-family=${JSON.stringify(fontFamily)} font-size="${fontSize}" font-weight="700" fill="#ffffff" fill-opacity="0.94">
+      <g font-family="${escapeXml(fontFamily)}" font-size="${fontSize}" font-weight="700" fill="#ffffff" fill-opacity="0.94">
         ${textElements}
       </g>
     </svg>
