@@ -1642,7 +1642,11 @@ function renderConferencePhoto(city) {
 
 function isUploadedPhoto(photo) {
   const src = String(photo?.src || "").trim();
-  return src.startsWith("./data/uploaded/public/") || src.startsWith("./data/uploaded/original/");
+  return (
+    src.startsWith("./data/uploaded/public/") ||
+    src.startsWith("./data/uploaded/original/") ||
+    src.startsWith("./images/uploaded/")
+  );
 }
 
 function openPhotoLightbox(photo) {
@@ -1676,6 +1680,11 @@ async function deleteUploadedPhoto(cityIndex, photo) {
     return;
   }
 
+  const confirmed = window.confirm("この画像を削除しますか？");
+  if (!confirmed) {
+    return;
+  }
+
   const password = window.prompt("この画像を削除しようとしています．本当に削除する場合は，削除用パスワードを入力してください．");
   if (password === null) {
     return;
@@ -1702,6 +1711,12 @@ async function deleteUploadedPhoto(cityIndex, photo) {
 
     const result = await response.json().catch(() => null);
     if (!response.ok || !result?.ok) {
+      if (response.status === 403) {
+        const message = result?.message || "パスワードが違います";
+        setSaveStatus(message);
+        window.alert(message);
+        return;
+      }
       throw new Error(result?.message || "画像を削除できませんでした");
     }
 
@@ -2045,9 +2060,10 @@ function normalizePhotoEntry(entry) {
   const originalSrc = explicitOriginalSrc || deriveOriginalUploadedSrc(explicitPublicSrc || src);
   const publicPath = String(entry.publicPath || "").trim() || derivePublicArchivePath(publicSrc || src);
   const originalPath = String(entry.originalPath || "").trim() || deriveOriginalArchivePath(originalSrc || src);
+  const normalizedSrc = publicSrc || originalSrc || src;
   return src
     ? {
-        src,
+        src: normalizedSrc,
         title,
         credit,
         publicSrc,
@@ -2067,6 +2083,9 @@ function deriveOriginalUploadedSrc(value) {
   if (normalizedValue.startsWith("./data/uploaded/public/")) {
     return normalizedValue.replace("./data/uploaded/public/", "./data/uploaded/original/");
   }
+  if (normalizedValue.startsWith("./images/uploaded/")) {
+    return normalizedValue.replace("./images/uploaded/", "./data/uploaded/original/");
+  }
   return "";
 }
 
@@ -2077,6 +2096,9 @@ function derivePublicUploadedSrc(value) {
   }
   if (normalizedValue.startsWith("./data/uploaded/original/")) {
     return normalizedValue.replace("./data/uploaded/original/", "./data/uploaded/public/");
+  }
+  if (normalizedValue.startsWith("./images/uploaded/")) {
+    return normalizedValue.replace("./images/uploaded/", "./data/uploaded/public/");
   }
   return "";
 }
@@ -2095,6 +2117,9 @@ function deriveOriginalArchivePath(value) {
   if (normalizedValue.startsWith("./data/uploaded/public/")) {
     return normalizedValue.replace("./data/uploaded/public/", "uploaded/original/");
   }
+  if (normalizedValue.startsWith("./images/uploaded/")) {
+    return normalizedValue.replace("./images/uploaded/", "uploaded/original/");
+  }
   return "";
 }
 
@@ -2111,6 +2136,9 @@ function derivePublicArchivePath(value) {
   }
   if (normalizedValue.startsWith("./data/uploaded/original/")) {
     return normalizedValue.replace("./data/uploaded/original/", "uploaded/public/");
+  }
+  if (normalizedValue.startsWith("./images/uploaded/")) {
+    return normalizedValue.replace("./images/uploaded/", "uploaded/public/");
   }
   return "";
 }

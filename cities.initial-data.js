@@ -1,4 +1,3 @@
-//window.__PHOTO_SOURCE_MODE__ = "original";
 window.__PHOTO_SOURCE_MODE__ = "public";
 window.__INITIAL_CITIES__ = [
   {
@@ -10,7 +9,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "日本風工学会",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "CWE",
     "coordinates": [
@@ -35,7 +34,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "日本風工学会",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "APCWE",
     "coordinates": [
@@ -60,7 +59,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "日本風工学会",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "CWE",
     "coordinates": [
@@ -85,7 +84,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -106,7 +105,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "CWE",
     "coordinates": [
@@ -127,7 +126,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "APCWE",
     "coordinates": [
@@ -152,7 +151,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
     "coordinates": [
@@ -177,7 +176,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -202,7 +201,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "CWE",
     "coordinates": [
@@ -223,7 +222,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
     "coordinates": [
@@ -244,7 +243,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -269,7 +268,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "APCWE",
     "coordinates": [
@@ -294,7 +293,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
     "coordinates": [
@@ -315,7 +314,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -336,7 +335,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -361,7 +360,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "APCWE",
     "coordinates": [
@@ -382,7 +381,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "CWE",
     "coordinates": [
@@ -403,7 +402,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
     "coordinates": [
@@ -424,7 +423,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -445,7 +444,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "APCWE",
     "coordinates": [
@@ -466,7 +465,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
     "coordinates": [
@@ -487,7 +486,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -508,7 +507,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "APCWE",
     "coordinates": [
@@ -529,7 +528,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
     "coordinates": [
@@ -550,7 +549,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -575,7 +574,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "APCWE",
     "coordinates": [
@@ -596,7 +595,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -617,7 +616,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -638,7 +637,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -657,40 +656,9 @@ window.__INITIAL_CITIES__ = [
     "comment": "第16回ICWE",
     "eventDate": "2023",
     "organizer": "",
-    "photo": "./images/16ICWE-2023.jpg",
-    "photos": [
-      {
-        "src": "./data/uploaded/original/icwe-italy-2023/16icwe-2023.jpg",
-        "title": "Group Photo",
-        "credit": "池谷直樹（九州大学）",
-        "publicSrc": "./data/uploaded/public/icwe-italy-2023/16icwe-2023.jpg",
-        "originalSrc": "./data/uploaded/original/icwe-italy-2023/16icwe-2023.jpg",
-        "publicPath": "uploaded/public/icwe-italy-2023/16icwe-2023.jpg",
-        "originalPath": "uploaded/original/icwe-italy-2023/16icwe-2023.jpg",
-        "originalName": "16icwe-2023.jpg"
-      },
-      {
-        "src": "./data/uploaded/original/icwe-italy-2023/closing.heic",
-        "title": "Opening Ceremony",
-        "credit": "池谷直樹（九州大学）",
-        "publicSrc": "./data/uploaded/public/icwe-italy-2023/closing.jpg",
-        "originalSrc": "./data/uploaded/original/icwe-italy-2023/closing.heic",
-        "publicPath": "uploaded/public/icwe-italy-2023/closing.jpg",
-        "originalPath": "uploaded/original/icwe-italy-2023/closing.heic",
-        "originalName": "closing.heic"
-      },
-      {
-        "src": "./data/uploaded/original/icwe-italy-2023/opening.heic",
-        "title": "Closing Ceremony",
-        "credit": "池谷直樹（九州大学）",
-        "publicSrc": "./data/uploaded/public/icwe-italy-2023/opening.jpg",
-        "originalSrc": "./data/uploaded/original/icwe-italy-2023/opening.heic",
-        "publicPath": "uploaded/public/icwe-italy-2023/opening.jpg",
-        "originalPath": "uploaded/original/icwe-italy-2023/opening.heic",
-        "originalName": "opening.heic"
-      }
-    ],
-    "photoSourceMode": "original",
+    "photo": "",
+    "photos": [],
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -715,7 +683,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": true,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -736,7 +704,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -761,7 +729,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -786,7 +754,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -807,7 +775,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
@@ -832,7 +800,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "CWE",
     "coordinates": [
@@ -853,7 +821,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": true,
     "conferenceType": "CWE",
     "coordinates": [
@@ -874,7 +842,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "APCWE",
     "coordinates": [
@@ -894,39 +862,8 @@ window.__INITIAL_CITIES__ = [
     "eventDate": "2025",
     "organizer": "",
     "photo": "",
-    "photos": [
-      {
-        "src": "./data/uploaded/original/apcwe-china-2025/10apcwe-2025.png",
-        "title": "Group photo",
-        "credit": "池谷直樹（九州大学）",
-        "publicSrc": "./data/uploaded/public/apcwe-china-2025/10apcwe-2025.jpg",
-        "originalSrc": "./data/uploaded/original/apcwe-china-2025/10apcwe-2025.png",
-        "publicPath": "uploaded/public/apcwe-china-2025/10apcwe-2025.jpg",
-        "originalPath": "uploaded/original/apcwe-china-2025/10apcwe-2025.png",
-        "originalName": "10apcwe-2025.png"
-      },
-      {
-        "src": "./data/uploaded/original/apcwe-china-2025/img-7032.heic",
-        "title": "Coffee Break",
-        "credit": "池谷直樹（九州大学）",
-        "publicSrc": "./data/uploaded/public/apcwe-china-2025/img-7032.jpg",
-        "originalSrc": "./data/uploaded/original/apcwe-china-2025/img-7032.heic",
-        "publicPath": "uploaded/public/apcwe-china-2025/img-7032.jpg",
-        "originalPath": "uploaded/original/apcwe-china-2025/img-7032.heic",
-        "originalName": "img-7032.heic"
-      },
-      {
-        "src": "./data/uploaded/original/apcwe-china-2025/97ae62eb-0473-4f98-8f7e-d8c13c54542a.jpg",
-        "title": "Ikegaya Lab. (Kyushu Uni.: Tong, Yin , Azeri, Ikegaya, Wang)",
-        "credit": "池谷直樹（九州大学）",
-        "publicSrc": "./data/uploaded/public/apcwe-china-2025/97ae62eb-0473-4f98-8f7e-d8c13c54542a.jpg",
-        "originalSrc": "./data/uploaded/original/apcwe-china-2025/97ae62eb-0473-4f98-8f7e-d8c13c54542a.jpg",
-        "publicPath": "uploaded/public/apcwe-china-2025/97ae62eb-0473-4f98-8f7e-d8c13c54542a.jpg",
-        "originalPath": "uploaded/original/apcwe-china-2025/97ae62eb-0473-4f98-8f7e-d8c13c54542a.jpg",
-        "originalName": "97ae62eb-0473-4f98-8f7e-d8c13c54542a.jpg"
-      }
-    ],
-    "photoSourceMode": "original",
+    "photos": [],
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "APCWE",
     "coordinates": [
@@ -947,7 +884,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "CWE",
     "coordinates": [
@@ -968,7 +905,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "APCWE",
     "coordinates": [
@@ -989,7 +926,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
     "coordinates": [
@@ -1010,7 +947,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
     "coordinates": [
@@ -1031,7 +968,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
     "coordinates": [
@@ -1052,7 +989,7 @@ window.__INITIAL_CITIES__ = [
     "organizer": "",
     "photo": "",
     "photos": [],
-    "photoSourceMode": "original",
+    "photoSourceMode": "public",
     "isUpcoming": true,
     "conferenceType": "BBAA",
     "coordinates": [

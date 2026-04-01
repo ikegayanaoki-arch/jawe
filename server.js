@@ -265,7 +265,7 @@ async function handleDeleteUpload(request, response) {
     return writeJson(response, 403, { ok: false, message: "パスワードが違います" });
   }
 
-  const nextEntries = existingEntries.filter((entry) => String(entry?.src || "").trim() !== src);
+  const nextEntries = existingEntries.filter((entry) => !photoEntryMatchesSrc(entry, src));
 
   manifest.cities = manifest.cities || {};
   if (nextEntries.length === 0) {
@@ -535,7 +535,7 @@ function looksLikeHeic(buffer) {
 
 function buildWatermarkText(context) {
   return [
-    "JAWE Members Only",
+    "日本風工学会会員限定|転載禁止",
     [context.conferenceType, context.eventDate].filter(Boolean).join(" "),
     [context.cityName, context.country].filter(Boolean).join(" / "),
   ]
@@ -621,40 +621,48 @@ function normalizeUploadsManifest(manifest) {
     normalized.cities[cityIndex] = Array.isArray(entries)
       ? entries
           .filter((entry) => entry && typeof entry === "object" && entry.src)
-          .map((entry) => ({
-            id: String(entry.id || entry.src).trim(),
-            src: String(entry.src || "").trim(),
-            title: String(entry.title || "").trim(),
-            credit: String(entry.credit || "").trim(),
-            deletePassword: String(entry.deletePassword || "test"),
-            originalName: String(entry.originalName || path.basename(String(entry.src || ""))).trim(),
-            mimeType: String(entry.mimeType || "").trim(),
-            bytes: Number(entry.bytes) || 0,
-            originalBytes: Number(entry.originalBytes) || Number(entry.bytes) || 0,
-            publicBytes: Number(entry.publicBytes) || Number(entry.bytes) || 0,
-            storedAt: String(entry.storedAt || "").trim(),
-            archivePath:
-              String(entry.archivePath || "").trim() ||
-              toPosixPath(path.join("uploaded", "original", String(entry.src || "").replace(/^\.\/images\/uploaded\//, ""))),
-            originalPath:
-              String(entry.originalPath || "").trim() ||
-              toPosixPath(path.join("uploaded", "original", String(entry.src || "").replace(/^\.\/images\/uploaded\//, ""))),
-            publicPath:
-              String(entry.publicPath || "").trim() ||
-              toPosixPath(path.join("uploaded", "public", String(entry.src || "").replace(/^\.\/images\/uploaded\//, ""))),
-            width: Number(entry.width) || 0,
-            height: Number(entry.height) || 0,
-            originalWidth: Number(entry.originalWidth) || 0,
-            originalHeight: Number(entry.originalHeight) || 0,
-            watermarkText: Array.isArray(entry.watermarkText)
-              ? entry.watermarkText.map((line) => String(line || "").trim()).filter(Boolean)
-              : [],
-            cityIndex: Number(entry.cityIndex),
-            cityName: String(entry.cityName || "").trim(),
-            conferenceType: String(entry.conferenceType || "").trim(),
-            country: String(entry.country || "").trim(),
-            eventDate: String(entry.eventDate || "").trim(),
-          }))
+          .map((entry) => {
+            const legacySrc = String(entry.src || "").trim();
+            const normalizedPublicPath = normalizePublicArchivePath(
+              String(entry.publicPath || "").trim() || legacySrc,
+            );
+            const normalizedOriginalPath = normalizeOriginalArchivePath(
+              String(entry.originalPath || entry.archivePath || "").trim() || legacySrc,
+            );
+            const normalizedSrc =
+              buildPublicSrcFromArchivePath(normalizedPublicPath) ||
+              convertLegacyUploadedSrcToPublicSrc(legacySrc) ||
+              legacySrc;
+
+            return {
+              id: String(entry.id || normalizedSrc).trim(),
+              src: normalizedSrc,
+              title: String(entry.title || "").trim(),
+              credit: String(entry.credit || "").trim(),
+              deletePassword: String(entry.deletePassword || "test"),
+              originalName: String(entry.originalName || path.basename(normalizedOriginalPath || normalizedSrc)).trim(),
+              mimeType: String(entry.mimeType || "").trim(),
+              bytes: Number(entry.bytes) || 0,
+              originalBytes: Number(entry.originalBytes) || Number(entry.bytes) || 0,
+              publicBytes: Number(entry.publicBytes) || Number(entry.bytes) || 0,
+              storedAt: String(entry.storedAt || "").trim(),
+              archivePath: normalizedOriginalPath,
+              originalPath: normalizedOriginalPath,
+              publicPath: normalizedPublicPath,
+              width: Number(entry.width) || 0,
+              height: Number(entry.height) || 0,
+              originalWidth: Number(entry.originalWidth) || 0,
+              originalHeight: Number(entry.originalHeight) || 0,
+              watermarkText: Array.isArray(entry.watermarkText)
+                ? entry.watermarkText.map((line) => String(line || "").trim()).filter(Boolean)
+                : [],
+              cityIndex: Number(entry.cityIndex),
+              cityName: String(entry.cityName || "").trim(),
+              conferenceType: String(entry.conferenceType || "").trim(),
+              country: String(entry.country || "").trim(),
+              eventDate: String(entry.eventDate || "").trim(),
+            };
+          })
       : [];
   });
   normalized.generatedAt = new Date().toISOString();
@@ -946,6 +954,45 @@ function buildPublicSrcFromArchivePath(archivePath) {
 function buildOriginalSrcFromArchivePath(archivePath) {
   const relativePath = String(archivePath || "").trim().replace(/^uploaded\/original\//, "");
   return relativePath && relativePath !== archivePath ? `./data/uploaded/original/${relativePath}` : "";
+}
+
+function convertLegacyUploadedSrcToPublicSrc(src) {
+  const normalizedSrc = String(src || "").trim();
+  if (normalizedSrc.startsWith("./data/uploaded/public/")) {
+    return normalizedSrc;
+  }
+  if (normalizedSrc.startsWith("./images/uploaded/")) {
+    return normalizedSrc.replace("./images/uploaded/", "./data/uploaded/public/");
+  }
+  return "";
+}
+
+function normalizePublicArchivePath(value) {
+  const normalizedValue = String(value || "").trim();
+  if (normalizedValue.startsWith("uploaded/public/")) {
+    return normalizedValue;
+  }
+  if (normalizedValue.startsWith("./data/uploaded/public/")) {
+    return normalizedValue.replace("./data/uploaded/public/", "uploaded/public/");
+  }
+  if (normalizedValue.startsWith("./images/uploaded/")) {
+    return normalizedValue.replace("./images/uploaded/", "uploaded/public/");
+  }
+  return "";
+}
+
+function normalizeOriginalArchivePath(value) {
+  const normalizedValue = String(value || "").trim();
+  if (normalizedValue.startsWith("uploaded/original/")) {
+    return normalizedValue;
+  }
+  if (normalizedValue.startsWith("./data/uploaded/original/")) {
+    return normalizedValue.replace("./data/uploaded/original/", "uploaded/original/");
+  }
+  if (normalizedValue.startsWith("./images/uploaded/")) {
+    return normalizedValue.replace("./images/uploaded/", "uploaded/original/");
+  }
+  return "";
 }
 
 function isServedUploadedSrc(src) {
