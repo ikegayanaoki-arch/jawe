@@ -99,6 +99,10 @@ const server = http.createServer(async (request, response) => {
       return handleCreateUploadsArchive(request, response);
     }
 
+    if (request.method === "GET" && requestUrl.pathname === "/api/export/full-backup") {
+      return handleCreateFullBackupArchive(request, response);
+    }
+
     if (request.method !== "GET" && request.method !== "HEAD") {
       return writeJson(response, 405, { ok: false, message: "Method not allowed" });
     }
@@ -335,6 +339,7 @@ async function handleGetStorageInfo(response) {
     },
     photoCount,
     archiveDownloadPath: "/api/export/uploads-archive",
+    fullBackupDownloadPath: "/api/export/full-backup",
   });
 }
 
@@ -351,6 +356,30 @@ async function handleCreateUploadsArchive(request, response) {
   const archivePath = path.join(EXPORTS_DIR, archiveFileName);
 
   await createUploadsArchive(archivePath);
+
+  const stat = await fs.stat(archivePath);
+  response.writeHead(200, {
+    "Content-Type": "application/gzip",
+    "Content-Disposition": `attachment; filename="${archiveFileName}"`,
+    "Content-Length": stat.size,
+    "Cache-Control": "no-cache",
+  });
+  fsNative.createReadStream(archivePath).pipe(response);
+}
+
+async function handleCreateFullBackupArchive(request, response) {
+  if (!isAdminDownloadAuthorized(request)) {
+    return writeJson(response, 403, {
+      ok: false,
+      message: "管理者パスワードが必要です。`X-Admin-Password` ヘッダーを付けてください。",
+    });
+  }
+
+  await ensureDirectory(EXPORTS_DIR);
+  const archiveFileName = `full-backup-${formatTimestampForFileName(new Date())}.tar.gz`;
+  const archivePath = path.join(EXPORTS_DIR, archiveFileName);
+
+  await createFullBackupArchive(archivePath);
 
   const stat = await fs.stat(archivePath);
   response.writeHead(200, {
@@ -1212,6 +1241,40 @@ function formatTimestampForFileName(date) {
 async function createUploadsArchive(outputPath) {
   await new Promise((resolve, reject) => {
     const child = spawn("tar", ["-czf", outputPath, "-C", DATA_DIR, "uploads.json", "uploaded/original"], { cwd: ROOT_DIR });
+    let stderr = "";
+
+    child.stderr.on("data", (chunk) => {
+      stderr += chunk.toString("utf8");
+    });
+
+    child.on("error", reject);
+    child.on("close", (code) => {
+      if (code === 0) {
+        resolve();
+        return;
+      }
+
+      reject(new Error(stderr.trim() || `tar exited with code ${code}`));
+    });
+  });
+}
+
+async function createFullBackupArchive(outputPath) {
+  await new Promise((resolve, reject) => {
+    const child = spawn(
+      "tar",
+      [
+        "-czf",
+        outputPath,
+        "--exclude=src/node_modules",
+        "--exclude=src/.git",
+        "--exclude=src/data/exports/*.tar.gz",
+        "-C",
+        path.dirname(ROOT_DIR),
+        path.basename(ROOT_DIR),
+      ],
+      { cwd: path.dirname(ROOT_DIR) },
+    );
     let stderr = "";
 
     child.stderr.on("data", (chunk) => {

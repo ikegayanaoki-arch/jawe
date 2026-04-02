@@ -49,6 +49,17 @@ curl -L \
 
 展開すると `uploads.json` と `uploaded/original/` が入ります。管理者向けアーカイブには元画像を含め、配信用画像は含めません。
 
+サーバー上のソースコードと `data` 配下をまとめてバックアップしたい場合は、次の API を使います。
+
+```bash
+curl -fL \
+  -H "X-Admin-Password: あなたの管理者パスワード" \
+  http://localhost:8000/api/export/full-backup \
+  -o full-backup.tar.gz
+```
+
+このアーカイブにはアプリ本体のソース、`cities.initial-data.js`、`data/uploads.json`、`data/uploaded/public`、`data/uploaded/original` などが入ります。`node_modules`、`.git`、既存の `data/exports/*.tar.gz` は除外します。
+
 ## 都市データの編集
 
 起動時は次の順で都市データを読み込みます。
