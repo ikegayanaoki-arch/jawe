@@ -194,7 +194,7 @@ window.__INITIAL_CITIES__ = [
   },
   {
     "name": "Chapel Hill",
-    "country": "The United States",
+    "country": "US",
     "flag": "🇺🇸",
     "comment": "第5回CWE2010",
     "eventDate": "2010",
@@ -205,8 +205,8 @@ window.__INITIAL_CITIES__ = [
     "isUpcoming": false,
     "conferenceType": "CWE",
     "coordinates": [
-      -86.6933305,
-      35.6264581
+      -79.05578,
+      35.9131542
     ],
     "labelOffset": [
       24,
@@ -406,7 +406,7 @@ window.__INITIAL_CITIES__ = [
   },
   {
     "name": "Virginia",
-    "country": "The United States",
+    "country": "US",
     "flag": "🇺🇸",
     "comment": "第3回BBAA",
     "eventDate": "1996",
@@ -417,8 +417,8 @@ window.__INITIAL_CITIES__ = [
     "isUpcoming": false,
     "conferenceType": "BBAA",
     "coordinates": [
-      -79.971598,
-      39.6471919
+      -78.4927721,
+      37.1232245
     ],
     "labelOffset": [
       24,
@@ -620,7 +620,7 @@ window.__INITIAL_CITIES__ = [
   },
   {
     "name": "Colorado",
-    "country": "The United States",
+    "country": "US",
     "flag": "🇺🇸",
     "comment": "第5回ICWE",
     "eventDate": "1979",
@@ -631,8 +631,8 @@ window.__INITIAL_CITIES__ = [
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
-      -105.2664423,
-      40.0070061
+      -105.607716,
+      38.7251776
     ],
     "labelOffset": [
       24,
@@ -988,8 +988,19 @@ window.__INITIAL_CITIES__ = [
     "comment": "第6回BBAA",
     "eventDate": "2008",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/bbaa-2008-italy-milano/polimi011.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/bbaa-2008-italy-milano/polimi011.jpg",
+        "title": "Group Photo",
+        "credit": "竹内　崇（神戸大学）",
+        "publicSrc": "./data/uploaded/public/bbaa-2008-italy-milano/polimi011.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2008-italy-milano/polimi011.jpg",
+        "publicPath": "uploaded/public/bbaa-2008-italy-milano/polimi011.jpg",
+        "originalPath": "uploaded/original/bbaa-2008-italy-milano/polimi011.jpg",
+        "originalName": "POLIMI011.JPG"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
