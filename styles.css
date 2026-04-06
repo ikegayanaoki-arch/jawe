@@ -171,6 +171,15 @@ body::before {
   backdrop-filter: blur(16px);
 }
 
+.hero-committee {
+  margin: 0 0 6px;
+  color: var(--accent-strong);
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: left;
+}
+
 .hero-title-row {
   display: flex;
   align-items: center;
