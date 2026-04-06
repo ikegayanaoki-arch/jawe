@@ -1589,7 +1589,7 @@ function renderConferencePhoto(city) {
 
   syncPhotoSourceBadge();
   const missingPhotoMessage =
-    "この会議での日本風工学会員に関わる集合写真やグループ写真をお持ちの方はご提供ください。";
+    "この会議での日本風工学会員に関わる集合写真やグループ写真をお持ちの方はご提供ください。\nアップロードされている写真の削除を希望される場合は，運営・学術委員会までご連絡ください．";
   const photos = getCityPhotos(city);
   syncPhotoUploadCount(photos.length);
   const slides = [

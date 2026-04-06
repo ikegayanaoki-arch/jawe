@@ -713,6 +713,7 @@ button.photo-empty:focus-visible {
   text-align: center;
   font-size: var(--photo-empty-font-size, 0.8rem);
   line-height: 1.25;
+  white-space: pre-line;
   overflow-wrap: anywhere;
   overflow: hidden;
 }
