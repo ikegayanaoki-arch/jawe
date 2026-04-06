@@ -215,7 +215,7 @@ window.__INITIAL_CITIES__ = [
   },
   {
     "name": "Boston",
-    "country": "The United States",
+    "country": "US",
     "flag": "🇺🇸",
     "comment": "第8回BBAA",
     "eventDate": "2016",
@@ -226,8 +226,8 @@ window.__INITIAL_CITIES__ = [
     "isUpcoming": false,
     "conferenceType": "BBAA",
     "coordinates": [
-      -87.0325045,
-      35.8428441
+      -71.0578303,
+      42.3588336
     ],
     "labelOffset": [
       24,
@@ -241,8 +241,19 @@ window.__INITIAL_CITIES__ = [
     "comment": "第12回ICWE",
     "eventDate": "2007",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/icwe-2007-australia-cairns/img-0006edit.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/icwe-2007-australia-cairns/img-0006edit.jpg",
+        "title": "ICWE12の集合写真",
+        "credit": "木村吉郎（東京理科大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2007-australia-cairns/img-0006edit.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2007-australia-cairns/img-0006edit.jpg",
+        "publicPath": "uploaded/public/icwe-2007-australia-cairns/img-0006edit.jpg",
+        "originalPath": "uploaded/original/icwe-2007-australia-cairns/img-0006edit.jpg",
+        "originalName": "IMG_0006edit.jpg"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
@@ -307,7 +318,7 @@ window.__INITIAL_CITIES__ = [
   },
   {
     "name": "Texas",
-    "country": "The United States",
+    "country": "US",
     "flag": "🇺🇸",
     "comment": "第11回ICWE",
     "eventDate": "2003",
@@ -318,8 +329,8 @@ window.__INITIAL_CITIES__ = [
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
-      -77.0405911,
-      38.8899136
+      -98.5456116,
+      31.2638905
     ],
     "labelOffset": [
       24,
@@ -374,7 +385,7 @@ window.__INITIAL_CITIES__ = [
   },
   {
     "name": "Fort Collins",
-    "country": "The United States",
+    "country": "US",
     "flag": "🇺🇸",
     "comment": "第2回CWE96",
     "eventDate": "1996",
@@ -385,8 +396,8 @@ window.__INITIAL_CITIES__ = [
     "isUpcoming": false,
     "conferenceType": "CWE",
     "coordinates": [
-      -81.5365482,
-      28.5899642
+      -105.0770113,
+      40.5871782
     ],
     "labelOffset": [
       24,
@@ -629,7 +640,7 @@ window.__INITIAL_CITIES__ = [
     ]
   },
   {
-    "name": "Beijin",
+    "name": "Beijing",
     "country": "China",
     "flag": "🇨🇳",
     "comment": "第15回ICWE",
@@ -641,8 +652,8 @@ window.__INITIAL_CITIES__ = [
     "isUpcoming": false,
     "conferenceType": "ICWE",
     "coordinates": [
-      112.5536978,
-      21.8509337
+      116.3912972,
+      39.9057136
     ],
     "labelOffset": [
       24,
@@ -656,8 +667,29 @@ window.__INITIAL_CITIES__ = [
     "comment": "第16回ICWE",
     "eventDate": "2023",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/icwe-2023-italy-florence/16icwe-2023.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/icwe-2023-italy-florence/16icwe-2023.jpg",
+        "title": "Group photo",
+        "credit": "池谷直樹（九州大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2023-italy-florence/16icwe-2023.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2023-italy-florence/16icwe-2023.jpg",
+        "publicPath": "uploaded/public/icwe-2023-italy-florence/16icwe-2023.jpg",
+        "originalPath": "uploaded/original/icwe-2023-italy-florence/16icwe-2023.jpg",
+        "originalName": "16ICWE-2023.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2023-italy-florence/img-0876.jpg",
+        "title": "会議ホール",
+        "credit": "WANG Wei（九州大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2023-italy-florence/img-0876.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2023-italy-florence/img-0876.jpg",
+        "publicPath": "uploaded/public/icwe-2023-italy-florence/img-0876.jpg",
+        "originalPath": "uploaded/original/icwe-2023-italy-florence/img-0876.jpg",
+        "originalName": "IMG_0876.jpg"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
@@ -861,8 +893,19 @@ window.__INITIAL_CITIES__ = [
     "comment": "第10回APCWE",
     "eventDate": "2025",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/apcwe-2025-china-chengdu/10apcwe-2025.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/apcwe-2025-china-chengdu/10apcwe-2025.jpg",
+        "title": "Group photo",
+        "credit": "池谷直樹（九州大学）",
+        "publicSrc": "./data/uploaded/public/apcwe-2025-china-chengdu/10apcwe-2025.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2025-china-chengdu/10apcwe-2025.png",
+        "publicPath": "uploaded/public/apcwe-2025-china-chengdu/10apcwe-2025.jpg",
+        "originalPath": "uploaded/original/apcwe-2025-china-chengdu/10apcwe-2025.png",
+        "originalName": "10APCWE-2025.png"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "APCWE",
