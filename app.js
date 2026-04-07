@@ -1853,18 +1853,22 @@ function syncPhotoGridLayout() {
     return;
   }
 
-  const photoCount = photoItems.length;
-  let preferredColumns = 2;
-  if (photoCount >= 13) {
-    preferredColumns = 5;
-  } else if (photoCount >= 10) {
-    preferredColumns = 4;
-  } else if (photoCount >= 5) {
-    preferredColumns = 3;
-  }
   const gap = 1;
-  const bestColumns = preferredColumns;
-  const tileSize = Math.max(Math.floor((availableWidth - gap * (bestColumns - 1)) / bestColumns), 48);
+  let bestColumns = 1;
+  let bestTileSize = 0;
+
+  for (let columns = 1; columns <= itemCount; columns += 1) {
+    const rows = Math.ceil(itemCount / columns);
+    const tileWidth = (availableWidth - gap * (columns - 1)) / columns;
+    const tileHeight = (availableHeight - gap * (rows - 1)) / rows;
+    const tileSize = Math.floor(Math.min(tileWidth, tileHeight));
+
+    if (tileSize > bestTileSize) {
+      bestColumns = columns;
+      bestTileSize = tileSize;
+    }
+  }
+  const tileSize = Math.max(bestTileSize, 1);
   const noticePadding = Math.max(4, Math.min(10, Math.floor(tileSize * 0.08)));
 
   photoGridElement.style.setProperty("--photo-grid-columns", String(bestColumns));
