@@ -144,7 +144,7 @@ window.__INITIAL_CITIES__ = [
   },
   {
     "name": "Shanghai",
-    "country": "Chian",
+    "country": "China",
     "flag": "🇨🇳",
     "comment": "第7回BBAA",
     "eventDate": "2012",
@@ -155,8 +155,8 @@ window.__INITIAL_CITIES__ = [
     "isUpcoming": false,
     "conferenceType": "BBAA",
     "coordinates": [
-      121.3991984,
-      31.3180633
+      121.4700152,
+      31.2312707
     ],
     "labelOffset": [
       24,

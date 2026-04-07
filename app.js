@@ -1589,7 +1589,9 @@ function renderConferencePhoto(city) {
 
   syncPhotoSourceBadge();
   const missingPhotoMessage =
-    "この会議での日本風工学会員に関わる集合写真やグループ写真をお持ちの方はご提供ください。\nアップロードされている写真の削除を希望される場合は，運営・学術委員会までご連絡ください．";
+    "この会議での日本風工学会員に関わる集合写真やグループ写真をお持ちの方はご提供ください．\n" +
+    "アップロードされている写真の削除を希望される場合は，運営・学術委員会までご連絡ください．\n" +
+    "画像には自動的に「転載禁止」の文言が入ります．upload前の加工は不要です．";   
   const photos = getCityPhotos(city);
   syncPhotoUploadCount(photos.length);
   const slides = [
