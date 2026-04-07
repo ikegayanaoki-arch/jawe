@@ -105,6 +105,32 @@
         min-height: 1.4em;
       }
 
+      .photo-upload-selection {
+        display: grid;
+        gap: 8px;
+        padding: 12px 14px;
+        border: 1px solid rgba(24, 84, 94, 0.1);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.58);
+      }
+
+      .photo-upload-selection.is-hidden {
+        display: none;
+      }
+
+      .photo-upload-selection-title {
+        font-size: 0.96rem;
+        color: var(--ink);
+      }
+
+      .photo-upload-selection-list {
+        margin: 0;
+        padding-left: 1.2em;
+        color: var(--muted);
+        font-size: 0.94rem;
+        line-height: 1.55;
+      }
+
       .photo-upload-status.is-error {
         color: #b42318;
       }
@@ -168,6 +194,11 @@
           <input id="photo-upload-input" type="file" accept=".jpg,.jpeg,.png,.gif,.webp,.svg,.heic,image/jpeg,image/png,image/gif,image/webp,image/svg+xml,image/heic" multiple />
         </label>
 
+        <section id="photo-upload-selection" class="photo-upload-selection is-hidden" aria-live="polite">
+          <strong id="photo-upload-selection-title" class="photo-upload-selection-title"></strong>
+          <ol id="photo-upload-selection-list" class="photo-upload-selection-list"></ol>
+        </section>
+
         <label class="photo-upload-field">
           <span>写真のタイトルを入れてください（特に，写真に写っている方のお名前を記載ください）</span>
           <textarea id="photo-upload-titles" rows="5" placeholder="1行目が1枚目，2行目が2枚目に対応します"></textarea>
@@ -214,6 +245,9 @@
       const inputElement = document.getElementById("photo-upload-input");
       const titlesElement = document.getElementById("photo-upload-titles");
       const creditsElement = document.getElementById("photo-upload-credits");
+      const selectionElement = document.getElementById("photo-upload-selection");
+      const selectionTitleElement = document.getElementById("photo-upload-selection-title");
+      const selectionListElement = document.getElementById("photo-upload-selection-list");
       const submitButton = document.getElementById("photo-upload-submit");
       const closeButton = document.getElementById("photo-upload-close");
       const statusElement = document.getElementById("photo-upload-status");
@@ -237,7 +271,34 @@
         submitButton.disabled = !isViewerAuthenticated || pendingUpload;
       }
 
+      function renderSelectedFiles() {
+        const files = Array.from(inputElement.files || []);
+        if (files.length === 0) {
+          selectionElement.classList.add("is-hidden");
+          selectionTitleElement.textContent = "";
+          selectionListElement.innerHTML = "";
+          return;
+        }
+
+        selectionElement.classList.remove("is-hidden");
+        selectionTitleElement.textContent = `${files.length}件の画像を選択中`;
+        selectionListElement.innerHTML = files.map((file) => `<li>${escapeHtml(file.name || "名称未設定")}</li>`).join("");
+      }
+
+      function escapeHtml(value) {
+        return String(value || "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
+      }
+
       metaElement.textContent = [comment, cityName, country, eventDate].filter(Boolean).join(" | ");
+
+      inputElement.addEventListener("change", () => {
+        renderSelectedFiles();
+      });
 
       closeButton.addEventListener("click", () => {
         window.close();
