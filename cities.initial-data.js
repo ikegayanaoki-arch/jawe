@@ -1017,7 +1017,7 @@ window.__INITIAL_CITIES__ = [
     "name": "Birmingham",
     "country": "The United Kingdom",
     "flag": "🇬🇧",
-    "comment": "第9回",
+    "comment": "第9回BBAA",
     "eventDate": "2024",
     "organizer": "",
     "photo": "",
