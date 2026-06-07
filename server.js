@@ -689,12 +689,25 @@ function loadWatermarkFont() {
         continue;
       }
 
-      return opentype.loadSync(candidatePath);
+      const fontBuffer = fsNative.readFileSync(candidatePath);
+      const fontArrayBuffer = fontBuffer.buffer.slice(
+        fontBuffer.byteOffset,
+        fontBuffer.byteOffset + fontBuffer.byteLength,
+      );
+      const font = opentype.parse(fontArrayBuffer);
+      if (!font?.names || typeof font.charToGlyph !== "function") {
+        console.warn(`Watermark font at ${candidatePath} did not parse as a usable font.`);
+        continue;
+      }
+
+      console.log(`Watermark font loaded: ${candidatePath}`);
+      return font;
     } catch (error) {
       console.warn(`Failed to load watermark font from ${candidatePath}:`, error);
     }
   }
 
+  console.warn("Watermark font was not loaded. Japanese watermark text may render incorrectly.");
   return null;
 }
 
