@@ -57,8 +57,39 @@ window.__INITIAL_CITIES__ = [
     "comment": "第4回CWE2006",
     "eventDate": "2006",
     "organizer": "日本風工学会",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/cwe-2006-japan-yokohama/r0010229.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/cwe-2006-japan-yokohama/r0010229.jpg",
+        "title": "Iice breakerで挨拶する田村幸雄先生",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/cwe-2006-japan-yokohama/r0010229.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2006-japan-yokohama/r0010229.jpeg",
+        "publicPath": "uploaded/public/cwe-2006-japan-yokohama/r0010229.jpg",
+        "originalPath": "uploaded/original/cwe-2006-japan-yokohama/r0010229.jpeg",
+        "originalName": "R0010229.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2006-japan-yokohama/r0010246-2.jpg",
+        "title": "カンファレンスディナーでの一コマ（Ahsan Kareem先生、田村哲郎先生）",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/cwe-2006-japan-yokohama/r0010246-2.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2006-japan-yokohama/r0010246-2.jpeg",
+        "publicPath": "uploaded/public/cwe-2006-japan-yokohama/r0010246-2.jpg",
+        "originalPath": "uploaded/original/cwe-2006-japan-yokohama/r0010246-2.jpeg",
+        "originalName": "R0010246.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2006-japan-yokohama/r0010247.jpg",
+        "title": "カンファレンスディナー会場となった船",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/cwe-2006-japan-yokohama/r0010247.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2006-japan-yokohama/r0010247.jpeg",
+        "publicPath": "uploaded/public/cwe-2006-japan-yokohama/r0010247.jpg",
+        "originalPath": "uploaded/original/cwe-2006-japan-yokohama/r0010247.jpeg",
+        "originalName": "R0010247.jpeg"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "CWE",
@@ -82,8 +113,29 @@ window.__INITIAL_CITIES__ = [
     "comment": "第14回ICWE",
     "eventDate": "2015",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/img-20150622-094522.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/img-20150622-094522.jpg",
+        "title": "会場風景",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/img-20150622-094522.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2015-brazil-porto-alegre/img-20150622-094522.jpg",
+        "publicPath": "uploaded/public/icwe-2015-brazil-porto-alegre/img-20150622-094522.jpg",
+        "originalPath": "uploaded/original/icwe-2015-brazil-porto-alegre/img-20150622-094522.jpg",
+        "originalName": "IMG_20150622_094522.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/opening-celemony.jpg",
+        "title": "オープニングセレモニー",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/opening-celemony.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2015-brazil-porto-alegre/opening-celemony.jpg",
+        "publicPath": "uploaded/public/icwe-2015-brazil-porto-alegre/opening-celemony.jpg",
+        "originalPath": "uploaded/original/icwe-2015-brazil-porto-alegre/opening-celemony.jpg",
+        "originalName": "Opening Celemony.JPG"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
@@ -103,8 +155,139 @@ window.__INITIAL_CITIES__ = [
     "comment": "第6回CWE2014",
     "eventDate": "2014",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/cwe-2014-germany-hamburg/cwe2014-1-hu-wt.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/cwe2014-1-hu-wt.jpg",
+        "title": "University of Hamburgの風洞ツアー1",
+        "credit": "池谷直樹（九州大学）",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/cwe2014-1-hu-wt.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/cwe2014-1-hu-wt.jpg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/cwe2014-1-hu-wt.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/cwe2014-1-hu-wt.jpg",
+        "originalName": "CWE2014-1-HU-WT.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/cwe2014-2-hu-wt.jpg",
+        "title": "University of Hamburgの風洞ツアー2",
+        "credit": "池谷直樹（九州大学）",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/cwe2014-2-hu-wt.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/cwe2014-2-hu-wt.jpg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/cwe2014-2-hu-wt.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/cwe2014-2-hu-wt.jpg",
+        "originalName": "CWE2014-2-HU-WT.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/6th-cwe-june-08-12-2014-humburg-germany.jpg",
+        "title": "Proceedings USB",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/6th-cwe-june-08-12-2014-humburg-germany.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/6th-cwe-june-08-12-2014-humburg-germany.jpg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/6th-cwe-june-08-12-2014-humburg-germany.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/6th-cwe-june-08-12-2014-humburg-germany.jpg",
+        "originalName": "6th_CWE_June_08-12_2014_Humburg_Germany.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/14061002.jpg",
+        "title": "田村幸雄",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/14061002.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/14061002.jpg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/14061002.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/14061002.jpg",
+        "originalName": "14061002.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/14061005.jpg",
+        "title": "Robert Meroney",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/14061005.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/14061005.jpg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/14061005.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/14061005.jpg",
+        "originalName": "14061005.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/14061015-3.jpg",
+        "title": "竹内崇、前田潤滋、大坪和広、友清衣利子、野田稔、勝地弘、植松康",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/14061015-3.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/14061015-3.jpg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/14061015-3.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/14061015-3.jpg",
+        "originalName": "14061015-3.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/cwe2014-conferencephoto.jpg",
+        "title": "集合写真",
+        "credit": "片岡浩人",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/cwe2014-conferencephoto.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/cwe2014-conferencephoto.jpg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/cwe2014-conferencephoto.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/cwe2014-conferencephoto.jpg",
+        "originalName": "CWE2014_ConferencePhoto.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/cimg5223.jpg",
+        "title": "Ice breakerの様子",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/cimg5223.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/cimg5223.jpeg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/cimg5223.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/cimg5223.jpeg",
+        "originalName": "CIMG5223.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/cimg5261.jpg",
+        "title": "カンファレンスディナー（持田灯先生）",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/cimg5261.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/cimg5261.jpeg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/cimg5261.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/cimg5261.jpeg",
+        "originalName": "CIMG5261.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/cimg5265.jpg",
+        "title": "カンファレンスディナー（田村哲郎先生、田村幸雄先生）",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/cimg5265.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/cimg5265.jpeg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/cimg5265.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/cimg5265.jpeg",
+        "originalName": "CIMG5265.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/cimg5276.jpg",
+        "title": "ポストカンファレンスツアー（植松康先生、Greg Kopp先生）",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/cimg5276.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/cimg5276.jpeg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/cimg5276.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/cimg5276.jpeg",
+        "originalName": "CIMG5276.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/0006-cwe2014.jpg",
+        "title": "富永禎秀（新潟工科大学）",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/0006-cwe2014.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/0006-cwe2014.jpg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/0006-cwe2014.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/0006-cwe2014.jpg",
+        "originalName": "0006_CWE2014.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/0004-cwe2014.jpg",
+        "title": "0004_CWE2014.JPG",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/0004-cwe2014.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/0004-cwe2014.jpg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/0004-cwe2014.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/0004-cwe2014.jpg",
+        "originalName": "0004_CWE2014.JPG"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "CWE",
@@ -124,8 +307,49 @@ window.__INITIAL_CITIES__ = [
     "comment": "第8回APCWE",
     "eventDate": "2013",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/apcwe-2013-india-chennai/apcwe-viii-dec10-14-2013-chennai-india.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/apcwe-2013-india-chennai/apcwe-viii-dec10-14-2013-chennai-india.jpg",
+        "title": "Proceedings card",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/apcwe-2013-india-chennai/apcwe-viii-dec10-14-2013-chennai-india.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2013-india-chennai/apcwe-viii-dec10-14-2013-chennai-india.jpg",
+        "publicPath": "uploaded/public/apcwe-2013-india-chennai/apcwe-viii-dec10-14-2013-chennai-india.jpg",
+        "originalPath": "uploaded/original/apcwe-2013-india-chennai/apcwe-viii-dec10-14-2013-chennai-india.jpg",
+        "originalName": "APCWE-VIII-Dec10-14_2013_Chennai-INDIA.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2013-india-chennai/apcwe-viii-dec10-14-2013-chennai-india-2.jpg",
+        "title": "APCWE-VIII-Dec10-14_2013_Chennai-INDIA-2.JPG",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/apcwe-2013-india-chennai/apcwe-viii-dec10-14-2013-chennai-india-2.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2013-india-chennai/apcwe-viii-dec10-14-2013-chennai-india-2.jpg",
+        "publicPath": "uploaded/public/apcwe-2013-india-chennai/apcwe-viii-dec10-14-2013-chennai-india-2.jpg",
+        "originalPath": "uploaded/original/apcwe-2013-india-chennai/apcwe-viii-dec10-14-2013-chennai-india-2.jpg",
+        "originalName": "APCWE-VIII-Dec10-14_2013_Chennai-INDIA-2.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2013-india-chennai/dsc00640.jpg",
+        "title": "会場風景とwelcom ceremony",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/apcwe-2013-india-chennai/dsc00640.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2013-india-chennai/dsc00640.jpg",
+        "publicPath": "uploaded/public/apcwe-2013-india-chennai/dsc00640.jpg",
+        "originalPath": "uploaded/original/apcwe-2013-india-chennai/dsc00640.jpg",
+        "originalName": "DSC00640.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2013-india-chennai/dsc00677.jpg",
+        "title": "DSC00677.JPG",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/apcwe-2013-india-chennai/dsc00677.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2013-india-chennai/dsc00677.jpg",
+        "publicPath": "uploaded/public/apcwe-2013-india-chennai/dsc00677.jpg",
+        "originalPath": "uploaded/original/apcwe-2013-india-chennai/dsc00677.jpg",
+        "originalName": "DSC00677.JPG"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "APCWE",
@@ -149,8 +373,29 @@ window.__INITIAL_CITIES__ = [
     "comment": "第7回BBAA",
     "eventDate": "2012",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/bbaa-2012-china-shanghai/dsc01488.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/bbaa-2012-china-shanghai/dsc01488.jpg",
+        "title": "Ted Stathopoulos先生、田村幸雄先生（手前）",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/bbaa-2012-china-shanghai/dsc01488.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2012-china-shanghai/dsc01488.jpg",
+        "publicPath": "uploaded/public/bbaa-2012-china-shanghai/dsc01488.jpg",
+        "originalPath": "uploaded/original/bbaa-2012-china-shanghai/dsc01488.jpg",
+        "originalName": "DSC01488.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2012-china-shanghai/dsc01484.jpg",
+        "title": "Opening Ceremony（田村幸雄先生）",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/bbaa-2012-china-shanghai/dsc01484.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2012-china-shanghai/dsc01484.jpg",
+        "publicPath": "uploaded/public/bbaa-2012-china-shanghai/dsc01484.jpg",
+        "originalPath": "uploaded/original/bbaa-2012-china-shanghai/dsc01484.jpg",
+        "originalName": "DSC01484.JPG"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
@@ -174,8 +419,139 @@ window.__INITIAL_CITIES__ = [
     "comment": "第13回ICWE",
     "eventDate": "2011",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/img-2133-s.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/img-2133-s.jpg",
+        "title": "Opening Ceremony",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/img-2133-s.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/img-2133-s.jpg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/img-2133-s.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/img-2133-s.jpg",
+        "originalName": "IMG_2133-s.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/img-2143.jpg",
+        "title": "IMG_2143.JPG",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/img-2143.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/img-2143.jpg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/img-2143.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/img-2143.jpg",
+        "originalName": "IMG_2143.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/img-2149-s.jpg",
+        "title": "田村幸雄",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/img-2149-s.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/img-2149-s.jpg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/img-2149-s.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/img-2149-s.jpg",
+        "originalName": "IMG_2149-s.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/group-pic.jpg",
+        "title": "集合写真",
+        "credit": "片岡浩人",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/group-pic.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/group-pic.jpg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/group-pic.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/group-pic.jpg",
+        "originalName": "Group pic.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015524.jpg",
+        "title": "Ice breakerでの一コマ（Michael Kasperski先生、松本勝先生）",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015524.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/r0015524.jpeg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/r0015524.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/r0015524.jpeg",
+        "originalName": "R0015524.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015525.jpg",
+        "title": "Ice breakerでの一コマ（長谷部寛先生、持田灯先生、吉田昭仁先生、野田稔先生、白土博通先生）",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015525.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/r0015525.jpeg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/r0015525.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/r0015525.jpeg",
+        "originalName": "R0015525.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015530.jpg",
+        "title": "Ice breakerでの一コマ（白土博通先生）",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015530.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/r0015530.jpeg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/r0015530.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/r0015530.jpeg",
+        "originalName": "R0015530.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015557.jpg",
+        "title": "Opening ceremony",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015557.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/r0015557.jpeg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/r0015557.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/r0015557.jpeg",
+        "originalName": "R0015557.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015569.jpg",
+        "title": "R0015569.jpeg",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015569.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/r0015569.jpeg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/r0015569.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/r0015569.jpeg",
+        "originalName": "R0015569.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015572.jpg",
+        "title": "R0015572.jpeg",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015572.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/r0015572.jpeg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/r0015572.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/r0015572.jpeg",
+        "originalName": "R0015572.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015581.jpg",
+        "title": "持田灯先生",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015581.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/r0015581.jpeg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/r0015581.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/r0015581.jpeg",
+        "originalName": "R0015581.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015667.jpg",
+        "title": "松本勝先生のIAWE Senior Award授賞式",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015667.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/r0015667.jpeg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/r0015667.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/r0015667.jpeg",
+        "originalName": "R0015667.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015687.jpg",
+        "title": "Keynote Lectureの一コマ（Giovanni Solari 先生、田村幸雄先生、Nicholas Isyumov先生）",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/r0015687.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/r0015687.jpeg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/r0015687.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/r0015687.jpeg",
+        "originalName": "R0015687.jpeg"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
@@ -199,8 +575,29 @@ window.__INITIAL_CITIES__ = [
     "comment": "第5回CWE2010",
     "eventDate": "2010",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/cwe-2010-us-chapel-hill/dsc05637.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/cwe-2010-us-chapel-hill/dsc05637.jpg",
+        "title": "DSC05637.JPG",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/cwe-2010-us-chapel-hill/dsc05637.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2010-us-chapel-hill/dsc05637.jpg",
+        "publicPath": "uploaded/public/cwe-2010-us-chapel-hill/dsc05637.jpg",
+        "originalPath": "uploaded/original/cwe-2010-us-chapel-hill/dsc05637.jpg",
+        "originalName": "DSC05637.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2010-us-chapel-hill/dsc05642.jpg",
+        "title": "DSC05642.JPG",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/cwe-2010-us-chapel-hill/dsc05642.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2010-us-chapel-hill/dsc05642.jpg",
+        "publicPath": "uploaded/public/cwe-2010-us-chapel-hill/dsc05642.jpg",
+        "originalPath": "uploaded/original/cwe-2010-us-chapel-hill/dsc05642.jpg",
+        "originalName": "DSC05642.JPG"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "CWE",
@@ -252,6 +649,16 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/icwe-2007-australia-cairns/img-0006edit.jpg",
         "originalPath": "uploaded/original/icwe-2007-australia-cairns/img-0006edit.jpg",
         "originalName": "IMG_0006edit.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2007-australia-cairns/icwe2007-cairns.jpg",
+        "title": "Conference dinner",
+        "credit": "勝地弘（横浜国立大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2007-australia-cairns/icwe2007-cairns.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2007-australia-cairns/icwe2007-cairns.jpg",
+        "publicPath": "uploaded/public/icwe-2007-australia-cairns/icwe2007-cairns.jpg",
+        "originalPath": "uploaded/original/icwe-2007-australia-cairns/icwe2007-cairns.jpg",
+        "originalName": "ICWE2007@Cairns.jpg"
       }
     ],
     "photoSourceMode": "public",
@@ -277,8 +684,29 @@ window.__INITIAL_CITIES__ = [
     "comment": "第6回APCWE",
     "eventDate": "2005",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/apcwe-2005-korea-soul/dsc00676.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/apcwe-2005-korea-soul/dsc00676.jpg",
+        "title": "welcome ceremony",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/apcwe-2005-korea-soul/dsc00676.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2005-korea-soul/dsc00676.jpg",
+        "publicPath": "uploaded/public/apcwe-2005-korea-soul/dsc00676.jpg",
+        "originalPath": "uploaded/original/apcwe-2005-korea-soul/dsc00676.jpg",
+        "originalName": "DSC00676.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2005-korea-soul/dsc03357.jpg",
+        "title": "DSC03357.JPG",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/apcwe-2005-korea-soul/dsc03357.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2005-korea-soul/dsc03357.jpg",
+        "publicPath": "uploaded/public/apcwe-2005-korea-soul/dsc03357.jpg",
+        "originalPath": "uploaded/original/apcwe-2005-korea-soul/dsc03357.jpg",
+        "originalName": "DSC03357.JPG"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "APCWE",
@@ -302,8 +730,19 @@ window.__INITIAL_CITIES__ = [
     "comment": "第5回BBAA",
     "eventDate": "2004",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/bbaa-2004-canada-otawa/bbaa2004-nrc.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/bbaa-2004-canada-otawa/bbaa2004-nrc.jpg",
+        "title": "BBAA2004＠NRC",
+        "credit": "勝地弘（横浜国立大学）",
+        "publicSrc": "./data/uploaded/public/bbaa-2004-canada-otawa/bbaa2004-nrc.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2004-canada-otawa/bbaa2004-nrc.jpg",
+        "publicPath": "uploaded/public/bbaa-2004-canada-otawa/bbaa2004-nrc.jpg",
+        "originalPath": "uploaded/original/bbaa-2004-canada-otawa/bbaa2004-nrc.jpg",
+        "originalName": "BBAA2004@NRC.JPG"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
@@ -323,8 +762,99 @@ window.__INITIAL_CITIES__ = [
     "comment": "第11回ICWE",
     "eventDate": "2003",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/icwe-2003-us-texas/1999texus-s.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/icwe-2003-us-texas/1999texus-s.jpg",
+        "title": "左から2人目・Jack E Cermak",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-2003-us-texas/1999texus-s.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2003-us-texas/1999texus-s.jpg",
+        "publicPath": "uploaded/public/icwe-2003-us-texas/1999texus-s.jpg",
+        "originalPath": "uploaded/original/icwe-2003-us-texas/1999texus-s.jpg",
+        "originalName": "1999TEXUS-s.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2003-us-texas/03060120.jpg",
+        "title": "風車博物館と会場モニュメント",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-2003-us-texas/03060120.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2003-us-texas/03060120.jpg",
+        "publicPath": "uploaded/public/icwe-2003-us-texas/03060120.jpg",
+        "originalPath": "uploaded/original/icwe-2003-us-texas/03060120.jpg",
+        "originalName": "03060120.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2003-us-texas/img-0096.jpg",
+        "title": "IMG_0096.JPG",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-2003-us-texas/img-0096.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2003-us-texas/img-0096.jpg",
+        "publicPath": "uploaded/public/icwe-2003-us-texas/img-0096.jpg",
+        "originalPath": "uploaded/original/icwe-2003-us-texas/img-0096.jpg",
+        "originalName": "IMG_0096.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2003-us-texas/p1010121.jpg",
+        "title": "後ろ姿のA G Davenport",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-2003-us-texas/p1010121.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2003-us-texas/p1010121.jpg",
+        "publicPath": "uploaded/public/icwe-2003-us-texas/p1010121.jpg",
+        "originalPath": "uploaded/original/icwe-2003-us-texas/p1010121.jpg",
+        "originalName": "P1010121.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2003-us-texas/p1010196.jpg",
+        "title": "左2人目から、友清衣利子、前田潤滋",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-2003-us-texas/p1010196.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2003-us-texas/p1010196.jpg",
+        "publicPath": "uploaded/public/icwe-2003-us-texas/p1010196.jpg",
+        "originalPath": "uploaded/original/icwe-2003-us-texas/p1010196.jpg",
+        "originalName": "P1010196.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2003-us-texas/dsc01749c.jpg",
+        "title": "DSC01749c.JPG",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2003-us-texas/dsc01749c.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2003-us-texas/dsc01749c.jpg",
+        "publicPath": "uploaded/public/icwe-2003-us-texas/dsc01749c.jpg",
+        "originalPath": "uploaded/original/icwe-2003-us-texas/dsc01749c.jpg",
+        "originalName": "DSC01749c.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2003-us-texas/dsc01754.jpg",
+        "title": "DSC01754.JPG",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2003-us-texas/dsc01754.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2003-us-texas/dsc01754.jpg",
+        "publicPath": "uploaded/public/icwe-2003-us-texas/dsc01754.jpg",
+        "originalPath": "uploaded/original/icwe-2003-us-texas/dsc01754.jpg",
+        "originalName": "DSC01754.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2003-us-texas/dsc01782.jpg",
+        "title": "DSC01782.JPG",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2003-us-texas/dsc01782.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2003-us-texas/dsc01782.jpg",
+        "publicPath": "uploaded/public/icwe-2003-us-texas/dsc01782.jpg",
+        "originalPath": "uploaded/original/icwe-2003-us-texas/dsc01782.jpg",
+        "originalName": "DSC01782.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2003-us-texas/dsc01826.jpg",
+        "title": "DSC01826.JPG",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2003-us-texas/dsc01826.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2003-us-texas/dsc01826.jpg",
+        "publicPath": "uploaded/public/icwe-2003-us-texas/dsc01826.jpg",
+        "originalPath": "uploaded/original/icwe-2003-us-texas/dsc01826.jpg",
+        "originalName": "DSC01826.JPG"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
@@ -344,8 +874,19 @@ window.__INITIAL_CITIES__ = [
     "comment": "第10回ICWE",
     "eventDate": "1999",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/icwe-1999-denmark-copenhagen/10icwe-1999-s.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/icwe-1999-denmark-copenhagen/10icwe-1999-s.jpg",
+        "title": "桂順二、谷池義人、川村純夫、前田潤滋",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-1999-denmark-copenhagen/10icwe-1999-s.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1999-denmark-copenhagen/10icwe-1999-s.jpg",
+        "publicPath": "uploaded/public/icwe-1999-denmark-copenhagen/10icwe-1999-s.jpg",
+        "originalPath": "uploaded/original/icwe-1999-denmark-copenhagen/10icwe-1999-s.jpg",
+        "originalName": "10ICWE_1999アムステルダム-s.jpg"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
@@ -432,8 +973,69 @@ window.__INITIAL_CITIES__ = [
     "comment": "第9回ICWE",
     "eventDate": "1995",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/icwe-1995-india-delhi/group-photo.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/icwe-1995-india-delhi/group-photo.jpg",
+        "title": "グループ写真",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/icwe-1995-india-delhi/group-photo.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1995-india-delhi/group-photo.jpg",
+        "publicPath": "uploaded/public/icwe-1995-india-delhi/group-photo.jpg",
+        "originalPath": "uploaded/original/icwe-1995-india-delhi/group-photo.jpg",
+        "originalName": "Group Photo.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1995-india-delhi/opening-address-by-prof-krishna.jpg",
+        "title": "Krishna 先生による開会あいさつ",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/icwe-1995-india-delhi/opening-address-by-prof-krishna.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1995-india-delhi/opening-address-by-prof-krishna.jpg",
+        "publicPath": "uploaded/public/icwe-1995-india-delhi/opening-address-by-prof-krishna.jpg",
+        "originalPath": "uploaded/original/icwe-1995-india-delhi/opening-address-by-prof-krishna.jpg",
+        "originalName": "Opening Address by Prof Krishna.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1995-india-delhi/prof-davenport.jpg",
+        "title": "Davenport 先生",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/icwe-1995-india-delhi/prof-davenport.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1995-india-delhi/prof-davenport.jpg",
+        "publicPath": "uploaded/public/icwe-1995-india-delhi/prof-davenport.jpg",
+        "originalPath": "uploaded/original/icwe-1995-india-delhi/prof-davenport.jpg",
+        "originalName": "Prof Davenport.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1995-india-delhi/prof-kareem-and-krishna.jpg",
+        "title": "Kareem 先生と Krishna 先生",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/icwe-1995-india-delhi/prof-kareem-and-krishna.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1995-india-delhi/prof-kareem-and-krishna.jpg",
+        "publicPath": "uploaded/public/icwe-1995-india-delhi/prof-kareem-and-krishna.jpg",
+        "originalPath": "uploaded/original/icwe-1995-india-delhi/prof-kareem-and-krishna.jpg",
+        "originalName": "Prof Kareem and Krishna.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1995-india-delhi/opening-ceremony.jpg",
+        "title": "オープニングセレモニー",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/icwe-1995-india-delhi/opening-ceremony.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1995-india-delhi/opening-ceremony.jpg",
+        "publicPath": "uploaded/public/icwe-1995-india-delhi/opening-ceremony.jpg",
+        "originalPath": "uploaded/original/icwe-1995-india-delhi/opening-ceremony.jpg",
+        "originalName": "Opening Ceremony.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1995-india-delhi/prof-stathopoulos-and-nomura.jpg",
+        "title": "一般会場：Stathopoulos 先生（座長）と野村",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/icwe-1995-india-delhi/prof-stathopoulos-and-nomura.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1995-india-delhi/prof-stathopoulos-and-nomura.jpg",
+        "publicPath": "uploaded/public/icwe-1995-india-delhi/prof-stathopoulos-and-nomura.jpg",
+        "originalPath": "uploaded/original/icwe-1995-india-delhi/prof-stathopoulos-and-nomura.jpg",
+        "originalName": "Prof Stathopoulos and Nomura.jpg"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
@@ -474,8 +1076,59 @@ window.__INITIAL_CITIES__ = [
     "comment": "第2回BBAA",
     "eventDate": "1992",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/bbaa-1992-australia-melbourne/prof-yasuharu-nakamura-and-shuzo-murakami.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/bbaa-1992-australia-melbourne/prof-yasuharu-nakamura-and-shuzo-murakami.jpg",
+        "title": "中村泰治先生（左）と村上周三先生（右）",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/bbaa-1992-australia-melbourne/prof-yasuharu-nakamura-and-shuzo-murakami.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1992-australia-melbourne/prof-yasuharu-nakamura-and-shuzo-murakami.jpg",
+        "publicPath": "uploaded/public/bbaa-1992-australia-melbourne/prof-yasuharu-nakamura-and-shuzo-murakami.jpg",
+        "originalPath": "uploaded/original/bbaa-1992-australia-melbourne/prof-yasuharu-nakamura-and-shuzo-murakami.jpg",
+        "originalName": "Prof Yasuharu Nakamura and Shuzo Murakami.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-1992-australia-melbourne/bienkiewicz.jpg",
+        "title": "風洞見学：（左から）藤井邦雄さん、田村幸雄先生、河合宏允先生、（1人おいて）Bienkiewicz 先生（コロラド州立大学）",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/bbaa-1992-australia-melbourne/bienkiewicz.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1992-australia-melbourne/bienkiewicz.jpg",
+        "publicPath": "uploaded/public/bbaa-1992-australia-melbourne/bienkiewicz.jpg",
+        "originalPath": "uploaded/original/bbaa-1992-australia-melbourne/bienkiewicz.jpg",
+        "originalName": "風洞見学 藤井邦雄 田村幸夫 河井宏允 Bienkiewicz.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-1992-australia-melbourne/dr-john-holmes-center.jpg",
+        "title": "John Holmes 博士（中央）",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/bbaa-1992-australia-melbourne/dr-john-holmes-center.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1992-australia-melbourne/dr-john-holmes-center.jpg",
+        "publicPath": "uploaded/public/bbaa-1992-australia-melbourne/dr-john-holmes-center.jpg",
+        "originalPath": "uploaded/original/bbaa-1992-australia-melbourne/dr-john-holmes-center.jpg",
+        "originalName": "Dr John Holmes (Center).jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-1992-australia-melbourne/nomura-prof-bienkiewicz-yukio-tamura-and-atsuchi.jpg",
+        "title": "風洞見学後の懇親会：（左から）野村、Bienkiewicz 教授、田村幸雄先生、（右端）岡島厚先生",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/bbaa-1992-australia-melbourne/nomura-prof-bienkiewicz-yukio-tamura-and-atsuchi.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1992-australia-melbourne/nomura-prof-bienkiewicz-yukio-tamura-and-atsuchi.jpg",
+        "publicPath": "uploaded/public/bbaa-1992-australia-melbourne/nomura-prof-bienkiewicz-yukio-tamura-and-atsuchi.jpg",
+        "originalPath": "uploaded/original/bbaa-1992-australia-melbourne/nomura-prof-bienkiewicz-yukio-tamura-and-atsuchi.jpg",
+        "originalName": "Nomura Prof Bienkiewicz Yukio Tamura and Atsuchi Okajima(R).jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-1992-australia-melbourne/photo-1.jpg",
+        "title": "（左から）田村哲郎先生、酒井洋典さん（川崎重工業）、上野久儀先生（金沢大学）、岡島厚先生",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/bbaa-1992-australia-melbourne/photo-1.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1992-australia-melbourne/photo-1.jpg",
+        "publicPath": "uploaded/public/bbaa-1992-australia-melbourne/photo-1.jpg",
+        "originalPath": "uploaded/original/bbaa-1992-australia-melbourne/photo-1.jpg",
+        "originalName": "田村哲郎 酒井洋典 上野久儀 岡島厚.jpg"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
@@ -495,8 +1148,69 @@ window.__INITIAL_CITIES__ = [
     "comment": "第8回ICWE",
     "eventDate": "1991",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/icwe-1991-canada-london/91070712.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/icwe-1991-canada-london/91070712.jpg",
+        "title": "松本勝",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-1991-canada-london/91070712.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1991-canada-london/91070712.jpg",
+        "publicPath": "uploaded/public/icwe-1991-canada-london/91070712.jpg",
+        "originalPath": "uploaded/original/icwe-1991-canada-london/91070712.jpg",
+        "originalName": "91070712.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1991-canada-london/91070715-s.jpg",
+        "title": "西亮",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-1991-canada-london/91070715-s.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1991-canada-london/91070715-s.jpg",
+        "publicPath": "uploaded/public/icwe-1991-canada-london/91070715-s.jpg",
+        "originalPath": "uploaded/original/icwe-1991-canada-london/91070715-s.jpg",
+        "originalName": "91070715-s.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1991-canada-london/91070717-s2.jpg",
+        "title": "藤井邦雄、神田順、大熊武司、田村幸雄、前田潤滋",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-1991-canada-london/91070717-s2.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1991-canada-london/91070717-s2.jpg",
+        "publicPath": "uploaded/public/icwe-1991-canada-london/91070717-s2.jpg",
+        "originalPath": "uploaded/original/icwe-1991-canada-london/91070717-s2.jpg",
+        "originalName": "91070717-s2.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1991-canada-london/91070901-s.jpg",
+        "title": "石崎🀅雄",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-1991-canada-london/91070901-s.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1991-canada-london/91070901-s.jpg",
+        "publicPath": "uploaded/public/icwe-1991-canada-london/91070901-s.jpg",
+        "originalPath": "uploaded/original/icwe-1991-canada-london/91070901-s.jpg",
+        "originalName": "91070901-s.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1991-canada-london/91070902-s.jpg",
+        "title": "河井宏允",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-1991-canada-london/91070902-s.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1991-canada-london/91070902-s.jpg",
+        "publicPath": "uploaded/public/icwe-1991-canada-london/91070902-s.jpg",
+        "originalPath": "uploaded/original/icwe-1991-canada-london/91070902-s.jpg",
+        "originalName": "91070902-s.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1991-canada-london/91071009-ss.jpg",
+        "title": "吉村健",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-1991-canada-london/91071009-ss.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1991-canada-london/91071009-ss.jpg",
+        "publicPath": "uploaded/public/icwe-1991-canada-london/91071009-ss.jpg",
+        "originalPath": "uploaded/original/icwe-1991-canada-london/91071009-ss.jpg",
+        "originalName": "91071009-ss.jpg"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
@@ -558,8 +1272,29 @@ window.__INITIAL_CITIES__ = [
     "comment": "第7回ICWE",
     "eventDate": "1987",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/icwe-1987-west-germany-aachen/940703-94-3.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/940703-94-3.jpg",
+        "title": "中村泰治",
+        "credit": "前田潤滋(九州大)",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/940703-94-3.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/940703-94-3.jpg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/940703-94-3.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/940703-94-3.jpg",
+        "originalName": "940703中村先生・フライブ94中村先生・フライブルグ3.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/87080705-s.jpg",
+        "title": "不明",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/87080705-s.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/87080705-s.jpg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/87080705-s.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/87080705-s.jpg",
+        "originalName": "87080705-s.jpg"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
@@ -604,8 +1339,29 @@ window.__INITIAL_CITIES__ = [
     "comment": "第6回ICWE",
     "eventDate": "1983",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/icwe-1983-australia-gold-coast/1983-03-icwe.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/icwe-1983-australia-gold-coast/1983-03-icwe.jpg",
+        "title": "石崎潑雄，藤井邦雄，木本英爾，川村純夫，前田潤滋，立川正夫，田村幸雄",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-1983-australia-gold-coast/1983-03-icwe.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1983-australia-gold-coast/1983-03-icwe.jpg",
+        "publicPath": "uploaded/public/icwe-1983-australia-gold-coast/1983-03-icwe.jpg",
+        "originalPath": "uploaded/original/icwe-1983-australia-gold-coast/1983-03-icwe.jpg",
+        "originalName": "1983 03 ICWE 石崎潑雄、藤井邦雄、木本英爾、川村純夫、前田潤滋、立川正夫、田村幸雄.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1983-australia-gold-coast/830316scruton-injamescookuniv-inicew1893.jpg",
+        "title": "ICWE1983 Prof. C.Scruton",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/icwe-1983-australia-gold-coast/830316scruton-injamescookuniv-inicew1893.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1983-australia-gold-coast/830316scruton-injamescookuniv-inicew1893.jpg",
+        "publicPath": "uploaded/public/icwe-1983-australia-gold-coast/830316scruton-injamescookuniv-inicew1893.jpg",
+        "originalPath": "uploaded/original/icwe-1983-australia-gold-coast/830316scruton-injamescookuniv-inicew1893.jpg",
+        "originalName": "830316Scruton教授inJamesCookUniv_inICEW1893.jpg"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
@@ -646,8 +1402,109 @@ window.__INITIAL_CITIES__ = [
     "comment": "第15回ICWE",
     "eventDate": "2019",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/icwe-2019-china-beijing/group-photo1.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/icwe-2019-china-beijing/group-photo1.jpg",
+        "title": "Group photo1.jpg",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2019-china-beijing/group-photo1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2019-china-beijing/group-photo1.jpg",
+        "publicPath": "uploaded/public/icwe-2019-china-beijing/group-photo1.jpg",
+        "originalPath": "uploaded/original/icwe-2019-china-beijing/group-photo1.jpg",
+        "originalName": "Group photo1.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2019-china-beijing/2019-09-icwe-beijing-2.jpg",
+        "title": "Beijing 2",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2019-china-beijing/2019-09-icwe-beijing-2.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2019-china-beijing/2019-09-icwe-beijing-2.jpg",
+        "publicPath": "uploaded/public/icwe-2019-china-beijing/2019-09-icwe-beijing-2.jpg",
+        "originalPath": "uploaded/original/icwe-2019-china-beijing/2019-09-icwe-beijing-2.jpg",
+        "originalName": "2019 09 ICWE Beijing 2.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2019-china-beijing/2019-09-icwe-beijing-3.jpg",
+        "title": "Beijing 3",
+        "credit": "",
+        "publicSrc": "./data/uploaded/public/icwe-2019-china-beijing/2019-09-icwe-beijing-3.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2019-china-beijing/2019-09-icwe-beijing-3.jpg",
+        "publicPath": "uploaded/public/icwe-2019-china-beijing/2019-09-icwe-beijing-3.jpg",
+        "originalPath": "uploaded/original/icwe-2019-china-beijing/2019-09-icwe-beijing-3.jpg",
+        "originalName": "2019 09 ICWE Beijing 3.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2019-china-beijing/2019-09-icwe-beijing-5.jpg",
+        "title": "Beijing 5",
+        "credit": "",
+        "publicSrc": "./data/uploaded/public/icwe-2019-china-beijing/2019-09-icwe-beijing-5.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2019-china-beijing/2019-09-icwe-beijing-5.jpg",
+        "publicPath": "uploaded/public/icwe-2019-china-beijing/2019-09-icwe-beijing-5.jpg",
+        "originalPath": "uploaded/original/icwe-2019-china-beijing/2019-09-icwe-beijing-5.jpg",
+        "originalName": "2019 09 ICWE Beijing 5.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2019-china-beijing/2019-09-icwe-beijing-6.jpg",
+        "title": "Beijing 6",
+        "credit": "",
+        "publicSrc": "./data/uploaded/public/icwe-2019-china-beijing/2019-09-icwe-beijing-6.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2019-china-beijing/2019-09-icwe-beijing-6.jpg",
+        "publicPath": "uploaded/public/icwe-2019-china-beijing/2019-09-icwe-beijing-6.jpg",
+        "originalPath": "uploaded/original/icwe-2019-china-beijing/2019-09-icwe-beijing-6.jpg",
+        "originalName": "2019 09 ICWE Beijing 6.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2019-china-beijing/2019-09-icwe-f-ding.jpg",
+        "title": "田村幸雄，F. Ding",
+        "credit": "",
+        "publicSrc": "./data/uploaded/public/icwe-2019-china-beijing/2019-09-icwe-f-ding.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2019-china-beijing/2019-09-icwe-f-ding.jpg",
+        "publicPath": "uploaded/public/icwe-2019-china-beijing/2019-09-icwe-f-ding.jpg",
+        "originalPath": "uploaded/original/icwe-2019-china-beijing/2019-09-icwe-f-ding.jpg",
+        "originalName": "2019 09 ICWE 田村幸雄､F. Ding.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2019-china-beijing/img-5578.jpg",
+        "title": "カンファレンスディナーの一コマ（女子十二楽坊の演奏とそれを観る参加者）",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2019-china-beijing/img-5578.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2019-china-beijing/img-5578.jpeg",
+        "publicPath": "uploaded/public/icwe-2019-china-beijing/img-5578.jpg",
+        "originalPath": "uploaded/original/icwe-2019-china-beijing/img-5578.jpeg",
+        "originalName": "IMG_5578.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2019-china-beijing/dsc02278.jpg",
+        "title": "DSC02278.jpeg",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2019-china-beijing/dsc02278.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2019-china-beijing/dsc02278.jpeg",
+        "publicPath": "uploaded/public/icwe-2019-china-beijing/dsc02278.jpg",
+        "originalPath": "uploaded/original/icwe-2019-china-beijing/dsc02278.jpeg",
+        "originalName": "DSC02278.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2019-china-beijing/keynot-lecture-by-dr-kataoka.jpg",
+        "title": "片岡浩人さんの基調講演",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/icwe-2019-china-beijing/keynot-lecture-by-dr-kataoka.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2019-china-beijing/keynot-lecture-by-dr-kataoka.jpg",
+        "publicPath": "uploaded/public/icwe-2019-china-beijing/keynot-lecture-by-dr-kataoka.jpg",
+        "originalPath": "uploaded/original/icwe-2019-china-beijing/keynot-lecture-by-dr-kataoka.jpg",
+        "originalName": "Keynot Lecture by Dr Kataoka.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2019-china-beijing/dr-h-kataoka.jpg",
+        "title": "基調講演をされる片岡浩人さん",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/icwe-2019-china-beijing/dr-h-kataoka.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2019-china-beijing/dr-h-kataoka.jpg",
+        "publicPath": "uploaded/public/icwe-2019-china-beijing/dr-h-kataoka.jpg",
+        "originalPath": "uploaded/original/icwe-2019-china-beijing/dr-h-kataoka.jpg",
+        "originalName": "Dr H_Kataoka.JPG"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
@@ -688,6 +1545,76 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/icwe-2023-italy-florence/img-0876.jpg",
         "originalPath": "uploaded/original/icwe-2023-italy-florence/img-0876.jpg",
         "originalName": "IMG_0876.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2023-italy-florence/icwe16-1.jpg",
+        "title": "会場",
+        "credit": "池谷直樹（九州大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2023-italy-florence/icwe16-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2023-italy-florence/icwe16-1.jpeg",
+        "publicPath": "uploaded/public/icwe-2023-italy-florence/icwe16-1.jpg",
+        "originalPath": "uploaded/original/icwe-2023-italy-florence/icwe16-1.jpeg",
+        "originalName": "icwe16-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2023-italy-florence/icwe16-2.jpg",
+        "title": "Welcomeメッセージ",
+        "credit": "池谷直樹（九州大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2023-italy-florence/icwe16-2.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2023-italy-florence/icwe16-2.jpeg",
+        "publicPath": "uploaded/public/icwe-2023-italy-florence/icwe16-2.jpg",
+        "originalPath": "uploaded/original/icwe-2023-italy-florence/icwe16-2.jpeg",
+        "originalName": "icwe16-2.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2023-italy-florence/2023-08-icwe-florence-italy-1.jpg",
+        "title": "Group Photo",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2023-italy-florence/2023-08-icwe-florence-italy-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2023-italy-florence/2023-08-icwe-florence-italy-1.jpg",
+        "publicPath": "uploaded/public/icwe-2023-italy-florence/2023-08-icwe-florence-italy-1.jpg",
+        "originalPath": "uploaded/original/icwe-2023-italy-florence/2023-08-icwe-florence-italy-1.jpg",
+        "originalName": "2023 08 ICWE Florence Italy 1.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2023-italy-florence/2023-08-icwe-florence-italy-2.jpg",
+        "title": "田村幸雄",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2023-italy-florence/2023-08-icwe-florence-italy-2.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2023-italy-florence/2023-08-icwe-florence-italy-2.jpg",
+        "publicPath": "uploaded/public/icwe-2023-italy-florence/2023-08-icwe-florence-italy-2.jpg",
+        "originalPath": "uploaded/original/icwe-2023-italy-florence/2023-08-icwe-florence-italy-2.jpg",
+        "originalName": "2023 08 ICWE Florence Italy 2.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2023-italy-florence/image-20240122162507.jpg",
+        "title": "富永禎秀",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2023-italy-florence/image-20240122162507.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2023-italy-florence/image-20240122162507.jpg",
+        "publicPath": "uploaded/public/icwe-2023-italy-florence/image-20240122162507.jpg",
+        "originalPath": "uploaded/original/icwe-2023-italy-florence/image-20240122162507.jpg",
+        "originalName": "Image_20240122162507.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2023-italy-florence/img-8340.jpg",
+        "title": "IMG_8340.JPG",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2023-italy-florence/img-8340.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2023-italy-florence/img-8340.jpg",
+        "publicPath": "uploaded/public/icwe-2023-italy-florence/img-8340.jpg",
+        "originalPath": "uploaded/original/icwe-2023-italy-florence/img-8340.jpg",
+        "originalName": "IMG_8340.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2023-italy-florence/img-8399.jpg",
+        "title": "Yoshihide Tominaga, Ted Stahotpoulos",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2023-italy-florence/img-8399.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2023-italy-florence/img-8399.jpg",
+        "publicPath": "uploaded/public/icwe-2023-italy-florence/img-8399.jpg",
+        "originalPath": "uploaded/original/icwe-2023-italy-florence/img-8399.jpg",
+        "originalName": "IMG_8399.JPG"
       }
     ],
     "photoSourceMode": "public",
@@ -830,8 +1757,119 @@ window.__INITIAL_CITIES__ = [
     "comment": "第7回CWE2018",
     "eventDate": "2018",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-a-kareem.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-a-kareem.jpg",
+        "title": "，，A. Kareem，，田村幸雄，，",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-a-kareem.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-a-kareem.jpg",
+        "publicPath": "uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-a-kareem.jpg",
+        "originalPath": "uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-a-kareem.jpg",
+        "originalName": "2018 06 CWE 、、A. Kareem、、田村幸雄、、.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-a-kareem-2.jpg",
+        "title": "，，田村幸雄， A. Kareem，，，",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-a-kareem-2.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-a-kareem-2.jpg",
+        "publicPath": "uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-a-kareem-2.jpg",
+        "originalPath": "uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-a-kareem-2.jpg",
+        "originalName": "2018 06 CWE 、、田村幸雄、 A. Kareem、、、.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-a-kareem-g-solari.jpg",
+        "title": "A. Kareem， G. Solari，西嶋一欽",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-a-kareem-g-solari.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-a-kareem-g-solari.jpg",
+        "publicPath": "uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-a-kareem-g-solari.jpg",
+        "originalPath": "uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-a-kareem-g-solari.jpg",
+        "originalName": "2018 06 CWE A. Kareem、 G. Solari、西嶋一欽.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-q-zhou-q-s-yang-t-stathopoulos-y-j-g.jpg",
+        "title": "Q. Zhou，Q.S. Yang，T. Stathopoulos，曹曙陽，Y.J. Ge，，",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-q-zhou-q-s-yang-t-stathopoulos-y-j-g.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-q-zhou-q-s-yang-t-stathopoulos-y-j-g.jpg",
+        "publicPath": "uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-q-zhou-q-s-yang-t-stathopoulos-y-j-g.jpg",
+        "originalPath": "uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-q-zhou-q-s-yang-t-stathopoulos-y-j-g.jpg",
+        "originalName": "2018 06 CWE Q. Zhou、Q.S. Yang、T. Stathopoulos、曹曙陽、Y.J. Ge、、.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-s-s-lee-y-c-ha-h-k-kim.jpg",
+        "title": "S.S. Lee，金鐘洛，田村幸雄，Y.C. Ha，金潤石，植松康，野村卓史，金容徹，H.K. Kim",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-s-s-lee-y-c-ha-h-k-kim.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-s-s-lee-y-c-ha-h-k-kim.jpg",
+        "publicPath": "uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-s-s-lee-y-c-ha-h-k-kim.jpg",
+        "originalPath": "uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-s-s-lee-y-c-ha-h-k-kim.jpg",
+        "originalName": "2018 06 CWE S.S. Lee、金鐘洛、田村幸雄、Y.C. Ha、金潤石、植松康、野村卓史、金容徹、H.K. Kim.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-seoul-7.jpg",
+        "title": "Seoul 7",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-seoul-7.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-seoul-7.jpg",
+        "publicPath": "uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-seoul-7.jpg",
+        "originalPath": "uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-seoul-7.jpg",
+        "originalName": "2018 06 CWE Seoul 7.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-seoul-8.jpg",
+        "title": "Seoul 8",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-seoul-8.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-seoul-8.jpg",
+        "publicPath": "uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-seoul-8.jpg",
+        "originalPath": "uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-seoul-8.jpg",
+        "originalName": "2018 06 CWE Seoul 8.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-t-stathopoulos-k-c-s-kwok-g-solari.jpg",
+        "title": "T. Stathopoulos，，K.C.S. Kwok，G. Solari",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-t-stathopoulos-k-c-s-kwok-g-solari.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-t-stathopoulos-k-c-s-kwok-g-solari.jpg",
+        "publicPath": "uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-t-stathopoulos-k-c-s-kwok-g-solari.jpg",
+        "originalPath": "uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-t-stathopoulos-k-c-s-kwok-g-solari.jpg",
+        "originalName": "2018 06 CWE T. Stathopoulos、、K.C.S. Kwok、G. Solari.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-y-j-ge-d-liang-g-bitsuamlak-a-kareem.jpg",
+        "title": "曹曙陽，Y.J. Ge，D. Liang，G. Bitsuamlak，A. Kareem",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-y-j-ge-d-liang-g-bitsuamlak-a-kareem.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-y-j-ge-d-liang-g-bitsuamlak-a-kareem.jpg",
+        "publicPath": "uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-y-j-ge-d-liang-g-bitsuamlak-a-kareem.jpg",
+        "originalPath": "uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-y-j-ge-d-liang-g-bitsuamlak-a-kareem.jpg",
+        "originalName": "2018 06 CWE 曹曙陽、Y.J. Ge、D. Liang、G. Bitsuamlak、A. Kareem.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-a-kareem-y-l-xu.jpg",
+        "title": "田村幸雄，A. Kareem，Y.L. Xu",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-a-kareem-y-l-xu.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-a-kareem-y-l-xu.jpg",
+        "publicPath": "uploaded/public/cwe-2018-korea-seoul/2018-06-cwe-a-kareem-y-l-xu.jpg",
+        "originalPath": "uploaded/original/cwe-2018-korea-seoul/2018-06-cwe-a-kareem-y-l-xu.jpg",
+        "originalName": "2018 06 CWE 田村幸雄、A. Kareem、Y.L. Xu.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2018-korea-seoul/image2.jpg",
+        "title": "image2.jpeg",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/cwe-2018-korea-seoul/image2.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2018-korea-seoul/image2.jpeg",
+        "publicPath": "uploaded/public/cwe-2018-korea-seoul/image2.jpg",
+        "originalPath": "uploaded/original/cwe-2018-korea-seoul/image2.jpeg",
+        "originalName": "image2.jpeg"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "CWE",
@@ -872,8 +1910,109 @@ window.__INITIAL_CITIES__ = [
     "comment": "第9回APCWE",
     "eventDate": "2017",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/2017-12-apcwe-auckland-new-zealand-1.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/2017-12-apcwe-auckland-new-zealand-1.jpg",
+        "title": "Auckland New Zealand 1",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/2017-12-apcwe-auckland-new-zealand-1.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2017-new-zealand-auckland/2017-12-apcwe-auckland-new-zealand-1.jpg",
+        "publicPath": "uploaded/public/apcwe-2017-new-zealand-auckland/2017-12-apcwe-auckland-new-zealand-1.jpg",
+        "originalPath": "uploaded/original/apcwe-2017-new-zealand-auckland/2017-12-apcwe-auckland-new-zealand-1.jpg",
+        "originalName": "2017 12 APCWE Auckland New Zealand 1.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/2017-12-apcwe-b-melbourne-g-solari.jpg",
+        "title": "B. Melbourne，田村幸雄，G. Solari",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/2017-12-apcwe-b-melbourne-g-solari.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2017-new-zealand-auckland/2017-12-apcwe-b-melbourne-g-solari.jpg",
+        "publicPath": "uploaded/public/apcwe-2017-new-zealand-auckland/2017-12-apcwe-b-melbourne-g-solari.jpg",
+        "originalPath": "uploaded/original/apcwe-2017-new-zealand-auckland/2017-12-apcwe-b-melbourne-g-solari.jpg",
+        "originalName": "2017 12 APCWE B. Melbourne、田村幸雄、G. Solari.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/2017-12-apcwe-bm-s-wife-l-cochran-r-flay-g-solar.jpg",
+        "title": "BM's wife，L. Cochran，，R. Flay，，，G. Solari，B. Melbourne，田村幸雄",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/2017-12-apcwe-bm-s-wife-l-cochran-r-flay-g-solar.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2017-new-zealand-auckland/2017-12-apcwe-bm-s-wife-l-cochran-r-flay-g-solar.jpg",
+        "publicPath": "uploaded/public/apcwe-2017-new-zealand-auckland/2017-12-apcwe-bm-s-wife-l-cochran-r-flay-g-solar.jpg",
+        "originalPath": "uploaded/original/apcwe-2017-new-zealand-auckland/2017-12-apcwe-bm-s-wife-l-cochran-r-flay-g-solar.jpg",
+        "originalName": "2017 12 APCWE BM's wife、L. Cochran、、R. Flay、、、G. Solari、B. Melbourne、田村幸雄.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/2017-12-apcwe-g-solari-b-melbourne.jpg",
+        "title": "G. Solari，B. Melbourne，田村幸雄",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/2017-12-apcwe-g-solari-b-melbourne.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2017-new-zealand-auckland/2017-12-apcwe-g-solari-b-melbourne.jpg",
+        "publicPath": "uploaded/public/apcwe-2017-new-zealand-auckland/2017-12-apcwe-g-solari-b-melbourne.jpg",
+        "originalPath": "uploaded/original/apcwe-2017-new-zealand-auckland/2017-12-apcwe-g-solari-b-melbourne.jpg",
+        "originalName": "2017 12 APCWE G. Solari、B. Melbourne、田村幸雄.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/apcwe9-2017-2-auckland.jpg",
+        "title": "Conference dinner",
+        "credit": "勝地弘（横浜国立大学）",
+        "publicSrc": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/apcwe9-2017-2-auckland.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2017-new-zealand-auckland/apcwe9-2017-2-auckland.jpg",
+        "publicPath": "uploaded/public/apcwe-2017-new-zealand-auckland/apcwe9-2017-2-auckland.jpg",
+        "originalPath": "uploaded/original/apcwe-2017-new-zealand-auckland/apcwe9-2017-2-auckland.jpg",
+        "originalName": "APCWE9_2017-2@Auckland.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/dsc-0364.jpg",
+        "title": "富永禎秀（新潟工科大学）",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/dsc-0364.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2017-new-zealand-auckland/dsc-0364.jpg",
+        "publicPath": "uploaded/public/apcwe-2017-new-zealand-auckland/dsc-0364.jpg",
+        "originalPath": "uploaded/original/apcwe-2017-new-zealand-auckland/dsc-0364.jpg",
+        "originalName": "DSC_0364.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/dsc04253.jpg",
+        "title": "DSC04253.JPG",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/dsc04253.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2017-new-zealand-auckland/dsc04253.jpg",
+        "publicPath": "uploaded/public/apcwe-2017-new-zealand-auckland/dsc04253.jpg",
+        "originalPath": "uploaded/original/apcwe-2017-new-zealand-auckland/dsc04253.jpg",
+        "originalName": "DSC04253.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/prof-richards.jpg",
+        "title": "Richards 教授（オークランド大学）とヨットの風洞模型",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/prof-richards.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2017-new-zealand-auckland/prof-richards.jpg",
+        "publicPath": "uploaded/public/apcwe-2017-new-zealand-auckland/prof-richards.jpg",
+        "originalPath": "uploaded/original/apcwe-2017-new-zealand-auckland/prof-richards.jpg",
+        "originalName": "Prof Richards.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/photo-1.jpg",
+        "title": "マオリ族の踊り",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/photo-1.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2017-new-zealand-auckland/photo-1.jpg",
+        "publicPath": "uploaded/public/apcwe-2017-new-zealand-auckland/photo-1.jpg",
+        "originalPath": "uploaded/original/apcwe-2017-new-zealand-auckland/photo-1.jpg",
+        "originalName": "マオリ族の踊り.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/stand-banner.jpg",
+        "title": "Stand Banner",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/stand-banner.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2017-new-zealand-auckland/stand-banner.jpg",
+        "publicPath": "uploaded/public/apcwe-2017-new-zealand-auckland/stand-banner.jpg",
+        "originalPath": "uploaded/original/apcwe-2017-new-zealand-auckland/stand-banner.jpg",
+        "originalName": "Stand Banner.JPG"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "APCWE",
@@ -904,6 +2043,66 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/apcwe-2025-china-chengdu/10apcwe-2025.jpg",
         "originalPath": "uploaded/original/apcwe-2025-china-chengdu/10apcwe-2025.png",
         "originalName": "10APCWE-2025.png"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2025-china-chengdu/img-3181.jpg",
+        "title": "バンケットでの変面",
+        "credit": "西嶋一欽（京都大学）",
+        "publicSrc": "./data/uploaded/public/apcwe-2025-china-chengdu/img-3181.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2025-china-chengdu/img-3181.jpeg",
+        "publicPath": "uploaded/public/apcwe-2025-china-chengdu/img-3181.jpg",
+        "originalPath": "uploaded/original/apcwe-2025-china-chengdu/img-3181.jpeg",
+        "originalName": "IMG_3181.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2025-china-chengdu/img-3272.jpg",
+        "title": "APCWEのあとに重慶で開催されたCJKの夜",
+        "credit": "西嶋一欽（京都大学）",
+        "publicSrc": "./data/uploaded/public/apcwe-2025-china-chengdu/img-3272.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2025-china-chengdu/img-3272.jpeg",
+        "publicPath": "uploaded/public/apcwe-2025-china-chengdu/img-3272.jpg",
+        "originalPath": "uploaded/original/apcwe-2025-china-chengdu/img-3272.jpeg",
+        "originalName": "IMG_3272.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2025-china-chengdu/apcwe10-1.jpg",
+        "title": "会場スケジュール",
+        "credit": "池谷直樹（九州大学）",
+        "publicSrc": "./data/uploaded/public/apcwe-2025-china-chengdu/apcwe10-1.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2025-china-chengdu/apcwe10-1.jpeg",
+        "publicPath": "uploaded/public/apcwe-2025-china-chengdu/apcwe10-1.jpg",
+        "originalPath": "uploaded/original/apcwe-2025-china-chengdu/apcwe10-1.jpeg",
+        "originalName": "apcwe10-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2025-china-chengdu/apcwe10-2.jpg",
+        "title": "Welcomeボード",
+        "credit": "池谷直樹（九州大学）",
+        "publicSrc": "./data/uploaded/public/apcwe-2025-china-chengdu/apcwe10-2.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2025-china-chengdu/apcwe10-2.jpeg",
+        "publicPath": "uploaded/public/apcwe-2025-china-chengdu/apcwe10-2.jpg",
+        "originalPath": "uploaded/original/apcwe-2025-china-chengdu/apcwe10-2.jpeg",
+        "originalName": "apcwe10-2.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2025-china-chengdu/2025-08-apcwe-c-m-cheng-a-kareem-x-z-chen-t-wu-q.jpg",
+        "title": "，，，，C.M. Cheng，A. Kareem，田村幸雄，X.Z. Chen，T. Wu，Q.S. Yang，，，，",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/apcwe-2025-china-chengdu/2025-08-apcwe-c-m-cheng-a-kareem-x-z-chen-t-wu-q.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2025-china-chengdu/2025-08-apcwe-c-m-cheng-a-kareem-x-z-chen-t-wu-q.jpg",
+        "publicPath": "uploaded/public/apcwe-2025-china-chengdu/2025-08-apcwe-c-m-cheng-a-kareem-x-z-chen-t-wu-q.jpg",
+        "originalPath": "uploaded/original/apcwe-2025-china-chengdu/2025-08-apcwe-c-m-cheng-a-kareem-x-z-chen-t-wu-q.jpg",
+        "originalName": "2025 08 APCWE 、、、、C.M. Cheng、A. Kareem、田村幸雄、X.Z. Chen、T. Wu、Q.S. Yang、、、、.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2025-china-chengdu/2025-08-apcwe-s-li-r-flay-l-caracoglia-k-c-s-kwo.jpg",
+        "title": "S. Li，R. Flay，田村幸雄，L. Caracoglia，K.C.S. Kwok，M. Liu，，",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/apcwe-2025-china-chengdu/2025-08-apcwe-s-li-r-flay-l-caracoglia-k-c-s-kwo.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2025-china-chengdu/2025-08-apcwe-s-li-r-flay-l-caracoglia-k-c-s-kwo.jpg",
+        "publicPath": "uploaded/public/apcwe-2025-china-chengdu/2025-08-apcwe-s-li-r-flay-l-caracoglia-k-c-s-kwo.jpg",
+        "originalPath": "uploaded/original/apcwe-2025-china-chengdu/2025-08-apcwe-s-li-r-flay-l-caracoglia-k-c-s-kwo.jpg",
+        "originalName": "2025 08 APCWE S. Li、R. Flay、田村幸雄、L. Caracoglia、K.C.S. Kwok、M. Liu、、.jpg"
       }
     ],
     "photoSourceMode": "public",
@@ -925,8 +2124,39 @@ window.__INITIAL_CITIES__ = [
     "comment": "第3回CWE2000",
     "eventDate": "2000",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/cwe-2000-the-united-kingdom-birmingham/img-3819.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/cwe-2000-the-united-kingdom-birmingham/img-3819.jpg",
+        "title": "カンファレンスディナーの一コマ（田村哲郎先生、野村卓史先生、R. Panneer Selvam先生）",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/cwe-2000-the-united-kingdom-birmingham/img-3819.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2000-the-united-kingdom-birmingham/img-3819.jpeg",
+        "publicPath": "uploaded/public/cwe-2000-the-united-kingdom-birmingham/img-3819.jpg",
+        "originalPath": "uploaded/original/cwe-2000-the-united-kingdom-birmingham/img-3819.jpeg",
+        "originalName": "IMG_3819.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2000-the-united-kingdom-birmingham/img-3820.jpg",
+        "title": "IMG_3820.jpeg",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/cwe-2000-the-united-kingdom-birmingham/img-3820.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2000-the-united-kingdom-birmingham/img-3820.jpeg",
+        "publicPath": "uploaded/public/cwe-2000-the-united-kingdom-birmingham/img-3820.jpg",
+        "originalPath": "uploaded/original/cwe-2000-the-united-kingdom-birmingham/img-3820.jpeg",
+        "originalName": "IMG_3820.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2000-the-united-kingdom-birmingham/3c-3.jpg",
+        "title": "富永禎秀",
+        "credit": "富永禎秀（新潟工科大学）",
+        "publicSrc": "./data/uploaded/public/cwe-2000-the-united-kingdom-birmingham/3c-3.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2000-the-united-kingdom-birmingham/3c-3.jpg",
+        "publicPath": "uploaded/public/cwe-2000-the-united-kingdom-birmingham/3c-3.jpg",
+        "originalPath": "uploaded/original/cwe-2000-the-united-kingdom-birmingham/3c-3.jpg",
+        "originalName": "3c_発表3.jpg"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "CWE",
@@ -946,8 +2176,19 @@ window.__INITIAL_CITIES__ = [
     "comment": "第7回APCWE",
     "eventDate": "2009",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/apcwe-2009-taiwan-taipei/2009apcwe7-first-announce-01.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/apcwe-2009-taiwan-taipei/2009apcwe7-first-announce-01.jpg",
+        "title": "First announcement",
+        "credit": "前田潤滋（九州大）",
+        "publicSrc": "./data/uploaded/public/apcwe-2009-taiwan-taipei/2009apcwe7-first-announce-01.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2009-taiwan-taipei/2009apcwe7-first-announce-01.jpg",
+        "publicPath": "uploaded/public/apcwe-2009-taiwan-taipei/2009apcwe7-first-announce-01.jpg",
+        "originalPath": "uploaded/original/apcwe-2009-taiwan-taipei/2009apcwe7-first-announce-01.jpg",
+        "originalName": "2009APCWE7(台北)first announce-01.jpg"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "APCWE",
@@ -999,6 +2240,26 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/bbaa-2008-italy-milano/polimi011.jpg",
         "originalPath": "uploaded/original/bbaa-2008-italy-milano/polimi011.jpg",
         "originalName": "POLIMI011.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2008-italy-milano/prof-diana-l-and-prof-yukio-tamura-r.jpg",
+        "title": "オープニングセレモニー：Diana 先生（左）田村幸雄先生（右）",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/bbaa-2008-italy-milano/prof-diana-l-and-prof-yukio-tamura-r.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2008-italy-milano/prof-diana-l-and-prof-yukio-tamura-r.jpg",
+        "publicPath": "uploaded/public/bbaa-2008-italy-milano/prof-diana-l-and-prof-yukio-tamura-r.jpg",
+        "originalPath": "uploaded/original/bbaa-2008-italy-milano/prof-diana-l-and-prof-yukio-tamura-r.jpg",
+        "originalName": "Prof Diana(L) and Prof Yukio Tamura(R).JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2008-italy-milano/plenary-lecture-by-prof-yukio-tamura.jpg",
+        "title": "田村幸雄先生の基調講演",
+        "credit": "野村卓史",
+        "publicSrc": "./data/uploaded/public/bbaa-2008-italy-milano/plenary-lecture-by-prof-yukio-tamura.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2008-italy-milano/plenary-lecture-by-prof-yukio-tamura.jpg",
+        "publicPath": "uploaded/public/bbaa-2008-italy-milano/plenary-lecture-by-prof-yukio-tamura.jpg",
+        "originalPath": "uploaded/original/bbaa-2008-italy-milano/plenary-lecture-by-prof-yukio-tamura.jpg",
+        "originalName": "Plenary Lecture by Prof Yukio Tamura.JPG"
       }
     ],
     "photoSourceMode": "public",
@@ -1020,8 +2281,59 @@ window.__INITIAL_CITIES__ = [
     "comment": "第9回BBAA",
     "eventDate": "2024",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-k-c-s-kwok-a-kareem-ak-s-wife.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-k-c-s-kwok-a-kareem-ak-s-wife.jpg",
+        "title": ", K.C.S. Kwok, 田村幸雄, A.Kareem, AK's wife",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-k-c-s-kwok-a-kareem-ak-s-wife.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-k-c-s-kwok-a-kareem-ak-s-wife.jpeg",
+        "publicPath": "uploaded/public/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-k-c-s-kwok-a-kareem-ak-s-wife.jpg",
+        "originalPath": "uploaded/original/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-k-c-s-kwok-a-kareem-ak-s-wife.jpeg",
+        "originalName": "2024 07 - 08 BBAA 、､K.C.S. Kwok、田村幸雄、A.Kareem、AK's wife.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-birmingham-uk-1.jpg",
+        "title": "Group Photo 1",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-birmingham-uk-1.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-birmingham-uk-1.jpeg",
+        "publicPath": "uploaded/public/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-birmingham-uk-1.jpg",
+        "originalPath": "uploaded/original/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-birmingham-uk-1.jpeg",
+        "originalName": "2024 07 - 08 BBAA Birmingham UK 1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-birmingham-uk-2.jpg",
+        "title": "Group Photo 2",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-birmingham-uk-2.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-birmingham-uk-2.jpeg",
+        "publicPath": "uploaded/public/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-birmingham-uk-2.jpg",
+        "originalPath": "uploaded/original/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-birmingham-uk-2.jpeg",
+        "originalName": "2024 07 - 08 BBAA Birmingham UK 2.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-birmingham-uk-4.jpg",
+        "title": "Venue",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-birmingham-uk-4.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-birmingham-uk-4.jpeg",
+        "publicPath": "uploaded/public/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-birmingham-uk-4.jpg",
+        "originalPath": "uploaded/original/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-birmingham-uk-4.jpeg",
+        "originalName": "2024 07 - 08 BBAA Birmingham UK 4.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-g-kopp-r-hoeffer-t-stathopoulos.jpg",
+        "title": "G. Kopp, R. Hoeffer, T. Stathopoulos, M. Sterling, F. Haan, B. Blocken, HH's wife, H. Hemida, C. Borri, I. Calotescu,  , 田村幸雄, A. Kareem, AK's wife, 曹曙陽，Q.S. Yang",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-g-kopp-r-hoeffer-t-stathopoulos.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-g-kopp-r-hoeffer-t-stathopoulos-.jpg",
+        "publicPath": "uploaded/public/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-g-kopp-r-hoeffer-t-stathopoulos.jpg",
+        "originalPath": "uploaded/original/bbaa-2024-the-united-kingdom-birmingham/2024-07-08-bbaa-g-kopp-r-hoeffer-t-stathopoulos-.jpg",
+        "originalName": "2024 07 - 08 BBAA G. Kopp, R. Hoeffer, T. Stathopoulos, M. Sterling, F. Haan, B. Blocken, HH's wife, H. Hemida, C. Borri, I. Calotescu,  , 田村幸雄, A. Kareem, AK's wife, 曹曙陽、Q。S. Yang.jpg"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
