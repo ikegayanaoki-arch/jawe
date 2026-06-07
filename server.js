@@ -5,20 +5,16 @@ const fsNative = require("fs");
 const fs = require("fs/promises");
 const path = require("path");
 const heicConvert = require("heic-convert");
-const opentype = require("opentype.js");
 const sharp = require("sharp");
 const { URL } = require("url");
 
 const ROOT_DIR = __dirname;
 const PORT = Number(process.env.PORT || 8000);
 const DATA_DIR = path.resolve(process.env.DATA_DIR || path.join(ROOT_DIR, "data"));
-const WATERMARK_FONT_CANDIDATE_PATHS = [
-  process.env.WATERMARK_FONT_PATH ? path.resolve(process.env.WATERMARK_FONT_PATH) : "",
-  path.join(ROOT_DIR, "fonts", "NotoSansJP-Bold.otf"),
-  path.join(ROOT_DIR, "fonts", "NotoSansJP-Bold.ttf"),
-  path.join(ROOT_DIR, "fonts", "NotoSansJP-Regular.ttf"),
-  path.join(ROOT_DIR, "fonts", "NotoSansJP-VariableFont_wght.ttf"),
-].filter(Boolean);
+const WATERMARK_NOTICE_TEXT = "日本風工学会会員限定|転載禁止";
+const WATERMARK_NOTICE_PATH_D =
+  "M27.70-33.50L72.30-33.50L72.30-10.90L27.70-10.90ZM27.70-45.30L27.70-66.80L72.30-66.80L72.30-45.30ZM15.40-78.90L15.40 7.80L27.70 7.80L27.70 1.20L72.30 1.20L72.30 7.60L85.20 7.60L85.20-78.90ZM143.60-84.90L143.60-65.50L105.90-65.50L105.90-53.30L136.50-53.30C128.70-37.80 116-23.40 101.90-15.70C104.70-13.30 108.60-8.70 110.70-5.70C116.30-9.20 121.50-13.60 126.40-18.60L126.40-8L143.60-8L143.60 9L156.30 9L156.30-8L172.90-8L172.90-19.50C177.90-14.20 183.40-9.70 189.30-6.10C191.40-9.50 195.60-14.40 198.60-16.90C184.20-24.50 171.40-38.30 163.50-53.30L194.30-53.30L194.30-65.50L156.30-65.50L156.30-84.90ZM143.60-20.20L127.90-20.20C133.80-26.60 139.10-34 143.60-42.10ZM156.30-20.20L156.30-42.30C160.80-34.10 166.20-26.70 172.30-20.20ZM213.50-80.90L213.50-46C213.50-30.80 212.60-10.80 202.40 2.80C205.10 4 210.10 7.30 212.10 9.30C223.20-5.50 224.90-29.30 224.90-46L224.90-69.80L274.10-69.80C274.10-26.90 274.30 9 289 9C295.20 9 297.50 3.40 298.60-8.70C296.50-10.90 293.80-14.80 291.90-18.20C291.80-10.10 291.10-4 290.20-4C285.40-4 285.40-41.40 286-80.90ZM237.40-40L243.80-40L243.80-29.10L237.40-29.10ZM254.20-40L260.80-40L260.80-29.10L254.20-29.10ZM258.30-17C259.40-15 260.40-12.90 261.40-10.70L254.20-10.20L254.20-20L270.50-20L270.50-49.20L254.20-49.20L254.20-56.30C260.90-57.20 267.40-58.30 272.90-59.70L265-68.30C255.50-65.70 239.70-64 225.90-63.20C227-60.90 228.40-56.80 228.80-54.30C233.60-54.50 238.70-54.80 243.80-55.20L243.80-49.20L228.20-49.20L228.20-20L243.80-20L243.80-9.50L223.70-8.40L224.50 2.30L265.20-1C266 1.50 266.60 3.80 267 5.80L276.80 2.50C275.60-3.60 271.50-12.90 267.40-19.80ZM304.50-10.10L304.50 2L395.90 2L395.90-10.10L356.50-10.10L356.50-62L390.30-62L390.30-74.60L310-74.60L310-62L342.80-62L342.80-10.10ZM443.90-34.80L443.90-28.30L405.40-28.30L405.40-17.30L443.90-17.30L443.90-4.20C443.90-2.80 443.40-2.40 441.40-2.40C439.30-2.30 431.80-2.30 425.50-2.60C427.30 0.60 429.60 5.70 430.40 9C438.90 9 445.20 8.90 450 7.20C454.80 5.50 456.20 2.30 456.20-3.90L456.20-17.30L494.90-17.30L494.90-28.30L457-28.30C465.20-33 473-39.50 478.60-45.60L471.10-51.40L468.50-50.80L423.30-50.80L423.30-40.40L457.40-40.40C455-38.40 452.30-36.50 449.60-34.80ZM438.50-81.60C440.90-77.80 443.40-73 444.90-69.10L429.10-69.10L432.70-70.80C431.10-74.60 427.10-80 423.60-84L413.40-79.40C415.80-76.30 418.50-72.40 420.30-69.10L406.70-69.10L406.70-44.60L417.90-44.60L417.90-58.50L482-58.50L482-44.60L493.80-44.60L493.80-69.10L480.50-69.10C483.30-72.60 486.20-76.60 488.90-80.50L475.90-84.30C473.90-79.70 470.60-73.80 467.30-69.10L452.10-69.10L457-71C455.70-75.10 452.30-81.10 449.10-85.50ZM558.10-17.90C561.30-14.90 564.70-11.40 567.90-7.80L537.60-6.70C540.70-12.20 543.90-18.40 546.80-24.30L591.90-24.30L591.90-35.50L508.80-35.50L508.80-24.30L532-24.30C530-18.50 527.20-11.90 524.40-6.30L509.30-5.80L510.80 6C528 5.20 552.90 4.10 576.50 2.90C578 5.10 579.40 7.20 580.40 9.10L591.60 2.30C587-5.30 577.60-15.80 568.60-23.50ZM526.60-51.10L526.60-43.80L573.50-43.80L573.50-51.70C579-48 584.80-44.60 590.40-42C592.50-45.60 595.20-49.90 598.20-52.90C582.30-58.60 566.40-70 555.70-84.80L543.10-84.80C535.70-72.90 519.70-58.70 502.50-51.10C505-48.60 508.20-44 509.60-41.10C515.50-43.90 521.30-47.30 526.60-51.10ZM549.90-73.30C554.50-67 561.40-60.60 569.20-54.80L531.60-54.80C539.20-60.70 545.60-67.20 549.90-73.30ZM658.10-17.90C661.30-14.90 664.70-11.40 667.90-7.80L637.60-6.70C640.70-12.20 643.90-18.40 646.80-24.30L691.90-24.30L691.90-35.50L608.80-35.50L608.80-24.30L632-24.30C630-18.50 627.20-11.90 624.40-6.30L609.30-5.80L610.80 6C628 5.20 652.90 4.10 676.50 2.90C678 5.10 679.40 7.20 680.40 9.10L691.60 2.30C687-5.30 677.60-15.80 668.60-23.50ZM626.60-51.10L626.60-43.80L673.50-43.80L673.50-51.70C679-48 684.80-44.60 690.40-42C692.50-45.60 695.20-49.90 698.20-52.90C682.30-58.60 666.40-70 655.70-84.80L643.10-84.80C635.70-72.90 619.70-58.70 602.50-51.10C605-48.60 608.20-44 609.60-41.10C615.50-43.90 621.30-47.30 626.60-51.10ZM649.90-73.30C654.50-67 661.40-60.60 669.20-54.80L631.60-54.80C639.20-60.70 645.60-67.20 649.90-73.30ZM729.90-72.50L770.50-72.50L770.50-66L729.90-66ZM717.80-81.80L717.80-56.70L783.20-56.70L783.20-81.80ZM725.20-32.90L774.30-32.90L774.30-28.60L725.20-28.60ZM725.20-21L774.30-21L774.30-16.70L725.20-16.70ZM725.20-44.70L774.30-44.70L774.30-40.50L725.20-40.50ZM754.60-2.50C765.30 0.60 779.10 5.60 786.90 9.20L797.50 0.70C790.50-2.10 780-5.70 770.60-8.50L786.80-8.50L786.80-52.90L713.30-52.90L713.30-8.50L728.90-8.50C722.10-5.10 711.80-1.50 703.10 0.40C705.90 2.70 710 6.50 712.20 9C722.30 6.50 735.30 1.60 743.30-3.10L735.70-8.50L763.10-8.50ZM855.40-52.40L878.60-52.40L878.60-44L855.40-44ZM855.40-62.20L855.40-70.20L878.60-70.20L878.60-62.20ZM885.90-33C883.60-30 880.20-26.40 876.90-23.20C875.40-26.50 874.10-30 873.10-33.70L890.50-33.70L890.50-80.50L843.80-80.50L843.80-5.90L833.40-4.20L837.30 7.40C846.90 5.40 859.20 2.70 870.80 0L869.80-10.40L855.40-7.80L855.40-33.70L862.60-33.70C867.10-14.20 874.80 0.90 889.70 8.60C891.30 5.50 894.90 0.90 897.50-1.40C890.90-4.30 885.70-8.90 881.70-14.70C886-18 891-22.30 895.30-26.50ZM807.40-80.60L807.40 9L818.60 9L818.60-70L827.30-70C825.60-63 823.30-53.90 821.10-47.40C827.10-40.60 828.50-34.40 828.50-29.80C828.60-26.90 828-25 826.80-24.10C825.90-23.50 824.90-23.20 823.80-23.20C822.50-23.20 821.10-23.20 819.20-23.30C820.90-20.30 821.70-15.60 821.80-12.60C824.30-12.60 826.80-12.50 828.80-12.80C831-13.20 833.10-13.80 834.70-15C838-17.40 839.40-21.50 839.40-28.20C839.40-34 838.20-40.90 831.60-48.70C834.70-56.60 838.20-67.60 841-76.40L832.80-81.10L831.10-80.60ZM919.80-37.80C918-20.50 913.10-6.60 902.20 1.40C905 3.20 910.10 7.40 912.10 9.60C917.80 4.70 922.20-1.70 925.50-9.50C934.60 4.90 948.40 8 967 8L992.10 8C992.70 4.30 994.60-1.40 996.40-4.30C989.60-4 973-4 967.60-4C963.60-4 959.80-4.20 956.20-4.60L956.20-19.60L983.70-19.60L983.70-30.80L956.20-30.80L956.20-43.30L977.60-43.30L977.60-54.80L922.30-54.80L922.30-43.30L943.70-43.30L943.70-8.10C937.80-10.90 933.10-15.70 930-23.70C931-27.70 931.70-32 932.30-36.50ZM907.10-74.70L907.10-49.60L918.90-49.60L918.90-63.40L980.70-63.40L980.70-49.60L993-49.60L993-74.70L956.30-74.70L956.30-84.80L943.50-84.80L943.50-74.70ZM1010 28.40L1019.60 28.40L1019.60-85.10L1010-85.10ZM1082.50-78L1082.50-66.70L1122.60-66.70L1122.60-78ZM1105.80-23.60C1108.20-18.80 1110.50-13.10 1112.30-7.70L1096.10-6.60C1098.70-15.70 1101.50-27.60 1103.60-38.60L1126.10-38.60L1126.10-49.90L1078.60-49.90L1078.60-38.60L1090.60-38.60C1089.20-27.70 1086.90-15 1084.50-5.80L1076-5.30L1078.20 6.50C1088.50 5.60 1102.10 4.30 1115.40 3C1115.90 5 1116.20 7 1116.50 8.70L1127.60 4.30C1125.90-4.50 1121.30-17.60 1116-27.70ZM1036.30-59.60L1036.30-23.20L1050.50-23.20L1050.50-17.50L1032.70-17.50L1032.70-7L1050.50-7L1050.50 8.90L1061.60 8.90L1061.60-7L1078.50-7L1078.50-17.50L1061.60-17.50L1061.60-23.20L1076.60-23.20L1076.60-59.60L1061.80-59.60L1061.80-65.10L1077.80-65.10L1077.80-75.40L1061.80-75.40L1061.80-84.90L1050.50-84.90L1050.50-75.40L1034.10-75.40L1034.10-65.10L1050.50-65.10L1050.50-59.60ZM1045.50-37.50L1051.70-37.50L1051.70-31.60L1045.50-31.60ZM1060.40-37.50L1067.10-37.50L1067.10-31.60L1060.40-31.60ZM1045.50-51.20L1051.70-51.20L1051.70-45.30L1045.50-45.30ZM1060.40-51.20L1067.10-51.20L1067.10-45.30L1060.40-45.30ZM1202.40-78.70C1206.80-74.40 1212.20-68.30 1214.50-64.30L1223.90-70.80C1221.20-74.70 1215.70-80.50 1211.20-84.60ZM1211.60-49.50C1209.20-41.70 1206.20-34.60 1202.40-28.10C1201.10-35.50 1200.20-44.30 1199.60-53.80L1225.30-53.80L1225.30-63.70L1199.20-63.70C1199-70.50 1198.90-77.60 1199.10-84.80L1187.10-84.80C1187.10-77.70 1187.20-70.60 1187.40-63.70L1166.30-63.70L1166.30-69L1182.30-69L1182.30-78.20L1166.30-78.20L1166.30-84.90L1154.90-84.90L1154.90-78.20L1138.70-78.20L1138.70-69L1154.90-69L1154.90-63.70L1134.20-63.70L1134.20-53.80L1155.10-53.80L1155.10-49.50L1136.90-49.50L1136.90-41L1155.10-41L1155.10-37.20L1138.70-37.20L1138.70-12.40L1155.30-12.40L1155.30-8.60L1135.60-8.60L1135.60 0.10L1155.30 0.10L1155.30 9L1165.80 9L1165.80 0.10L1175.10 0.10C1178 2.50 1181.30 6.20 1183 9.20C1188.30 5.70 1193.20 1.60 1197.60-2.90C1201.20 4.60 1206.10 9 1212.60 9C1221.50 9 1225.20 4.60 1226.80-12.80C1223.80-13.90 1219.80-16.60 1217.30-19.20C1216.80-7.60 1215.80-2.70 1213.70-2.70C1210.80-2.70 1208.10-6.50 1206-13C1212.80-22.50 1218.20-33.60 1222.20-46.20ZM1165.90-53.80L1187.90-53.80C1188.80-39.20 1190.40-25.70 1193.20-15.10C1190.40-11.80 1187.30-8.90 1184-6.20L1184-8.60L1165.80-8.60L1165.80-12.40L1182.80-12.40L1182.80-37.20L1165.90-37.20L1165.90-41L1184.20-41L1184.20-49.50L1165.90-49.50ZM1147.20-22L1156.10-22L1156.10-18.30L1147.20-18.30ZM1164.90-22L1174-22L1174-18.30L1164.90-18.30ZM1147.20-31.30L1156.10-31.30L1156.10-27.60L1147.20-27.60ZM1164.90-31.30L1174-31.30L1174-27.60L1164.90-27.60ZM1294.20-9C1301-4.20 1309.50 2.90 1313.40 7.50L1323.70 1.20C1319.30-3.50 1310.40-10.20 1303.70-14.60ZM1246.60-40.70L1246.60-31L1314-31L1314-40.70ZM1251.10-14.20C1247.20-8.60 1240.10-3 1233 0.50C1235.60 2.20 1240.20 5.90 1242.30 7.90C1249.40 3.60 1257.50-3.40 1262.40-10.60ZM1251.40-85L1251.40-76.30L1236-76.30L1236-66.60L1248.10-66.60C1243.90-60.50 1238-54.70 1232.20-51.40C1234.60-49.50 1237.80-45.80 1239.40-43.30C1243.60-46.20 1247.80-50.50 1251.40-55.40L1251.40-43.50L1262.50-43.50L1262.50-56.60C1265.80-54 1269.30-51.20 1271.30-49.30L1277.50-57.30C1275.10-59 1266.50-64.30 1262.50-66.50L1262.50-66.60L1275.30-66.60L1275.30-76.30L1262.50-76.30L1262.50-85ZM1235.50-26L1235.50-16L1273.90-16L1273.90-2.70C1273.90-1.50 1273.40-1.20 1271.80-1.10C1270.30-1 1264.30-1 1259.40-1.30C1260.90 1.60 1262.70 5.90 1263.30 9.10C1270.80 9.10 1276.40 9 1280.50 7.50C1284.80 5.90 1286 3.20 1286-2.40L1286-16L1324-16L1324-26ZM1295.50-85L1295.50-76.30L1278.80-76.30L1278.80-66.60L1292-66.60C1287.60-60.60 1281.10-55 1274.90-51.80C1277.10-49.90 1280.40-46.10 1282-43.70C1286.80-46.70 1291.50-51.30 1295.50-56.40L1295.50-43.50L1306.80-43.50L1306.80-55.90C1310.80-51 1315.20-46.50 1319.30-43.50C1321-46.10 1324.40-49.80 1326.80-51.70C1320.80-55 1314.10-60.80 1309.30-66.60L1323.30-66.60L1323.30-76.30L1306.80-76.30L1306.80-85ZM1346.50-64.30L1346.50-8.10L1333.70-8.10L1333.70 3.90L1425.50 3.90L1425.50-8.10L1390.10-8.10L1390.10-41.50L1420-41.50L1420-53.60L1390.10-53.60L1390.10-84.90L1377.30-84.90L1377.30-8.10L1359-8.10L1359-64.30Z";
+const WATERMARK_NOTICE_PATH_BOUNDS = { x1: 15.4, x2: 1425.5 };
 const UPLOADS_DIR = path.join(DATA_DIR, "uploaded");
 const ORIGINAL_UPLOADS_DIR = path.join(UPLOADS_DIR, "original");
 const PUBLIC_UPLOADS_DIR = path.join(UPLOADS_DIR, "public");
@@ -51,7 +47,6 @@ const STATIC_TYPES = {
   ".gz": "application/gzip",
   ".webp": "image/webp",
 };
-const WATERMARK_FONT = loadWatermarkFont();
 
 const server = http.createServer(async (request, response) => {
   try {
@@ -576,7 +571,7 @@ function looksLikeHeic(buffer) {
 
 function buildWatermarkText(context) {
   return [
-    "日本風工学会会員限定|転載禁止",
+    WATERMARK_NOTICE_TEXT,
     [context.conferenceType, context.eventDate].filter(Boolean).join(" "),
     [context.cityName, context.country].filter(Boolean).join(" / "),
   ]
@@ -590,7 +585,7 @@ function createWatermarkSvg(width, height, lines) {
   const padding = Math.round(Math.min(safeWidth, safeHeight) * 0.03);
   const lineHeight = Math.max(18, Math.round(safeHeight * 0.035));
   const fontSize = Math.max(15, Math.round(safeHeight * 0.03));
-  const measuredTextWidth = WATERMARK_FONT ? measureWatermarkTextWidth(lines, fontSize) : 0;
+  const measuredTextWidth = measureWatermarkTextWidth(lines, fontSize);
   const watermarkWidth = Math.min(
     Math.max(Math.round(safeWidth * 0.38), Math.ceil(measuredTextWidth + padding * 2.8)),
     Math.round(safeWidth * 0.78),
@@ -599,23 +594,14 @@ function createWatermarkSvg(width, height, lines) {
   const watermarkHeight = padding * 2 + lineHeight * lines.length;
   const x = safeWidth - watermarkWidth - padding;
   const y = safeHeight - watermarkHeight - padding;
-  const textElements = WATERMARK_FONT
-    ? createWatermarkPathElements(lines, {
-        x,
-        y,
-        width: watermarkWidth,
-        padding,
-        lineHeight,
-        fontSize,
-      })
-    : createWatermarkTextElements(lines, {
-        x,
-        y,
-        width: watermarkWidth,
-        padding,
-        lineHeight,
-        fontSize,
-      });
+  const textElements = createWatermarkElements(lines, {
+    x,
+    y,
+    width: watermarkWidth,
+    padding,
+    lineHeight,
+    fontSize,
+  });
 
   return `
     <svg xmlns="http://www.w3.org/2000/svg" width="${safeWidth}" height="${safeHeight}">
@@ -627,88 +613,41 @@ function createWatermarkSvg(width, height, lines) {
   `;
 }
 
-function createWatermarkTextElements(lines, layout) {
+function createWatermarkElements(lines, layout) {
   return lines
     .map((line, index) => {
       const baselineY = layout.y + layout.padding + layout.fontSize + index * layout.lineHeight;
+      if (line === WATERMARK_NOTICE_TEXT) {
+        return createWatermarkNoticePath(layout, baselineY);
+      }
+
       return `<text x="${layout.x + layout.width / 2}" y="${baselineY}" text-anchor="middle" font-family='"Noto Sans JP", "Noto Sans CJK JP", Arial, sans-serif' font-size="${layout.fontSize}" font-weight="700">${escapeXml(line)}</text>`;
     })
     .join("");
 }
 
-function createWatermarkPathElements(lines, layout) {
-  return lines
-    .map((line, index) => {
-      const pathMarkup = buildWatermarkLinePath(line, layout, index);
-      return pathMarkup || "";
-    })
-    .join("");
-}
-
-function buildWatermarkLinePath(line, layout, index) {
-  const trimmedLine = String(line || "").trim();
-  if (!trimmedLine || !WATERMARK_FONT) {
-    return "";
-  }
-
-  const baselineY = layout.y + layout.padding + layout.fontSize + index * layout.lineHeight;
-  const pathObject = WATERMARK_FONT.getPath(trimmedLine, 0, baselineY, layout.fontSize, {
-    kerning: true,
-    features: { liga: true },
-  });
-  const bounds = pathObject.getBoundingBox();
-  const textWidth = Math.max(0, bounds.x2 - bounds.x1);
-  const centeredX = layout.x + (layout.width - textWidth) / 2 - bounds.x1;
-  const centeredPath = WATERMARK_FONT.getPath(trimmedLine, centeredX, baselineY, layout.fontSize, {
-    kerning: true,
-    features: { liga: true },
-  });
-  return `<path d="${centeredPath.toPathData(2)}" />`;
+function createWatermarkNoticePath(layout, baselineY) {
+  const scale = layout.fontSize / 100;
+  const pathWidth = (WATERMARK_NOTICE_PATH_BOUNDS.x2 - WATERMARK_NOTICE_PATH_BOUNDS.x1) * scale;
+  const translateX = layout.x + (layout.width - pathWidth) / 2 - WATERMARK_NOTICE_PATH_BOUNDS.x1 * scale;
+  return `<path d="${WATERMARK_NOTICE_PATH_D}" transform="translate(${translateX.toFixed(2)} ${baselineY.toFixed(
+    2,
+  )}) scale(${scale.toFixed(4)})" />`;
 }
 
 function measureWatermarkTextWidth(lines, fontSize) {
   return lines.reduce((maxWidth, line) => {
     const trimmedLine = String(line || "").trim();
-    if (!trimmedLine || !WATERMARK_FONT) {
+    if (!trimmedLine) {
       return maxWidth;
     }
 
-    const pathObject = WATERMARK_FONT.getPath(trimmedLine, 0, 0, fontSize, {
-      kerning: true,
-      features: { liga: true },
-    });
-    const bounds = pathObject.getBoundingBox();
-    return Math.max(maxWidth, Math.max(0, bounds.x2 - bounds.x1));
-  }, 0);
-}
-
-function loadWatermarkFont() {
-  for (const candidatePath of WATERMARK_FONT_CANDIDATE_PATHS) {
-    try {
-      if (!candidatePath || !fsNative.existsSync(candidatePath)) {
-        continue;
-      }
-
-      const fontBuffer = fsNative.readFileSync(candidatePath);
-      const fontArrayBuffer = fontBuffer.buffer.slice(
-        fontBuffer.byteOffset,
-        fontBuffer.byteOffset + fontBuffer.byteLength,
-      );
-      const font = opentype.parse(fontArrayBuffer);
-      if (!font?.names || typeof font.charToGlyph !== "function") {
-        console.warn(`Watermark font at ${candidatePath} did not parse as a usable font.`);
-        continue;
-      }
-
-      console.log(`Watermark font loaded: ${candidatePath}`);
-      return font;
-    } catch (error) {
-      console.warn(`Failed to load watermark font from ${candidatePath}:`, error);
+    if (trimmedLine === WATERMARK_NOTICE_TEXT) {
+      return Math.max(maxWidth, (WATERMARK_NOTICE_PATH_BOUNDS.x2 - WATERMARK_NOTICE_PATH_BOUNDS.x1) * (fontSize / 100));
     }
-  }
 
-  console.warn("Watermark font was not loaded. Japanese watermark text may render incorrectly.");
-  return null;
+    return Math.max(maxWidth, trimmedLine.length * fontSize * 0.62);
+  }, 0);
 }
 
 function mergeUniquePhotos(existingEntries, nextEntries) {
