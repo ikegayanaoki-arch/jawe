@@ -7,8 +7,49 @@ window.__INITIAL_CITIES__ = [
     "comment": "第1回CWE92",
     "eventDate": "1992",
     "organizer": "日本風工学会",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/cwe-1992-japan-tokyo/1992-08-cwe-a-kareem-j-h-ferziger-g-walker-b-bie.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/cwe-1992-japan-tokyo/1992-08-cwe-a-kareem-j-h-ferziger-g-walker-b-bie.jpg",
+        "title": "A. Kareem，小林信行，村上周三，J.H. Ferziger，G. Walker，B. Bienkiewicz，久枝XX，，田村幸雄",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-1992-japan-tokyo/1992-08-cwe-a-kareem-j-h-ferziger-g-walker-b-bie.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-1992-japan-tokyo/1992-08-cwe-a-kareem-j-h-ferziger-g-walker-b-bie.jpg",
+        "publicPath": "uploaded/public/cwe-1992-japan-tokyo/1992-08-cwe-a-kareem-j-h-ferziger-g-walker-b-bie.jpg",
+        "originalPath": "uploaded/original/cwe-1992-japan-tokyo/1992-08-cwe-a-kareem-j-h-ferziger-g-walker-b-bie.jpg",
+        "originalName": "1992 08 CWE A. Kareem、小林信行、村上周三、J.H. Ferziger、G. Walker、B. Bienkiewicz、久枝XX、、田村幸雄.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-1992-japan-tokyo/1992-08-cwe-a-kareem.jpg",
+        "title": "宮田利雄，A Kareem，田村幸雄，大熊武司",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-1992-japan-tokyo/1992-08-cwe-a-kareem.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-1992-japan-tokyo/1992-08-cwe-a-kareem.jpg",
+        "publicPath": "uploaded/public/cwe-1992-japan-tokyo/1992-08-cwe-a-kareem.jpg",
+        "originalPath": "uploaded/original/cwe-1992-japan-tokyo/1992-08-cwe-a-kareem.jpg",
+        "originalName": "1992 08 CWE 宮田利雄、A Kareem、田村幸雄、大熊武司.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-1992-japan-tokyo/1992-08-cwe.jpg",
+        "title": "村上周三",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-1992-japan-tokyo/1992-08-cwe.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-1992-japan-tokyo/1992-08-cwe.jpg",
+        "publicPath": "uploaded/public/cwe-1992-japan-tokyo/1992-08-cwe.jpg",
+        "originalPath": "uploaded/original/cwe-1992-japan-tokyo/1992-08-cwe.jpg",
+        "originalName": "1992 08 CWE 村上周三.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-1992-japan-tokyo/1992-08-cwe-j-holmes.jpg",
+        "title": "石崎潑雄，，，J. Holmes",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-1992-japan-tokyo/1992-08-cwe-j-holmes.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-1992-japan-tokyo/1992-08-cwe-j-holmes.jpg",
+        "publicPath": "uploaded/public/cwe-1992-japan-tokyo/1992-08-cwe-j-holmes.jpg",
+        "originalPath": "uploaded/original/cwe-1992-japan-tokyo/1992-08-cwe-j-holmes.jpg",
+        "originalName": "1992 08 CWE 石崎潑雄、、、J. Holmes.jpg"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "CWE",
@@ -88,6 +129,36 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/cwe-2006-japan-yokohama/r0010247.jpg",
         "originalPath": "uploaded/original/cwe-2006-japan-yokohama/r0010247.jpeg",
         "originalName": "R0010247.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2006-japan-yokohama/2006-07-cwe-t-stathopoulos-a-kareem.jpg",
+        "title": "T. Stathopoulos，松本勝， A. Kareem",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2006-japan-yokohama/2006-07-cwe-t-stathopoulos-a-kareem.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2006-japan-yokohama/2006-07-cwe-t-stathopoulos-a-kareem.jpg",
+        "publicPath": "uploaded/public/cwe-2006-japan-yokohama/2006-07-cwe-t-stathopoulos-a-kareem.jpg",
+        "originalPath": "uploaded/original/cwe-2006-japan-yokohama/2006-07-cwe-t-stathopoulos-a-kareem.jpg",
+        "originalName": "2006 07 CWE T. Stathopoulos、松本勝、 A. Kareem.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2006-japan-yokohama/2006-07-cwe-yokohama-1.jpg",
+        "title": "Yokohama 1",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2006-japan-yokohama/2006-07-cwe-yokohama-1.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2006-japan-yokohama/2006-07-cwe-yokohama-1.jpg",
+        "publicPath": "uploaded/public/cwe-2006-japan-yokohama/2006-07-cwe-yokohama-1.jpg",
+        "originalPath": "uploaded/original/cwe-2006-japan-yokohama/2006-07-cwe-yokohama-1.jpg",
+        "originalName": "2006 07 CWE Yokohama 1.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2006-japan-yokohama/2006-07-cwe-yokohama-3.jpg",
+        "title": "Yokohama 3",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2006-japan-yokohama/2006-07-cwe-yokohama-3.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2006-japan-yokohama/2006-07-cwe-yokohama-3.jpg",
+        "publicPath": "uploaded/public/cwe-2006-japan-yokohama/2006-07-cwe-yokohama-3.jpg",
+        "originalPath": "uploaded/original/cwe-2006-japan-yokohama/2006-07-cwe-yokohama-3.jpg",
+        "originalName": "2006 07 CWE Yokohama 3.jpg"
       }
     ],
     "photoSourceMode": "public",
@@ -134,6 +205,96 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/icwe-2015-brazil-porto-alegre/opening-celemony.jpg",
         "originalPath": "uploaded/original/icwe-2015-brazil-porto-alegre/opening-celemony.jpg",
         "originalName": "Opening Celemony.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-c-borri-g-dianna.jpg",
+        "title": "C. Borri，G. Dianna",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-c-borri-g-dianna.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2015-brazil-porto-alegre/2015-06-icwe-c-borri-g-dianna.jpg",
+        "publicPath": "uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-c-borri-g-dianna.jpg",
+        "originalPath": "uploaded/original/icwe-2015-brazil-porto-alegre/2015-06-icwe-c-borri-g-dianna.jpg",
+        "originalName": "2015 06 ICWE C. Borri、G. Dianna.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-porto-alegre-brazil-1.jpg",
+        "title": "Porto Alegre Brazil 1",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-porto-alegre-brazil-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2015-brazil-porto-alegre/2015-06-icwe-porto-alegre-brazil-1.jpg",
+        "publicPath": "uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-porto-alegre-brazil-1.jpg",
+        "originalPath": "uploaded/original/icwe-2015-brazil-porto-alegre/2015-06-icwe-porto-alegre-brazil-1.jpg",
+        "originalName": "2015 06 ICWE Porto Alegre Brazil 1.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-porto-alegre-brazil-7.jpg",
+        "title": "Porto Alegre Brazil 7",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-porto-alegre-brazil-7.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2015-brazil-porto-alegre/2015-06-icwe-porto-alegre-brazil-7.jpg",
+        "publicPath": "uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-porto-alegre-brazil-7.jpg",
+        "originalPath": "uploaded/original/icwe-2015-brazil-porto-alegre/2015-06-icwe-porto-alegre-brazil-7.jpg",
+        "originalName": "2015 06 ICWE Porto Alegre Brazil 7.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-q-s-yang-r-flay-t-stathopoulos-a-ka.jpg",
+        "title": "Q.S. Yang，R. Flay，T. Stathopoulos，田村幸雄，A. Kareem，，曹曙陽",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-q-s-yang-r-flay-t-stathopoulos-a-ka.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2015-brazil-porto-alegre/2015-06-icwe-q-s-yang-r-flay-t-stathopoulos-a-ka.jpg",
+        "publicPath": "uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-q-s-yang-r-flay-t-stathopoulos-a-ka.jpg",
+        "originalPath": "uploaded/original/icwe-2015-brazil-porto-alegre/2015-06-icwe-q-s-yang-r-flay-t-stathopoulos-a-ka.jpg",
+        "originalName": "2015 06 ICWE Q.S. Yang、R. Flay、T. Stathopoulos、田村幸雄、A. Kareem、、曹曙陽.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-q-s-yang-r-flay-t-stathopoulos.jpg",
+        "title": "Q.S. Yang，R. Flay，田村幸雄，T. Stathopoulos，，曹曙陽",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-q-s-yang-r-flay-t-stathopoulos.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2015-brazil-porto-alegre/2015-06-icwe-q-s-yang-r-flay-t-stathopoulos.jpg",
+        "publicPath": "uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-q-s-yang-r-flay-t-stathopoulos.jpg",
+        "originalPath": "uploaded/original/icwe-2015-brazil-porto-alegre/2015-06-icwe-q-s-yang-r-flay-t-stathopoulos.jpg",
+        "originalName": "2015 06 ICWE Q.S. Yang、R. Flay、田村幸雄、T. Stathopoulos、、曹曙陽.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-r-flay-k-c-s-kwok.jpg",
+        "title": "R. Flay，K.C.S. Kwok",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-r-flay-k-c-s-kwok.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2015-brazil-porto-alegre/2015-06-icwe-r-flay-k-c-s-kwok.jpg",
+        "publicPath": "uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-r-flay-k-c-s-kwok.jpg",
+        "originalPath": "uploaded/original/icwe-2015-brazil-porto-alegre/2015-06-icwe-r-flay-k-c-s-kwok.jpg",
+        "originalName": "2015 06 ICWE R. Flay、K.C.S. Kwok.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-a-loredo-souza.jpg",
+        "title": "田村幸雄，，A. Loredo-Souza",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-a-loredo-souza.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2015-brazil-porto-alegre/2015-06-icwe-a-loredo-souza.jpg",
+        "publicPath": "uploaded/public/icwe-2015-brazil-porto-alegre/2015-06-icwe-a-loredo-souza.jpg",
+        "originalPath": "uploaded/original/icwe-2015-brazil-porto-alegre/2015-06-icwe-a-loredo-souza.jpg",
+        "originalName": "2015 06 ICWE 田村幸雄、、A. Loredo-Souza.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/dsc-0058.jpg",
+        "title": "伊藤靖晃，A. Loredo-Souza，C.A. Trein，白土博通，八木知己",
+        "credit": "八木知己（京都大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/dsc-0058.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2015-brazil-porto-alegre/dsc-0058.jpg",
+        "publicPath": "uploaded/public/icwe-2015-brazil-porto-alegre/dsc-0058.jpg",
+        "originalPath": "uploaded/original/icwe-2015-brazil-porto-alegre/dsc-0058.jpg",
+        "originalName": "DSC_0058.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/dsc04087.jpg",
+        "title": "松田一俊，八木知己，白土博通，C.A. Trein，野口恭平",
+        "credit": "八木知己（京都大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2015-brazil-porto-alegre/dsc04087.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2015-brazil-porto-alegre/dsc04087.jpg",
+        "publicPath": "uploaded/public/icwe-2015-brazil-porto-alegre/dsc04087.jpg",
+        "originalPath": "uploaded/original/icwe-2015-brazil-porto-alegre/dsc04087.jpg",
+        "originalName": "DSC04087.JPG"
       }
     ],
     "photoSourceMode": "public",
@@ -286,6 +447,46 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/cwe-2014-germany-hamburg/0004-cwe2014.jpg",
         "originalPath": "uploaded/original/cwe-2014-germany-hamburg/0004-cwe2014.jpg",
         "originalName": "0004_CWE2014.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/2014-06-cwe-t-stathopoulos.jpg",
+        "title": "，，T. Stathopoulos",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/2014-06-cwe-t-stathopoulos.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/2014-06-cwe-t-stathopoulos.jpg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/2014-06-cwe-t-stathopoulos.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/2014-06-cwe-t-stathopoulos.jpg",
+        "originalName": "2014 06 CWE 、、T. Stathopoulos.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/2014-06-cwe-hamburg-germany-2.jpg",
+        "title": "Hamburg Germany 2",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/2014-06-cwe-hamburg-germany-2.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/2014-06-cwe-hamburg-germany-2.jpg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/2014-06-cwe-hamburg-germany-2.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/2014-06-cwe-hamburg-germany-2.jpg",
+        "originalName": "2014 06 CWE Hamburg Germany 2.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/2014-06-cwe-hamburg-germany-3.jpg",
+        "title": "Hamburg Germany 3",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/2014-06-cwe-hamburg-germany-3.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/2014-06-cwe-hamburg-germany-3.jpg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/2014-06-cwe-hamburg-germany-3.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/2014-06-cwe-hamburg-germany-3.jpg",
+        "originalName": "2014 06 CWE Hamburg Germany 3.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2014-germany-hamburg/2014-06-cwe-hamburg-germany-5.jpg",
+        "title": "Hamburg Germany 5",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2014-germany-hamburg/2014-06-cwe-hamburg-germany-5.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2014-germany-hamburg/2014-06-cwe-hamburg-germany-5.jpg",
+        "publicPath": "uploaded/public/cwe-2014-germany-hamburg/2014-06-cwe-hamburg-germany-5.jpg",
+        "originalPath": "uploaded/original/cwe-2014-germany-hamburg/2014-06-cwe-hamburg-germany-5.jpg",
+        "originalName": "2014 06 CWE Hamburg Germany 5.jpg"
       }
     ],
     "photoSourceMode": "public",
@@ -348,6 +549,46 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/apcwe-2013-india-chennai/dsc00677.jpg",
         "originalPath": "uploaded/original/apcwe-2013-india-chennai/dsc00677.jpg",
         "originalName": "DSC00677.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2013-india-chennai/2013-12-apcwe-a-gupta-a-mittal.jpg",
+        "title": "A. Gupta，A. Mittal，田村幸雄",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/apcwe-2013-india-chennai/2013-12-apcwe-a-gupta-a-mittal.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2013-india-chennai/2013-12-apcwe-a-gupta-a-mittal.jpg",
+        "publicPath": "uploaded/public/apcwe-2013-india-chennai/2013-12-apcwe-a-gupta-a-mittal.jpg",
+        "originalPath": "uploaded/original/apcwe-2013-india-chennai/2013-12-apcwe-a-gupta-a-mittal.jpg",
+        "originalName": "2013 12 APCWE A. Gupta、A. Mittal、田村幸雄.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2013-india-chennai/2013-12-apcwe-chennai-india-1.jpg",
+        "title": "Chennai India 1",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/apcwe-2013-india-chennai/2013-12-apcwe-chennai-india-1.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2013-india-chennai/2013-12-apcwe-chennai-india-1.jpg",
+        "publicPath": "uploaded/public/apcwe-2013-india-chennai/2013-12-apcwe-chennai-india-1.jpg",
+        "originalPath": "uploaded/original/apcwe-2013-india-chennai/2013-12-apcwe-chennai-india-1.jpg",
+        "originalName": "2013 12 APCWE Chennai India 1.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2013-india-chennai/2013-12-apcwe-k-mehta-p-krishna.jpg",
+        "title": "K. Mehta，田村幸雄，，P. Krishna",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/apcwe-2013-india-chennai/2013-12-apcwe-k-mehta-p-krishna.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2013-india-chennai/2013-12-apcwe-k-mehta-p-krishna.jpg",
+        "publicPath": "uploaded/public/apcwe-2013-india-chennai/2013-12-apcwe-k-mehta-p-krishna.jpg",
+        "originalPath": "uploaded/original/apcwe-2013-india-chennai/2013-12-apcwe-k-mehta-p-krishna.jpg",
+        "originalName": "2013 12 APCWE K. Mehta、田村幸雄、、P. Krishna.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2013-india-chennai/2013-12-apcwe-p-sarkar-r-flay.jpg",
+        "title": "，，，P. Sarkar，R. Flay",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/apcwe-2013-india-chennai/2013-12-apcwe-p-sarkar-r-flay.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2013-india-chennai/2013-12-apcwe-p-sarkar-r-flay.jpg",
+        "publicPath": "uploaded/public/apcwe-2013-india-chennai/2013-12-apcwe-p-sarkar-r-flay.jpg",
+        "originalPath": "uploaded/original/apcwe-2013-india-chennai/2013-12-apcwe-p-sarkar-r-flay.jpg",
+        "originalName": "2013 12 APCWE、、、P. Sarkar、R. Flay.jpg"
       }
     ],
     "photoSourceMode": "public",
@@ -394,6 +635,66 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/bbaa-2012-china-shanghai/dsc01484.jpg",
         "originalPath": "uploaded/original/bbaa-2012-china-shanghai/dsc01484.jpg",
         "originalName": "DSC01484.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2012-china-shanghai/cimg2111.jpg",
+        "title": "バンケット",
+        "credit": "松宮央登（京都大学）",
+        "publicSrc": "./data/uploaded/public/bbaa-2012-china-shanghai/cimg2111.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2012-china-shanghai/cimg2111.jpg",
+        "publicPath": "uploaded/public/bbaa-2012-china-shanghai/cimg2111.jpg",
+        "originalPath": "uploaded/original/bbaa-2012-china-shanghai/cimg2111.jpg",
+        "originalName": "CIMG2111.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2012-china-shanghai/2012-09-bbaa-a-kareem-a-zasso-c-borri.jpg",
+        "title": "A. Kareem，A. Zasso，，C. Borri，田村幸雄",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2012-china-shanghai/2012-09-bbaa-a-kareem-a-zasso-c-borri.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2012-china-shanghai/2012-09-bbaa-a-kareem-a-zasso-c-borri.jpg",
+        "publicPath": "uploaded/public/bbaa-2012-china-shanghai/2012-09-bbaa-a-kareem-a-zasso-c-borri.jpg",
+        "originalPath": "uploaded/original/bbaa-2012-china-shanghai/2012-09-bbaa-a-kareem-a-zasso-c-borri.jpg",
+        "originalName": "2012 09 BBAA A. Kareem、A. Zasso、、C. Borri、田村幸雄.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2012-china-shanghai/2012-09-bbaa-l-carassale-a-freda-a-kareem-g-sola.jpg",
+        "title": "L. Carassale，，A. Freda，A. Kareem，田村幸雄，G. Solari，松本勝，",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2012-china-shanghai/2012-09-bbaa-l-carassale-a-freda-a-kareem-g-sola.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2012-china-shanghai/2012-09-bbaa-l-carassale-a-freda-a-kareem-g-sola.jpg",
+        "publicPath": "uploaded/public/bbaa-2012-china-shanghai/2012-09-bbaa-l-carassale-a-freda-a-kareem-g-sola.jpg",
+        "originalPath": "uploaded/original/bbaa-2012-china-shanghai/2012-09-bbaa-l-carassale-a-freda-a-kareem-g-sola.jpg",
+        "originalName": "2012 09 BBAA L. Carassale、、A. Freda、A. Kareem、田村幸雄、G. Solari、松本勝、.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2012-china-shanghai/2012-09-bbaa-shanghai-1.jpg",
+        "title": "Shanghai 1",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2012-china-shanghai/2012-09-bbaa-shanghai-1.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2012-china-shanghai/2012-09-bbaa-shanghai-1.jpg",
+        "publicPath": "uploaded/public/bbaa-2012-china-shanghai/2012-09-bbaa-shanghai-1.jpg",
+        "originalPath": "uploaded/original/bbaa-2012-china-shanghai/2012-09-bbaa-shanghai-1.jpg",
+        "originalName": "2012 09 BBAA Shanghai 1.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2012-china-shanghai/2012-09-bbaa-shanghai-4.jpg",
+        "title": "Shanghai 4",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2012-china-shanghai/2012-09-bbaa-shanghai-4.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2012-china-shanghai/2012-09-bbaa-shanghai-4.jpg",
+        "publicPath": "uploaded/public/bbaa-2012-china-shanghai/2012-09-bbaa-shanghai-4.jpg",
+        "originalPath": "uploaded/original/bbaa-2012-china-shanghai/2012-09-bbaa-shanghai-4.jpg",
+        "originalName": "2012 09 BBAA Shanghai 4.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2012-china-shanghai/2012-09-bbaa-a-kareem.jpg",
+        "title": "田村幸雄， A. Kareem",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2012-china-shanghai/2012-09-bbaa-a-kareem.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2012-china-shanghai/2012-09-bbaa-a-kareem.jpg",
+        "publicPath": "uploaded/public/bbaa-2012-china-shanghai/2012-09-bbaa-a-kareem.jpg",
+        "originalPath": "uploaded/original/bbaa-2012-china-shanghai/2012-09-bbaa-a-kareem.jpg",
+        "originalName": "2012 09 BBAA 田村幸雄、 A. Kareem.JPG"
       }
     ],
     "photoSourceMode": "public",
@@ -550,6 +851,76 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/r0015687.jpg",
         "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/r0015687.jpeg",
         "originalName": "R0015687.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/cimg1088.jpg",
+        "title": "松本先生",
+        "credit": "松宮央登（京都大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/cimg1088.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/cimg1088.jpg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/cimg1088.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/cimg1088.jpg",
+        "originalName": "CIMG1088.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/cimg1118.jpg",
+        "title": "白土先生",
+        "credit": "松宮央登（京都大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/cimg1118.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/cimg1118.jpg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/cimg1118.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/cimg1118.jpg",
+        "originalName": "CIMG1118.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/2011-07-icwe-amsterdam-netherlands-1.jpg",
+        "title": "Amsterdam Netherlands 1",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/2011-07-icwe-amsterdam-netherlands-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/2011-07-icwe-amsterdam-netherlands-1.jpg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/2011-07-icwe-amsterdam-netherlands-1.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/2011-07-icwe-amsterdam-netherlands-1.jpg",
+        "originalName": "2011 07 ICWE Amsterdam Netherlands 1.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/2011-07-icwe-amsterdam-netherlands-5.jpg",
+        "title": "Amsterdam Netherlands 5",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/2011-07-icwe-amsterdam-netherlands-5.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/2011-07-icwe-amsterdam-netherlands-5.jpg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/2011-07-icwe-amsterdam-netherlands-5.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/2011-07-icwe-amsterdam-netherlands-5.jpg",
+        "originalName": "2011 07 ICWE Amsterdam Netherlands 5.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/2011-07-icwe-m-wahlstrom-c-guerts.jpg",
+        "title": "M. Wahlstrom，S. Rahman，C. Guerts，田村幸雄",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/2011-07-icwe-m-wahlstrom-c-guerts.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/2011-07-icwe-m-wahlstrom-c-guerts.jpg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/2011-07-icwe-m-wahlstrom-c-guerts.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/2011-07-icwe-m-wahlstrom-c-guerts.jpg",
+        "originalName": "2011 07 ICWE M. Wahlstrom、、田村幸雄、C. Guerts.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/2011-07-icwe-m-wahlstrom-s-rahman-c-guerts.jpg",
+        "title": "M. Wahlstrom，，田村幸雄，C. Guerts",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/2011-07-icwe-m-wahlstrom-s-rahman-c-guerts.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/2011-07-icwe-m-wahlstrom-s-rahman-c-guerts.jpg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/2011-07-icwe-m-wahlstrom-s-rahman-c-guerts.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/2011-07-icwe-m-wahlstrom-s-rahman-c-guerts.jpg",
+        "originalName": "2011 07 ICWE M. Wahlstrom、S. Rahman、C. Guerts、田村幸雄.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/2011-07-icwe-n-isyumov-a-kareem-t-kijewski-l-man.jpg",
+        "title": "N. Isyumov，A. Kareem， T. Kijewski，L. Mannini，M.O. Repetto，山口敦",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2011-netherlands-amsterdam/2011-07-icwe-n-isyumov-a-kareem-t-kijewski-l-man.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2011-netherlands-amsterdam/2011-07-icwe-n-isyumov-a-kareem-t-kijewski-l-man.jpg",
+        "publicPath": "uploaded/public/icwe-2011-netherlands-amsterdam/2011-07-icwe-n-isyumov-a-kareem-t-kijewski-l-man.jpg",
+        "originalPath": "uploaded/original/icwe-2011-netherlands-amsterdam/2011-07-icwe-n-isyumov-a-kareem-t-kijewski-l-man.jpg",
+        "originalName": "2011 07 ICWE N. Isyumov、A. Kareem、 T. Kijewski、L. Mannini、M.O. Repetto、山口敦.JPG"
       }
     ],
     "photoSourceMode": "public",
@@ -596,6 +967,26 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/cwe-2010-us-chapel-hill/dsc05642.jpg",
         "originalPath": "uploaded/original/cwe-2010-us-chapel-hill/dsc05642.jpg",
         "originalName": "DSC05642.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2010-us-chapel-hill/2010-05-cwe-l-cochran-p-sarkar-m-levitan-d-preva.jpg",
+        "title": "L. Cochran，田村幸雄，，，P. Sarkar，M. Levitan，D. Prevatt，R.P. Selvam",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2010-us-chapel-hill/2010-05-cwe-l-cochran-p-sarkar-m-levitan-d-preva.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2010-us-chapel-hill/2010-05-cwe-l-cochran-p-sarkar-m-levitan-d-preva.jpg",
+        "publicPath": "uploaded/public/cwe-2010-us-chapel-hill/2010-05-cwe-l-cochran-p-sarkar-m-levitan-d-preva.jpg",
+        "originalPath": "uploaded/original/cwe-2010-us-chapel-hill/2010-05-cwe-l-cochran-p-sarkar-m-levitan-d-preva.jpg",
+        "originalName": "2010 05 CWE L. Cochran、田村幸雄、、、P. Sarkar、M. Levitan、D. Prevatt、R.P. Selvam.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2010-us-chapel-hill/2010-05-cwe-t-s-uyar-a-zasso-y-j-ge-a-kareem-a-h.jpg",
+        "title": "T.S. Uyar，A. Zasso，Y.J. Ge，A. Kareem，田村幸雄，A. Huber，，C. Guerts",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/cwe-2010-us-chapel-hill/2010-05-cwe-t-s-uyar-a-zasso-y-j-ge-a-kareem-a-h.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2010-us-chapel-hill/2010-05-cwe-t-s-uyar-a-zasso-y-j-ge-a-kareem-a-h.jpg",
+        "publicPath": "uploaded/public/cwe-2010-us-chapel-hill/2010-05-cwe-t-s-uyar-a-zasso-y-j-ge-a-kareem-a-h.jpg",
+        "originalPath": "uploaded/original/cwe-2010-us-chapel-hill/2010-05-cwe-t-s-uyar-a-zasso-y-j-ge-a-kareem-a-h.jpg",
+        "originalName": "2010 05 CWE T.S. Uyar、A. Zasso、Y.J. Ge、A. Kareem、田村幸雄、A. Huber、、C. Guerts.JPG"
       }
     ],
     "photoSourceMode": "public",
@@ -617,8 +1008,99 @@ window.__INITIAL_CITIES__ = [
     "comment": "第8回BBAA",
     "eventDate": "2016",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/bbaa-2016-us-boston/2016-06-bbaa-boston-usa-6.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/bbaa-2016-us-boston/2016-06-bbaa-boston-usa-6.jpg",
+        "title": "Boston USA 6",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2016-us-boston/2016-06-bbaa-boston-usa-6.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2016-us-boston/2016-06-bbaa-boston-usa-6.jpg",
+        "publicPath": "uploaded/public/bbaa-2016-us-boston/2016-06-bbaa-boston-usa-6.jpg",
+        "originalPath": "uploaded/original/bbaa-2016-us-boston/2016-06-bbaa-boston-usa-6.jpg",
+        "originalName": "2016 06 BBAA Boston USA 6.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2016-us-boston/2016-06-bbaa-j-naprstek-g-solari-l-caracoglia-c.jpg",
+        "title": "J. Naprstek，G. Solari，田村幸雄，L. Caracoglia，C. Letchford，Tim Tse",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2016-us-boston/2016-06-bbaa-j-naprstek-g-solari-l-caracoglia-c.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2016-us-boston/2016-06-bbaa-j-naprstek-g-solari-l-caracoglia-c-.jpg",
+        "publicPath": "uploaded/public/bbaa-2016-us-boston/2016-06-bbaa-j-naprstek-g-solari-l-caracoglia-c.jpg",
+        "originalPath": "uploaded/original/bbaa-2016-us-boston/2016-06-bbaa-j-naprstek-g-solari-l-caracoglia-c-.jpg",
+        "originalName": "2016 06 BBAA J. Naprstek、G. Solari、田村幸雄、L. Caracoglia、C. Letchford、Tim Tse.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2016-us-boston/2016-06-bbaa-m-mason-j-holmesa-loredo-souza-g-so.jpg",
+        "title": "M. Mason，J. HolmesA. Loredo-Souza，，G. Solari，田村幸雄",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2016-us-boston/2016-06-bbaa-m-mason-j-holmesa-loredo-souza-g-so.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2016-us-boston/2016-06-bbaa-m-mason-j-holmesa-loredo-souza-g-so.jpg",
+        "publicPath": "uploaded/public/bbaa-2016-us-boston/2016-06-bbaa-m-mason-j-holmesa-loredo-souza-g-so.jpg",
+        "originalPath": "uploaded/original/bbaa-2016-us-boston/2016-06-bbaa-m-mason-j-holmesa-loredo-souza-g-so.jpg",
+        "originalName": "2016 06 BBAA M. Mason、J. HolmesA. Loredo-Souza、、G. Solari、田村幸雄.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2016-us-boston/2016-06-bbaa-a-kareem-g-solari.jpg",
+        "title": "田村幸雄，A. Kareem，G. Solari",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2016-us-boston/2016-06-bbaa-a-kareem-g-solari.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2016-us-boston/2016-06-bbaa-a-kareem-g-solari.jpg",
+        "publicPath": "uploaded/public/bbaa-2016-us-boston/2016-06-bbaa-a-kareem-g-solari.jpg",
+        "originalPath": "uploaded/original/bbaa-2016-us-boston/2016-06-bbaa-a-kareem-g-solari.jpg",
+        "originalName": "2016 06 BBAA 田村幸雄、A. Kareem、G. Solari.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2016-us-boston/dsc02910.jpg",
+        "title": "DSC02910.JPG",
+        "credit": "松宮（京都大学）",
+        "publicSrc": "./data/uploaded/public/bbaa-2016-us-boston/dsc02910.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2016-us-boston/dsc02910.jpg",
+        "publicPath": "uploaded/public/bbaa-2016-us-boston/dsc02910.jpg",
+        "originalPath": "uploaded/original/bbaa-2016-us-boston/dsc02910.jpg",
+        "originalName": "DSC02910.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2016-us-boston/dsc02912.jpg",
+        "title": "DSC02912.JPG",
+        "credit": "松宮（京都大学）",
+        "publicSrc": "./data/uploaded/public/bbaa-2016-us-boston/dsc02912.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2016-us-boston/dsc02912.jpg",
+        "publicPath": "uploaded/public/bbaa-2016-us-boston/dsc02912.jpg",
+        "originalPath": "uploaded/original/bbaa-2016-us-boston/dsc02912.jpg",
+        "originalName": "DSC02912.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2016-us-boston/dsc02933.jpg",
+        "title": "DSC02933.JPG",
+        "credit": "松宮（京都大学）",
+        "publicSrc": "./data/uploaded/public/bbaa-2016-us-boston/dsc02933.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2016-us-boston/dsc02933.jpg",
+        "publicPath": "uploaded/public/bbaa-2016-us-boston/dsc02933.jpg",
+        "originalPath": "uploaded/original/bbaa-2016-us-boston/dsc02933.jpg",
+        "originalName": "DSC02933.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2016-us-boston/dsc02934.jpg",
+        "title": "DSC02934.JPG",
+        "credit": "松宮（京都大学）",
+        "publicSrc": "./data/uploaded/public/bbaa-2016-us-boston/dsc02934.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2016-us-boston/dsc02934.jpg",
+        "publicPath": "uploaded/public/bbaa-2016-us-boston/dsc02934.jpg",
+        "originalPath": "uploaded/original/bbaa-2016-us-boston/dsc02934.jpg",
+        "originalName": "DSC02934.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2016-us-boston/dsc02935.jpg",
+        "title": "DSC02935.JPG",
+        "credit": "松宮（京都大学）",
+        "publicSrc": "./data/uploaded/public/bbaa-2016-us-boston/dsc02935.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2016-us-boston/dsc02935.jpg",
+        "publicPath": "uploaded/public/bbaa-2016-us-boston/dsc02935.jpg",
+        "originalPath": "uploaded/original/bbaa-2016-us-boston/dsc02935.jpg",
+        "originalName": "DSC02935.JPG"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
@@ -659,6 +1141,126 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/icwe-2007-australia-cairns/icwe2007-cairns.jpg",
         "originalPath": "uploaded/original/icwe-2007-australia-cairns/icwe2007-cairns.jpg",
         "originalName": "ICWE2007@Cairns.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2007-australia-cairns/r0011448.jpg",
+        "title": "染川さんとMichael Kasperski先生",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2007-australia-cairns/r0011448.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2007-australia-cairns/r0011448.jpeg",
+        "publicPath": "uploaded/public/icwe-2007-australia-cairns/r0011448.jpg",
+        "originalPath": "uploaded/original/icwe-2007-australia-cairns/r0011448.jpeg",
+        "originalName": "R0011448.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2007-australia-cairns/r0011458.jpg",
+        "title": "染川さんと西村さん",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2007-australia-cairns/r0011458.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2007-australia-cairns/r0011458.jpeg",
+        "publicPath": "uploaded/public/icwe-2007-australia-cairns/r0011458.jpg",
+        "originalPath": "uploaded/original/icwe-2007-australia-cairns/r0011458.jpeg",
+        "originalName": "R0011458.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2007-australia-cairns/r0011485.jpg",
+        "title": "田村哲郎先生、喜々津さん、飯塚先生",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2007-australia-cairns/r0011485.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2007-australia-cairns/r0011485.jpeg",
+        "publicPath": "uploaded/public/icwe-2007-australia-cairns/r0011485.jpg",
+        "originalPath": "uploaded/original/icwe-2007-australia-cairns/r0011485.jpeg",
+        "originalName": "R0011485.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2007-australia-cairns/r0011484-2.jpg",
+        "title": "富永先生と義江先生",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2007-australia-cairns/r0011484-2.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2007-australia-cairns/r0011484-2.jpeg",
+        "publicPath": "uploaded/public/icwe-2007-australia-cairns/r0011484-2.jpg",
+        "originalPath": "uploaded/original/icwe-2007-australia-cairns/r0011484-2.jpeg",
+        "originalName": "R0011484.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2007-australia-cairns/r0011494.jpg",
+        "title": "丸山先生、西村さん、一人挟んで松井先生",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2007-australia-cairns/r0011494.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2007-australia-cairns/r0011494.jpeg",
+        "publicPath": "uploaded/public/icwe-2007-australia-cairns/r0011494.jpg",
+        "originalPath": "uploaded/original/icwe-2007-australia-cairns/r0011494.jpeg",
+        "originalName": "R0011494.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2007-australia-cairns/2007-07-icwe-a-kareem-g-solari-a-g-davenport.jpg",
+        "title": "A. Kareem，G. Solari，A.G. Davenport",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2007-australia-cairns/2007-07-icwe-a-kareem-g-solari-a-g-davenport.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2007-australia-cairns/2007-07-icwe-a-kareem-g-solari-a-g-davenport.jpg",
+        "publicPath": "uploaded/public/icwe-2007-australia-cairns/2007-07-icwe-a-kareem-g-solari-a-g-davenport.jpg",
+        "originalPath": "uploaded/original/icwe-2007-australia-cairns/2007-07-icwe-a-kareem-g-solari-a-g-davenport.jpg",
+        "originalName": "2007 07 ICWE A. Kareem、G. Solari、A.G. Davenport.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2007-australia-cairns/2007-07-icwe-cairns-australia-1.jpg",
+        "title": "Cairns Australia 1",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2007-australia-cairns/2007-07-icwe-cairns-australia-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2007-australia-cairns/2007-07-icwe-cairns-australia-1.jpg",
+        "publicPath": "uploaded/public/icwe-2007-australia-cairns/2007-07-icwe-cairns-australia-1.jpg",
+        "originalPath": "uploaded/original/icwe-2007-australia-cairns/2007-07-icwe-cairns-australia-1.jpg",
+        "originalName": "2007 07 ICWE Cairns Australia 1.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2007-australia-cairns/2007-07-icwe-n-isyumov-ni-s-wife-g-solari-gs-s-w.jpg",
+        "title": "N. Isyumov，NI's wife，田村幸雄，G. Solari，GS's wife",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2007-australia-cairns/2007-07-icwe-n-isyumov-ni-s-wife-g-solari-gs-s-w.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2007-australia-cairns/2007-07-icwe-n-isyumov-ni-s-wife-g-solari-gs-s-w.jpg",
+        "publicPath": "uploaded/public/icwe-2007-australia-cairns/2007-07-icwe-n-isyumov-ni-s-wife-g-solari-gs-s-w.jpg",
+        "originalPath": "uploaded/original/icwe-2007-australia-cairns/2007-07-icwe-n-isyumov-ni-s-wife-g-solari-gs-s-w.jpg",
+        "originalName": "2007 07 ICWE N. Isyumov、NI's wife、田村幸雄、G. Solari、GS's wife.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2007-australia-cairns/2007-07-icwe.jpg",
+        "title": "北川徹哉，藤野陽三，植松康，河井宏允，内藤玄一，野田稔，吉江慶祐，，",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2007-australia-cairns/2007-07-icwe.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2007-australia-cairns/2007-07-icwe.jpg",
+        "publicPath": "uploaded/public/icwe-2007-australia-cairns/2007-07-icwe.jpg",
+        "originalPath": "uploaded/original/icwe-2007-australia-cairns/2007-07-icwe.jpg",
+        "originalName": "2007 07 ICWE 北川徹哉、藤野陽三、植松康、河井宏允、内藤玄一、野田稔、吉江慶祐、、.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2007-australia-cairns/2007-07-icwe-2.jpg",
+        "title": "河井宏允，藤野陽三，田村幸雄，内藤玄一",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2007-australia-cairns/2007-07-icwe-2.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2007-australia-cairns/2007-07-icwe-2.jpg",
+        "publicPath": "uploaded/public/icwe-2007-australia-cairns/2007-07-icwe-2.jpg",
+        "originalPath": "uploaded/original/icwe-2007-australia-cairns/2007-07-icwe-2.jpg",
+        "originalName": "2007 07 ICWE 河井宏允、藤野陽三、田村幸雄、内藤玄一.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2007-australia-cairns/2007-07-icwe-a-g-davenport.jpg",
+        "title": "田村幸雄， A.G. Davenport",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2007-australia-cairns/2007-07-icwe-a-g-davenport.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2007-australia-cairns/2007-07-icwe-a-g-davenport.jpg",
+        "publicPath": "uploaded/public/icwe-2007-australia-cairns/2007-07-icwe-a-g-davenport.jpg",
+        "originalPath": "uploaded/original/icwe-2007-australia-cairns/2007-07-icwe-a-g-davenport.jpg",
+        "originalName": "2007 07 ICWE 田村幸雄、 A.G. Davenport.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2007-australia-cairns/img-0521.jpg",
+        "title": "八木知己，島宜範，松宮央登，橋本三智雄，白土博通",
+        "credit": "八木知己（京都大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2007-australia-cairns/img-0521.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2007-australia-cairns/img-0521.jpg",
+        "publicPath": "uploaded/public/icwe-2007-australia-cairns/img-0521.jpg",
+        "originalPath": "uploaded/original/icwe-2007-australia-cairns/img-0521.jpg",
+        "originalName": "IMG_0521.JPG"
       }
     ],
     "photoSourceMode": "public",
@@ -741,6 +1343,16 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/bbaa-2004-canada-otawa/bbaa2004-nrc.jpg",
         "originalPath": "uploaded/original/bbaa-2004-canada-otawa/bbaa2004-nrc.jpg",
         "originalName": "BBAA2004@NRC.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2004-canada-otawa/2004-07-bbaa.jpg",
+        "title": "松本勝，田村幸雄",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2004-canada-otawa/2004-07-bbaa.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2004-canada-otawa/2004-07-bbaa.jpg",
+        "publicPath": "uploaded/public/bbaa-2004-canada-otawa/2004-07-bbaa.jpg",
+        "originalPath": "uploaded/original/bbaa-2004-canada-otawa/2004-07-bbaa.jpg",
+        "originalName": "2004 07 BBAA 松本勝、田村幸雄.JPG"
       }
     ],
     "photoSourceMode": "public",
@@ -853,6 +1465,46 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/icwe-2003-us-texas/dsc01826.jpg",
         "originalPath": "uploaded/original/icwe-2003-us-texas/dsc01826.jpg",
         "originalName": "DSC01826.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2003-us-texas/2003-icwe-b-melbourne-g-walker-j-holmes.jpg",
+        "title": "B. Melbourne，，G. Walker，J. Holmes",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2003-us-texas/2003-icwe-b-melbourne-g-walker-j-holmes.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2003-us-texas/2003-icwe-b-melbourne-g-walker-j-holmes.jpg",
+        "publicPath": "uploaded/public/icwe-2003-us-texas/2003-icwe-b-melbourne-g-walker-j-holmes.jpg",
+        "originalPath": "uploaded/original/icwe-2003-us-texas/2003-icwe-b-melbourne-g-walker-j-holmes.jpg",
+        "originalName": "2003 ICWE B. Melbourne、、G. Walker、J. Holmes.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2003-us-texas/2003-icwe-j-cheung-r-flay-p-vickery-g-kopp.jpg",
+        "title": "J. Cheung，R. Flay，P. Vickery，G. Kopp，",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2003-us-texas/2003-icwe-j-cheung-r-flay-p-vickery-g-kopp.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2003-us-texas/2003-icwe-j-cheung-r-flay-p-vickery-g-kopp.jpg",
+        "publicPath": "uploaded/public/icwe-2003-us-texas/2003-icwe-j-cheung-r-flay-p-vickery-g-kopp.jpg",
+        "originalPath": "uploaded/original/icwe-2003-us-texas/2003-icwe-j-cheung-r-flay-p-vickery-g-kopp.jpg",
+        "originalName": "2003 ICWE J. Cheung、R. Flay、P. Vickery、G. Kopp、.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2003-us-texas/2003-icwe-g-solari.jpg",
+        "title": "田村幸雄， G. Solari",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2003-us-texas/2003-icwe-g-solari.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2003-us-texas/2003-icwe-g-solari.jpg",
+        "publicPath": "uploaded/public/icwe-2003-us-texas/2003-icwe-g-solari.jpg",
+        "originalPath": "uploaded/original/icwe-2003-us-texas/2003-icwe-g-solari.jpg",
+        "originalName": "2003 ICWE 田村幸雄、 G. Solari.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2003-us-texas/2003-icwe-c-letchford-g-kopp.jpg",
+        "title": "田村幸雄，C. Letchford，松本勝， G. Kopp",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-2003-us-texas/2003-icwe-c-letchford-g-kopp.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2003-us-texas/2003-icwe-c-letchford-g-kopp.jpg",
+        "publicPath": "uploaded/public/icwe-2003-us-texas/2003-icwe-c-letchford-g-kopp.jpg",
+        "originalPath": "uploaded/original/icwe-2003-us-texas/2003-icwe-c-letchford-g-kopp.jpg",
+        "originalName": "2003 ICWE 田村幸雄、C. Letchford、松本勝、 G. Kopp.jpg"
       }
     ],
     "photoSourceMode": "public",
@@ -885,6 +1537,36 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/icwe-1999-denmark-copenhagen/10icwe-1999-s.jpg",
         "originalPath": "uploaded/original/icwe-1999-denmark-copenhagen/10icwe-1999-s.jpg",
         "originalName": "10ICWE_1999アムステルダム-s.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1999-denmark-copenhagen/1999-06-icwe-copenhagen-denmark-1.jpg",
+        "title": "Copenhagen Denmark 1",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-1999-denmark-copenhagen/1999-06-icwe-copenhagen-denmark-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1999-denmark-copenhagen/1999-06-icwe-copenhagen-denmark-1.jpg",
+        "publicPath": "uploaded/public/icwe-1999-denmark-copenhagen/1999-06-icwe-copenhagen-denmark-1.jpg",
+        "originalPath": "uploaded/original/icwe-1999-denmark-copenhagen/1999-06-icwe-copenhagen-denmark-1.jpg",
+        "originalName": "1999 06 ICWE Copenhagen Denmark 1.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1999-denmark-copenhagen/1999-06-icwe-a-g-davenport-jawe.jpg",
+        "title": "村上周三，A.G. Davenport (JAWE名誉会員証)",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-1999-denmark-copenhagen/1999-06-icwe-a-g-davenport-jawe.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1999-denmark-copenhagen/1999-06-icwe-a-g-davenport-jawe.jpg",
+        "publicPath": "uploaded/public/icwe-1999-denmark-copenhagen/1999-06-icwe-a-g-davenport-jawe.jpg",
+        "originalPath": "uploaded/original/icwe-1999-denmark-copenhagen/1999-06-icwe-a-g-davenport-jawe.jpg",
+        "originalName": "1999 06 ICWE 村上周三、A.G. Davenport (JAWE名誉会員証).JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1999-denmark-copenhagen/1999-06-icwe-g-diana-d-reed-a-kareem-p-sarkar.jpg",
+        "title": "神田亮，G. Diana，D. Reed，A. Kareem，P. Sarkar",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-1999-denmark-copenhagen/1999-06-icwe-g-diana-d-reed-a-kareem-p-sarkar.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1999-denmark-copenhagen/1999-06-icwe-g-diana-d-reed-a-kareem-p-sarkar.jpg",
+        "publicPath": "uploaded/public/icwe-1999-denmark-copenhagen/1999-06-icwe-g-diana-d-reed-a-kareem-p-sarkar.jpg",
+        "originalPath": "uploaded/original/icwe-1999-denmark-copenhagen/1999-06-icwe-g-diana-d-reed-a-kareem-p-sarkar.jpg",
+        "originalName": "1999 06 ICWE 神田亮、G. Diana、D. Reed、A. Kareem、P. Sarkar.JPG"
       }
     ],
     "photoSourceMode": "public",
@@ -1127,6 +1809,76 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/bbaa-1992-australia-melbourne/photo-1.jpg",
         "originalPath": "uploaded/original/bbaa-1992-australia-melbourne/photo-1.jpg",
         "originalName": "田村哲郎 酒井洋典 上野久儀 岡島厚.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-b-bienkiewicz-p-w-bearman.jpg",
+        "title": "B Bienkiewicz，，P.W. Bearman，久保喜延，鈴木雅靖，加藤九州男，，中村泰治，藤井邦雄，，，岡島厚",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-b-bienkiewicz-p-w-bearman.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1992-australia-melbourne/1992-12-bbaa-b-bienkiewicz-p-w-bearman.jpg",
+        "publicPath": "uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-b-bienkiewicz-p-w-bearman.jpg",
+        "originalPath": "uploaded/original/bbaa-1992-australia-melbourne/1992-12-bbaa-b-bienkiewicz-p-w-bearman.jpg",
+        "originalName": "1992 12 BBAA B Bienkiewicz、、P.W. Bearman、久保喜延、鈴木雅靖、加藤九州男、、中村泰治、藤井邦雄、、、岡島厚.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-b-melbourne-p-w-bearmann.jpg",
+        "title": "B Melbourne，P. W. Bearmann，，",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-b-melbourne-p-w-bearmann.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1992-australia-melbourne/1992-12-bbaa-b-melbourne-p-w-bearmann.jpg",
+        "publicPath": "uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-b-melbourne-p-w-bearmann.jpg",
+        "originalPath": "uploaded/original/bbaa-1992-australia-melbourne/1992-12-bbaa-b-melbourne-p-w-bearmann.jpg",
+        "originalName": "1992 12 BBAA B Melbourne、P. W. Bearmann、、.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-b-melbourne.jpg",
+        "title": "B. Melbourne，中村泰治，岡島厚",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-b-melbourne.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1992-australia-melbourne/1992-12-bbaa-b-melbourne.jpg",
+        "publicPath": "uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-b-melbourne.jpg",
+        "originalPath": "uploaded/original/bbaa-1992-australia-melbourne/1992-12-bbaa-b-melbourne.jpg",
+        "originalName": "1992 12 BBAA B. Melbourne、中村泰治、岡島厚.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-b-melbourne-2.jpg",
+        "title": "B.Melbourne",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-b-melbourne-2.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1992-australia-melbourne/1992-12-bbaa-b-melbourne-2.jpg",
+        "publicPath": "uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-b-melbourne-2.jpg",
+        "originalPath": "uploaded/original/bbaa-1992-australia-melbourne/1992-12-bbaa-b-melbourne-2.jpg",
+        "originalName": "1992 12 BBAA B.Melbourne.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-k-c-s-kwok-r-denoon-p-hitchcock.jpg",
+        "title": "K.C.S. Kwok，R. Denoon，P. Hitchcock，，河井宏允，田村幸雄，宮下康一，藤井邦雄，，",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-k-c-s-kwok-r-denoon-p-hitchcock.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1992-australia-melbourne/1992-12-bbaa-k-c-s-kwok-r-denoon-p-hitchcock.jpg",
+        "publicPath": "uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-k-c-s-kwok-r-denoon-p-hitchcock.jpg",
+        "originalPath": "uploaded/original/bbaa-1992-australia-melbourne/1992-12-bbaa-k-c-s-kwok-r-denoon-p-hitchcock.jpg",
+        "originalName": "1992 12 BBAA K.C.S. Kwok、R. Denoon、P. Hitchcock、、河井宏允、田村幸雄、宮下康一、藤井邦雄、、.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-t-stathopoulos-b-bienkiewicz.jpg",
+        "title": "T. Stathopoulos， B. Bienkiewicz",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-t-stathopoulos-b-bienkiewicz.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1992-australia-melbourne/1992-12-bbaa-t-stathopoulos-b-bienkiewicz.jpg",
+        "publicPath": "uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-t-stathopoulos-b-bienkiewicz.jpg",
+        "originalPath": "uploaded/original/bbaa-1992-australia-melbourne/1992-12-bbaa-t-stathopoulos-b-bienkiewicz.jpg",
+        "originalName": "1992 12 BBAA T. Stathopoulos、 B. Bienkiewicz.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-j-holmes.jpg",
+        "title": "岡島厚，田村幸雄，J. Holmes，鈴木雅靖",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-j-holmes.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1992-australia-melbourne/1992-12-bbaa-j-holmes.jpg",
+        "publicPath": "uploaded/public/bbaa-1992-australia-melbourne/1992-12-bbaa-j-holmes.jpg",
+        "originalPath": "uploaded/original/bbaa-1992-australia-melbourne/1992-12-bbaa-j-holmes.jpg",
+        "originalName": "1992 12 BBAA 岡島厚、田村幸雄、J. Holmes、鈴木雅靖.jpg"
       }
     ],
     "photoSourceMode": "public",
@@ -1209,6 +1961,46 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/icwe-1991-canada-london/91071009-ss.jpg",
         "originalPath": "uploaded/original/icwe-1991-canada-london/91071009-ss.jpg",
         "originalName": "91071009-ss.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1991-canada-london/1991-07-icwe-london-ontario-canada-3.jpg",
+        "title": "London Ontario Canada 3",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-1991-canada-london/1991-07-icwe-london-ontario-canada-3.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1991-canada-london/1991-07-icwe-london-ontario-canada-3.jpg",
+        "publicPath": "uploaded/public/icwe-1991-canada-london/1991-07-icwe-london-ontario-canada-3.jpg",
+        "originalPath": "uploaded/original/icwe-1991-canada-london/1991-07-icwe-london-ontario-canada-3.jpg",
+        "originalName": "1991 07 ICWE London Ontario Canada 3.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1991-canada-london/1991-07-icwe.jpg",
+        "title": "本田明弘，田中洋，白土博通，松本勝，藤井邦雄，田村幸雄，神田順，大熊武司，井上浩男",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-1991-canada-london/1991-07-icwe.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1991-canada-london/1991-07-icwe.jpg",
+        "publicPath": "uploaded/public/icwe-1991-canada-london/1991-07-icwe.jpg",
+        "originalPath": "uploaded/original/icwe-1991-canada-london/1991-07-icwe.jpg",
+        "originalName": "1991 07 ICWE 本田明弘、田中洋、白土博通、松本勝、藤井邦雄、田村幸雄、神田順、大熊武司、井上浩男.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1991-canada-london/1991-07-icwe-2.jpg",
+        "title": "藤井邦雄，神田順，大熊武司，田村幸雄，前田潤滋",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-1991-canada-london/1991-07-icwe-2.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1991-canada-london/1991-07-icwe-2.jpg",
+        "publicPath": "uploaded/public/icwe-1991-canada-london/1991-07-icwe-2.jpg",
+        "originalPath": "uploaded/original/icwe-1991-canada-london/1991-07-icwe-2.jpg",
+        "originalName": "1991 07 ICWE 藤井邦雄、神田順、大熊武司、田村幸雄、前田潤滋.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1991-canada-london/1991-07-icwe-g-solari-c-borri.jpg",
+        "title": "谷池義人，田村幸雄，森武雄，G. Solari，，C Borri",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-1991-canada-london/1991-07-icwe-g-solari-c-borri.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1991-canada-london/1991-07-icwe-g-solari-c-borri.jpg",
+        "publicPath": "uploaded/public/icwe-1991-canada-london/1991-07-icwe-g-solari-c-borri.jpg",
+        "originalPath": "uploaded/original/icwe-1991-canada-london/1991-07-icwe-g-solari-c-borri.jpg",
+        "originalName": "1991 07 ICWE 谷池義人、田村幸雄、森武雄、G. Solari、、C Borri.jpg"
       }
     ],
     "photoSourceMode": "public",
@@ -1251,8 +2043,49 @@ window.__INITIAL_CITIES__ = [
     "comment": "第1回BBAA",
     "eventDate": "1988",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/bbaa-1988-japan-kyoto/1988-10-bbaa-r-meroney.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/bbaa-1988-japan-kyoto/1988-10-bbaa-r-meroney.jpg",
+        "title": "R. Meroney，田村幸雄",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-1988-japan-kyoto/1988-10-bbaa-r-meroney.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1988-japan-kyoto/1988-10-bbaa-r-meroney.jpg",
+        "publicPath": "uploaded/public/bbaa-1988-japan-kyoto/1988-10-bbaa-r-meroney.jpg",
+        "originalPath": "uploaded/original/bbaa-1988-japan-kyoto/1988-10-bbaa-r-meroney.jpg",
+        "originalName": "1988 10 BBAA R. Meroney、田村幸雄.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-1988-japan-kyoto/1988-10-bbaa-r-meroney-2.jpg",
+        "title": "R. Meroney",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-1988-japan-kyoto/1988-10-bbaa-r-meroney-2.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1988-japan-kyoto/1988-10-bbaa-r-meroney-2.jpg",
+        "publicPath": "uploaded/public/bbaa-1988-japan-kyoto/1988-10-bbaa-r-meroney-2.jpg",
+        "originalPath": "uploaded/original/bbaa-1988-japan-kyoto/1988-10-bbaa-r-meroney-2.jpg",
+        "originalName": "1988 10 BBAA R. Meroney.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-1988-japan-kyoto/1988-10-bbaa-m-m-zdravkovich-g-v-parkinson.jpg",
+        "title": "松本勝，M.M. Zdravkovich，田村幸雄，G.V. Parkinson",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-1988-japan-kyoto/1988-10-bbaa-m-m-zdravkovich-g-v-parkinson.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1988-japan-kyoto/1988-10-bbaa-m-m-zdravkovich-g-v-parkinson.jpg",
+        "publicPath": "uploaded/public/bbaa-1988-japan-kyoto/1988-10-bbaa-m-m-zdravkovich-g-v-parkinson.jpg",
+        "originalPath": "uploaded/original/bbaa-1988-japan-kyoto/1988-10-bbaa-m-m-zdravkovich-g-v-parkinson.jpg",
+        "originalName": "1988 10 BBAA 松本勝、M.M. Zdravkovich、田村幸雄、G.V. Parkinson.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-1988-japan-kyoto/1988-10-bbaa.jpg",
+        "title": "松本勝，田村幸雄",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-1988-japan-kyoto/1988-10-bbaa.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1988-japan-kyoto/1988-10-bbaa.jpg",
+        "publicPath": "uploaded/public/bbaa-1988-japan-kyoto/1988-10-bbaa.jpg",
+        "originalPath": "uploaded/original/bbaa-1988-japan-kyoto/1988-10-bbaa.jpg",
+        "originalName": "1988 10 BBAA 松本勝、田村幸雄.jpg"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
@@ -1293,6 +2126,26 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/87080705-s.jpg",
         "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/87080705-s.jpg",
         "originalName": "87080705-s.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/1987-07-icwe-a-p-jeary.jpg",
+        "title": "田村幸雄，A.P. Jeary，神田順，大熊武司",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/1987-07-icwe-a-p-jeary.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/1987-07-icwe-a-p-jeary.jpg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/1987-07-icwe-a-p-jeary.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/1987-07-icwe-a-p-jeary.jpg",
+        "originalName": "1987 07 ICWE 田村幸雄、A.P. Jeary、神田順、大熊武司.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/1987-07-icwe.jpg",
+        "title": "須田健一，田村幸雄，，，。山口宏樹",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/1987-07-icwe.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/1987-07-icwe.jpg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/1987-07-icwe.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/1987-07-icwe.jpg",
+        "originalName": "1987 07 ICWE 須田健一、田村幸雄、、、。山口宏樹.jpg"
       }
     ],
     "photoSourceMode": "public",
@@ -1381,8 +2234,19 @@ window.__INITIAL_CITIES__ = [
     "comment": "第5回ICWE",
     "eventDate": "1979",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/icwe-1979-us-colorado/1979-icwe-5.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/icwe-1979-us-colorado/1979-icwe-5.jpg",
+        "title": "Emil Simiu & 伊藤學先生",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/icwe-1979-us-colorado/1979-icwe-5.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1979-us-colorado/1979-icwe-5.jpg",
+        "publicPath": "uploaded/public/icwe-1979-us-colorado/1979-icwe-5.jpg",
+        "originalPath": "uploaded/original/icwe-1979-us-colorado/1979-icwe-5.jpg",
+        "originalName": "1979-ICWE-5.JPG"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "ICWE",
@@ -1503,6 +2367,36 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/icwe-2019-china-beijing/dr-h-kataoka.jpg",
         "originalPath": "uploaded/original/icwe-2019-china-beijing/dr-h-kataoka.jpg",
         "originalName": "Dr H_Kataoka.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2019-china-beijing/dsc02219.jpg",
+        "title": "河井宏允先生の発表風景",
+        "credit": "片岡浩人（FFRJ）",
+        "publicSrc": "./data/uploaded/public/icwe-2019-china-beijing/dsc02219.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2019-china-beijing/dsc02219.jpeg",
+        "publicPath": "uploaded/public/icwe-2019-china-beijing/dsc02219.jpg",
+        "originalPath": "uploaded/original/icwe-2019-china-beijing/dsc02219.jpeg",
+        "originalName": "DSC02219.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2019-china-beijing/dsc09288.jpg",
+        "title": "王嘉奇，田村幸雄",
+        "credit": "八木知己（京都大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2019-china-beijing/dsc09288.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2019-china-beijing/dsc09288.jpg",
+        "publicPath": "uploaded/public/icwe-2019-china-beijing/dsc09288.jpg",
+        "originalPath": "uploaded/original/icwe-2019-china-beijing/dsc09288.jpg",
+        "originalName": "DSC09288.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2019-china-beijing/dsc09226.jpg",
+        "title": "野口恭平，八木知己，王嘉奇",
+        "credit": "八木知己（京都大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2019-china-beijing/dsc09226.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2019-china-beijing/dsc09226.jpg",
+        "publicPath": "uploaded/public/icwe-2019-china-beijing/dsc09226.jpg",
+        "originalPath": "uploaded/original/icwe-2019-china-beijing/dsc09226.jpg",
+        "originalName": "DSC09226.JPG"
       }
     ],
     "photoSourceMode": "public",
@@ -1892,7 +2786,7 @@ window.__INITIAL_CITIES__ = [
     "photo": "",
     "photos": [],
     "photoSourceMode": "public",
-    "isUpcoming": true,
+    "isUpcoming": false,
     "conferenceType": "CWE",
     "coordinates": [
       -81.2496068,
@@ -2011,6 +2905,16 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/apcwe-2017-new-zealand-auckland/stand-banner.jpg",
         "originalPath": "uploaded/original/apcwe-2017-new-zealand-auckland/stand-banner.jpg",
         "originalName": "Stand Banner.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/d5d6047.jpg",
+        "title": "Konstantinos Bakis, Jiaqi Wang, Dongming Zhang, 野口恭平，白土博通，田村哲郎，野村卓史，野田稔，佐々浩司",
+        "credit": "野口恭平",
+        "publicSrc": "./data/uploaded/public/apcwe-2017-new-zealand-auckland/d5d6047.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2017-new-zealand-auckland/d5d6047.jpg",
+        "publicPath": "uploaded/public/apcwe-2017-new-zealand-auckland/d5d6047.jpg",
+        "originalPath": "uploaded/original/apcwe-2017-new-zealand-auckland/d5d6047.jpg",
+        "originalName": "_D5D6047.jpg"
       }
     ],
     "photoSourceMode": "public",
@@ -2187,6 +3091,36 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/apcwe-2009-taiwan-taipei/2009apcwe7-first-announce-01.jpg",
         "originalPath": "uploaded/original/apcwe-2009-taiwan-taipei/2009apcwe7-first-announce-01.jpg",
         "originalName": "2009APCWE7(台北)first announce-01.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2009-taiwan-taipei/2009-11-apcwe-taipei-taiwan-1-3.jpg",
+        "title": "Taipei Taiwan 1",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/apcwe-2009-taiwan-taipei/2009-11-apcwe-taipei-taiwan-1-3.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2009-taiwan-taipei/2009-11-apcwe-taipei-taiwan-1-3.jpg",
+        "publicPath": "uploaded/public/apcwe-2009-taiwan-taipei/2009-11-apcwe-taipei-taiwan-1-3.jpg",
+        "originalPath": "uploaded/original/apcwe-2009-taiwan-taipei/2009-11-apcwe-taipei-taiwan-1-3.jpg",
+        "originalName": "2009 11 APCWE Taipei Taiwan 1.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2009-taiwan-taipei/2009-11-apcwe-5.jpg",
+        "title": "河井宏允，河井夫人，田村幸雄，奥田泰雄",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/apcwe-2009-taiwan-taipei/2009-11-apcwe-5.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2009-taiwan-taipei/2009-11-apcwe-5.jpg",
+        "publicPath": "uploaded/public/apcwe-2009-taiwan-taipei/2009-11-apcwe-5.jpg",
+        "originalPath": "uploaded/original/apcwe-2009-taiwan-taipei/2009-11-apcwe-5.jpg",
+        "originalName": "2009 11 APCWE 河井宏允、河井夫人、田村幸雄、奥田泰雄.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2009-taiwan-taipei/2009-11-apcwec-m-cheng-r-flay.jpg",
+        "title": "C.M. Cheng，，，，R. Flay",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/apcwe-2009-taiwan-taipei/2009-11-apcwec-m-cheng-r-flay.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2009-taiwan-taipei/2009-11-apcwec-m-cheng-r-flay.jpg",
+        "publicPath": "uploaded/public/apcwe-2009-taiwan-taipei/2009-11-apcwec-m-cheng-r-flay.jpg",
+        "originalPath": "uploaded/original/apcwe-2009-taiwan-taipei/2009-11-apcwec-m-cheng-r-flay.jpg",
+        "originalName": "2009 11 APCWEC.M. Cheng、、、、R. Flay.JPG"
       }
     ],
     "photoSourceMode": "public",
@@ -2208,8 +3142,39 @@ window.__INITIAL_CITIES__ = [
     "comment": "第4回BBAA",
     "eventDate": "2000",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/bbaa-2000-germany-bochum/2000-09-11-bbaa-j-naprstek-e-english.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/bbaa-2000-germany-bochum/2000-09-11-bbaa-j-naprstek-e-english.jpg",
+        "title": "J. Naprstek，E. English",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2000-germany-bochum/2000-09-11-bbaa-j-naprstek-e-english.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2000-germany-bochum/2000-09-11-bbaa-j-naprstek-e-english.jpg",
+        "publicPath": "uploaded/public/bbaa-2000-germany-bochum/2000-09-11-bbaa-j-naprstek-e-english.jpg",
+        "originalPath": "uploaded/original/bbaa-2000-germany-bochum/2000-09-11-bbaa-j-naprstek-e-english.jpg",
+        "originalName": "2000 09 11 BBAA J. Naprstek、E. English.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2000-germany-bochum/2000-09-11-bbaa-r-flay-p-richards.jpg",
+        "title": "R. Flay，P. Richards",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2000-germany-bochum/2000-09-11-bbaa-r-flay-p-richards.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2000-germany-bochum/2000-09-11-bbaa-r-flay-p-richards.jpg",
+        "publicPath": "uploaded/public/bbaa-2000-germany-bochum/2000-09-11-bbaa-r-flay-p-richards.jpg",
+        "originalPath": "uploaded/original/bbaa-2000-germany-bochum/2000-09-11-bbaa-r-flay-p-richards.jpg",
+        "originalName": "2000 09 11 BBAA R. Flay、P. Richards.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2000-germany-bochum/2000-09-11-bbaa.jpg",
+        "title": "木谷勝，田村幸雄",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2000-germany-bochum/2000-09-11-bbaa.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2000-germany-bochum/2000-09-11-bbaa.jpg",
+        "publicPath": "uploaded/public/bbaa-2000-germany-bochum/2000-09-11-bbaa.jpg",
+        "originalPath": "uploaded/original/bbaa-2000-germany-bochum/2000-09-11-bbaa.jpg",
+        "originalName": "2000 09 11 BBAA 木谷勝、田村幸雄.JPG"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "BBAA",
@@ -2260,6 +3225,36 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/bbaa-2008-italy-milano/plenary-lecture-by-prof-yukio-tamura.jpg",
         "originalPath": "uploaded/original/bbaa-2008-italy-milano/plenary-lecture-by-prof-yukio-tamura.jpg",
         "originalName": "Plenary Lecture by Prof Yukio Tamura.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2008-italy-milano/2008-07-bbaa-c-baker-t-stathopoulos.jpg",
+        "title": "C. Baker， T. Stathopoulos，田村幸雄",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2008-italy-milano/2008-07-bbaa-c-baker-t-stathopoulos.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2008-italy-milano/2008-07-bbaa-c-baker-t-stathopoulos.jpg",
+        "publicPath": "uploaded/public/bbaa-2008-italy-milano/2008-07-bbaa-c-baker-t-stathopoulos.jpg",
+        "originalPath": "uploaded/original/bbaa-2008-italy-milano/2008-07-bbaa-c-baker-t-stathopoulos.jpg",
+        "originalName": "2008 07 BBAA C. Baker、 T. Stathopoulos、田村幸雄.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2008-italy-milano/2008-07-bbaa-c-m-cheng-cmc-s-wife-ak-s-wife-a-ka.jpg",
+        "title": "C.M.Cheng，CMC's wife，AK's wife，A. Kareem，G. Solari，田村幸雄，曹曙陽",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2008-italy-milano/2008-07-bbaa-c-m-cheng-cmc-s-wife-ak-s-wife-a-ka.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2008-italy-milano/2008-07-bbaa-c-m-cheng-cmc-s-wife-ak-s-wife-a-ka.jpg",
+        "publicPath": "uploaded/public/bbaa-2008-italy-milano/2008-07-bbaa-c-m-cheng-cmc-s-wife-ak-s-wife-a-ka.jpg",
+        "originalPath": "uploaded/original/bbaa-2008-italy-milano/2008-07-bbaa-c-m-cheng-cmc-s-wife-ak-s-wife-a-ka.jpg",
+        "originalName": "2008 07 BBAA C.M.Cheng、CMC's wife、AK's wife、A. Kareem、G. Solari、田村幸雄、曹曙陽.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2008-italy-milano/2008-07-bbaa-k-c-s-kwok-a-kareem-p-sarkar-g-sola.jpg",
+        "title": "田村幸雄，K.C.S. Kwok，A. Kareem，P. Sarkar，G. Solari",
+        "credit": "田村幸雄",
+        "publicSrc": "./data/uploaded/public/bbaa-2008-italy-milano/2008-07-bbaa-k-c-s-kwok-a-kareem-p-sarkar-g-sola.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2008-italy-milano/2008-07-bbaa-k-c-s-kwok-a-kareem-p-sarkar-g-sola.jpg",
+        "publicPath": "uploaded/public/bbaa-2008-italy-milano/2008-07-bbaa-k-c-s-kwok-a-kareem-p-sarkar-g-sola.jpg",
+        "originalPath": "uploaded/original/bbaa-2008-italy-milano/2008-07-bbaa-k-c-s-kwok-a-kareem-p-sarkar-g-sola.jpg",
+        "originalName": "2008 07 BBAA 田村幸雄、K.C.S. Kwok、A. Kareem、P. Sarkar、G. Solari.JPG"
       }
     ],
     "photoSourceMode": "public",
