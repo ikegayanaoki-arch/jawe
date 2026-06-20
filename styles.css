@@ -1167,7 +1167,7 @@ button.photo-empty:focus-visible {
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.78);
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 1.875rem;
   border: 1px solid rgba(24, 84, 94, 0.08);
 }
 
@@ -1188,7 +1188,7 @@ button.photo-empty:focus-visible {
   border: 0;
   border-radius: 0;
   background: transparent;
-  font-size: 0.76rem;
+  font-size: 1.725rem;
   line-height: 1;
 }
 
@@ -1215,12 +1215,14 @@ button.photo-empty:focus-visible {
 .city-card.cities-chart-card {
   width: 100%;
   min-width: 0;
+  min-height: 40px;
   max-width: none;
   padding: 3px 5px;
   border-radius: 9px;
+  align-content: center;
   scroll-snap-align: unset;
-  --card-comment-size: 0.64rem;
-  --card-title-size: 0.56rem;
+  --card-comment-size: 2.025rem;
+  --card-title-size: 1.875rem;
   --card-country-size: 0.64rem;
 }
 
@@ -1232,7 +1234,7 @@ button.photo-empty:focus-visible {
   align-items: center;
   gap: 2px;
   color: var(--muted);
-  font-size: 0.58rem;
+  font-size: 0.8rem;
   font-weight: 700;
   line-height: 1;
   pointer-events: none;
@@ -1275,7 +1277,7 @@ button.photo-empty:focus-visible {
 }
 
 .cities-chart-card .flag {
-  font-size: 0.72rem;
+  font-size: 0.95rem;
   line-height: 1;
 }
 

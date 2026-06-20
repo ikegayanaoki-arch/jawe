@@ -169,10 +169,10 @@ function fitCityCardsText(root) {
     }
 
     const sizeSteps = [
-      { title: "0.72rem", comment: "0.82rem" },
-      { title: "0.68rem", comment: "0.78rem" },
-      { title: "0.64rem", comment: "0.74rem" },
-      { title: "0.6rem", comment: "0.7rem" },
+      { title: "2.25rem", comment: "2.4rem" },
+      { title: "2.13rem", comment: "2.28rem" },
+      { title: "2.01rem", comment: "2.16rem" },
+      { title: "1.875rem", comment: "2.025rem" },
     ];
 
     for (const step of sizeSteps) {
