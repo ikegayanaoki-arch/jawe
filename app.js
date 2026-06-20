@@ -2540,15 +2540,6 @@ function syncPhotoUploadCount(count) {
 
 function startPhotoCarousel() {
   stopPhotoCarousel();
-
-  const slides = conferencePhotoTrack?.querySelectorAll(".photo-slide");
-  if (!slides || slides.length <= 1 || currentPhotoViewMode !== "carousel") {
-    return;
-  }
-
-  photoCarouselTimerId = window.setInterval(() => {
-    moveConferencePhoto(1);
-  }, 3500);
 }
 
 function stopPhotoCarousel() {
