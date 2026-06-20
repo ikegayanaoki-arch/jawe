@@ -1125,7 +1125,7 @@ button.photo-empty:focus-visible {
 
 .cities-chart-panel-header .eyebrow {
   margin: 0;
-  font-size: 0.7rem;
+  font-size: var(--timeline-range-size, 2.4rem);
   line-height: 1;
 }
 
@@ -1137,20 +1137,20 @@ button.photo-empty:focus-visible {
 
 .cities-chart-panel-body {
   min-height: 0;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
   display: grid;
-  place-items: start center;
+  align-items: start;
 }
 
 .cities-chart-scale-frame {
-  --timeline-scale: 1;
-  transform: scale(var(--timeline-scale));
-  transform-origin: top center;
+  width: 100%;
 }
 
 .cities-chart-grid {
   display: grid;
-  grid-template-columns: 58px repeat(4, minmax(clamp(88px, 17cqi, 132px), 1fr));
+  width: 100%;
+  grid-template-columns: clamp(42px, 8cqi, 68px) repeat(4, minmax(0, 1fr));
   gap: 2px 4px;
   align-items: stretch;
   min-width: 0;
@@ -1167,7 +1167,7 @@ button.photo-empty:focus-visible {
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.78);
   color: var(--muted);
-  font-size: 1.875rem;
+  font-size: var(--timeline-type-size, 2.4rem);
   border: 1px solid rgba(24, 84, 94, 0.08);
 }
 
@@ -1188,7 +1188,7 @@ button.photo-empty:focus-visible {
   border: 0;
   border-radius: 0;
   background: transparent;
-  font-size: 1.725rem;
+  font-size: var(--timeline-year-size, 2.4rem);
   line-height: 1;
 }
 
@@ -1215,9 +1215,9 @@ button.photo-empty:focus-visible {
 .city-card.cities-chart-card {
   width: 100%;
   min-width: 0;
-  min-height: 40px;
+  min-height: var(--timeline-card-min-height, 40px);
   max-width: none;
-  padding: 3px 5px;
+  padding: var(--timeline-card-padding-y, 3px) var(--timeline-card-padding-x, 5px);
   border-radius: 9px;
   align-content: center;
   scroll-snap-align: unset;
@@ -1234,7 +1234,7 @@ button.photo-empty:focus-visible {
   align-items: center;
   gap: 2px;
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: var(--timeline-photo-count-size, 3.2rem);
   font-weight: 700;
   line-height: 1;
   pointer-events: none;
@@ -1242,8 +1242,8 @@ button.photo-empty:focus-visible {
 
 .cities-chart-photo-meta .city-card-photo-badge {
   position: static;
-  width: 12px;
-  height: 12px;
+  width: var(--timeline-photo-icon-size, 24px);
+  height: var(--timeline-photo-icon-size, 24px);
 }
 
 .cities-chart-photo-meta > span {
@@ -1277,17 +1277,13 @@ button.photo-empty:focus-visible {
 }
 
 .cities-chart-card .flag {
-  font-size: 0.95rem;
+  font-size: var(--timeline-flag-size, 0.95rem);
   line-height: 1;
 }
 
 @media (max-width: 980px) {
-  .cities-chart-panels {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .cities-chart-panel {
-    min-height: 320px;
+    padding: 6px;
   }
 }
 

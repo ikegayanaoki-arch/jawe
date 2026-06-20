@@ -1,7 +1,8 @@
 const STORAGE_KEY = "flagged-world-map-cities";
 const DISPLAY_CONFERENCE_TYPES = ["ICWE", "APCWE", "BBAA", "CWE"];
 const GUIDE_YEARS = new Set(["1980", "1990", "2000", "2010", "2020"]);
-const panelScaleObservers = [];
+let timelineResizeObserver;
+let timelineFitFrameId;
 
 const chartRoot = document.getElementById("cities-chart-page-content");
 
@@ -35,7 +36,7 @@ async function renderChartPage() {
 
   chartRoot.replaceChildren(panelWrapper);
   fitCityCardsText(chartRoot);
-  fitTimelinePanels(chartRoot);
+  setupTimelineFit(chartRoot);
 }
 
 function createTimelinePanel(eyebrow, axisEntries, cities) {
@@ -183,73 +184,69 @@ function fitCityCardsText(root) {
         break;
       }
     }
+
+    card.dataset.baseTitleSize = String(parseFloat(card.style.getPropertyValue("--card-title-size")) || 1.875);
+    card.dataset.baseCommentSize = String(parseFloat(card.style.getPropertyValue("--card-comment-size")) || 2.025);
   });
 }
 
-function fitTimelinePanels(root) {
-  panelScaleObservers.splice(0).forEach((observer) => observer.disconnect());
+function setupTimelineFit(root) {
+  timelineResizeObserver?.disconnect();
 
-  const panels = [...root.querySelectorAll(".cities-chart-panel-body")]
-    .map((body) => {
-      const frame = body.querySelector(".cities-chart-scale-frame");
-      const grid = body.querySelector(".cities-chart-grid");
-      if (!frame || !grid) {
-        return null;
-      }
-
-      return { body, frame, grid };
-    })
-    .filter(Boolean);
-
-  const updateScale = () => {
-    let sharedContentWidth = 0;
-    let sharedScale = Number.POSITIVE_INFINITY;
-
-    panels.forEach(({ frame, body, grid }) => {
-      frame.style.removeProperty("--timeline-scale");
-
-      const availableWidth = body.clientWidth;
-      const availableHeight = body.clientHeight;
-      const contentWidth = grid.scrollWidth;
-      const contentHeight = grid.scrollHeight;
-
-      if (!availableWidth || !availableHeight || !contentWidth || !contentHeight) {
-        return;
-      }
-
-      frame.style.height = `${contentHeight}px`;
-      sharedContentWidth = Math.max(sharedContentWidth, contentWidth);
-    });
-
-    panels.forEach(({ body, grid }) => {
-      const availableWidth = body.clientWidth;
-      const availableHeight = body.clientHeight;
-      const contentHeight = grid.scrollHeight;
-
-      if (!sharedContentWidth || !availableWidth || !availableHeight || !contentHeight) {
-        return;
-      }
-
-      sharedScale = Math.min(sharedScale, availableWidth / sharedContentWidth, availableHeight / contentHeight);
-    });
-
-    panels.forEach(({ frame }) => {
-      if (sharedContentWidth) {
-        frame.style.width = `${sharedContentWidth}px`;
-      }
-      frame.style.setProperty("--timeline-scale", String(Number.isFinite(sharedScale) ? sharedScale : 1));
-    });
+  const scheduleFit = () => {
+    window.cancelAnimationFrame(timelineFitFrameId);
+    timelineFitFrameId = window.requestAnimationFrame(() => fitTimelineToViewport(root));
   };
 
-  updateScale();
+  timelineResizeObserver = new ResizeObserver(scheduleFit);
+  timelineResizeObserver.observe(root);
+  scheduleFit();
+  document.fonts?.ready.then(scheduleFit);
+}
 
-  panels.forEach(({ body, grid }) => {
-    const observer = new ResizeObserver(() => {
-      requestAnimationFrame(updateScale);
-    });
-    observer.observe(body);
-    observer.observe(grid);
-    panelScaleObservers.push(observer);
+function fitTimelineToViewport(root) {
+  const panelBodies = [...root.querySelectorAll(".cities-chart-panel-body")];
+  if (panelBodies.length === 0) {
+    return;
+  }
+
+  const fits = () => panelBodies.every((body) => body.scrollHeight <= body.clientHeight + 1);
+  applyTimelineFontScale(root, 1);
+  if (fits()) {
+    return;
+  }
+
+  let minimumScale = 0.2;
+  let maximumScale = 1;
+  for (let iteration = 0; iteration < 12; iteration += 1) {
+    const candidateScale = (minimumScale + maximumScale) / 2;
+    applyTimelineFontScale(root, candidateScale);
+    if (fits()) {
+      minimumScale = candidateScale;
+    } else {
+      maximumScale = candidateScale;
+    }
+  }
+
+  applyTimelineFontScale(root, minimumScale);
+}
+
+function applyTimelineFontScale(root, scale) {
+  root.style.setProperty("--timeline-type-size", `${2.4 * scale}rem`);
+  root.style.setProperty("--timeline-year-size", `${2.4 * scale}rem`);
+  root.style.setProperty("--timeline-range-size", `${2.4 * scale}rem`);
+  root.style.setProperty("--timeline-card-min-height", `${40 * scale}px`);
+  root.style.setProperty("--timeline-card-padding-y", `${3 * scale}px`);
+  root.style.setProperty("--timeline-card-padding-x", `${5 * scale}px`);
+  root.style.setProperty("--timeline-photo-count-size", `${3.2 * scale}rem`);
+  root.style.setProperty("--timeline-photo-icon-size", `${24 * scale}px`);
+  root.style.setProperty("--timeline-flag-size", `${0.95 * scale}rem`);
+
+  root.querySelectorAll(".cities-chart-card").forEach((card) => {
+    const baseTitleSize = Number(card.dataset.baseTitleSize) || 1.875;
+    const baseCommentSize = Number(card.dataset.baseCommentSize) || 2.025;
+    card.style.setProperty("--card-title-size", `${baseTitleSize * scale}rem`);
+    card.style.setProperty("--card-comment-size", `${baseCommentSize * scale}rem`);
   });
 }
 
