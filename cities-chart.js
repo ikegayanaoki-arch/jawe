@@ -102,7 +102,7 @@ function createTextCell(text, className) {
 }
 
 function createCityCard(city, cityIndex) {
-  const hasPhotos = hasCityPhotos(city);
+  const photoCount = getCityPhotoCount(city);
   const button = document.createElement("button");
   button.type = "button";
   button.className =
@@ -111,7 +111,11 @@ function createCityCard(city, cityIndex) {
   button.dataset.cityIndex = String(cityIndex);
 
   button.innerHTML = `
-    ${hasPhotos ? '<img src="./images/logo/logo-photo.svg" alt="写真あり" class="city-card-photo-badge" />' : ""}
+    ${
+      photoCount > 0
+        ? `<span class="cities-chart-photo-meta" aria-label="登録写真 ${photoCount}枚"><img src="./images/logo/logo-photo.svg" alt="" class="city-card-photo-badge" /><span>${photoCount}</span></span>`
+        : ""
+    }
     <span class="comment">${escapeHtml(city.comment || "")}</span>
     <span class="city-card-header">
       <span class="city-card-title">
@@ -136,18 +140,22 @@ function createCityCard(city, cityIndex) {
   return button;
 }
 
-function hasCityPhotos(city) {
+function getCityPhotoCount(city) {
   if (Array.isArray(city?.photos)) {
-    return city.photos.some((entry) => {
+    const count = city.photos.filter((entry) => {
       if (typeof entry === "string") {
         return Boolean(String(entry.split("|")[0] || "").trim());
       }
 
-      return Boolean(String(entry?.src || "").trim());
-    });
+      return Boolean(String(entry?.src || entry?.publicSrc || entry?.originalSrc || "").trim());
+    }).length;
+
+    if (count > 0) {
+      return count;
+    }
   }
 
-  return Boolean(String(city?.photo || "").trim());
+  return String(city?.photo || "").trim() ? 1 : 0;
 }
 
 function fitCityCardsText(root) {
@@ -195,7 +203,7 @@ function fitTimelinePanels(root) {
 
   const updateScale = () => {
     let sharedContentWidth = 0;
-    let sharedScale = 1;
+    let sharedScale = Number.POSITIVE_INFINITY;
 
     panels.forEach(({ frame, body, grid }) => {
       frame.style.removeProperty("--timeline-scale");
@@ -229,7 +237,7 @@ function fitTimelinePanels(root) {
       if (sharedContentWidth) {
         frame.style.width = `${sharedContentWidth}px`;
       }
-      frame.style.setProperty("--timeline-scale", String(Math.min(sharedScale, 1)));
+      frame.style.setProperty("--timeline-scale", String(Number.isFinite(sharedScale) ? sharedScale : 1));
     });
   };
 

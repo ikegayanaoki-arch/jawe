@@ -268,10 +268,15 @@ quickGuideToggleButton?.addEventListener("click", () => {
 });
 
 hostingCitiesChartButton?.addEventListener("click", () => {
+  const popupWidth = Math.max(320, window.screen?.availWidth || window.innerWidth);
+  const popupHeight = Math.max(480, window.screen?.availHeight || window.innerHeight);
+  const popupLeft = window.screen?.availLeft || 0;
+  const popupTop = window.screen?.availTop || 0;
+
   window.open(
     "./cities-chart.html",
     "hosting-cities-timeline",
-    "popup=yes,width=1400,height=900,resizable=yes,scrollbars=yes",
+    `popup=yes,width=${popupWidth},height=${popupHeight},left=${popupLeft},top=${popupTop},resizable=yes,scrollbars=yes`,
   );
 });
 

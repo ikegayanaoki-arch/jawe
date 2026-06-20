@@ -1224,6 +1224,30 @@ button.photo-empty:focus-visible {
   --card-country-size: 0.64rem;
 }
 
+.cities-chart-photo-meta {
+  position: absolute;
+  top: 4px;
+  right: 5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--muted);
+  font-size: 0.58rem;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.cities-chart-photo-meta .city-card-photo-badge {
+  position: static;
+  width: 12px;
+  height: 12px;
+}
+
+.cities-chart-photo-meta > span {
+  color: #7b8587;
+}
+
 .cities-chart-card .city-card-header {
   align-items: start;
   justify-content: center;
