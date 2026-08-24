@@ -589,6 +589,56 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/apcwe-2013-india-chennai/2013-12-apcwe-p-sarkar-r-flay.jpg",
         "originalPath": "uploaded/original/apcwe-2013-india-chennai/2013-12-apcwe-p-sarkar-r-flay.jpg",
         "originalName": "2013 12 APCWE、、、P. Sarkar、R. Flay.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2013-india-chennai/img-2027.jpg",
+        "title": "8th APCWE",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/apcwe-2013-india-chennai/img-2027.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2013-india-chennai/img-2027.jpg",
+        "publicPath": "uploaded/public/apcwe-2013-india-chennai/img-2027.jpg",
+        "originalPath": "uploaded/original/apcwe-2013-india-chennai/img-2027.jpg",
+        "originalName": "IMG_2027.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2013-india-chennai/img-2028.jpg",
+        "title": "8th APCWE",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/apcwe-2013-india-chennai/img-2028.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2013-india-chennai/img-2028.jpg",
+        "publicPath": "uploaded/public/apcwe-2013-india-chennai/img-2028.jpg",
+        "originalPath": "uploaded/original/apcwe-2013-india-chennai/img-2028.jpg",
+        "originalName": "IMG_2028.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2013-india-chennai/img-2040.jpg",
+        "title": "8th APCWE",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/apcwe-2013-india-chennai/img-2040.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2013-india-chennai/img-2040.jpg",
+        "publicPath": "uploaded/public/apcwe-2013-india-chennai/img-2040.jpg",
+        "originalPath": "uploaded/original/apcwe-2013-india-chennai/img-2040.jpg",
+        "originalName": "IMG_2040.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2013-india-chennai/img-2067.jpg",
+        "title": "8th APCWE",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/apcwe-2013-india-chennai/img-2067.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2013-india-chennai/img-2067.jpg",
+        "publicPath": "uploaded/public/apcwe-2013-india-chennai/img-2067.jpg",
+        "originalPath": "uploaded/original/apcwe-2013-india-chennai/img-2067.jpg",
+        "originalName": "IMG_2067.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/apcwe-2013-india-chennai/img-2074.jpg",
+        "title": "8th APCWE",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/apcwe-2013-india-chennai/img-2074.jpg",
+        "originalSrc": "./data/uploaded/original/apcwe-2013-india-chennai/img-2074.jpg",
+        "publicPath": "uploaded/public/apcwe-2013-india-chennai/img-2074.jpg",
+        "originalPath": "uploaded/original/apcwe-2013-india-chennai/img-2074.jpg",
+        "originalName": "IMG_2074.JPG"
       }
     ],
     "photoSourceMode": "public",
@@ -695,6 +745,36 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/bbaa-2012-china-shanghai/2012-09-bbaa-a-kareem.jpg",
         "originalPath": "uploaded/original/bbaa-2012-china-shanghai/2012-09-bbaa-a-kareem.jpg",
         "originalName": "2012 09 BBAA 田村幸雄、 A. Kareem.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2012-china-shanghai/img-1332.jpg",
+        "title": "7th BBAA",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/bbaa-2012-china-shanghai/img-1332.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2012-china-shanghai/img-1332.jpg",
+        "publicPath": "uploaded/public/bbaa-2012-china-shanghai/img-1332.jpg",
+        "originalPath": "uploaded/original/bbaa-2012-china-shanghai/img-1332.jpg",
+        "originalName": "IMG_1332.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2012-china-shanghai/photo-2.jpg",
+        "title": "同済大学振動台",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/bbaa-2012-china-shanghai/photo-2.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2012-china-shanghai/photo-2.jpg",
+        "publicPath": "uploaded/public/bbaa-2012-china-shanghai/photo-2.jpg",
+        "originalPath": "uploaded/original/bbaa-2012-china-shanghai/photo-2.jpg",
+        "originalName": "同済大学振動台.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2012-china-shanghai/photo-3.jpg",
+        "title": "太陽工業武田さん",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/bbaa-2012-china-shanghai/photo-3.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2012-china-shanghai/photo-3.jpg",
+        "publicPath": "uploaded/public/bbaa-2012-china-shanghai/photo-3.jpg",
+        "originalPath": "uploaded/original/bbaa-2012-china-shanghai/photo-3.jpg",
+        "originalName": "太陽工業武田さん.JPG"
       }
     ],
     "photoSourceMode": "public",
@@ -1099,6 +1179,16 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/bbaa-2016-us-boston/dsc02935.jpg",
         "originalPath": "uploaded/original/bbaa-2016-us-boston/dsc02935.jpg",
         "originalName": "DSC02935.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-2016-us-boston/bbaa8-2016-6-northeastern-universirty.jpg",
+        "title": "Northeastern Universirty, 集合写真",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/bbaa-2016-us-boston/bbaa8-2016-6-northeastern-universirty.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-2016-us-boston/bbaa8-2016-6-northeastern-universirty.jpg",
+        "publicPath": "uploaded/public/bbaa-2016-us-boston/bbaa8-2016-6-northeastern-universirty.jpg",
+        "originalPath": "uploaded/original/bbaa-2016-us-boston/bbaa8-2016-6-northeastern-universirty.jpg",
+        "originalName": "BBAA8(2016年6月)Northeastern Universirty_集合写真.jpg"
       }
     ],
     "photoSourceMode": "public",
@@ -1505,6 +1595,16 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/icwe-2003-us-texas/2003-icwe-c-letchford-g-kopp.jpg",
         "originalPath": "uploaded/original/icwe-2003-us-texas/2003-icwe-c-letchford-g-kopp.jpg",
         "originalName": "2003 ICWE 田村幸雄、C. Letchford、松本勝、 G. Kopp.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-2003-us-texas/022.jpg",
+        "title": "松本勝、J. Holms",
+        "credit": "神田順（東京大学）",
+        "publicSrc": "./data/uploaded/public/icwe-2003-us-texas/022.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-2003-us-texas/022.jpg",
+        "publicPath": "uploaded/public/icwe-2003-us-texas/022.jpg",
+        "originalPath": "uploaded/original/icwe-2003-us-texas/022.jpg",
+        "originalName": "世界一周 022.jpg"
       }
     ],
     "photoSourceMode": "public",
@@ -1567,6 +1667,26 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/icwe-1999-denmark-copenhagen/1999-06-icwe-g-diana-d-reed-a-kareem-p-sarkar.jpg",
         "originalPath": "uploaded/original/icwe-1999-denmark-copenhagen/1999-06-icwe-g-diana-d-reed-a-kareem-p-sarkar.jpg",
         "originalName": "1999 06 ICWE 神田亮、G. Diana、D. Reed、A. Kareem、P. Sarkar.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1999-denmark-copenhagen/icwe-001.jpg",
+        "title": "10th ICWE",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/icwe-1999-denmark-copenhagen/icwe-001.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1999-denmark-copenhagen/icwe-001.jpg",
+        "publicPath": "uploaded/public/icwe-1999-denmark-copenhagen/icwe-001.jpg",
+        "originalPath": "uploaded/original/icwe-1999-denmark-copenhagen/icwe-001.jpg",
+        "originalName": "ICWEコペンハーゲン001.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1999-denmark-copenhagen/icwe-002.jpg",
+        "title": "10th ICWE",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/icwe-1999-denmark-copenhagen/icwe-002.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1999-denmark-copenhagen/icwe-002.jpg",
+        "publicPath": "uploaded/public/icwe-1999-denmark-copenhagen/icwe-002.jpg",
+        "originalPath": "uploaded/original/icwe-1999-denmark-copenhagen/icwe-002.jpg",
+        "originalName": "ICWEコペンハーゲン002.jpg"
       }
     ],
     "photoSourceMode": "public",
@@ -1716,6 +1836,66 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/icwe-1995-india-delhi/prof-stathopoulos-and-nomura.jpg",
         "originalPath": "uploaded/original/icwe-1995-india-delhi/prof-stathopoulos-and-nomura.jpg",
         "originalName": "Prof Stathopoulos and Nomura.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1995-india-delhi/icwe-001.jpg",
+        "title": "9th ICWE",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/icwe-1995-india-delhi/icwe-001.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1995-india-delhi/icwe-001.jpg",
+        "publicPath": "uploaded/public/icwe-1995-india-delhi/icwe-001.jpg",
+        "originalPath": "uploaded/original/icwe-1995-india-delhi/icwe-001.jpg",
+        "originalName": "ICWEニューデリー001.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1995-india-delhi/icwe-002.jpg",
+        "title": "9th ICWE",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/icwe-1995-india-delhi/icwe-002.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1995-india-delhi/icwe-002.jpg",
+        "publicPath": "uploaded/public/icwe-1995-india-delhi/icwe-002.jpg",
+        "originalPath": "uploaded/original/icwe-1995-india-delhi/icwe-002.jpg",
+        "originalName": "ICWEニューデリー002.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1995-india-delhi/icwe-003.jpg",
+        "title": "9th ICWE",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/icwe-1995-india-delhi/icwe-003.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1995-india-delhi/icwe-003.jpg",
+        "publicPath": "uploaded/public/icwe-1995-india-delhi/icwe-003.jpg",
+        "originalPath": "uploaded/original/icwe-1995-india-delhi/icwe-003.jpg",
+        "originalName": "ICWEニューデリー003.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1995-india-delhi/icwe-004.jpg",
+        "title": "9th ICWE",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/icwe-1995-india-delhi/icwe-004.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1995-india-delhi/icwe-004.jpg",
+        "publicPath": "uploaded/public/icwe-1995-india-delhi/icwe-004.jpg",
+        "originalPath": "uploaded/original/icwe-1995-india-delhi/icwe-004.jpg",
+        "originalName": "ICWEニューデリー004.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1995-india-delhi/icwe-005.jpg",
+        "title": "9th ICWE",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/icwe-1995-india-delhi/icwe-005.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1995-india-delhi/icwe-005.jpg",
+        "publicPath": "uploaded/public/icwe-1995-india-delhi/icwe-005.jpg",
+        "originalPath": "uploaded/original/icwe-1995-india-delhi/icwe-005.jpg",
+        "originalName": "ICWEニューデリー005.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1995-india-delhi/icwe-006.jpg",
+        "title": "9th ICWE",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/icwe-1995-india-delhi/icwe-006.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1995-india-delhi/icwe-006.jpg",
+        "publicPath": "uploaded/public/icwe-1995-india-delhi/icwe-006.jpg",
+        "originalPath": "uploaded/original/icwe-1995-india-delhi/icwe-006.jpg",
+        "originalName": "ICWEニューデリー006.jpg"
       }
     ],
     "photoSourceMode": "public",
@@ -2001,6 +2181,16 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/icwe-1991-canada-london/1991-07-icwe-g-solari-c-borri.jpg",
         "originalPath": "uploaded/original/icwe-1991-canada-london/1991-07-icwe-g-solari-c-borri.jpg",
         "originalName": "1991 07 ICWE 谷池義人、田村幸雄、森武雄、G. Solari、、C Borri.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1991-canada-london/7thicwe1991-uwo-proceedings.jpg",
+        "title": "Proceedings",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/icwe-1991-canada-london/7thicwe1991-uwo-proceedings.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1991-canada-london/7thicwe1991-uwo-proceedings.jpg",
+        "publicPath": "uploaded/public/icwe-1991-canada-london/7thicwe1991-uwo-proceedings.jpg",
+        "originalPath": "uploaded/original/icwe-1991-canada-london/7thicwe1991-uwo-proceedings.jpg",
+        "originalName": "7thICWE1991(UWO) Proceedings.jpg"
       }
     ],
     "photoSourceMode": "public",
@@ -2084,6 +2274,16 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/bbaa-1988-japan-kyoto/1988-10-bbaa.jpg",
         "originalPath": "uploaded/original/bbaa-1988-japan-kyoto/1988-10-bbaa.jpg",
         "originalName": "1988 10 BBAA 松本勝、田村幸雄.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/bbaa-1988-japan-kyoto/bbaa1988-kyoto.jpg",
+        "title": "集合写真",
+        "credit": "植松康",
+        "publicSrc": "./data/uploaded/public/bbaa-1988-japan-kyoto/bbaa1988-kyoto.jpg",
+        "originalSrc": "./data/uploaded/original/bbaa-1988-japan-kyoto/bbaa1988-kyoto.jpg",
+        "publicPath": "uploaded/public/bbaa-1988-japan-kyoto/bbaa1988-kyoto.jpg",
+        "originalPath": "uploaded/original/bbaa-1988-japan-kyoto/bbaa1988-kyoto.jpg",
+        "originalName": "BBAA1988(Kyoto)_集合写真.jpg"
       }
     ],
     "photoSourceMode": "public",
@@ -2146,6 +2346,246 @@ window.__INITIAL_CITIES__ = [
         "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/1987-07-icwe.jpg",
         "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/1987-07-icwe.jpg",
         "originalName": "1987 07 ICWE 須田健一、田村幸雄、、、。山口宏樹.jpg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/dr-maeda1-1.jpg",
+        "title": "Dr. Maeda",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/dr-maeda1-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/dr-maeda1-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/dr-maeda1-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/dr-maeda1-1.jpeg",
+        "originalName": "Dr.Maeda1-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/dr-tamura1-1.jpg",
+        "title": "Dr. Tamura1",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/dr-tamura1-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/dr-tamura1-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/dr-tamura1-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/dr-tamura1-1.jpeg",
+        "originalName": "Dr.Tamura1-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/dr-y-fujino2-1.jpg",
+        "title": "Dr. Y. Fujino",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/dr-y-fujino2-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/dr-y-fujino2-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/dr-y-fujino2-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/dr-y-fujino2-1.jpeg",
+        "originalName": "Dr.Y.Fujino2-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/dr-y-fujino4-1.jpg",
+        "title": "Dr. Y. Fujino",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/dr-y-fujino4-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/dr-y-fujino4-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/dr-y-fujino4-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/dr-y-fujino4-1.jpeg",
+        "originalName": "Dr.Y.Fujino4-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/dr-y-taniike-1.jpg",
+        "title": "Dr. Y. Taniike",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/dr-y-taniike-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/dr-y-taniike-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/dr-y-taniike-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/dr-y-taniike-1.jpeg",
+        "originalName": "Dr.Y.Taniike-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/group2-1.jpg",
+        "title": "Group photo",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/group2-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/group2-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/group2-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/group2-1.jpeg",
+        "originalName": "group2-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/h-shirato-1.jpg",
+        "title": "H. Shirato",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/h-shirato-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/h-shirato-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/h-shirato-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/h-shirato-1.jpeg",
+        "originalName": "H.Shirato-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/h-tanaka-1.jpg",
+        "title": "H. Tanaka",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/h-tanaka-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/h-tanaka-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/h-tanaka-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/h-tanaka-1.jpeg",
+        "originalName": "H.Tanaka-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/j-hertig-n-murakami-1.jpg",
+        "title": "J. Hertig,N. Murakami",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/j-hertig-n-murakami-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/j-hertig-n-murakami-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/j-hertig-n-murakami-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/j-hertig-n-murakami-1.jpeg",
+        "originalName": "J.Hertig,N.Murakami-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/j-hertig-n-shiraishi-1.jpg",
+        "title": "J. Hertig,N. Shiraishi",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/j-hertig-n-shiraishi-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/j-hertig-n-shiraishi-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/j-hertig-n-shiraishi-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/j-hertig-n-shiraishi-1.jpeg",
+        "originalName": "J.Hertig,N.Shiraishi-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/j-kanda-1.jpg",
+        "title": "J. Kanda",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/j-kanda-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/j-kanda-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/j-kanda-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/j-kanda-1.jpeg",
+        "originalName": "J.Kanda-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/k-hiramatsu-1.jpg",
+        "title": "K. Hiramatsu",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/k-hiramatsu-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/k-hiramatsu-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/k-hiramatsu-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/k-hiramatsu-1.jpeg",
+        "originalName": "K.Hiramatsu-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/k-ogawa-y-sakai-1.jpg",
+        "title": "K. Ogawa Y. Sakai",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/k-ogawa-y-sakai-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/k-ogawa-y-sakai-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/k-ogawa-y-sakai-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/k-ogawa-y-sakai-1.jpeg",
+        "originalName": "K.Ogawa Y.Sakai-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/m-ohba2-1.jpg",
+        "title": "M. Ohba",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/m-ohba2-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/m-ohba2-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/m-ohba2-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/m-ohba2-1.jpeg",
+        "originalName": "M.Ohba2-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/n-kobayashi2-1.jpg",
+        "title": "N. Kobayashi",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/n-kobayashi2-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/n-kobayashi2-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/n-kobayashi2-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/n-kobayashi2-1.jpeg",
+        "originalName": "N.Kobayashi2-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/prof-nakamura-1.jpg",
+        "title": "Prof. Nakamura",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/prof-nakamura-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/prof-nakamura-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/prof-nakamura-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/prof-nakamura-1.jpeg",
+        "originalName": "Prof.Nakamura-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/prof-ohkuma-1.jpg",
+        "title": "Prof. Ohkuma",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/prof-ohkuma-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/prof-ohkuma-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/prof-ohkuma-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/prof-ohkuma-1.jpeg",
+        "originalName": "Prof.Ohkuma-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/prof-s-kawamura-1.jpg",
+        "title": "Prof.S. Kawamura",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/prof-s-kawamura-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/prof-s-kawamura-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/prof-s-kawamura-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/prof-s-kawamura-1.jpeg",
+        "originalName": "Prof.S.Kawamura-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/t-amano2-1.jpg",
+        "title": "T. Amano",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/t-amano2-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/t-amano2-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/t-amano2-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/t-amano2-1.jpeg",
+        "originalName": "T.Amano2-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/t-maruyama-1.jpg",
+        "title": "T. Maruyama",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/t-maruyama-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/t-maruyama-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/t-maruyama-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/t-maruyama-1.jpeg",
+        "originalName": "T.Maruyama-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/y-mataki-1.jpg",
+        "title": "Y. Mataki",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/y-mataki-1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/y-mataki-1.jpeg",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/y-mataki-1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/y-mataki-1.jpeg",
+        "originalName": "Y.Mataki-1.jpeg"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/venue1.jpg",
+        "title": "会場の様子1",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/venue1.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/venue1.png",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/venue1.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/venue1.png",
+        "originalName": "venue1.png"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/venue2.jpg",
+        "title": "会場の様子2",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/venue2.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/venue2.png",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/venue2.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/venue2.png",
+        "originalName": "venue2.png"
+      },
+      {
+        "src": "./data/uploaded/public/icwe-1987-west-germany-aachen/venue3.jpg",
+        "title": "会場の様子3",
+        "credit": "神田順",
+        "publicSrc": "./data/uploaded/public/icwe-1987-west-germany-aachen/venue3.jpg",
+        "originalSrc": "./data/uploaded/original/icwe-1987-west-germany-aachen/venue3.png",
+        "publicPath": "uploaded/public/icwe-1987-west-germany-aachen/venue3.jpg",
+        "originalPath": "uploaded/original/icwe-1987-west-germany-aachen/venue3.png",
+        "originalName": "venue3.png"
       }
     ],
     "photoSourceMode": "public",
@@ -2783,8 +3223,49 @@ window.__INITIAL_CITIES__ = [
     "comment": "第8回CWE2026",
     "eventDate": "2026",
     "organizer": "",
-    "photo": "",
-    "photos": [],
+    "photo": "./data/uploaded/public/cwe-2026-canada-london/img-4706.jpg",
+    "photos": [
+      {
+        "src": "./data/uploaded/public/cwe-2026-canada-london/img-4706.jpg",
+        "title": "Opening Session",
+        "credit": "野口恭平",
+        "publicSrc": "./data/uploaded/public/cwe-2026-canada-london/img-4706.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2026-canada-london/img-4706.jpg",
+        "publicPath": "uploaded/public/cwe-2026-canada-london/img-4706.jpg",
+        "originalPath": "uploaded/original/cwe-2026-canada-london/img-4706.jpg",
+        "originalName": "IMG_4706.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2026-canada-london/img-4822.jpg",
+        "title": "菊本英紀",
+        "credit": "野口恭平",
+        "publicSrc": "./data/uploaded/public/cwe-2026-canada-london/img-4822.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2026-canada-london/img-4822.jpg",
+        "publicPath": "uploaded/public/cwe-2026-canada-london/img-4822.jpg",
+        "originalPath": "uploaded/original/cwe-2026-canada-london/img-4822.jpg",
+        "originalName": "IMG_4822.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2026-canada-london/img-4785.jpg",
+        "title": "野口恭平，髙舘祐貴，植松康，石田泰之，伊藤嘉晃，竹内崇，Kouki Uchiyama",
+        "credit": "野口恭平",
+        "publicSrc": "./data/uploaded/public/cwe-2026-canada-london/img-4785.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2026-canada-london/img-4785.jpg",
+        "publicPath": "uploaded/public/cwe-2026-canada-london/img-4785.jpg",
+        "originalPath": "uploaded/original/cwe-2026-canada-london/img-4785.jpg",
+        "originalName": "IMG_4785.JPG"
+      },
+      {
+        "src": "./data/uploaded/public/cwe-2026-canada-london/img-4964.jpg",
+        "title": "夕食会",
+        "credit": "野口恭平",
+        "publicSrc": "./data/uploaded/public/cwe-2026-canada-london/img-4964.jpg",
+        "originalSrc": "./data/uploaded/original/cwe-2026-canada-london/img-4964.jpg",
+        "publicPath": "uploaded/public/cwe-2026-canada-london/img-4964.jpg",
+        "originalPath": "uploaded/original/cwe-2026-canada-london/img-4964.jpg",
+        "originalName": "IMG_4964.JPG"
+      }
+    ],
     "photoSourceMode": "public",
     "isUpcoming": false,
     "conferenceType": "CWE",
